@@ -1,2 +1,27 @@
-//start coding by removing this file and adding yours ;)
-@import "wcs";
+@import "variables.scss";
+@import "~bootstrap/scss/bootstrap";
+@import 'aos/dist/aos.css';
+
+@font-face {
+    font-family: "Alpaca Scarlett";
+    src: "../fonts/AlpacaScarlett.woff2" format("woff2"),
+        "../fonts/AlpacaScarlett.woff" format("woff");
+}
+
+@font-face {
+    font-family: "Mazzard H";
+    src: "../MazzardH-Regular.woff2" format("woff2"),
+        "../MazzardH-Regular.woff" format("woff");
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-family: $titleFont;
+}
+
+body {
+    font-family: $textFont;
+}

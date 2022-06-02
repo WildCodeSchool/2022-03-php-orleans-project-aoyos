@@ -10,3 +10,10 @@ import './styles/app.scss';
 
 // start the Stimulus application
 import './bootstrap';
+
+//Bootstrap
+require('bootstrap');
+
+//AOS
+import AOS from 'aos';
+AOS.init();
