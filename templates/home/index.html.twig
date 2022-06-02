@@ -1,15 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Home{% endblock %}
+{% block title %}{{ parent() }} - Accueil{% endblock %}
 
 {% block body %}
-    <div class="pink-stripe">
-        <h1>
-            Let's start coding&nbsp;&#129304;
-        </h1>
-    </div>
-    <div class="white-stripe">
-        <img src="{{ asset('build/images/LOGO_WILD_CODE_SCHOOL.png') }}"
-             alt="">
+    <h1 class="text-primary">Home</h1>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor quas fugit provident ea commodi nulla assumenda eius aut cupiditate similique fuga optio, quaerat nihil! Perspiciatis quasi quas asperiores quis nihil.</p>
+    <div class="container">
+        <a href="#" class="btn btn-primary" data-aos="fade-up">Un boutton</a>
     </div>
 {% endblock %}
