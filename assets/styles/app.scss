@@ -12,16 +12,28 @@
     font-family: "Mazzard H";
     src: "../MazzardH-Regular.woff2" format("woff2"),
         "../MazzardH-Regular.woff" format("woff");
+    font-weight: normal;
 }
+
+@font-face {
+    font-family: 'Mazzard H';
+    src: "../MazzardH-Bold.woff2" format('woff2'),
+        "../'MazzardH-Bold.woff" format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
 
 h1,
 h2,
 h3,
 h4,
 h5 {
-    font-family: $titleFont;
+    font-family: $textFont;
+    font-weight: bold;
 }
 
 body {
     font-family: $textFont;
+    line-height: $lineHeight;
 }
