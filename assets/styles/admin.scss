@@ -1,0 +1,33 @@
+@import "variables.scss";
+
+.sideBar {
+    width: 18vw;
+    height: 100vh;
+    position: fixed;
+    background-color: darken($blueLogo, 50%);
+}
+
+.sideBar a {
+    font-family: $titleFont;
+    color: $light;    
+}
+
+.sideBar .accordion-item, .sideBar .accordion-button {
+    background-color: darken($blueLogo, 50%);
+    color: $light;
+}
+
+.sideBar .accordion-button:focus {
+    box-shadow: none;
+    border-color: $light;
+}
+
+.sideBar .bi-house-door {
+    fill: $light;
+}
+
+.sideBarLogo {
+    width:30px;
+    height:30px;
+}
+
