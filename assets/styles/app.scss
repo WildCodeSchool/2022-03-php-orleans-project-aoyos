@@ -36,3 +36,15 @@ body {
     font-family: $textFont;
     line-height: $lineHeight;
 }
+
+.btn-outline-primary:hover {
+    color: $dark;
+    box-shadow: 0px 0px 4px $primary;
+    background-color: transparent;
+}
+
+.btn-outline-secondary:hover {
+    color: $dark;
+    box-shadow: 0px 0px 4px $secondary;
+    background-color: transparent;
+}
