@@ -18,7 +18,7 @@ class ArticleFixtures extends Fixture
             $article->setCreatedAt($faker->dateTimeBetween('-200 week', '-1 day'));
             $article->setDescription($faker->paragraph(3));
             $article->setImage($faker->imageUrl(350, 65, 'animals', true));
-            $article->setAuthor($faker->firstname() . ' ' . $faker->lastname());
+            $article->setAuthor($faker->name());
 
             $manager->persist($article);
         }
