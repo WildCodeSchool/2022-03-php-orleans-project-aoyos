@@ -4,6 +4,12 @@ $orangeLogo: #FFA930;
 $blueLogo: #1C86FF;
 $dark: #2D0055;
 $light: #FFFFFF;
+$adminColor: darken($blueLogo, 50%);
 $navFont: "Alpaca Scarlett";
 $textFont: 'Mazzard H';
+
 $lineHeight: 1.5;
+$sideBarWidth: 15rem;
+$accordion-icon-color: $light;
+$accordion-icon-active-color: $light;
+$accordion-border-width: 0;
