@@ -17,6 +17,7 @@ class ProductionFixtures extends Fixture
             $production = new Production();
             $production->setTitle($faker->sentence(3));
             $production->setDescription($faker->sentence(10));
+            $production->setImage('https://picsum.photos/400');
             $manager->persist($production);
         }
         $manager->flush();

@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Production;
-use App\Form\Production1Type;
+use App\Form\ProductionType;
 use App\Repository\ProductionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,7 +25,7 @@ class AdminProductionController extends AbstractController
     public function new(Request $request, ProductionRepository $productionRepository): Response
     {
         $production = new Production();
-        $form = $this->createForm(Production1Type::class, $production);
+        $form = $this->createForm(ProductionType::class, $production);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -40,18 +40,10 @@ class AdminProductionController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_admin_production_show', methods: ['GET'])]
-    public function show(Production $production): Response
-    {
-        return $this->render('admin_production/show.html.twig', [
-            'production' => $production,
-        ]);
-    }
-
     #[Route('/{id}/edit', name: 'app_admin_production_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Production $production, ProductionRepository $productionRepository): Response
     {
-        $form = $this->createForm(Production1Type::class, $production);
+        $form = $this->createForm(ProductionType::class, $production);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
