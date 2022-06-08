@@ -2,8 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\ArticleRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ArticleRepository;
+use DateTime;
+use Symfony\Component\Validator\Constraints\Date;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
 class Article
@@ -11,22 +13,22 @@ class Article
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private int $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $title;
+    private string $title;
 
-    #[ORM\Column(type: 'datetime_immutable')]
-    private $createdAt;
+    #[ORM\Column(type: 'date')]
+    private DateTime $createdAt;
 
     #[ORM\Column(type: 'text')]
-    private $description;
+    private string $description;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $image;
+    private string $image;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $author;
+    private string $author;
 
     public function getId(): ?int
     {
@@ -45,12 +47,12 @@ class Article
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): ?DateTime
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    public function setCreatedAt(DateTime $createdAt): self
     {
         $this->createdAt = $createdAt;
 
