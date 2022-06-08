@@ -1,10 +1,10 @@
 @import "variables.scss";
 
 .sideBar {
-    width: 18vw;
+    width: $sideBarWidth;
     height: 100vh;
     position: fixed;
-    background-color: darken($blueLogo, 50%);
+    background-color: $adminColor;
 }
 
 .sideBar a {
@@ -13,7 +13,7 @@
 }
 
 .sideBar .accordion-item, .sideBar .accordion-button {
-    background-color: darken($blueLogo, 50%);
+    background-color: $adminColor;
     color: $light;
 }
 
@@ -23,6 +23,11 @@
 
 .sideBar .bi-house-door {
     fill: $light;
+}
+
+.bg-navbar-admin {
+    background-color: $adminColor;
+    font-family: $titleFont;
 }
 
 .sideBarLogo {
