@@ -2,13 +2,12 @@
 
 .sideBar {
     width: $sideBarWidth;
-    position: fixed;
     background-color: $adminColor;
 }
 
 .sideBar a {
-    font-family: $titleFont;
-    color: $light;    
+    font-family: $textFont;
+    color: $light;  
 }
 
 .sideBar .accordion-item, .sideBar .accordion-button {
@@ -16,7 +15,7 @@
     color: $light;
 }
 
-.sideBar .accordion-button:focus {
+.sideBar .accordion-button:focus, .btn:focus {
     box-shadow: none;
 }
 
@@ -24,7 +23,11 @@
     fill: $light;
 }
 
-.bg-navbar-admin {
+.topBar {
     background-color: $adminColor;
-    font-family: $titleFont;
+    font-family: $textFont;
+}
+
+.topBar h1 {
+    font-weight: normal;
 }
