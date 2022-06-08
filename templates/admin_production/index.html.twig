@@ -1,37 +1,44 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin_layout.html.twig' %}
 
-{% block title %}Production index{% endblock %}
+{% block title %}{{ parent() }} - Liste des réalisations{% endblock %}
 
 {% block body %}
-    <h1>Production index</h1>
-
-    <table class="table">
+    <main class="container-fluid p-5">
+    <h1 class="mb-5">Liste des réalisations</h1>
+    <a class="btn btn-primary pb-0 mb-3" href="{{ path('app_admin_production_new') }}">
+        <i class="bi bi-plus-square"></i>
+        Ajouter
+    </a>
+    <table class="table table-hover">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Title</th>
+                <th>Titre</th>
                 <th>Description</th>
-                <th>actions</th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
         {% for production in productions %}
             <tr>
-                <td>{{ production.id }}</td>
                 <td>{{ production.title }}</td>
                 <td>{{ production.description }}</td>
-                <td>
-                    <a href="{{ path('app_admin_production_show', {'id': production.id}) }}">show</a>
-                    <a href="{{ path('app_admin_production_edit', {'id': production.id}) }}">edit</a>
+                <td class="align-middle">
+                    <a class="btn btn-outline-secondary btn-sm text-nowrap pb-0" href="{{ path('app_admin_production_edit', {'id': production.id}) }}">
+                        <i class="bi bi-pen"></i>
+                        Éditer
+                    </a>
+                </td>
+                <td class="align-middle">
+                    {% include "admin_production/_delete_form.html.twig" %}
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="4">Aucune réalisation trouvée</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app_admin_production_new') }}">Create new</a>
+</main>
 {% endblock %}
