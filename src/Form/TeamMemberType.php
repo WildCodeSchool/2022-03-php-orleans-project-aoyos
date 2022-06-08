@@ -15,6 +15,7 @@ class TeamMemberType extends AbstractType
             ->add('name')
             ->add('position')
             ->add('description')
+            ->add('picture')
         ;
     }
 

@@ -53,7 +53,7 @@ class AdminTeamMemberController extends AbstractController
         Request $request,
         TeamMember $teamMember,
         TeamMemberRepository $teamMemberRepository
-        ): Response {
+    ): Response {
         $form = $this->createForm(TeamMemberType::class, $teamMember);
         $form->handleRequest($request);
 
@@ -70,8 +70,11 @@ class AdminTeamMemberController extends AbstractController
     }
 
     #[Route('/{id}', name: 'admin_team_member_delete', methods: ['POST'])]
-    public function delete(Request $request, TeamMember $teamMember, TeamMemberRepository $teamMemberRepository): Response
-    {
+    public function delete(
+        Request $request,
+        TeamMember $teamMember,
+        TeamMemberRepository $teamMemberRepository
+    ): Response {
         if ($this->isCsrfTokenValid('delete' . $teamMember->getId(), $request->request->get('_token'))) {
             $teamMemberRepository->remove($teamMember, true);
         }

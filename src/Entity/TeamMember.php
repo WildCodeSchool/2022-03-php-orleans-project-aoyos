@@ -11,7 +11,7 @@ class TeamMember
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private int $id;
 
     #[ORM\Column(type: 'string', length: 255)]
     private string $name;
@@ -21,6 +21,9 @@ class TeamMember
 
     #[ORM\Column(type: 'text', nullable: true)]
     private string $description;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $picture;
 
     public function getId(): ?int
     {
@@ -59,6 +62,18 @@ class TeamMember
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(?string $picture): self
+    {
+        $this->picture = $picture;
 
         return $this;
     }

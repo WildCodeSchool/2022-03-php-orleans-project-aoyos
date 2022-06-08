@@ -4,8 +4,12 @@
 
 {% block body %}
 <div class="container">
-    <h1 class="text-secondary">Membres de l'équipe</h1>
-
+    <h1 class="my-4">Membres de l'équipe</h1>
+    <div class="d-flex justify-content-end">
+    <a class="text-dark btn bg-light border-primary" href="{{ path('admin_team_member_new') }}">
+    <i class="bi bi-plus-circle text-primary"></i>
+    Ajouter</a> 
+    </div>
     <table class="table">
         <thead>
             <tr>
@@ -22,11 +26,9 @@
                 <td>{{ team_member.position }}</td>
                 <td>{{ team_member.description }}</td>
                 <td>
-               <div class="btn bg-dark"> <i class="bi bi-pen"></i>
-                    <a href="{{ path('admin_team_member_show', {'id': team_member.id}) }}">voir</a>
+                     <div>
+                    <a class="text-dark btn bg-light border-primary" href="{{ path('admin_team_member_edit', {'id': team_member.id}) }}"><i class="bi bi-pen text-primary"></i>Éditer</a>
                     </div>
-                    <i class="bi bi-pen"></i>
-                    <a href="{{ path('admin_team_member_edit', {'id': team_member.id}) }}">éditer</a>
                 </td>
             </tr>
         {% else %}
@@ -36,6 +38,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('admin_team_member_new') }}">Create new</a>
 {% endblock %}
