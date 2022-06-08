@@ -18,7 +18,7 @@ class Article
     #[ORM\Column(type: 'string', length: 255)]
     private string $title;
 
-    #[ORM\Column(type: 'date')]
+    #[ORM\Column(type: 'datetime')]
     private DateTime $createdAt;
 
     #[ORM\Column(type: 'text')]
