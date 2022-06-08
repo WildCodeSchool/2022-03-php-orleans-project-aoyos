@@ -8,13 +8,15 @@
    <div class="w-100 d-flex justify-content-end">
         <a class="btn btn-outline-primary pb-0 px-3" href="{{ path('app_admin_partner_new') }}">
                 <i class="bi bi-plus-square"></i>
-    Ajouter</a>
+        Ajouter</a>
     </div>
     <table class="table table-hover">
         <thead>
             <tr>
                 <th>Nom</th>
                 <th>Image</th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -26,11 +28,10 @@
                     <a class="btn btn-outline-secondary btn-sm text-nowrap pb-0 px-3" href="{{ path('app_admin_partner_edit', {'id': partner.id}) }}">
                     <i class="bi bi-pen"></i>
                     Éditer</a>
-
                 </td>
                 <td class="align-middle">
-                                    {{ include('admin/partner/_delete_form.html.twig') }}
-                 </td>
+                    {{ include('admin/partner/_delete_form.html.twig') }}
+                </td>
             </tr>
         {% else %}
             <tr>
@@ -39,7 +40,5 @@
         {% endfor %}
         </tbody>
     </table>
-
-
-    </main>
+</main>
 {% endblock %}
