@@ -16,7 +16,7 @@ class AdminProductionController extends AbstractController
     #[Route('/', name: 'app_admin_production_index', methods: ['GET'])]
     public function index(ProductionRepository $productionRepository): Response
     {
-        return $this->render('admin_production/index.html.twig', [
+        return $this->render('admin/production/index.html.twig', [
             'productions' => $productionRepository->findAll(),
         ]);
     }
