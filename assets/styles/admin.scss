@@ -2,7 +2,6 @@
 
 .sideBar {
     width: $sideBarWidth;
-    height: 100vh;
     position: fixed;
     background-color: $adminColor;
 }
@@ -28,9 +27,4 @@
 .bg-navbar-admin {
     background-color: $adminColor;
     font-family: $titleFont;
-}
-
-.sideBarLogo {
-    width:30px;
-    height:30px;
 }
