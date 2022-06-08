@@ -1,41 +1,48 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Membres de l'équipe{% endblock %}
+{% block title %}
+	{{ parent() }}
+	- Liste de l'équipe
+{% endblock %}
 
 {% block body %}
-<div class="container">
-    <h1 class="my-4">Membres de l'équipe</h1>
-    <div class="d-flex justify-content-end">
-    <a class="text-dark btn bg-light border-primary" href="{{ path('admin_team_member_new') }}">
-    <i class="bi bi-plus-circle text-primary"></i>
-    Ajouter</a> 
-    </div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Poste occupé</th>
-                <th>Description</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for team_member in team_members %}
-            <tr>
-                <td>{{ team_member.name }}</td>
-                <td>{{ team_member.position }}</td>
-                <td>{{ team_member.description }}</td>
-                <td>
-                     <div>
-                    <a class="text-dark btn bg-light border-primary" href="{{ path('admin_team_member_edit', {'id': team_member.id}) }}"><i class="bi bi-pen text-primary"></i>Éditer</a>
-                    </div>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-{% endblock %}
+	<div class="container-fluid p-5">
+		<h1 class="mb-5">Membres de l'équipe</h1>
+		<div class="w-100 d-flex justify-content-end">
+			<a class="btn btn-outline-primary pb-0 px-3" href="{{ path('admin_team_member_new') }}">
+				<i class="bi bi-plus-square"></i>
+				Ajouter
+                </a>
+		</div>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Nom</th>
+					<th>Poste occupé</th>
+					<th>Description</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for team_member in team_members %}
+					<tr>
+						<td>{{ team_member.name }}</td>
+						<td>{{ team_member.position }}</td>
+						<td>{{ team_member.description }}</td>
+						<td>
+							<div>
+								<a class="btn btn-outline-secondary btn-sm text-nowrap pb-0 px-3" href="{{ path('admin_team_member_edit', {'id': team_member.id}) }}">
+									<i class="bi bi-pen"></i>
+									Éditer
+								</a>
+							</div>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="5">Aucune membre trouvé</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	{% endblock %}
