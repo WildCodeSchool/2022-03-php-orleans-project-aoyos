@@ -4,21 +4,21 @@
 
 @font-face {
     font-family: "Alpaca Scarlett";
-    src: "../fonts/AlpacaScarlett.woff2" format("woff2"),
-        "../fonts/AlpacaScarlett.woff" format("woff");
+    src: url("../fonts/AlpacaScarlett.woff2") format("woff2"),
+        url("../fonts/AlpacaScarlett.woff") format("woff");
 }
 
 @font-face {
     font-family: "Mazzard H";
-    src: "../MazzardH-Regular.woff2" format("woff2"),
-        "../MazzardH-Regular.woff" format("woff");
+    src: url("../fonts/MazzardH-Regular.woff2") format("woff2"),
+        url("../fonts/MazzardH-Regular.woff") format("woff");
     font-weight: normal;
 }
 
 @font-face {
-    font-family: 'Mazzard H';
-    src: "../MazzardH-Bold.woff2" format('woff2'),
-        "../'MazzardH-Bold.woff" format('woff');
+    font-family: "Mazzard H";
+    src: url("../fonts/MazzardH-Bold.woff2") format('woff2'),
+        url("../fonts/MazzardH-Bold.woff") format('woff');
     font-weight: bold;
     font-style: normal;
 }
@@ -33,6 +33,18 @@ h5 {
 }
 
 body {
-    font-family: $textFont;
+    font-family: $navFont;
     line-height: $lineHeight;
+}
+
+.btn-outline-primary:hover {
+    color: $dark;
+    box-shadow: 0px 0px 4px $primary;
+    background-color: transparent;
+}
+
+.btn-outline-secondary:hover {
+    color: $dark;
+    box-shadow: 0px 0px 4px $secondary;
+    background-color: transparent;
 }
