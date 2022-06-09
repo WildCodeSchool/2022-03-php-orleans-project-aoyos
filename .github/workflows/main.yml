@@ -24,7 +24,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.0
+          php-version: 8.1
 
       - name: checks_directory
         run: |
@@ -42,7 +42,7 @@ jobs:
       - name: code_quality
         run: |
           ./vendor/bin/phpcs
-          ./vendor/bin/phpstan analyse src --level max
+          ./vendor/bin/phpstan analyse src --level 6
           ./vendor/bin/phpmd src text phpmd.xml
           ./node_modules/.bin/eslint assets
 
