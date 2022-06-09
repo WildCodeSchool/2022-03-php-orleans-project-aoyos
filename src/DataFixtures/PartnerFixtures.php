@@ -15,7 +15,7 @@ class PartnerFixtures extends Fixture
         for ($i = 0; $i < 10; $i++) {
             $partner = new Partner();
             $partner->setName($faker->name());
-            $partner->setImage('https://picsum.photos/200');
+            $partner->setImage('https://picsum.photos/100');
             $manager->persist($partner);
         }
         $manager->flush();
