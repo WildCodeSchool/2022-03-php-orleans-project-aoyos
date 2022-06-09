@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ parent() }} | Admin
+{% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	{{ encore_entry_link_tags('admin') }}
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+{% endblock %}
+
+{% block navbar %}
+{% include 'items/_admin_sidebar.html.twig' %}
+{% endblock %}
+
+{% block body %}
+{% endblock %}
+
