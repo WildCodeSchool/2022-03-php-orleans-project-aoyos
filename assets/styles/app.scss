@@ -33,8 +33,25 @@ h5 {
 }
 
 body {
-    font-family: $navFont;
+    font-family: $textFont;
     line-height: $lineHeight;
+}
+
+.btn-nav {
+    width : 150px;
+}
+
+.nav-link {
+    font-family: $navFont;
+    font-size : 1.1rem;
+}
+
+.nav-item {
+    list-style: none;
+}
+
+.navbar {
+    box-shadow: 1px 1px 4px 1px $shadowColor; 
 }
 
 .btn-outline-primary:hover {

@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/admin_base.html.twig' %}
 
 {% block title %}{{ parent() }} - Partenaires{% endblock %}
 
@@ -16,7 +16,6 @@
                 <th>Nom</th>
                 <th>Image</th>
                 <th></th>
-                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -24,12 +23,10 @@
             <tr>
                 <td class="align-middle">{{ partner.name }}</td>
                 <td class="align-middle"><img src="{{ partner.image }}" alt="{{ partner.name }}"></td>
-                <td class="align-middle">
-                    <a class="btn btn-outline-secondary btn-sm text-nowrap pb-0 px-3" href="{{ path('app_admin_partner_edit', {'id': partner.id}) }}">
+                <td class="align-middle text-end">
+                    <a class="btn btn-outline-secondary btn-sm text-nowrap pb-0 px-3 my-2" href="{{ path('app_admin_partner_edit', {'id': partner.id}) }}">
                     <i class="bi bi-pen"></i>
                     Éditer</a>
-                </td>
-                <td class="align-middle">
                     {{ include('admin/partner/_delete_form.html.twig') }}
                 </td>
             </tr>

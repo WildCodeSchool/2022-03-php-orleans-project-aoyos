@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin/partner')]
+#[Route('/admin/partenaires')]
 class AdminPartnerController extends AbstractController
 {
     #[Route('/', name: 'app_admin_partner_index', methods: ['GET'])]
