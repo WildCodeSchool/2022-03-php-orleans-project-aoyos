@@ -30,6 +30,7 @@ class Production
     #[Assert\Length(
         max: 255
     )]
+    #[Assert\Url()]
     private string $image;
 
     public function getId(): ?int

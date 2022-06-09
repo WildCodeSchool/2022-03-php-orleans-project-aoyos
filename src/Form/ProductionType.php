@@ -6,6 +6,7 @@ use App\Entity\Production;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -18,7 +19,7 @@ class ProductionType extends AbstractType
                 'label' => 'Titre'
             ])
             ->add('description', TextareaType::class)
-            ->add('image', TextType::class, [
+            ->add('image', UrlType::class, [
                 'label' => 'Lien vers l\'image'
             ])
         ;
