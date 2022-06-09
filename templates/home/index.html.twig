@@ -5,6 +5,9 @@
         {{ encore_entry_link_tags('home') }}
         {{ encore_entry_link_tags('app') }}
         {% endblock %}
+                {% block javascripts %}
+            {{ encore_entry_script_tags('typeAnimation') }}
+        {% endblock %}
         
 {% block body %}
 {% include 'components/_banner_main.html.twig' %}
