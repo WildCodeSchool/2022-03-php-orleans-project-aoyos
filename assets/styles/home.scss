@@ -32,9 +32,9 @@
   }
   
   .header-picture::before {
-    top: -5px;
-    bottom: -5px;
-    transform: rotate(-1deg);
+    top: -10px;
+    bottom: 10px;
+    transform: rotate(-3deg);
     z-index: -1;
     background-color: $secondary;
   }
@@ -42,7 +42,7 @@
   .header-picture::after {
     top: -5px;
     bottom: -5px;
-    transform: rotate(1deg);
+    transform: rotate(2deg);
     z-index: -2;
     background-color: $primary;
   }
