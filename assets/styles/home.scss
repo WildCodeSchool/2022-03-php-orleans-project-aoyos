@@ -1,18 +1,19 @@
 @import "variables.scss";
 
 .header-title {
-    font-size: 4rem;
+    font-size: clamp(0.5rem, 10vh, 4rem);
 }
 .header-picture {
     background-image: url("../images/header-aoyos.png");
     background-size: cover;
+    background-position: center;
     height: 450px;
     width: 1150px;
     position: relative;
 }
 
 .header-sub {
-    font-size: 4rem;
+    font-size: clamp(0.5rem, 10vh, 4rem);
 }
   
 .header-picture,
