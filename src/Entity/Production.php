@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ProductionRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ProductionRepository::class)]
 class Production
@@ -14,12 +15,21 @@ class Production
     private int $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        max: 255
+    )]
     private string $title;
 
     #[ORM\Column(type: 'text')]
+    #[Assert\NotBlank]
     private string $description;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        max: 255
+    )]
     private string $image;
 
     public function getId(): ?int
