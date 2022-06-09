@@ -9365,16 +9365,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.7.12",
+            "version": "1.7.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "32f10779d9cd88a9cbd972ec611a4148a3cbbc7e"
+                "reference": "62fcadcde81b4037e42ad2489119d31c46f00191"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/32f10779d9cd88a9cbd972ec611a4148a3cbbc7e",
-                "reference": "32f10779d9cd88a9cbd972ec611a4148a3cbbc7e",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/62fcadcde81b4037e42ad2489119d31c46f00191",
+                "reference": "62fcadcde81b4037e42ad2489119d31c46f00191",
                 "shasum": ""
             },
             "require": {
@@ -9400,7 +9400,7 @@
             "description": "PHPStan - PHP Static Analysis Tool",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan/issues",
-                "source": "https://github.com/phpstan/phpstan/tree/1.7.12"
+                "source": "https://github.com/phpstan/phpstan/tree/1.7.11"
             },
             "funding": [
                 {
@@ -9420,7 +9420,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-06-09T12:39:36+00:00"
+            "time": "2022-06-07T08:47:03+00:00"
         },
         {
             "name": "phpstan/phpstan-doctrine",
@@ -9492,16 +9492,16 @@
         },
         {
             "name": "phpstan/phpstan-symfony",
-            "version": "1.2.4",
+            "version": "1.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-symfony.git",
-                "reference": "9451f103bfbd7bac5d236405eb97106a37930197"
+                "reference": "7c24540375a53538190190496f077f76b14c63fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-symfony/zipball/9451f103bfbd7bac5d236405eb97106a37930197",
-                "reference": "9451f103bfbd7bac5d236405eb97106a37930197",
+                "url": "https://api.github.com/repos/phpstan/phpstan-symfony/zipball/7c24540375a53538190190496f077f76b14c63fb",
+                "reference": "7c24540375a53538190190496f077f76b14c63fb",
                 "shasum": ""
             },
             "require": {
@@ -9557,9 +9557,9 @@
             "description": "Symfony Framework extensions and rules for PHPStan",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-symfony/issues",
-                "source": "https://github.com/phpstan/phpstan-symfony/tree/1.2.4"
+                "source": "https://github.com/phpstan/phpstan-symfony/tree/1.2.3"
             },
-            "time": "2022-06-09T12:00:34+00:00"
+            "time": "2022-06-03T13:22:15+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
