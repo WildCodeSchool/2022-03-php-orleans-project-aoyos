@@ -1,0 +1,48 @@
+@import "variables.scss";
+
+.header-title {
+    font-size: 4rem;
+}
+.header-picture {
+    background-image: url("../images/header-aoyos.png");
+    background-size: cover;
+    height: 450px;
+    width: 1150px;
+    position: relative;
+}
+
+.header-sub {
+    font-size: 4rem;
+}
+  
+  .header-picture,
+  .header-picture::before,
+  .header-picture::after {
+    /* Styles to distinguish sheets from one another */
+    box-shadow: 1px 1px 1px rgba(0,0,0,0.25);
+    border: 1px solid #bbb;
+  }
+  
+  .header-picture::before,
+  .header-picture::after {
+    content: "";
+    position: absolute;
+    height: 105%;
+    width: 100%;
+  }
+  
+  .header-picture::before {
+    top: -5px;
+    bottom: -5px;
+    transform: rotate(-1deg);
+    z-index: -1;
+    background-color: $secondary;
+  }
+  
+  .header-picture::after {
+    top: -5px;
+    bottom: -5px;
+    transform: rotate(1deg);
+    z-index: -2;
+    background-color: $primary;
+  }
