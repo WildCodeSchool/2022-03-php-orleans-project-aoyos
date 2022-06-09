@@ -10,11 +10,11 @@ function typingEffect() {
         } else {
             timer = setTimeout(deletingEffect, 1000);
             return false;
-        };
+        }
         timer = setTimeout(loopTyping, 90);
     };
     loopTyping();
-};
+}
 
 function deletingEffect() {
     let word = words[i].split("");
@@ -27,13 +27,13 @@ function deletingEffect() {
                 i++;
             } else {
                 i = 0;
-            };
+            }
             typingEffect();
             return false;
-        };
+        }
         timer = setTimeout(loopDeleting, 150);
     };
     loopDeleting();
-};
+}
 
 typingEffect();
