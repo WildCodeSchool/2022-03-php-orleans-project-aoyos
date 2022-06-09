@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin/production')]
+#[Route('/admin/realisation')]
 class AdminProductionController extends AbstractController
 {
     #[Route('/', name: 'app_admin_production_index', methods: ['GET'])]
@@ -21,7 +21,7 @@ class AdminProductionController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_admin_production_new', methods: ['GET', 'POST'])]
+    #[Route('/ajouter', name: 'app_admin_production_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ProductionRepository $productionRepository): Response
     {
         $production = new Production();

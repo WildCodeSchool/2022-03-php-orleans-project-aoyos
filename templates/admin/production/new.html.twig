@@ -6,9 +6,6 @@
 {% block body %}
 	<main class="container">
 		<h1 class="my-5">Nouvelle réalisation</h1>
-
-		{{ include('admin/production/_form.html.twig') }}
-
-		<a href="{{ path('app_admin_production_index') }}" class="btn ">Retour</a>
+		{{ include('admin/production/_form.html.twig', {'icone': '<i class=\"bi bi-plus-square\"></i>'}) }}
 	</main>
 {% endblock %}
