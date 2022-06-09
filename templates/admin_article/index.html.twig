@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Article index
+{% block title %}{{ parent() }} - Articles
 {% endblock %}
 
 {% block body %}
@@ -38,7 +38,7 @@
 					</tr>
 				{% else %}
 					<tr>
-						<td colspan="7">no records found</td>
+						<td colspan="5">Aucun article trouvé</td>
 					</tr>
 				{% endfor %}
 			</tbody>
