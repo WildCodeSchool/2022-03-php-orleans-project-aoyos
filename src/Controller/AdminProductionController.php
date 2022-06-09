@@ -34,7 +34,7 @@ class AdminProductionController extends AbstractController
             return $this->redirectToRoute('app_admin_production_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('admin_production/new.html.twig', [
+        return $this->renderForm('admin/production/new.html.twig', [
             'production' => $production,
             'form' => $form,
         ]);
