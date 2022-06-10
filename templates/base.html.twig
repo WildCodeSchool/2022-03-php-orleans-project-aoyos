@@ -16,10 +16,13 @@
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
-    <body>
+    <body class="d-flex flex-column min-vh-100">
         {% block navbar %}
         {% include 'components/_navbar.html.twig' %}
         {% endblock %}
         {% block body %}{% endblock %}
+        {% block footer %}
+        {% include 'components/_footer.html.twig' %}
+        {% endblock %}
     </body>
 </html>
