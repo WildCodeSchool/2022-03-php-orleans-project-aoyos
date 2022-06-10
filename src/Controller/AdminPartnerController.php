@@ -40,7 +40,7 @@ class AdminPartnerController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_admin_partner_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/editer', name: 'app_admin_partner_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Partner $partner, PartnerRepository $partnerRepository): Response
     {
         $form = $this->createForm(PartnerType::class, $partner);
