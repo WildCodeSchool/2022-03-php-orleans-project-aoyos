@@ -5,7 +5,8 @@
         {{ encore_entry_link_tags('home') }}
         {{ encore_entry_link_tags('app') }}
         {% endblock %}
-                {% block javascripts %}
+        {% block javascripts %}
+            {{ parent() }}
             {{ encore_entry_script_tags('typeAnimation') }}
         {% endblock %}
         
