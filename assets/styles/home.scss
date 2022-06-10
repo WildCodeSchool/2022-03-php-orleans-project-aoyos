@@ -54,3 +54,7 @@
 @keyframes blink{
     to { opacity: .0; }
 }
+
+.aoyosPresentation {
+    background-color: lighten($primary, 18%);
+}
