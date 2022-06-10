@@ -21,7 +21,7 @@ class AdminPartnerController extends AbstractController
         ]);
     }
 
-    #[Route('/add', name: 'app_admin_partner_new', methods: ['GET', 'POST'])]
+    #[Route('/nouveau', name: 'app_admin_partner_new', methods: ['GET', 'POST'])]
     public function new(Request $request, PartnerRepository $partnerRepository): Response
     {
         $partner = new Partner();
