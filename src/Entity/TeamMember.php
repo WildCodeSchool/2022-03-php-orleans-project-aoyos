@@ -29,18 +29,16 @@ class TeamMember
     private string $position;
 
     #[ORM\Column(type: 'text', nullable: true)]
-    #[Assert\NotBlank]
     #[Assert\Length(
         max: 350
     )]
-    private string $description;
+    private ?string $description;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    #[Assert\NotBlank]
     #[Assert\Length(
         max: 255
     )]
-    private string $picture;
+    private ?string $picture;
 
     public function getId(): ?int
     {
