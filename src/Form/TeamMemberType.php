@@ -22,11 +22,11 @@ class TeamMemberType extends AbstractType
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Description',
-                'required' => 'False'
+                'required' => false
             ])
             ->add('picture', TextType::class, [
                 'label' => 'Photo',
-                'required' => 'False'
+                'required' => false
             ])
         ;
     }
