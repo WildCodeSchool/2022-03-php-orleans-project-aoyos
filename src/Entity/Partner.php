@@ -2,12 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\ProductionRepository;
+use App\Repository\PartnerRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-#[ORM\Entity(repositoryClass: ProductionRepository::class)]
-class Production
+#[ORM\Entity(repositoryClass: PartnerRepository::class)]
+class Partner
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -19,18 +19,14 @@ class Production
     #[Assert\Length(
         max: 255
     )]
-    private string $title;
-
-    #[ORM\Column(type: 'text')]
-    #[Assert\NotBlank]
-    private string $description;
+    private string $name;
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\NotBlank]
+    #[Assert\Url]
     #[Assert\Length(
         max: 255
     )]
-    #[Assert\Url()]
     private string $image;
 
     public function getId(): ?int
@@ -38,26 +34,14 @@ class Production
         return $this->id;
     }
 
-    public function getTitle(): ?string
+    public function getName(): ?string
     {
-        return $this->title;
+        return $this->name;
     }
 
-    public function setTitle(string $title): self
+    public function setName(string $name): self
     {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(string $description): self
-    {
-        $this->description = $description;
+        $this->name = $name;
 
         return $this;
     }
