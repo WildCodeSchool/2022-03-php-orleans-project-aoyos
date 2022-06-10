@@ -1,13 +1,10 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/admin_base.html.twig' %}
 
-{% block title %}Edit Production{% endblock %}
+{% block title %}{{ parent() }} - Éditer une réalisation{% endblock %}
 
 {% block body %}
-    <h1>Edit Production</h1>
-
-    {{ include('admin_production/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('app_admin_production_index') }}">back to list</a>
-
-    {{ include('admin_production/_delete_form.html.twig') }}
+<main class="container">
+    <h1 class="my-5">Éditer une réalistation</h1>
+    {{ include('admin/production/_form.html.twig', {'icon': '<i class=\"bi bi-pen\"></i>', 'button_label': 'Éditer'}) }}
+</main>
 {% endblock %}
