@@ -1,4 +1,5 @@
-const words = ["Afterwork.", "Séminaire d'entreprise.", "Soirée corporate.", "Évènement.", "Soirée d'entreprise."];
+const typeWriting =  document.getElementById('typeWriting');
+const words = typeWriting.dataset.words.split(',');
 let i = 0;
 let timer;
 
@@ -6,7 +7,7 @@ function typingEffect() {
     let word = words[i].split("");
     var loopTyping = function() {
         if (word.length > 0) {
-            document.getElementById('word').innerHTML += word.shift();
+            document.getElementById('typeWriting').innerHTML += word.shift();
         } else {
             timer = setTimeout(deletingEffect, 1000);
             return false;
@@ -21,7 +22,7 @@ function deletingEffect() {
     var loopDeleting = function() {
         if (word.length > 0) {
             word.pop();
-            document.getElementById('word').innerHTML = word.join("");
+            document.getElementById('typeWriting').innerHTML = word.join("");
         } else {
             if (words.length > (i + 1)) {
                 i++;
