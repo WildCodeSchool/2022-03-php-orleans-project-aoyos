@@ -1,11 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}{{ parent() }} - Accueil{% endblock %}
-
+        {% block stylesheets %}
+        {{ encore_entry_link_tags('home') }}
+        {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+                {% block javascripts %}
+            {{ encore_entry_script_tags('typeAnimation') }}
+        {% endblock %}
+        
 {% block body %}
-    <h1 class="text-primary">Home</h1>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor quas fugit provident ea commodi nulla assumenda eius aut cupiditate similique fuga optio, quaerat nihil! Perspiciatis quasi quas asperiores quis nihil.</p>
-    <div class="container">
-        <a href="#" class="btn btn-primary" data-aos="fade-up">Un bouton</a>
-    </div>
+<main>
+{% include 'components/_banner_main.html.twig' %}
+</main>
 {% endblock %}
