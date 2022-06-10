@@ -1,4 +1,4 @@
-const words = ["Afterwork.", "Séminaire d'entreprise.", "Soirée corporate.", "Soirée corporate."];
+const words = ["Afterwork.", "Séminaire d'entreprise.", "Soirée corporate.", "Évènement.", "Soirée d'entreprise."];
 let i = 0;
 let timer;
 
