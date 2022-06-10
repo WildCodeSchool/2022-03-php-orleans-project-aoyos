@@ -9,11 +9,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
+    public const MAX_ARTICLES = 4;
+
     #[Route('/', name: 'app_home')]
     public function index(ArticleRepository $articleRepository): Response
     {
         return $this->render('home/index.html.twig', [
-            'articles' => $articleRepository->findBy([], ['createdAt' => 'DESC'], 4)
+            'articles' => $articleRepository->findBy([], ['createdAt' => 'DESC'], self::MAX_ARTICLES)
         ]);
     }
 }
