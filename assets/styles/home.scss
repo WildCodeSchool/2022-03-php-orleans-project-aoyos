@@ -57,6 +57,8 @@
 
 .aoyosPresentation {
     background-color: lighten($primary, 18%);
+    border-radius: 4px 4px;
+    filter: drop-shadow(0 0 0.1rem $primary)
 }
 
 .aoyosPresentationImage {
