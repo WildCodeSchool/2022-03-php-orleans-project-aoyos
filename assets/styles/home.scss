@@ -1,5 +1,9 @@
 @import "variables.scss";
 
+$productionCardHeight: 500px;
+$productionImgHeight: 300px;
+$productionTitleOffset: -50px;
+
 .header-title {
     font-size: clamp(0.5rem, 10vh, 4rem);
 }
@@ -49,6 +53,27 @@
 
 .blink {
     animation: blink 0.6s infinite;
+}
+
+.production {
+    background-image: url("../images/bg_production.png");
+    background-size: 110% 100%;
+    background-position-x: left;
+    background-repeat: no-repeat;
+}
+
+.production .card {
+    height: $productionCardHeight;
+}
+
+.production img {
+    object-fit: cover;
+    object-position: center;
+    height: $productionImgHeight;
+}
+
+.production .card-title {
+    margin-top: $productionTitleOffset;
 }
 
 @keyframes blink{
