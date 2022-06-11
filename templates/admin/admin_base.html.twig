@@ -14,10 +14,15 @@
 {% endblock %}
 
 {% block navbar %}
-{% include 'items/_admin_sidebar.html.twig' %}
 {% endblock %}
 
 {% block body %}
+	{% include 'components/_admin_topBar.html.twig' %}
+	<div class="d-flex">
+			{% include 'components/_admin_sidebar.html.twig' %}
+		{% block content %}
+		{% endblock %}
+	</div>
 {% endblock %}
 
 {% block footer %}
