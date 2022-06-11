@@ -14,12 +14,12 @@
 {% endblock %}
 
 {% block navbar %}
+	{% include 'components/_admin_topBar.html.twig' %}
 {% endblock %}
 
 {% block body %}
-	{% include 'components/_admin_topBar.html.twig' %}
 	<div class="d-flex">
-			{% include 'components/_admin_sidebar.html.twig' %}
+		{% include 'components/_admin_sidebar.html.twig' %}
 		{% block content %}
 		{% endblock %}
 	</div>
