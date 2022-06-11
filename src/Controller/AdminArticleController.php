@@ -18,7 +18,7 @@ class AdminArticleController extends AbstractController
     public function index(ArticleRepository $articleRepository): Response
     {
         return $this->render('admin/article/index.html.twig', [
-            'articles' => $articleRepository->findBy([], ['createdAt' => 'DESC']),
+            'articles' => $articleRepository->findBy([], ['id' => 'DESC']),
         ]);
     }
 
@@ -30,7 +30,8 @@ class AdminArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $article->setCreatedAt(new DateTime());
+            $date = new DateTime();
+            $article->setCreatedAt($date->format('d-m-Y'));
             $articleRepository->add($article, true);
 
             return $this->redirectToRoute('admin_article_index', [], Response::HTTP_SEE_OTHER);
