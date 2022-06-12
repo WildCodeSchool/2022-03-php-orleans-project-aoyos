@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ parent()}}
+	- Équipe
+{% endblock %}
+
+{% block body %}
+	<h1 class="text-center my-5 mx-0 px-0">Notre équipe</h1>
+
+	<div class="row mx-0 pb-5">
+
+		<div class="d-flex flex-md-row px-0 col-12 flex-wrap flex-column mx-auto justify-content-center">
+            {% for team_member in team_members %}  
+            <div class="col-md-4">
+			<div class="card">
+				<img src="{{ asset('build/images/logo.png') }}" class="card-img-top w-25 h-25" alt="...">
+				<div class="card-body">
+					<h5 class="card-title">{{team_member.name}}</h5>
+					<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+				</div>
+				<div class="card-footer">
+					<small class="text-muted">Last updated 3 mins ago</small>
+				</div>
+			</div>
+            </div>
+            {% endfor %}
+		</div>
+                       
+	</div>
+
+{% endblock %}
