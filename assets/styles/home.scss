@@ -1,5 +1,7 @@
 @import "variables.scss";
 
+$logoSize: 200px;
+
 .header-title {
     font-size: clamp(0.5rem, 10vh, 4rem);
 }
@@ -56,7 +58,9 @@
 }
 
 .partner-image {
-    filter: grayscale(100%);
+    filter: opacity(0.5);
+    width: $logoSize;
+    max-height: auto;
     transition: filter 0.5s ease-in-out;
 }
 
