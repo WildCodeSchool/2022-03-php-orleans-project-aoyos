@@ -1,0 +1,14 @@
+<section class="partners mt-5 mb-5">
+	<div class="container mt-5 pt-5">
+		<div class="d-flex justify-content-center">
+			{% if partners is not empty %}
+				{% for partner in partners %}
+					<img src="{{ partner.image}}" class="partner-image mx-3 w-100"/>
+				{% endfor %}
+			{% else %}
+				<h2 class="h3">Partenaires à venir!
+				</h2>
+			{% endif %}
+		</div>
+	</div>
+</section>
