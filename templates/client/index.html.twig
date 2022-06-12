@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block stylesheets %}
-	{{ encore_entry_link_tags('app') }}
+	{{ encore_entry_link_tags('client') }}
 {% endblock %}
 
 {% block javascripts %}
@@ -14,4 +14,8 @@
 	{{ encore_entry_script_tags('typeAnimation') }}
 {% endblock %}
 
-{% block body %}{% endblock %}
+{% block body %}
+	<main class="container">
+		{% include "components/client/_header.html.twig" %}
+	</main>
+{% endblock %}
