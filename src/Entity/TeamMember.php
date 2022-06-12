@@ -35,6 +35,7 @@ class TeamMember
     private ?string $description;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Assert\Url]
     #[Assert\Length(
         max: 255
     )]

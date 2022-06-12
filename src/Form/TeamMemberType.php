@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 
 class TeamMemberType extends AbstractType
 {
@@ -24,7 +25,7 @@ class TeamMemberType extends AbstractType
                 'label' => 'Description',
                 'required' => false
             ])
-            ->add('picture', TextType::class, [
+            ->add('picture', UrlType::class, [
                 'label' => 'Photo',
                 'required' => false
             ])
