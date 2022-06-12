@@ -21,7 +21,7 @@ class AdminTeamMemberController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'admin_team_member_new', methods: ['GET', 'POST'])]
+    #[Route('/nouveau', name: 'admin_team_member_new', methods: ['GET', 'POST'])]
     public function new(Request $request, TeamMemberRepository $teamMemberRepository): Response
     {
         $teamMember = new TeamMember();
