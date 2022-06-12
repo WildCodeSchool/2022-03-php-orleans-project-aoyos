@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin/team')]
+#[Route('/admin/equipe')]
 class AdminTeamMemberController extends AbstractController
 {
     #[Route('/', name: 'admin_team_index', methods: ['GET'])]
@@ -48,7 +48,7 @@ class AdminTeamMemberController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'admin_team_member_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/editer', name: 'admin_team_member_edit', methods: ['GET', 'POST'])]
     public function edit(
         Request $request,
         TeamMember $teamMember,
