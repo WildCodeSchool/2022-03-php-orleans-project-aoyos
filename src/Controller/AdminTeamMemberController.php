@@ -48,7 +48,7 @@ class AdminTeamMemberController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'admin_team_member_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/editer', name: 'admin_team_member_edit', methods: ['GET', 'POST'])]
     public function edit(
         Request $request,
         TeamMember $teamMember,

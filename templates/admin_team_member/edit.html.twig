@@ -1,13 +1,10 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/admin_base.html.twig' %}
 
-{% block title %}Edit TeamMember{% endblock %}
+{% block title %}{{ parent() }} - Éditer un membre de l'équipe{% endblock %}
 
 {% block body %}
-    <h1>Edit TeamMember</h1>
-
-    {{ include('admin_team/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('app_admin_team_index') }}">back to list</a>
-
-    {{ include('admin_team/_delete_form.html.twig') }}
+<main class="container">
+    <h1 class="my-5">Édition d'un membre de l'équipe</h1>
+    {{ include('admin_team_member/_form.html.twig', {'icon': '<i class=\"bi bi-pen\"></i>', 'button_label': 'Éditer'}) }}
+</main>
 {% endblock %}
