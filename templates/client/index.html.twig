@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ parent() }}
+	- Accueil client
+{% endblock %}
+
+{% block stylesheets %}
+	{{ encore_entry_link_tags('client') }}
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('typeAnimation') }}
+{% endblock %}
+
+{% block body %}
+	<main class="container">
+		{% include "components/client/_header.html.twig" %}
+	</main>
+{% endblock %}

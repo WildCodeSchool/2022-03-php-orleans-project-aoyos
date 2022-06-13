@@ -28,7 +28,11 @@
 					<tr>
 						<td>{{ team_member.name }}</td>
 						<td>{{ team_member.position }}</td>
+						{% if team_member.description is defined and team_member.description is not null %}
 						<td>{{ team_member.description }}</td>
+						{% else %}
+						<td></td>
+						{% endif %}
 						<td>
 							<div>
 								<a class="btn btn-outline-secondary btn-sm text-nowrap pb-0 px-3" href="{{ path('admin_team_member_edit', {'id': team_member.id}) }}">

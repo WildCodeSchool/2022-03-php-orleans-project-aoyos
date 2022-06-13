@@ -40,7 +40,7 @@ class AdminProductionController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_admin_production_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/editer', name: 'app_admin_production_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Production $production, ProductionRepository $productionRepository): Response
     {
         $form = $this->createForm(ProductionType::class, $production);
@@ -52,7 +52,7 @@ class AdminProductionController extends AbstractController
             return $this->redirectToRoute('app_admin_production_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('admin_production/edit.html.twig', [
+        return $this->renderForm('admin/production/edit.html.twig', [
             'production' => $production,
             'form' => $form,
         ]);
