@@ -30,8 +30,6 @@ class AdminArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $date = new DateTime();
-            $article->setCreatedAt($date->format('d-m-Y'));
             $articleRepository->add($article, true);
 
             return $this->redirectToRoute('admin_article_index', [], Response::HTTP_SEE_OTHER);
@@ -51,7 +49,7 @@ class AdminArticleController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/editer', name: 'edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Article $article, ArticleRepository $articleRepository): Response
     {
         $form = $this->createForm(ArticleType::class, $article);
