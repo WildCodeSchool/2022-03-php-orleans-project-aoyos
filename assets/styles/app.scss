@@ -1,7 +1,6 @@
 @import "variables.scss";
 @import "~bootstrap/scss/bootstrap";
 @import 'aos/dist/aos.css';
-@import 'text-hover/text_hover.scss';
 
 @font-face {
     font-family: "Alpaca Scarlett";
@@ -79,3 +78,27 @@ body {
     height: 30%;
     top: 45%;
 }
+
+.hover-underline-animation {
+    display: inline-block;
+    position: relative;
+    color: $dark;
+}
+
+.hover-underline-animation:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: $dark;
+    transform-origin: bottom left;
+    transition: transform 0.35s ease-out;
+  }
+  
+  .hover-underline-animation:hover:after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
