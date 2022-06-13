@@ -1,0 +1,11 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block title %}New TeamMember{% endblock %}
+
+{% block body %}
+<main class="container">
+    <h1 class="my-5">Ajouter un membre de l'équipe</h1>
+
+    {{ include('admin/team_member/_form.html.twig', {'icon': '<i class=\"bi bi-plus-square\"></i>'}) }}
+</main>
+{% endblock %}

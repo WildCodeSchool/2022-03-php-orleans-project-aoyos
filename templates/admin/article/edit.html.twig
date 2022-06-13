@@ -1,13 +1,16 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/admin_base.html.twig' %}
 
-{% block title %}Edit Article{% endblock %}
+{% block title %}
+	{{ parent() }}
+	- Éditer un article
+{% endblock %}
 
-{% block body %}
-    <h1>Edit Article</h1>
+{% block content %}
 
-    {{ include('article/_form.html.twig', {'button_label': 'Update'}) }}
+	<main class="container">
+		<h1 class="my-5">Édition d'un article</h1>
 
-    <a href="{{ path('app_article_index') }}">back to list</a>
+		{{ include('admin/article/_form.html.twig', {'icon': '<i class=\"bi bi-pen\"></i>', 'button_label': 'Éditer'}) }}
+	</main>
 
-    {{ include('article/_delete_form.html.twig') }}
 {% endblock %}
