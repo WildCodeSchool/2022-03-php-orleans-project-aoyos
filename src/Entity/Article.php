@@ -24,10 +24,8 @@ class Article
     private string $title;
 
     #[ORM\Column(type: 'datetime')]
-    /**
-     * @var string A "Y-m-d H:i:s" formatted value
-     */
-    #[Assert\DateTime]
+    #[Assert\Type('\DateTimeInterface')]
+
     private DateTime $createdAt;
 
     #[ORM\Column(type: 'text')]
@@ -48,6 +46,11 @@ class Article
         max: 255
     )]
     private string $author;
+
+    public function __construct()
+    {
+        $this->createdAt = new DateTime();
+    }
 
     public function getId(): ?int
     {
