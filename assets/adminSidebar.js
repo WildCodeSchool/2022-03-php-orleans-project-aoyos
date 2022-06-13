@@ -2,20 +2,28 @@ const sideBar = document.getElementById('offcanvasScrolling');
 const breakPointWidth = 765;
 
 if (window.innerWidth >= breakPointWidth) {
-    sideBar.classList.add('position-sticky');
-    sideBar.classList.remove('offcanvas');
-    sideBar.classList.remove('offcanvas-start');
+    fixedMode() 
 }
 
 window.addEventListener('resize', () => {
     if (window.innerWidth <= breakPointWidth) {
-        sideBar.classList.add('offcanvas');
-        sideBar.classList.add('offcanvas-start');
-        sideBar.classList.remove('position-sticky');
+        canvasMode();
     } else {
-        sideBar.classList.remove('offcanvas');
-        sideBar.classList.remove('offcanvas-start');
-        sideBar.classList.remove('position-fixed');
-        sideBar.style.visibility = 'visible';
+        fixedMode() 
     }
 });
+
+function canvasMode()
+{
+    sideBar.classList.add('offcanvas');
+    sideBar.classList.add('offcanvas-start');
+    sideBar.classList.remove('position-sticky'); 
+}
+
+function fixedMode() 
+{
+    sideBar.classList.remove('offcanvas');
+    sideBar.classList.remove('offcanvas-start');
+    sideBar.classList.add('position-sticky');
+    sideBar.style.visibility = 'visible';
+}
