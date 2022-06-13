@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/admin_base.html.twig' %}
 
 {% block title %}
 	{{ parent() }}
@@ -39,7 +39,7 @@
 									<i class="bi bi-pen"></i>
 									Éditer
 								</a>
-								 {{ include('admin_team_member/_delete_form.html.twig') }}
+								 {{ include('admin/team_member/_delete_form.html.twig') }}
 							</div>
 						</td>
 					</tr>

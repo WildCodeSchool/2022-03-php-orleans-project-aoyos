@@ -16,7 +16,7 @@ class AdminTeamMemberController extends AbstractController
     #[Route('/', name: 'admin_team_index', methods: ['GET'])]
     public function index(TeamMemberRepository $teamMemberRepository): Response
     {
-        return $this->render('admin_team_member/index.html.twig', [
+        return $this->render('admin/team_member/index.html.twig', [
             'team_members' => $teamMemberRepository->findAll(),
         ]);
     }
@@ -34,7 +34,7 @@ class AdminTeamMemberController extends AbstractController
             return $this->redirectToRoute('admin_team_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('admin_team_member/new.html.twig', [
+        return $this->renderForm('admin/team_member/new.html.twig', [
             'team_member' => $teamMember,
             'form' => $form,
         ]);
@@ -43,7 +43,7 @@ class AdminTeamMemberController extends AbstractController
     #[Route('/{id}', name: 'admin_team_member_show', methods: ['GET'])]
     public function show(TeamMember $teamMember): Response
     {
-        return $this->render('admin_team_member/show.html.twig', [
+        return $this->render('admin/team_member/show.html.twig', [
             'team_member' => $teamMember,
         ]);
     }
@@ -63,7 +63,7 @@ class AdminTeamMemberController extends AbstractController
             return $this->redirectToRoute('admin_team_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('admin_team_member/edit.html.twig', [
+        return $this->renderForm('admin/team_member/edit.html.twig', [
             'team_member' => $teamMember,
             'form' => $form,
         ]);
