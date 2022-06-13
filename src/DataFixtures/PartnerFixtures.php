@@ -19,7 +19,10 @@ class PartnerFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create();
-        for ($i = 0; $i <= 4; $i++) {
+
+        $numberPartners = 5;
+
+        for ($i = 0; $i < $numberPartners; $i++) {
             $partner = new Partner();
             $partner->setName($faker->name());
             $partner->setImage(self::PARTNERSIMG[$i]);
