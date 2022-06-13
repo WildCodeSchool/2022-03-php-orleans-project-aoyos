@@ -3,6 +3,7 @@
 $productionCardHeight: 400px;
 $productionImgHeight: 220px;
 $productionTitleOffset: -50px;
+$logoHeight: 200px;
 
 .header-title {
     font-size: clamp(0.5rem, 10vh, 4rem);
@@ -88,4 +89,69 @@ $productionTitleOffset: -50px;
 
 @keyframes blink{
     to { opacity: .0; }
+}
+
+.partner-image {
+    filter: opacity(0.5);
+    object-fit: cover;
+    height: $logoHeight;
+    transition: filter 0.5s ease-in-out;
+}
+
+.partner-image:hover {
+    filter: none;
+}
+
+.aoyos-presentation {
+    background-color: lighten($primary, 20%);
+    border-radius: 4px 4px;
+    filter: drop-shadow(0 0 0.1rem $primary)
+}
+
+.aoyos-presentation-logo {
+    background-image: url("../images/favicon.png");
+    background-repeat: no-repeat;
+    background-size: 30%;
+    background-position: center;
+    border: 2px solid darken($primary, 20%);
+    border-radius: 4px 4px;
+    background-color: lighten($primary, 15%);
+}
+
+.aoyos-presentation h2 {
+    position: relative;
+}
+
+.aoyos-logo-div {
+    position:relative;
+}
+
+.square {
+    position: absolute;
+    z-index: 1;
+    opacity: 0.8;
+    width: $squareSize;
+    height: $squareSize;
+    border-radius: 4px 4px;
+}
+
+.yellow-square {
+    background-color: $orangeLogo;
+    top: 2%;
+    left:13%;
+    filter: drop-shadow(0 0 0.1rem $orangeLogo);
+}
+
+.pink-square {
+    background-color: $pinkLogo;
+    top: -3%;
+    left: 17%;
+    filter: drop-shadow(0 0 0.1rem $pinkLogo);
+}
+
+.blue-square {
+    background-color: $blueLogo;
+    bottom: 3%;
+    right:13%;
+    filter: drop-shadow(0 0 0.1rem $blueLogo);
 }
