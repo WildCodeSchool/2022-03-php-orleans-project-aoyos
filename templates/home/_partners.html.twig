@@ -1,9 +1,9 @@
 <section class="partners py-5">
-	<div class="container pt-3">
+	<div class="container-fluid pt-3">
 		<div class="row justify-content-center">
 			{% if partners is not empty %}
 				{% for partner in partners %}
-					<img src="{{ partner.image}}" class="col-lg-3 partner-image  mt-3"/>
+					<img src="{{ partner.image}}" class="col-lg-2 partner-image mt-3"/>
 				{% endfor %}
 			{% else %}
 				<h2 class="h3">Partenaires à venir !</h2>
