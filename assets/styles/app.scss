@@ -23,12 +23,24 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: "Merriweather";
+    src: url("https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&display=swap");
+    font-weight: normal;
+    font-style:normal;
+}
+
+@font-face {
+    font-family: "Inter";
+    src: url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;500;700;900&display=swap');
+}
+
 h1,
 h2,
 h3,
 h4,
 h5 {
-    font-family: $textFont;
+    font-family: $navFont;
     font-weight: bold;
 }
 
