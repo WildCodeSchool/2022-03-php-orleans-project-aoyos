@@ -76,6 +76,16 @@ $productionTitleOffset: -50px;
     margin-top: $productionTitleOffset;
 }
 
+.production .card-text {
+    text-overflow:ellipsis;
+    overflow:hidden;
+    // Addition lines for 4 line or multiline ellipsis
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+}
+
 @keyframes blink{
     to { opacity: .0; }
 }

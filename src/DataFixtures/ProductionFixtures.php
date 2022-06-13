@@ -15,8 +15,8 @@ class ProductionFixtures extends Fixture
 
         for ($i = 0; $i < 10; $i++) {
             $production = new Production();
-            $production->setTitle($faker->sentence(3));
-            $production->setDescription($faker->sentence(10));
+            $production->setTitle($faker->sentence(4));
+            $production->setDescription($faker->paragraph(50));
             $production->setImage('https://picsum.photos/400');
             $manager->persist($production);
         }
