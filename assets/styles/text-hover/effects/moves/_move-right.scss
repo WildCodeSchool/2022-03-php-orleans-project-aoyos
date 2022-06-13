@@ -1,0 +1,16 @@
+@mixin move-right {
+  @include line-options(
+    after,
+    $transition-property: right,
+    $value-of-transitioned-property:
+      calc(#{$max-value-of-transitioned-property} - 100%)
+  );
+
+  &:after {
+    background-color: transparent;
+    top: 0;
+    bottom: 0;
+    right: 50%;
+    height: auto;
+  }
+}

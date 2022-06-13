@@ -1,0 +1,23 @@
+@mixin cc-right-top {
+  @include line-options(
+    after,
+    $transition-property: width,
+    $value-of-transitioned-property: $max-value-of-transitioned-property
+  );
+
+  @include line-options(
+    before,
+    $transition-property: height,
+    $value-of-transitioned-property: $max-value-of-transitioned-property
+  );
+
+  &:before {
+    bottom: 0%;
+    right: 0;
+  }
+
+  &:after {
+    top: 0;
+    left: 0;
+  }
+}

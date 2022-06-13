@@ -1,0 +1,150 @@
+@mixin transition-options(
+  $transition-speed: $transition-speed,
+  $transition-easing: $transition-easing,
+  $transition-delay: $transition-delay,
+  $padding-top: $space-above-the-text,
+  $padding-bottom: $space-below-the-text,
+  $padding-right: $space-on-the-right-side,
+  $padding-left: $space-on-the-left-side,
+  $display: $display,
+  $hovered-color: $hovered-text-color,
+  $after-bg-color: $after-bg-color,
+  $before-bg-color: $before-bg-color
+) {
+  display: $display;
+  padding-top: $padding-top;
+  padding-bottom: $padding-bottom;
+  padding-right: $padding-right;
+  padding-left: $padding-left;
+  transition-timing-function: $transition-easing;
+  transition-duration: $transition-speed;
+  transition-delay: $transition-delay;
+  transition-property: color;
+  white-space: nowrap;
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+  text-decoration: none;
+  box-sizing: border-box;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+  &:after,
+  &:before {
+    transition-duration: $transition-speed;
+    transition-timing-function: $transition-easing;
+    transition-delay: $transition-delay;
+  }
+
+  &:after {
+    background-color: $after-bg-color;
+  }
+
+  &:before {
+    background-color: $before-bg-color;
+  }
+
+  @if $event == hover {
+    &:hover,
+    &:focus {
+      @include setTransitions(
+        $transition-speed,
+        $transition-easing,
+        $hovered-color
+      );
+    }
+
+    &:hover:after,
+    &:focus:after {
+      background-color: $after-bg-color;
+    }
+
+    &:hover:before,
+    &:focus:before {
+      background-color: $before-bg-color;
+    }
+
+    &:hover:after,
+    &:focus:after,
+    &:hover:before,
+    &:focus:before {
+      @include setTransitionsForPseudoElements(
+        $transition-speed,
+        $transition-easing,
+        $transition-delay
+      );
+    }
+  } @else {
+    &.#{$name-of-the-class-on-click} {
+      cursor: pointer;
+      @include setTransitions(
+        $transition-speed,
+        $transition-easing,
+        $hovered-color
+      );
+
+      &:after {
+        background-color: $after-bg-color;
+      }
+
+      &:before {
+        background-color: $before-bg-color;
+      }
+
+      &:after,
+      &:before {
+        @include setTransitionsForPseudoElements(
+          $transition-speed,
+          $transition-easing,
+          $transition-delay
+        );
+      }
+    }
+  }
+}
+
+$max-value-of-transitioned-property: 100%;
+@mixin line-options(
+  $type-of-pseudoelement,
+  $transition-property,
+  $value-of-transitioned-property,
+  $untransitioned-height: $size-of-the-line,
+  $untransitioned-width: $size-of-the-line
+) {
+  &:#{$type-of-pseudoelement} {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    @include checkTheExistenceOfTransitionProperty($transition-property) {
+      @include checkTheTransitionProperty(
+        $transition-property,
+        $untransitioned-height,
+        $untransitioned-width
+      );
+    }
+  }
+
+  @if $event == hover {
+    &:hover:#{$type-of-pseudoelement},
+    &:focus:#{$type-of-pseudoelement} {
+      outline: 0;
+      @include checkTheExistenceOfTransitionProperty($transition-property) {
+        @include checkTheLengthOfTransitionedProperties(
+          $transition-property,
+          $value-of-transitioned-property
+        );
+      }
+    }
+  } @else {
+    &.#{$name-of-the-class-on-click}:#{$type-of-pseudoelement} {
+      outline: 0;
+      @include checkTheExistenceOfTransitionProperty($transition-property) {
+        @include checkTheLengthOfTransitionedProperties(
+          $transition-property,
+          $value-of-transitioned-property
+        );
+      }
+    }
+  }
+}

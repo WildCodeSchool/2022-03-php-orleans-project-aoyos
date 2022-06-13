@@ -1,0 +1,11 @@
+@mixin left-goes-up {
+  @include line-options(
+    after,
+    $transition-property: height,
+    $value-of-transitioned-property: $max-value-of-transitioned-property
+  );
+  &:after {
+    bottom: 0%;
+    left: 0%;
+  }
+}

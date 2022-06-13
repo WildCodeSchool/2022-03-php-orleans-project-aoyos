@@ -1,0 +1,12 @@
+@mixin underline-goes-right {
+  @include line-options(
+    after,
+    $transition-property: width,
+    $value-of-transitioned-property: $max-value-of-transitioned-property
+  );
+
+  &:after {
+    left: 0;
+    bottom: 0;
+  }
+}

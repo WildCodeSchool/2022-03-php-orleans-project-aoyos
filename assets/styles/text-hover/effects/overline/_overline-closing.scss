@@ -1,0 +1,22 @@
+@mixin overline-closing {
+  @include line-options(
+    after,
+    $transition-property: width,
+    $value-of-transitioned-property: $max-value-of-transitioned-property / 2
+  );
+
+  @include line-options(
+    before,
+    $transition-property: width,
+    $value-of-transitioned-property: $max-value-of-transitioned-property / 2
+  );
+  &:after {
+    top: 0%;
+    left: 0%;
+  }
+
+  &:before {
+    top: 0%;
+    right: 0%;
+  }
+}

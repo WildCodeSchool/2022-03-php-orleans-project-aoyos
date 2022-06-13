@@ -1,0 +1,26 @@
+@mixin dl-reversed-lr {
+  @include line-options(
+    after,
+    $transition-property: width,
+    $value-of-transitioned-property: $max-value-of-transitioned-property
+  );
+
+  @include line-options(
+    before,
+    $transition-property: width,
+    $value-of-transitioned-property: $max-value-of-transitioned-property
+  );
+
+  &:after {
+    right: 0%;
+    top: 44%;
+    z-index: 9;
+  }
+
+  &:before {
+    left: 0%;
+    bottom: 10px;
+    z-index: 9;
+    top: 54%;
+  }
+}

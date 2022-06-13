@@ -1,0 +1,84 @@
+@import "defaults";
+@import "helpers";
+@import "options";
+
+@import "./../effects/overline/overline-goes-right";
+@import "./../effects/overline/overline-goes-left";
+@import "./../effects/overline/overline-closing";
+@import "./../effects/overline/overline-opening";
+
+@import "./../effects/underline/underline-goes-left";
+@import "./../effects/underline/underline-closing";
+@import "./../effects/underline/underline-opening";
+@import "./../effects/underline/underline-goes-right";
+
+@import "./../effects/both-side/both-go-right";
+@import "./../effects/both-side/both-opening-horizontal";
+@import "./../effects/both-side/both-go-up";
+@import "./../effects/both-side/both-go-down";
+@import "./../effects/both-side/both-go-left";
+@import "./../effects/both-side/left-goes-up-right-goes-down";
+@import "./../effects/both-side/left-goes-down-right-goes-up";
+@import "./../effects/both-side/overline-goes-left-underline-goes-right";
+@import "./../effects/both-side/overline-goes-right-underline-goes-left";
+
+@import "./../effects/fill/fill-goes-up";
+@import "./../effects/fill/fill-goes-down";
+@import "./../effects/fill/fill-goes-left";
+@import "./../effects/fill/fill-goes-right";
+@import "./../effects/fill/fill-opening-horizontal";
+@import "./../effects/fill/fill-closing-horizontal";
+@import "./../effects/fill/fill-closing-vertical";
+
+@import "./../effects/fill-corners/fc-top-left";
+@import "./../effects/fill-corners/fc-top-right";
+@import "./../effects/fill-corners/fc-bottom-left";
+@import "./../effects/fill-corners/fc-bottom-right";
+
+@import "./../effects/corners-closing/cc-left-top";
+@import "./../effects/corners-closing/cc-right-top";
+@import "./../effects/corners-closing/cc-left-bottom";
+@import "./../effects/corners-closing/cc-right-bottom";
+
+@import "./../effects/corners-expanding/ce-top-right";
+@import "./../effects/corners-expanding/ce-top-left";
+@import "./../effects/corners-expanding/ce-bottom-left";
+@import "./../effects/corners-expanding/ce-bottom-right";
+
+@import "./../effects/side-line/left-goes-down";
+@import "./../effects/side-line/left-goes-up";
+@import "./../effects/side-line/right-goes-up";
+@import "./../effects/side-line/right-goes-down";
+
+@import "./../effects/linethrough/linethrough-opening";
+@import "./../effects/linethrough/linethrough-closing";
+@import "./../effects/linethrough/linethrough-goes-left";
+@import "./../effects/linethrough/linethrough-goes-right";
+
+@import "./../effects/double-underline/du-goes-left";
+@import "./../effects/double-underline/du-goes-right";
+@import "./../effects/double-underline/du-opening";
+@import "./../effects/double-underline/du-reversed-lr";
+@import "./../effects/double-underline/du-reversed-rl";
+
+@import "./../effects/double-linethrough/dl-goes-left";
+@import "./../effects/double-linethrough/dl-goes-right";
+@import "./../effects/double-linethrough/dl-reversed-lr";
+@import "./../effects/double-linethrough/dl-reversed-rl";
+@import "./../effects/double-linethrough/dl-opening";
+
+@import "./../effects/moves/move-down";
+@import "./../effects/moves/move-up";
+@import "./../effects/moves/move-right";
+@import "./../effects/moves/move-left";
+@import "./../effects/moves/move-vertical";
+@import "./../effects/moves/move-horizontal";
+
+@import "./../effects/halfline/halfline-bottom-goes-right";
+@import "./../effects/halfline/halfline-bottom-goes-left";
+@import "./../effects/halfline/halfline-top-goes-right";
+@import "./../effects/halfline/halfline-top-goes-left";
+@import "./../effects/halfline/halfline-top-left-goes-down";
+@import "./../effects/halfline/halfline-top-right-goes-down";
+@import "./../effects/halfline/halfline-bottom-right-goes-up";
+@import "./../effects/halfline/halfline-bottom-left-goes-up";
