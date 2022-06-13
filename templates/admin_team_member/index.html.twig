@@ -35,10 +35,11 @@
 						{% endif %}
 						<td>
 							<div>
-								<a class="btn btn-outline-secondary btn-sm text-nowrap pb-0 px-3" href="{{ path('admin_team_member_edit', {'id': team_member.id}) }}">
+								<a class="btn btn-outline-secondary btn-sm text-nowrap pb-0 px-3 mb-1" href="{{ path('admin_team_member_edit', {'id': team_member.id}) }}">
 									<i class="bi bi-pen"></i>
 									Éditer
 								</a>
+								 {{ include('admin_team_member/_delete_form.html.twig') }}
 							</div>
 						</td>
 					</tr>
