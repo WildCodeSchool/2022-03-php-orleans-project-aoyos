@@ -23,11 +23,12 @@ class Article
     )]
     private string $title;
 
-    #[ORM\Column(type: 'string', length: 10)]
-    #[Assert\Length(
-        max: 10
-    )]
-    private string $createdAt;
+    #[ORM\Column(type: 'datetime')]
+    /**
+     * @var string A "Y-m-d H:i:s" formatted value
+     */
+    #[Assert\DateTime]
+    private DateTime $createdAt;
 
     #[ORM\Column(type: 'text')]
     #[Assert\NotBlank]
@@ -65,12 +66,12 @@ class Article
         return $this;
     }
 
-    public function getCreatedAt(): ?string
+    public function getCreatedAt(): ?DateTime
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(string $createdAt): self
+    public function setCreatedAt(DateTime $createdAt): self
     {
         $this->createdAt = $createdAt;
 
