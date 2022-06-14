@@ -35,6 +35,7 @@ Encore
     .addEntry('typeAnimation', './assets/typeAnimation.js')
     .addEntry('admin', './assets/styles/admin.scss')
     .addEntry('home', './assets/styles/home.scss')
+    .addEntry('team', './assets/styles/team.scss')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')
