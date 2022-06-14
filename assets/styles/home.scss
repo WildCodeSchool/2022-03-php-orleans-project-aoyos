@@ -1,5 +1,8 @@
 @import "variables.scss";
 
+$productionCardHeight: 400px;
+$productionImgHeight: 220px;
+$productionTitleOffset: -50px;
 $logoHeight: 200px;
 
 .header-title {
@@ -51,6 +54,37 @@ $logoHeight: 200px;
 
 .blink {
     animation: blink 0.6s infinite;
+}
+
+.production > div {
+    background-image: url("../images/bg_production.svg");
+    background-size: 50%;
+    background-position-x: right;
+    background-repeat: no-repeat;
+}
+
+.production .card {
+    height: $productionCardHeight;
+}
+
+.production img {
+    object-fit: cover;
+    object-position: center;
+    height: $productionImgHeight;
+}
+
+.production .card-title {
+    margin-top: $productionTitleOffset;
+}
+
+.production .card-text {
+    text-overflow:ellipsis;
+    overflow:hidden;
+    // Addition lines for 4 line or multiline ellipsis
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    white-space: normal;
 }
 
 @keyframes blink{

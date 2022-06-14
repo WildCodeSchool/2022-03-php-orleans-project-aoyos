@@ -75,6 +75,10 @@ body {
     border-right: 0.5px solid $light;
 }
 
+.w-fit {
+    width: fit-content;
+}
+
 .title-underline {
     z-index: -1;
     position: absolute;
