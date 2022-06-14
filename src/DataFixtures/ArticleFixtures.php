@@ -15,7 +15,7 @@ class ArticleFixtures extends Fixture
         for ($i = 0; $i < 10; $i++) {
             $article = new Article();
             $article->setTitle($faker->sentence());
-            $article->setCreatedAt($faker->dateTimeBetween('-200 week', '-1 day'));
+            $article->setCreatedAt($faker->dateTimeBetween('-200 week'));
             $article->setDescription($faker->paragraph(3));
             $article->setImage($faker->imageUrl(350, 65, 'animals', true));
             $article->setAuthor($faker->name());

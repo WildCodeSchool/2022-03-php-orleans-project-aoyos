@@ -2,7 +2,7 @@
 
 {% block title %}{{ parent() }} - Partenaires{% endblock %}
 
-{% block body %}
+{% block content %}
 <main class="container">
     <h1 class="my-5">Partenaires</h1>
    <div class="w-100 d-flex justify-content-end">
@@ -13,16 +13,16 @@
     <table class="table table-hover">
         <thead>
             <tr>
-                <th>Nom</th>
                 <th>Image</th>
+                <th>Nom</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
         {% for partner in partners %}
-            <tr>
+            <tr>           
+                <td class="align-middle"><img src="{{ partner.image }}" class="admin-table-image" alt="{{ partner.name }}"></td>
                 <td class="align-middle">{{ partner.name }}</td>
-                <td class="align-middle"><img src="{{ partner.image }}" alt="{{ partner.name }}"></td>
                 <td class="align-middle text-end">
                     <a class="btn btn-outline-secondary btn-sm text-nowrap pb-0 px-3 my-2" href="{{ path('app_admin_partner_edit', {'id': partner.id}) }}">
                     <i class="bi bi-pen"></i>
