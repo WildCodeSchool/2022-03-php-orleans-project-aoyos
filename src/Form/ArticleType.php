@@ -7,8 +7,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class ArticleType extends AbstractType
 {
@@ -21,11 +21,11 @@ class ArticleType extends AbstractType
             ->add('description', TextareaType::class, [
                 'label' => 'Description'
             ])
-            ->add('image', UrlType::class, [
-                'label' => 'Image'
-            ])
             ->add('author', TextType::class, [
                 'label' => 'Auteur'
+            ])
+            ->add('imageFile', VichFileType::class, [
+                'label' => 'Image',
             ])
         ;
     }
