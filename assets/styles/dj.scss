@@ -1,12 +1,14 @@
 @import "variables.scss";
 
+$btnSize: 350px;
+$typeDivHeight: 60px;
+
 main {
     height: 100%;
     background-image: url("../images/dots.svg");
     background-size: cover;
     background-position-x: right;
     background-repeat: no-repeat;
-    height: 100%;
 }
 
 .header-title {
@@ -18,11 +20,11 @@ main {
 }
 
 .dj-btn {
-    width: 350px;
+    width: $btnSize;
 }
 
 .type-div {
-    height: 60px;
+    height: $typeDivHeight;
     content: "";
 }
 
