@@ -6,7 +6,7 @@
 <main class="container">
     <h1 class="my-5">Partenaires</h1>
    <div class="w-100 d-flex justify-content-end">
-        <a class="btn btn-outline-primary pb-0 px-3" href="{{ path('app_admin_partner_new') }}">
+        <a class="btn btn-outline-dark pb-0 px-3 me-2" href="{{ path('app_admin_partner_new') }}">
                 <i class="bi bi-plus-square"></i>
         Ajouter</a>
     </div>
@@ -16,18 +16,19 @@
                 <th>Image</th>
                 <th>Nom</th>
                 <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
         {% for partner in partners %}
             <tr>           
-                <td class="align-middle"><img src="{{ partner.image }}" class="admin-table-image" alt="{{ partner.name }}"></td>
-                <td class="align-middle">{{ partner.name }}</td>
+                <td class="align-middle w-25"><img src="{{ partner.image }}" class="admin-table-image" alt="{{ partner.name }}"></td>
+                <td class="align-middle w-100">{{ partner.name }}</td>
                 <td class="align-middle text-end">
-                    <a class="btn btn-outline-secondary btn-sm text-nowrap pb-0 px-3 my-2" href="{{ path('app_admin_partner_edit', {'id': partner.id}) }}">
+                    <a class="btn btn-outline-dark btn-sm text-nowrap pb-0 px-3 my-2" href="{{ path('app_admin_partner_edit', {'id': partner.id}) }}">
                     <i class="bi bi-pen"></i>
-                    Éditer</a>
-                    {{ include('admin/partner/_delete_form.html.twig') }}
+                    Éditer</a></td>
+                <td class="align-middle text-end">{{ include('admin/partner/_delete_form.html.twig') }}
                 </td>
             </tr>
         {% else %}
