@@ -38,6 +38,7 @@ Encore
     .addEntry('home', './assets/styles/home.scss')
     .addEntry('team', './assets/styles/team.scss')
     .addEntry('client', './assets/styles/client.scss')
+    .addEntry('registration', './assets/styles/registration.scss')
     .addEntry('dj', './assets/styles/dj.scss')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)

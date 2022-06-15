@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ parent() }}
+	- S'inscrire
+{% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	{{ encore_entry_link_tags('registration') }}
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+<main class="registration-form my-5 mb-5">
+	<div class="container p-1 rounded-3 border border-dark">
+	<div class="p-5 border border-dark">
+		<div class="d-flex justify-content-center">
+			<h1 class="position-relative text-center w-fit mb-5 px-2">
+				<img src="{{ asset('build/images/title_underline_orange.png') }}" class="title-underline" alt="">Inscription
+			</h1>
+		</div>
+		{{ form_start(form) }}
+		{{ form_widget(form) }}
+		<div class="d-flex justify-content-between">
+			<button class="btn btn-outline-dark">
+				<i class="bi bi-pencil-square"></i>
+				S'inscrire
+			</button>
+		</div>
+		
+		{{ form_end(form) }}
+		</div>
+	</main>
+{% endblock %}
