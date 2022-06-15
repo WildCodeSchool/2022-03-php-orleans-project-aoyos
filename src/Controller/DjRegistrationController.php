@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/inscription', name: 'app_')]
 class DjRegistrationController extends AbstractController
 {
-    #[Route('/', name: 'app_registration')]
+    #[Route('/', name: 'registration')]
     public function register(HttpFoundationRequest $request, ArtistRepository $artistRepository): Response
     {
         $artist = new Artist();
