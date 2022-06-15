@@ -1,36 +1,33 @@
 <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light">
-	<a class="navbar-brand" href="#">
+	<a class="navbar-brand order-first" href="/">
 		<img src="{{ asset('build/images/aoyos-logo-dark.png') }}" width="100" height="30" class="ms-2 d-inline-block align-top" alt="">
 	</a>
-	<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	<div class="row btn-div w-25 w-sm-100 d-flex flex-row order-lg-last order-xs-2">
+	<div class="navbar-nav me-2 justify-content-end col-lg-12 col-md-12 col-xs-2 col-xl-12">
+		<a class="btn btn-nav btn-client w-100 me-2 mb-2 mb-lg-0" href="/client"> Client</a>
+		<a class="btn btn-nav btn-dj w-100 me-2" href="/dj"> DJ</a>
+	</div>
+	</div>
+	<button class="navbar-toggler order-lg-2 order-xs-3 collapsed me-5" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
-	<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-    <div class="w-100 d-flex justify-content-center">
-		<ul class="navbar-nav">
-			<li class="nav-item">
-				<a class="nav-link text-dark mx-2 hover-underline-animation" href="#">Qui sommes nous?</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link text-dark mx-2 hover-underline-animation" href="#">Notre équipe</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link text-dark mx-2 hover-underline-animation" href="#">Nos services</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link text-dark ms-2 hover-underline-animation" href="#">Nos réalisations</a>
-			</li>
-		</ul>
-    </div>
-		<div class="d-flex justify-content-center">
+	<div class="navbar-collapse w-100 order-lg-2 justify-content-end collapse show" id="navbarNav">
+		<div class="d-flex justify-content-end me-4 mt-2">
 			<ul class="navbar-nav">
-				<li class="nav-item me-2 mt-2">
-					<a class="nav-link btn btn-nav border-primary text-primary" href="#">Je suis client</a>
+				<li class="nav-item">
+					<a class="nav-link text-dark mx-2 fs-5 hover-underline-animation" href="#presentation">Qui sommes nous?</a>
 				</li>
-				<li class="nav-item me-2 mt-2">
-					<a class="nav-link btn btn-nav border-primary text-primary" href="#">Je suis DJ</a>
+				<li class="nav-item">
+					<a class="nav-link text-dark mx-2 fs-5 hover-underline-animation" href="/equipe">Notre équipe</a>
 				</li>
-			</ul>
+				<li class="nav-item">
+					<a class="nav-link text-dark mx-2 fs-5 hover-underline-animation" href="#services">Nos services</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-dark ms-2 fs-5 hover-underline-animation" href="#production">Nos réalisations</a>
+				</li>
+			</div>
 		</div>
 	</div>
+</ul>
 </nav>
