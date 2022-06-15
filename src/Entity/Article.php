@@ -28,7 +28,6 @@ class Article
     private string $title;
 
     #[ORM\Column(type: 'datetime')]
-    #[Assert\Type('\DateTimeInterface')]
     private DateTime $createdAt;
 
     #[ORM\Column(type: 'text')]
@@ -49,7 +48,6 @@ class Article
     private ?File $imageFile = null;
 
     #[ORM\Column(type: 'datetime')]
-    #[Assert\Type('\DateTimeInterface')]
     private ?DateTimeInterface $updatedAt = null;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
