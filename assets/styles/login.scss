@@ -1,0 +1,15 @@
+@import "variables.scss";
+
+.h1-login {
+    font-size: clamp(2rem, 10vh, 5rem);
+}
+
+.login-btn {
+    border: 1px solid darken($primary, 15%),
+}
+
+.block-color {
+    background-color: lighten($primary, 20%);
+    border-radius: 4px 4px;
+    filter: drop-shadow(0 0 0.1rem $primary)
+}
