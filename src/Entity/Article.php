@@ -39,9 +39,6 @@ class Article
     #[Assert\Length(
         max: 255
     )]
-    #[Assert\Length(
-        max: 255
-    )]
     private ?string $image = null;
 
     #[Vich\UploadableField(mapping: 'article_images', fileNameProperty: 'image')]
