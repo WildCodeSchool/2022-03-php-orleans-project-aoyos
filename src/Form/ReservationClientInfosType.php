@@ -17,22 +17,27 @@ class ReservationClientInfosType extends AbstractType
         $builder
             ->add('lastname', TextType::class, [
                 'label' => 'Nom',
-                'constraints' => [new Assert\Length(['max' => 255])],
+                'attr' => ['placeholder' => 'Dupont'],
+                'constraints' => [new Assert\Length(['max' => 255]), new Assert\NotBlank()],
             ])
             ->add('firstname', TextType::class, [
                 'label' => 'Prénom',
-                'constraints' => [new Assert\Length(['max' => 255])],
+                'attr' => ['placeholder' => 'Jean'],
+                'constraints' => [new Assert\Length(['max' => 255]), new Assert\NotBlank()],
             ])
             ->add('company', TextType::class, [
                 'label' => 'Société',
-                'constraints' => [new Assert\Length(['max' => 255])],
+                'attr' => ['placeholder' => 'aoyos'],
+                'constraints' => [new Assert\Length(['max' => 255]), new Assert\NotBlank()],
             ])
             ->add('email', EmailType::class, [
-                'constraints' => [new Assert\Email()],
+                'attr' => ['placeholder' => 'aoyos@aoyos.fr'],
+                'constraints' => [new Assert\Email(), new Assert\NotBlank()],
             ])
             ->add('phone', TextType::class, [
                 'label' => 'Téléphone',
-                'constraints' => [new Assert\Length(['max' => 255])],
+                'attr' => ['placeholder' => '06 99 99 99 99'],
+                'constraints' => [new Assert\Length(['max' => 255]), new Assert\NotBlank()],
             ])
         ;
     }
