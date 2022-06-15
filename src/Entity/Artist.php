@@ -45,7 +45,6 @@ class Artist
     #[Assert\NotBlank(groups: ['djInfos'])]
     private string $address;
 
-
     public function getId(): ?int
     {
         return $this->id;
