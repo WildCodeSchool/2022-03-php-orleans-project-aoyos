@@ -1,9 +1,20 @@
-<section class="reservation-form py-5">
-    <h1 class="text-center mb-4">Réserver</h1>
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <button class="btn btn-outline-dark px-3">
-            Suivant
-        </button>
-    {{ form_end(form) }}
+<section class="reservation-form px-5 pb-3 mb-5">
+    <div class="container p-2 rounded-3 border border-dark">
+        <div class="container p-5 pt-3 rounded-3 border border-dark">
+        <h1 class="w-fit mx-auto mt-2 mb-2 position-relative">
+            <img src="{{ asset('build/images/title_underline_blue.png') }}" class="title-underline" alt="">
+            Réservation
+        </h1>
+        <p class="text-center w-75 mx-auto fs-5 mb-4">Accompagnement personnalisé Proposition et devis en moins de 24 heures<br />
+    Vous pouvez aussi nous appeler dès maintenant : 01 70 06 05 70</p>
+            {{ form_start(form) }}
+                {{ form_widget(form) }}
+                <div class="w-100 text-end">
+                    <button class="btn btn-outline-dark px-3">
+                        Réserver
+                    </button>
+                </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
 </section>
