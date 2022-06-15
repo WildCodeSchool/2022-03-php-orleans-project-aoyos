@@ -6,6 +6,11 @@ use App\Entity\Artist;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ArtistType extends AbstractType
 {
@@ -14,36 +19,32 @@ class ArtistType extends AbstractType
         $builder
             ->add('firstname', null, [
             'label' => 'Prénom',
-            'attr' => ['placeholder' => 'Gaëtan']
+            'attr' => ['placeholder' => 'Gaëtan'],
+            'constraints' => [new Length(['max' => 255]), new NotBlank()],
             ])
             ->add('lastname', null, ['label' => 'Nom',
-            'attr' => ['placeholder' => 'Laurent']
-            ])
-            ->add('artistname', null, ['label' => 'Nom d\'artiste',
-            'attr' => ['placeholder' => 'aoyos']
+            'attr' => ['placeholder' => 'Laurent'],
+            'constraints' => [new Length(['max' => 255]), new NotBlank()],
             ])
             ->add('birthdate', null, ['label' => 'Date de naissance',
             'years' => range(date('Y') - 15, (date('1940'))),
+            'constraints' => [new NotBlank()],
             ])
-            ->add('idcard', null, ['label' => 'Carte d\'identité'])
-            ->add('idphoto', null, ['label' => 'Photo d\'identité'])
             ->add('phone', null, [
             'label' => 'Téléphone',
-            'attr' => ['placeholder' => '01 70 06 05 70']
+            'attr' => ['placeholder' => '01 70 06 05 70'],
+            'constraints' => [new Length(['max' => 255]), new NotBlank()],
             ])
-            ->add('mail', null, [
+            ->add('email', null, [
             'label' => 'Email',
-            'attr' => ['placeholder' => 'hello@aoyos.fr']
+            'attr' => ['placeholder' => 'hello@aoyos.fr'],
+            'constraints' => [new Length(['max' => 255]), new NotBlank(), new Email()],
             ])
             ->add('address', null, [
                 'label' => 'Adresse',
-                'attr' => ['placeholder' => '15 rue des Halles, 75 001 Paris']
+                'attr' => ['placeholder' => '15 rue des Halles, 75 001 Paris'],
+                'constraints' => [new Length(['max' => 255]), new NotBlank()],
                 ])
-            ->add('siret', null, [
-                'label' => 'SIRET',
-                'attr' => ['placeholder' => '123 568 941 00056']
-                ])
-            ->add('kbis', null, ['label' => 'KBIS'])
         ;
     }
 

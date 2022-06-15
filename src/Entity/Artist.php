@@ -4,15 +4,9 @@ namespace App\Entity;
 
 use App\Repository\ArtistRepository;
 use DateTime;
-use DateTimeImmutable;
-use DateTimeInterface;
-use Symfony\Component\HttpFoundation\File\File;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ArtistRepository::class)]
-#[Vich\Uploadable]
 class Artist
 {
     #[ORM\Id]
@@ -21,62 +15,23 @@ class Artist
     private int $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\NotBlank]
-    #[Assert\Length(max:255)]
     private string $firstname;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\NotBlank]
-    #[Assert\Length(max:255)]
     private string $lastname;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\NotBlank]
-    #[Assert\Length(max:255)]
-    private string $artistname;
-
     #[ORM\Column(type: 'date')]
-    #[Assert\Type('\DateTimeInterface')]
     private DateTime $birthdate;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private string $idcard;
-
-    #[ORM\Column(type: 'string', length: 255)]
-    private string $idphoto;
-
-    #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\NotBlank]
-    #[Assert\Length(max:255)]
     private string $phone;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\NotBlank]
-    #[Assert\Email]
-    #[Assert\Length(max:255)]
-    private string $mail;
+    private string $email;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\NotBlank]
-    #[Assert\Length(max:255)]
     private string $address;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\NotBlank]
-    #[Assert\Length(max:255)]
-    private string $siret;
-
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private string $kbis;
-
-    #[ORM\Column(type: 'array')]
-    private array $musicalstyle = [];
-
-    #[ORM\Column(type: 'array')]
-    private array $equipment = [];
-
-    #[ORM\Column(type: 'text', nullable: true)]
-    private string $message;
 
     public function getId(): ?int
     {
@@ -107,18 +62,6 @@ class Artist
         return $this;
     }
 
-    public function getArtistname(): ?string
-    {
-        return $this->artistname;
-    }
-
-    public function setArtistname(string $artistname): self
-    {
-        $this->artistname = $artistname;
-
-        return $this;
-    }
-
     public function getBirthdate(): ?\DateTime
     {
         return $this->birthdate;
@@ -127,30 +70,6 @@ class Artist
     public function setBirthdate(\DateTime $birthdate): self
     {
         $this->birthdate = $birthdate;
-
-        return $this;
-    }
-
-    public function getIdcard(): ?string
-    {
-        return $this->idcard;
-    }
-
-    public function setIdcard(string $idcard): self
-    {
-        $this->idcard = $idcard;
-
-        return $this;
-    }
-
-    public function getIdphoto(): ?string
-    {
-        return $this->idphoto;
-    }
-
-    public function setIdphoto(string $idphoto): self
-    {
-        $this->idphoto = $idphoto;
 
         return $this;
     }
@@ -167,14 +86,14 @@ class Artist
         return $this;
     }
 
-    public function getMail(): ?string
+    public function getEmail(): ?string
     {
-        return $this->mail;
+        return $this->email;
     }
 
-    public function setMail(string $mail): self
+    public function setEmail(string $email): self
     {
-        $this->mail = $mail;
+        $this->email = $email;
 
         return $this;
     }
@@ -187,66 +106,6 @@ class Artist
     public function setAddress(string $address): self
     {
         $this->address = $address;
-
-        return $this;
-    }
-
-    public function getSiret(): ?string
-    {
-        return $this->siret;
-    }
-
-    public function setSiret(string $siret): self
-    {
-        $this->siret = $siret;
-
-        return $this;
-    }
-
-    public function getKbis(): ?string
-    {
-        return $this->kbis;
-    }
-
-    public function setKbis(?string $kbis): self
-    {
-        $this->kbis = $kbis;
-
-        return $this;
-    }
-
-    public function getMusicalstyle(): ?array
-    {
-        return $this->musicalstyle;
-    }
-
-    public function setMusicalstyle(array $musicalstyle): self
-    {
-        $this->musicalstyle = $musicalstyle;
-
-        return $this;
-    }
-
-    public function getEquipment(): ?array
-    {
-        return $this->equipment;
-    }
-
-    public function setEquipment(array $equipment): self
-    {
-        $this->equipment = $equipment;
-
-        return $this;
-    }
-
-    public function getMessage(): ?string
-    {
-        return $this->message;
-    }
-
-    public function setMessage(?string $message): self
-    {
-        $this->message = $message;
 
         return $this;
     }
