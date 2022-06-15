@@ -4,7 +4,11 @@
 
 {% block body %}
 <main class="container">
-    <h1 class="my-5">Édition d'un membre de l'équipe</h1>
+	<a href="{{ path('admin_team_index') }}" class="btn btn-outline-dark mt-3">
+		<i class="bi bi-arrow-left-square"></i>
+		Retour
+	</a>
+    <h1 class="my-4">Édition d'un membre de l'équipe</h1>
     {{ include('admin/team_member/_form.html.twig', {'icon': '<i class=\"bi bi-pen\"></i>', 'button_label': 'Éditer'}) }}
 </main>
 {% endblock %}

@@ -5,7 +5,11 @@
 
 {% block content %}
 	<main class="container">
-		<h1 class="my-5">Nouvelle réalisation</h1>
+		<a href="{{ path('app_admin_production_index') }}" class="btn btn-outline-dark pb-0 px-3 mt-3">
+			<i class="bi bi-arrow-left-square"></i>
+		Retour
+	    </a>
+		<h1 class="my-4">Nouvelle réalisation</h1>
 		{{ include('admin/production/_form.html.twig', {'icon': '<i class=\"bi bi-plus-square\"></i>'}) }}
 	</main>
 {% endblock %}
