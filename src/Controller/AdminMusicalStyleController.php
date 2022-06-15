@@ -40,14 +40,6 @@ class AdminMusicalStyleController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_admin_musical_style_show', methods: ['GET'])]
-    public function show(MusicalStyle $musicalStyle): Response
-    {
-        return $this->render('admin/musical_style/show.html.twig', [
-            'musical_style' => $musicalStyle,
-        ]);
-    }
-
     #[Route('/{id}/editer', name: 'admin_musical_style_edit', methods: ['GET', 'POST'])]
     public function edit(
         Request $request,
