@@ -1,0 +1,22 @@
+@import "variables.scss";
+$teamCardSize: 500px;
+$teamImgSize: 250px;
+$teamTitleOffset: -30px;
+
+.team .card {
+    height: $teamCardSize;
+}
+
+.team img {
+    object-fit: cover;
+    object-position: center;
+    height: $teamImgSize;
+}
+
+.team h2 {
+    margin-top: $teamTitleOffset;
+}
+
+.w-fit {
+    width: fit-content;
+}
