@@ -16,33 +16,33 @@ class Artist
     private int $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\Length(max:255, groups: ['djinfo'])]
-    #[Assert\NotBlank(groups: ['djinfo'])]
+    #[Assert\Length(max:255, groups: ['djInfos'])]
+    #[Assert\NotBlank(groups: ['djInfos'])]
     private string $firstname;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\Length(max:255, groups: ['djinfo'])]
-    #[Assert\NotBlank(groups: ['djinfo'])]
+    #[Assert\Length(max:255, groups: ['djInfos'])]
+    #[Assert\NotBlank(groups: ['djInfos'])]
     private string $lastname;
 
     #[ORM\Column(type: 'date')]
-    #[Assert\NotBlank(groups: ['djinfo'])]
+    #[Assert\NotBlank(groups: ['djInfos'])]
     private DateTime $birthdate;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\Length(max:255, groups: ['djinfo'])]
-    #[Assert\NotBlank(groups: ['djinfo'])]
+    #[Assert\Length(max:255, groups: ['djInfos'])]
+    #[Assert\NotBlank(groups: ['djInfos'])]
     private string $phone;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\Length(max:255, groups: ['djinfo'])]
-    #[Assert\NotBlank(groups: ['djinfo'])]
-    #[Assert\Email(groups: ['djinfo'])]
+    #[Assert\Length(max:255, groups: ['djInfos'])]
+    #[Assert\NotBlank(groups: ['djInfos'])]
+    #[Assert\Email(groups: ['djInfos'])]
     private string $email;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\Length(max:255, groups: ['djinfo'])]
-    #[Assert\NotBlank(groups: ['djinfo'])]
+    #[Assert\Length(max:255, groups: ['djInfos'])]
+    #[Assert\NotBlank(groups: ['djInfos'])]
     private string $address;
 
 
