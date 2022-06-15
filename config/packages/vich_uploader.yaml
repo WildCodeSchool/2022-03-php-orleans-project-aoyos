@@ -1,0 +1,19 @@
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        dj_id_cards:
+           uri_prefix: /uploads/images/dj/id_cards
+           upload_destination: '%kernel.project_dir%/public/uploads/images/dj/id_cards'
+           namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+        dj_id_photos:
+           uri_prefix: /uploads/images/dj/id_photos
+           upload_destination: '%kernel.project_dir%/public/uploads/images/dj/id_photos'
+           namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+        dj_kbis:
+           uri_prefix: /uploads/images/dj/kbis
+           upload_destination: '%kernel.project_dir%/public/uploads/images/dj/kbis'
+           namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+
+    metadata: 
+        type: attribute

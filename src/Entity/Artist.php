@@ -4,11 +4,15 @@ namespace App\Entity;
 
 use App\Repository\ArtistRepository;
 use DateTime;
+use DateTimeImmutable;
 use DateTimeInterface;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ArtistRepository::class)]
+#[Vich\Uploadable]
 class Artist
 {
     #[ORM\Id]
@@ -64,6 +68,15 @@ class Artist
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private string $kbis;
+
+    #[ORM\Column(type: 'array')]
+    private array $musicalstyle = [];
+
+    #[ORM\Column(type: 'array')]
+    private array $equipment = [];
+
+    #[ORM\Column(type: 'text', nullable: true)]
+    private string $message;
 
     public function getId(): ?int
     {
@@ -198,6 +211,42 @@ class Artist
     public function setKbis(?string $kbis): self
     {
         $this->kbis = $kbis;
+
+        return $this;
+    }
+
+    public function getMusicalstyle(): ?array
+    {
+        return $this->musicalstyle;
+    }
+
+    public function setMusicalstyle(array $musicalstyle): self
+    {
+        $this->musicalstyle = $musicalstyle;
+
+        return $this;
+    }
+
+    public function getEquipment(): ?array
+    {
+        return $this->equipment;
+    }
+
+    public function setEquipment(array $equipment): self
+    {
+        $this->equipment = $equipment;
+
+        return $this;
+    }
+
+    public function getMessage(): ?string
+    {
+        return $this->message;
+    }
+
+    public function setMessage(?string $message): self
+    {
+        $this->message = $message;
 
         return $this;
     }

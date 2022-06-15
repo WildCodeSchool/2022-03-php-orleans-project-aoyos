@@ -20,7 +20,7 @@ class ArtistType extends AbstractType
             'attr' => ['placeholder' => 'Laurent']
             ])
             ->add('artistname', null, ['label' => 'Nom d\'artiste',
-            'attr' => ['placeholder' => 'Gaëtan']
+            'attr' => ['placeholder' => 'aoyos']
             ])
             ->add('birthdate', null, ['label' => 'Date de naissance',
             'years' => range(date('Y') - 15, (date('1940'))),
