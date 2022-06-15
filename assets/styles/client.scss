@@ -1,9 +1,19 @@
 @import "app.scss";
 
 $navBarHeight: 69px;
+$typeDivHeight: 60px;
 
 .landing-client {
     height: calc(100vh - $navBarHeight);
+}
+
+.header-title {
+    font-size: clamp(1rem, 7vh, 5rem);
+}
+
+.type-div {
+    height: $typeDivHeight;
+    content: "";
 }
 
 .blink {
