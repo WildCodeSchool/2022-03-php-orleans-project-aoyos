@@ -1,7 +1,7 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <div class="d-flex justify-content-between">
-	<button class="btn btn-outline-dark pb-0 px-3 mt-2">
+{{ form_widget(form) }}
+<div class="d-flex justify-content-end">
+	<button class="btn btn-outline-dark pb-0 px-3">
 		{{ icon|raw }}
 		{{ button_label|default('Ajouter') }}
 	</button>
