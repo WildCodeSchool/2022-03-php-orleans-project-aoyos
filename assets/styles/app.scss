@@ -42,17 +42,23 @@ body {
     line-height: $lineHeight;
 }
 
-.btn-nav {
-    width : 150px;
-}
-
 .nav-link {
     font-family: $titleFont;
-    font-size : 1.1rem;
+    font-weight: 200;
 }
 
 .nav-item {
-    list-style: none;
+     list-style: none;
+}
+
+.btn-client {
+    color: darken($secondary, 30%);
+    border: 1px solid darken($secondary, 20%);
+}
+
+.btn-dj {
+    color: darken($primary, 30%);
+    border: 1px solid darken($primary, 20%);
 }
 
 .navbar {
