@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ReservationRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]
 class Reservation
@@ -14,18 +15,44 @@ class Reservation
     private int $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(groups: ['clientInfos'])]
+    #[Assert\Length(
+        max: 255,
+        groups: ['clientInfos']
+    )]
     private string $lastname;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(groups: ['clientInfos'])]
+    #[Assert\Length(
+        max: 255,
+        groups: ['clientInfos']
+    )]
     private string $firstname;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(groups: ['clientInfos'])]
+    #[Assert\Length(
+        max: 255,
+        groups: ['clientInfos']
+    )]
     private string $company;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(groups: ['clientInfos'])]
+    #[Assert\Length(
+        max: 255,
+        groups: ['clientInfos']
+    )]
+    #[Assert\Email(groups: ['clientInfos'])]
     private string $email;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(groups: ['clientInfos'])]
+    #[Assert\Length(
+        max: 255,
+        groups: ['clientInfos']
+    )]
     private string $phone;
 
     public function getId(): ?int
