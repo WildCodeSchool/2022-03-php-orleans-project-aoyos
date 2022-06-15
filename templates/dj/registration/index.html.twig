@@ -15,7 +15,9 @@
 {% endblock %}
 
 {% block body %}
-	<main class="container py-5 mb-5">
+<main class="registration-form my-5 mb-5">
+	<div class="container p-1 rounded-3 border border-dark">
+	<div class="p-5 border border-dark">
 		<div class="d-flex justify-content-center">
 			<h1 class="position-relative text-center w-fit mb-5 px-2">
 				<img src="{{ asset('build/images/title_underline_orange.png') }}" class="title-underline" alt="">Inscription
@@ -29,6 +31,8 @@
 				S'inscrire
 			</button>
 		</div>
+		
 		{{ form_end(form) }}
+		</div>
 	</main>
 {% endblock %}
