@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class ReservationClientInfosType extends AbstractType
 {
@@ -15,17 +16,23 @@ class ReservationClientInfosType extends AbstractType
     {
         $builder
             ->add('lastname', TextType::class, [
-                'label' => 'Nom'
+                'label' => 'Nom',
+                'constraints' => [new Assert\Length(['max' => 255])],
             ])
             ->add('firstname', TextType::class, [
-                'label' => 'Prénom'
+                'label' => 'Prénom',
+                'constraints' => [new Assert\Length(['max' => 255])],
             ])
             ->add('company', TextType::class, [
-                'label' => 'Société'
+                'label' => 'Société',
+                'constraints' => [new Assert\Length(['max' => 255])],
             ])
-            ->add('email', EmailType::class)
+            ->add('email', EmailType::class, [
+                'constraints' => [new Assert\Email()],
+            ])
             ->add('phone', TextType::class, [
-                'label' => 'Téléphone'
+                'label' => 'Téléphone',
+                'constraints' => [new Assert\Length(['max' => 255])],
             ])
         ;
     }
