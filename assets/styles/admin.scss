@@ -1,7 +1,13 @@
 @import "variables.scss";
 
+$topBarHeight: 60px;
+$sideBarWidth: 300px;
+
 .sideBar {
     width: $sideBarWidth;
+    height: calc(100vh - $topBarHeight);
+    top: $topBarHeight;
+    overflow-y: auto;
     background-color: $adminColor;
 }
 
@@ -24,8 +30,11 @@
 }
 
 .topBar {
+    height: $topBarHeight;
     background-color: $adminColor;
     font-family: $textFont;
+    top: 0;
+    position: sticky;
 }
 
 .topBar h1 {

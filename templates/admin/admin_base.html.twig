@@ -10,13 +10,19 @@
 
 {% block javascripts %}
 	{{ parent() }}
+	{{ encore_entry_script_tags('adminSidebar') }}
 {% endblock %}
 
 {% block navbar %}
-{% include 'items/_admin_sidebar.html.twig' %}
+	{% include 'components/_admin_topBar.html.twig' %}
 {% endblock %}
 
 {% block body %}
+	<div class="d-flex">
+		{% include 'components/_admin_sidebar.html.twig' %}
+		{% block content %}
+		{% endblock %}
+	</div>
 {% endblock %}
 
 {% block footer %}
