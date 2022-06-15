@@ -17,7 +17,7 @@ class AdminMusicalStyleController extends AbstractController
     public function index(MusicalStyleRepository $musicStyleRepository): Response
     {
         return $this->render('admin/musical_style/index.html.twig', [
-            'musical_styles' => $musicStyleRepository->findAll(),
+            'musical_styles' => $musicStyleRepository->findBy([], ['name' => 'ASC']),
         ]);
     }
 
