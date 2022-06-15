@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ArtistRepository;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ArtistRepository::class)]
 class Artist
@@ -15,21 +16,33 @@ class Artist
     private int $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Length(max:255, groups: ['djinfo'])]
+    #[Assert\NotBlank(groups: ['djinfo'])]
     private string $firstname;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Length(max:255, groups: ['djinfo'])]
+    #[Assert\NotBlank(groups: ['djinfo'])]
     private string $lastname;
 
     #[ORM\Column(type: 'date')]
+    #[Assert\NotBlank(groups: ['djinfo'])]
     private DateTime $birthdate;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Length(max:255, groups: ['djinfo'])]
+    #[Assert\NotBlank(groups: ['djinfo'])]
     private string $phone;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Length(max:255, groups: ['djinfo'])]
+    #[Assert\NotBlank(groups: ['djinfo'])]
+    #[Assert\Email(groups: ['djinfo'])]
     private string $email;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Length(max:255, groups: ['djinfo'])]
+    #[Assert\NotBlank(groups: ['djinfo'])]
     private string $address;
 
 
