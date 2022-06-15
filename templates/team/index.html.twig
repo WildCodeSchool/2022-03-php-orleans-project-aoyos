@@ -11,8 +11,9 @@
 {% endblock %}
 
 {% block body %}
-	<section class="team pb-5">
-		<h1 class="text-center my-5 mx-0 px-0 py-2">Notre équipe</h1>
+	<section class="team pb-5 d-flex flex-column align-items-center">
+		<h1 class="text-center py-4 mt-0 mb-4 position-relative">
+			<img src="{{ asset('build/images/title_underline_blue.png') }}" class="title-underline" alt="">Notre équipe</h1>
 		<div class="container">
 			<div class="row">
 				{% for team_member in team_members %}
