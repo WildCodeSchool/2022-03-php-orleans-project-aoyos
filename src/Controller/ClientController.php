@@ -23,7 +23,7 @@ class ClientController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $reservationRepo->add($reservation, true);
-            return $this->redirectToRoute('client_index');
+            return $this->redirectToRoute('client_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('client/index.html.twig', [
