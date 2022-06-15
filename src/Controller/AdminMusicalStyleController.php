@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\MusicalStyle;
-use App\Form\MusicalStyle1Type;
+use App\Form\MusicalStyleType;
 use App\Repository\MusicalStyleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,7 +25,7 @@ class AdminMusicalStyleController extends AbstractController
     public function new(Request $request, MusicalStyleRepository $musicStyleRepository): Response
     {
         $musicalStyle = new MusicalStyle();
-        $form = $this->createForm(MusicalStyle1Type::class, $musicalStyle);
+        $form = $this->createForm(MusicalStyleType::class, $musicalStyle);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -46,7 +46,7 @@ class AdminMusicalStyleController extends AbstractController
         MusicalStyle $musicalStyle,
         MusicalStyleRepository $musicStyleRepository
     ): Response {
-        $form = $this->createForm(MusicalStyle1Type::class, $musicalStyle);
+        $form = $this->createForm(MusicalStyleType::class, $musicalStyle);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
