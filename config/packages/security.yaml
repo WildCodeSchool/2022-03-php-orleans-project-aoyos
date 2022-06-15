@@ -21,6 +21,7 @@ security:
                 # "login" is the name of the route created previously
                 login_path: login
                 check_path: login
+                enable_csrf: true
             logout:
                 path: app_logout
 
