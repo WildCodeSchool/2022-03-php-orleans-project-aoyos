@@ -6,6 +6,7 @@ use App\Repository\ArtistRepository;
 use DateTime;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ArtistRepository::class)]
 class Artist
@@ -16,16 +17,23 @@ class Artist
     private int $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(max:255)]
     private string $firstname;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(max:255)]
     private string $lastname;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(max:255)]
     private string $artistname;
 
     #[ORM\Column(type: 'date')]
-    private DateTimeInterface $birthdate;
+    #[Assert\Type('\DateTimeInterface')]
+    private DateTime $birthdate;
 
     #[ORM\Column(type: 'string', length: 255)]
     private string $idcard;
@@ -34,15 +42,24 @@ class Artist
     private string $idphoto;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(max:255)]
     private string $phone;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Email]
+    #[Assert\Length(max:255)]
     private string $mail;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(max:255)]
     private string $address;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(max:255)]
     private string $siret;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
@@ -89,12 +106,12 @@ class Artist
         return $this;
     }
 
-    public function getBirthdate(): ?\DateTimeInterface
+    public function getBirthdate(): ?\DateTime
     {
         return $this->birthdate;
     }
 
-    public function setBirthdate(\DateTimeInterface $birthdate): self
+    public function setBirthdate(\DateTime $birthdate): self
     {
         $this->birthdate = $birthdate;
 
