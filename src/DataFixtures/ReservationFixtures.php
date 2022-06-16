@@ -29,13 +29,14 @@ class ReservationFixtures extends Fixture
             $reservation->setCompany($faker->words(2, true));
             $reservation->setEmail($faker->email());
             $reservation->setPhone($faker->phoneNumber());
-            $reservation->setFormula(self::FORMULAS[$faker->numberBetween(0, $totalFormulas - 1)]);
+            $reservation->setFormula(self::FORMULAS[rand(0, $totalFormulas - 1)]);
             $reservation->setEventType($faker->sentence(4));
             $reservation->setAddress($faker->address());
             $reservation->setDateStart($faker->dateTimeInInterval('+1 week', '+1 days'));
             $reservation->setDateEnd($faker->dateTimeInInterval('+1 week', '+2 days'));
             $reservation->setAttendees($faker->randomNumber(3, true));
             $reservation->setComment($faker->paragraph());
+
             $manager->persist($reservation);
         }
 
