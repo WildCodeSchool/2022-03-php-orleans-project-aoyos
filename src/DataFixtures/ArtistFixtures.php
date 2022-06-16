@@ -10,7 +10,7 @@ use Faker\Factory;
 
 class ArtistFixtures extends Fixture implements DependentFixtureInterface
 {
-    public const NUMBER_ARTIST = 5;
+    public const NUMBER_ARTISTS = 5;
 
     public function load(ObjectManager $manager): void
     {
@@ -18,7 +18,7 @@ class ArtistFixtures extends Fixture implements DependentFixtureInterface
 
         $faker = Factory::create();
 
-        for ($i = 0; $i <= self::NUMBER_ARTIST; $i++) {
+        for ($i = 0; $i <= self::NUMBER_ARTISTS; $i++) {
             $artist = new Artist();
 
             $artist->setFirstname($faker->firstName());
