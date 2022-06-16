@@ -15,14 +15,15 @@ class ReservationFixtures extends Fixture
         'Sur mesure',
     ];
 
+    public const NUMBER_RESERVATIONS = 10;
+
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create();
 
-        $numberReservations = 10;
         $totalFormulas = count(self::FORMULAS);
 
-        for ($i = 0; $i < $numberReservations; $i++) {
+        for ($i = 0; $i < self::NUMBER_RESERVATIONS; $i++) {
             $reservation = new Reservation();
             $reservation->setLastname($faker->lastName());
             $reservation->setFirstName($faker->firstName());
