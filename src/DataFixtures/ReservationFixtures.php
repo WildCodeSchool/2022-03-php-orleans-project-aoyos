@@ -27,7 +27,7 @@ class ReservationFixtures extends Fixture
             $reservation = new Reservation();
             $reservation->setLastname($faker->lastName());
             $reservation->setFirstName($faker->firstName());
-            $reservation->setCompany($faker->words(2, true));
+            $reservation->setCompany($faker->company());
             $reservation->setEmail($faker->email());
             $reservation->setPhone($faker->phoneNumber());
             $reservation->setFormula(self::FORMULAS[rand(0, $totalFormulas)]);
