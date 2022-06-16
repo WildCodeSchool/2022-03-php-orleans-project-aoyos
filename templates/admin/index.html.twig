@@ -5,3 +5,25 @@
 	- Accueil
 {% endblock %}
 
+{% block content %}
+<section class="team pb-5 d-flex flex-column align-items-center">
+		<h1 class="text-center py-4 mt-0 mb-4">
+			Nouveaux Djs</h1>
+		<div class="container">
+			<div class="row">
+				{% for artist in artists %}
+					<div class="col-md-3 mx-auto py-2">
+						<div class="card shadow border border-primary">
+							<div class="card-body px-0">
+								<h2 class=" px-2 py-2 card-title shadow border border-primary bg-dark text-light fs-3 w-fit mx-auto">{{artist.firstname}} {{artist.lastname}}</h2>
+								<p class="card-text px-2 py-3">{{ artist.birthdate | date("d/m/Y") }}</p>
+							</div>
+							<span class="text-end px-2 py-2 fs-5">{{ artist.address }}</span>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</section>
+{% endblock %}
+
