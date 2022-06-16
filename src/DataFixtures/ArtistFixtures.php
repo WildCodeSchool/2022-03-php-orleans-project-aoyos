@@ -13,6 +13,7 @@ class ArtistFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager): void
     {
         $numberArtists = 5;
+        $totalMusicalStyles = count(MusicalStyleFixtures::MUSICALSTYLES);
 
         $faker = Factory::create();
 
@@ -28,7 +29,9 @@ class ArtistFixtures extends Fixture implements DependentFixtureInterface
             $artist->setArtistName($faker->word());
             $artist->setEquipment($faker->words(3, true));
             $artist->setMessage($faker->sentence());
-            $artist->addMusicalStyle($this->getReference('musicalstyle_' . $faker->numberBetween(0, 14)));
+            $artist->addMusicalStyle(
+                $this->getReference('musicalstyle_' . $faker->numberBetween(0, $totalMusicalStyles))
+            );
 
 
             $manager->persist($artist);
