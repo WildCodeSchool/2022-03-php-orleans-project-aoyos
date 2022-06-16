@@ -2,6 +2,7 @@
 
 $topBarHeight: 60px;
 $sideBarWidth: 300px;
+$adminCardsHeight: 300px;
 
 .sideBar {
     width: $sideBarWidth;
@@ -35,6 +36,7 @@ $sideBarWidth: 300px;
     font-family: $textFont;
     top: 0;
     position: sticky;
+    z-index: 1;
 }
 
 .topBar h1 {
@@ -43,4 +45,8 @@ $sideBarWidth: 300px;
 
 .admin-table-image {
     height:$adminTableImageSize;
+}
+
+.admin .card {
+    $height: $adminCardsHeight;
 }
