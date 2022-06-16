@@ -7,7 +7,7 @@ $teamTitleOffset: -30px;
     height: $teamCardSize;
 }
 
-.team img {
+.team .card-img-top {
     object-fit: cover;
     object-position: center;
     height: $teamImgSize;

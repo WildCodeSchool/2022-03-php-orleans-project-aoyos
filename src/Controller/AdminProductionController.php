@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin/realisation')]
+#[Route('/admin/realisations')]
 class AdminProductionController extends AbstractController
 {
     #[Route('/', name: 'app_admin_production_index', methods: ['GET'])]

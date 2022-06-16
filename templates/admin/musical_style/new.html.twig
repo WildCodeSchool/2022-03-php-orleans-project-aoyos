@@ -1,0 +1,11 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block title %}New MusicalStyle{% endblock %}
+
+{% block content %}
+    <h1>Create new MusicalStyle</h1>
+
+    {{ include('admin/musical_style/_form.html.twig') }}
+
+    <a href="{{ path('admin_musical_style_index') }}">back to list</a>
+{% endblock %}

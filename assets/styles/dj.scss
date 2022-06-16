@@ -5,8 +5,8 @@ $typeDivHeight: 60px;
 
 main {
     height: 100%;
-    background-image: url("../images/dots.svg");
-    background-size: cover;
+    background-image: url("../images/dots.png");
+    background-size: contain;
     background-position-x: right;
     background-repeat: no-repeat;
 }

@@ -52,10 +52,10 @@
 			<div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree">
 				<div class="accordion-body">
 					<ul>
-						<li><a class="text-decoration-none" href="#">Équipe</a></li>
-						<li><a class="text-decoration-none" href="#">Projets</a></li>
-						<li><a class="text-decoration-none" href="#">Services</a></li>
-						<li><a class="text-decoration-none" href="#">Partenaires</a></li>
+						<li><a class="text-decoration-none" href="{{ path('admin_team_index')}}">Équipe</a></li>
+						<li><a class="text-decoration-none" href="{{ path('app_admin_production_index')}}">Réalisations</a></li>
+						<li><a class="text-decoration-none" href="{{ path('admin_article_index')}}">Services</a></li>
+						<li><a class="text-decoration-none" href="{{ path('app_admin_partner_index')}}">Partenaires</a></li>
 					</ul>
 				</div>
 			</div>
@@ -91,7 +91,7 @@
 			<div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive">
 				<div class="accordion-body">
 					<ul>
-						<li><a class="text-decoration-none" href="#">Style musical</a></li>
+						<li><a class="text-decoration-none" href="{{ path('admin_musical_style_index') }}">Style musical</a></li>
 					</ul>
 				</div>
 			</div>
@@ -99,7 +99,7 @@
 	</div>
 	<div class="d-flex flex-grow-1 flex-column mx-auto align-items-center justify-content-end mb-3 ">
 		<a class="text-decoration-none fs-5 my-2" href="#">Mon compte</a>
-		<a class="text-decoration-none fs-6 mt-2 mb-5" href="#">Déconnexion</a>
+		<a class="text-decoration-none fs-6 mt-2 mb-5" href="/logout">Déconnexion</a>
 	</div>
 </nav>
 

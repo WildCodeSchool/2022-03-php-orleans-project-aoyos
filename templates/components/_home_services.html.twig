@@ -1,5 +1,6 @@
-<section class="services container my-5">
-	<h1 class="my-5 text-center">Nos services</h1>
+<section class="services container my-5 d-flex flex-column align-items-center" id="services">
+	<h1 class="py-4 mt-0 mb-4 position-relative">
+		<img src="{{ asset('build/images/title_underline_blue.png') }}" class="title-underline" alt="">Nos services</h1>
 	<div class="row g-0 gap-3 justify-content-center">
 
 		{% for article in articles %}
@@ -21,6 +22,6 @@
 				</div>
 			</div>
 		{% endfor %}
-		<a href="#" class="btn btn-outline-primary col-md-4 my-3">Voir plus</a>
+		<a href="#" class="btn btn-outline-primary text-dark col-md-2 my-3">Voir plus</a>
 	</div>
 </section>
