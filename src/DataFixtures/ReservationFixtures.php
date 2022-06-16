@@ -21,7 +21,7 @@ class ReservationFixtures extends Fixture
     {
         $faker = Factory::create();
 
-        $totalFormulas = count(self::FORMULAS);
+        $totalFormulas = count(self::FORMULAS) - 1;
 
         for ($i = 0; $i < self::NUMBER_RESERVATIONS; $i++) {
             $reservation = new Reservation();
@@ -30,7 +30,7 @@ class ReservationFixtures extends Fixture
             $reservation->setCompany($faker->words(2, true));
             $reservation->setEmail($faker->email());
             $reservation->setPhone($faker->phoneNumber());
-            $reservation->setFormula(self::FORMULAS[rand(0, $totalFormulas - 1)]);
+            $reservation->setFormula(self::FORMULAS[rand(0, $totalFormulas)]);
             $reservation->setEventType($faker->sentence(4));
             $reservation->setAddress($faker->address());
             $reservation->setDateStart($faker->dateTimeInInterval('+1 week', '+1 days'));
