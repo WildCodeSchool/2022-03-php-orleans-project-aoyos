@@ -13,7 +13,7 @@ class ArtistFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager): void
     {
         $numberArtists = 5;
-        $totalMusicalStyles = count(MusicalStyleFixtures::MUSICALSTYLES);
+        $totalMusicalStyles = count(MusicalStyleFixtures::MUSICALSTYLES) - 1;
 
         $faker = Factory::create();
 
