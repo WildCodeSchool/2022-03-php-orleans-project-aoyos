@@ -10,14 +10,15 @@ use Faker\Factory;
 
 class ArtistFixtures extends Fixture implements DependentFixtureInterface
 {
+    public const NUMBER_ARTIST = 5;
+
     public function load(ObjectManager $manager): void
     {
-        $numberArtists = 5;
         $totalMusicalStyles = count(MusicalStyleFixtures::MUSICALSTYLES) - 1;
 
         $faker = Factory::create();
 
-        for ($i = 0; $i <= $numberArtists; $i++) {
+        for ($i = 0; $i <= self::NUMBER_ARTIST; $i++) {
             $artist = new Artist();
 
             $artist->setFirstname($faker->firstName());
@@ -30,7 +31,7 @@ class ArtistFixtures extends Fixture implements DependentFixtureInterface
             $artist->setEquipment($faker->words(3, true));
             $artist->setMessage($faker->sentence());
             $artist->addMusicalStyle(
-                $this->getReference('musicalstyle_' . $faker->numberBetween(0, $totalMusicalStyles))
+                $this->getReference('musicalstyle_' . rand(0, $totalMusicalStyles))
             );
 
 
