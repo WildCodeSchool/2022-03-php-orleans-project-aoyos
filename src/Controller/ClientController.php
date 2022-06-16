@@ -31,7 +31,7 @@ class ClientController extends AbstractController
         } else {
             $form = $this->createForm(ReservationClientInfosType::class, $reservation);
         }
-        
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
