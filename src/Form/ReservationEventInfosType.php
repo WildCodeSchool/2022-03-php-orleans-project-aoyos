@@ -35,9 +35,11 @@ class ReservationEventInfosType extends AbstractType
             ])
             ->add('dateStart', DateTimeType::class, [
                 'label' => 'Début',
+                'widget' => 'single_text',
             ])
             ->add('dateEnd', DateTimeType::class, [
-                'label' => 'Fin'
+                'label' => 'Fin',
+                'widget' => 'single_text',
             ])
             ->add('attendees', IntegerType::class, [
                 'label' => 'Participants',

@@ -105,10 +105,6 @@ class Reservation
     private int $attendees;
 
     #[ORM\Column(type: 'text', nullable: true)]
-    #[Assert\Length(
-        max: 255,
-        groups: ['eventInfos']
-    )]
     private ?string $comment;
 
     public function getId(): ?int
