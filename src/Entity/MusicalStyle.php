@@ -18,7 +18,7 @@ class MusicalStyle
     #[ORM\Column(type: 'string', length: 255)]
     private string $name;
 
-    #[ORM\ManyToMany(targetEntity: Artist::class, mappedBy: 'musicalStyle')]
+    #[ORM\ManyToMany(targetEntity: Artist::class, mappedBy: 'musicalStyles')]
     private Collection $artists;
 
     public function __construct()

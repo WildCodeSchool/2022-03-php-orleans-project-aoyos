@@ -27,12 +27,13 @@ class ArtistProfileType extends AbstractType
                 'label' => 'Message',
                 'attr' => ['placeholder' => 'Je suis un super DJ mais..!'],
                 ])
-            ->add('musicalStyle', EntityType::class, [
+            ->add('musicalStyles', EntityType::class, [
                 'class' => MusicalStyle::class,
                 'label' => 'Genre musical',
                 'choice_label' => 'name',
                 'multiple' => true,
                 'expanded' => true,
+                'by_reference' => false,
                 ])
         ;
     }

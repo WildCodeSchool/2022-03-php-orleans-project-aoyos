@@ -63,11 +63,16 @@ class Artist
     private string $message;
 
     #[ORM\ManyToMany(targetEntity: MusicalStyle::class, inversedBy: 'artists')]
-    private Collection $musicalStyle;
+    #[Assert\Count(
+        min: 1,
+        groups: ['djProfile'],
+        minMessage: 'Merci de choisir au moins {{ limit }} genre musical'
+    )]
+    private Collection $musicalStyles;
 
     public function __construct()
     {
-        $this->musicalStyle = new ArrayCollection();
+        $this->musicalStyles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -186,15 +191,15 @@ class Artist
     /**
      * @return Collection<int, MusicalStyle>
      */
-    public function getMusicalStyle(): Collection
+    public function getMusicalStyles(): Collection
     {
-        return $this->musicalStyle;
+        return $this->musicalStyles;
     }
 
     public function addMusicalStyle(MusicalStyle $musicalStyle): self
     {
-        if (!$this->musicalStyle->contains($musicalStyle)) {
-            $this->musicalStyle[] = $musicalStyle;
+        if (!$this->musicalStyles->contains($musicalStyle)) {
+            $this->musicalStyles[] = $musicalStyle;
         }
 
         return $this;
@@ -202,7 +207,7 @@ class Artist
 
     public function removeMusicalStyle(MusicalStyle $musicalStyle): self
     {
-        $this->musicalStyle->removeElement($musicalStyle);
+        $this->musicalStyles->removeElement($musicalStyle);
 
         return $this;
     }

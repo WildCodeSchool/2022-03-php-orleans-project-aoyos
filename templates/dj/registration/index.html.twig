@@ -15,24 +15,31 @@
 {% endblock %}
 
 {% block body %}
-<main class="registration-form my-5 mb-5">
-	<div class="container p-1 rounded-3 border border-dark">
-	<div class="p-5 border border-dark">
-		<div class="d-flex justify-content-center">
-			<h1 class="position-relative text-center w-fit mb-5 px-2">
-				<img src="{{ asset('build/images/title_underline_orange.png') }}" class="title-underline" alt="">Inscription
-			</h1>
-		</div>
-		{{ form_start(form) }}
-		{{ form_widget(form) }}
-		<div class="d-flex justify-content-between">
-			<button class="btn btn-outline-dark">
-				<i class="bi bi-pencil-square"></i>
-				S'inscrire
-			</button>
-		</div>
-		
-		{{ form_end(form) }}
-		</div>
-	</main>
-{% endblock %}
+	<main class="registration-form my-5 mb-5">
+		<div class="container p-1 rounded-3 border border-dark">
+			<div class="p-5 border border-dark">
+				<div class="d-flex justify-content-center">
+					<h1 class="position-relative text-center w-fit mb-5 px-2">
+						<img src="{{ asset('build/images/title_underline_orange.png') }}" class="title-underline" alt="">Inscription
+					</h1>
+				</div>
+				{{ form_start(form) }}
+				<h2 class="h5 mb-4">Étape:
+					{{ app.session.get('step') ?? 1 }}/2</h1>
+				{{ form_widget(form) }}
+				<div class="d-flex {% if app.session.get('step') %}justify-content-between {% else %} justify-content-end {% endif %}">
+					{% if app.session.get('step') == 2 %}
+						<a href="{{path('app_return')}}" class="btn btn-dark">
+							<i class="bi bi-arrow-left-square"></i>
+							Retour
+						</a>
+					{% endif %}
+					<button class="btn btn-dark">
+						<i class="bi bi-pencil-square"></i>
+						S'inscrire
+					</button>
+				</div>
+				{{ form_end(form) }}
+			</div>
+		</main>
+	{% endblock %}

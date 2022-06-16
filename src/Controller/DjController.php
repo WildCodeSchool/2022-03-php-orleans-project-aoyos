@@ -26,13 +26,12 @@ class DjController extends AbstractController
     public function register(
         HttpFoundationRequest $request,
         ArtistRepository $artistRepository,
-        MusicalStyle $musicalStyle,
         RequestStack $stack
     ): Response {
         $session = $stack->getSession();
         $artist = $session->get('artistInfos') ?? new Artist();
 
-        if (!$session->has('step')) {
+        if (!$session->get('step')) {
             $form = $this->createForm(ArtistType::class, $artist);
         } else {
             $form = $this->createForm(ArtistProfileType::class, $artist);
@@ -40,12 +39,15 @@ class DjController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if (!$session->has('step')) {
-                $artistInfos = $form->getData();
-                $session->set('artistInfos', $artistInfos);
-                $session->set('step', 1);
+            if (!$session->get('step')) {
+                $session->set('artistInfos', $artist);
+                $session->set('step', 2);
             } else {
+                $session->remove('artistInfos');
+                $session->remove('step');
                 $artistRepository->add($artist, true);
+
+                return $this->redirectToRoute('app_dj', [], Response::HTTP_SEE_OTHER);
             }
             return $this->redirectToRoute('app_registration', [], Response::HTTP_SEE_OTHER);
         }
@@ -54,8 +56,17 @@ class DjController extends AbstractController
             'dj/registration/index.html.twig',
             [ 'form' => $form,
              'artist' => $artist,
-             'musical_style' => $musicalStyle,
             ]
         );
+    }
+
+    #[Route('/return', name: 'return')]
+    public function return(RequestStack $requestStack): Response
+    {
+        $session = $requestStack->getSession();
+        if ($session->has('step')) {
+            $session->remove('step');
+        }
+        return $this->redirectToRoute('app_registration', [], Response::HTTP_SEE_OTHER);
     }
 }
