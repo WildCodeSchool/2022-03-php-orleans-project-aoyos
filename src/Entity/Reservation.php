@@ -82,18 +82,10 @@ class Reservation
 
     #[ORM\Column(type: 'datetime')]
     #[Assert\NotBlank(groups: ['eventInfos'])]
-    #[Assert\Type(
-        'DateTimeInterface',
-        groups: ['eventInfos']
-    )]
     private DateTimeInterface $dateStart;
 
     #[ORM\Column(type: 'datetime')]
     #[Assert\NotBlank(groups: ['eventInfos'])]
-    #[Assert\Type(
-        'DateTimeInterface',
-        groups: ['eventInfos']
-    )]
     private DateTimeInterface $dateEnd;
 
     #[ORM\Column(type: 'integer')]
