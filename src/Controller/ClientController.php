@@ -56,4 +56,14 @@ class ClientController extends AbstractController
             'step' => $step
         ]);
     }
+
+    #[Route('/', name: 'back')]
+    public function backForm(RequestStack $requestStack): Response
+    {
+        $session = $requestStack->getSession();
+        if ($session->has('step')) {
+            $session->remove('step');
+        }
+        return $this->redirectToRoute('client_index', [], Response::HTTP_SEE_OTHER);
+    }
 }
