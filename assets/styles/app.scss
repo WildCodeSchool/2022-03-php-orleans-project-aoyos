@@ -117,3 +117,10 @@ body {
     transform: scaleX(1);
     transform-origin: bottom left;
   }
+
+  a.anchor {
+    display: block;
+    position: relative;
+    top: -$navHeight;
+    visibility: hidden;
+}

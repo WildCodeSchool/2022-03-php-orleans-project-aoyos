@@ -6,7 +6,7 @@ use App\Entity\Reservation;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -26,19 +26,22 @@ class ReservationEventInfosType extends AbstractType
                 ]
             ])
             ->add('eventType', TextType::class, [
-                'label' => 'Type d\'évènement'
+                'label' => 'Type d\'évènement',
+                'attr' => ['placeholder' => 'Lancement de produit'],
             ])
             ->add('address', TextType::class, [
-                'label' => 'Lieu'
+                'label' => 'Lieu',
+                'attr' => ['placeholder' => '15 rue des halles, 75001 Paris'],
             ])
             ->add('dateStart', DateTimeType::class, [
-                'label' => 'Début'
+                'label' => 'Début',
             ])
             ->add('dateEnd', DateTimeType::class, [
                 'label' => 'Fin'
             ])
-            ->add('attendees', NumberType::class, [
-                'label' => 'Participants'
+            ->add('attendees', IntegerType::class, [
+                'label' => 'Participants',
+                'attr' => ['placeholder' => '150'],
             ])
             ->add('comment', TextareaType::class, [
                 'label' => 'Commentaire (optionnel)',

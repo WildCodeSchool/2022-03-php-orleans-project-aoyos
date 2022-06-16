@@ -21,12 +21,12 @@ class ClientController extends AbstractController
         RequestStack $requestStack,
         ReservationRepository $reservationRepo
     ): Response {
-        $reservation = new Reservation();
-
-        $step = 0;
         $session = $requestStack->getSession();
-        if ($session->has('step') && $session->get('step') === 1) {
-            $step = 1;
+        $reservation = $session->get('reservationForm') ?? new Reservation();
+
+        $step = false;
+        if ($session->has('step') && $session->get('step')) {
+            $step = true;
             $form = $this->createForm(ReservationEventInfosType::class, $reservation);
         } else {
             $form = $this->createForm(ReservationClientInfosType::class, $reservation);
@@ -35,20 +35,15 @@ class ClientController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if ($step === 1) {
-                $clientInfos = $session->get('reservationForm');
-                $reservation->setLastname($clientInfos->getLastname());
-                $reservation->setFirstname($clientInfos->getFirstname());
-                $reservation->setCompany($clientInfos->getCompany());
-                $reservation->setEmail($clientInfos->getEmail());
-                $reservation->setPhone($clientInfos->getPhone());
-                $reservationRepo->add($reservation, true);
+            if (!$step) {
+                $session->set('reservationForm', $reservation);
+                $session->set('step', true);
             } else {
-                $reservationSession = $form->getData();
-                $session->set('reservationForm', $reservationSession);
-                $session->set('step', 1);
-                return $this->redirectToRoute('client_index', [], Response::HTTP_SEE_OTHER);
+                $session->remove('reservationForm');
+                $session->remove('step');
+                $reservationRepo->add($reservation, true);
             }
+            return $this->redirectToRoute('client_index', ['_fragment' => 'reservation'], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('client/index.html.twig', [
@@ -57,13 +52,13 @@ class ClientController extends AbstractController
         ]);
     }
 
-    #[Route('/', name: 'back')]
+    #[Route('/back', name: 'back')]
     public function backForm(RequestStack $requestStack): Response
     {
         $session = $requestStack->getSession();
         if ($session->has('step')) {
             $session->remove('step');
         }
-        return $this->redirectToRoute('client_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('client_index', ['_fragment' => 'reservation'], Response::HTTP_SEE_OTHER);
     }
 }
