@@ -6,24 +6,46 @@
 {% endblock %}
 
 {% block content %}
-<section class="djs pb-5 d-flex flex-column align-items-center">
-		<h1 class="text-center py-4 mt-0 mb-4">
-			Nouveaux Djs</h1>
-		<div class="container">
-			<div class="row">
-				{% for artist in artists %}
-					<div class="col-md-3 mx-auto py-2">
-						<div class="card shadow border border-primary">
-							<div class="card-body px-0">
-								<h2 class=" px-2 py-2 card-title shadow border border-primary bg-dark text-light fs-3 w-fit mx-auto">{{artist.firstname}} {{artist.lastname}}</h2>
-								<p class="card-text px-2 py-3">{{ artist.birthdate | date("d/m/Y") }}</p>
+	<div class="container d-flex flex-column admin">
+		<section class="reservations mb-4">
+			<h1 class="mt-3 mb-2 ms-3">
+				Nouvelles réservations</h1>
+			<div class="row me-2 ms-2 mb-4 d-flex flex-row">
+				{% for reservation in reservations %}
+					<div class="col-md-3 mx-auto my-2">
+						<div class="card h-100 shadow border border-dark">
+							<div class="card-body">
+								<h5 class="card-title border border-dark bg-dark text-light text-center w-fit mx-auto px-2 py-2 mb-3">{{reservation.company}}</h5>
+								<h6 class="card-subtitle mb-2 text-muted px-2 py-2">{{ reservation.firstName }}
+									{{ reservation.lastName }}</h6>
+								<p class="card-text px-2 py-2">{{ reservation.email }}</p>
 							</div>
-							<span class="text-end px-2 py-2 fs-5">{{ artist.address }}</span>
+							<a href="#" class="btn btn-outline-dark mx-2 mb-2">Voir</a>
 						</div>
 					</div>
 				{% endfor %}
 			</div>
-		</div>
-	</section>
+		</section>
+		<section class="djs">
+			<h1 class="mb-2 ms-3">
+				Nouveaux Djs</h1>
+			<div class="row me-2 ms-2">
+				{% for artist in artists %}
+					<div class="col-md-3 mx-auto my-2">
+						<div class="card h-100 shadow border border-dark">
+							<div class="card-body">
+								<h5 class="px-2 py-2 card-title border border-dark bg-dark text-light w-fit mx-auto mb-3">{{artist.firstname}}
+									{{artist.lastname}}</h5>
+								<h6 class="card-subtitle mb-2 text-muted px-2 py-2">
+									{{ artist.birthdate | date("d/m/Y") }}</h6>
+								<p class="px-2 py-2">Adresse :
+									{{ artist.address }}</p>
+							</div>
+							<a href="#" class="btn btn-outline-dark mx-2 mb-2">Voir</a>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		</section>
+	</div>
 {% endblock %}
-
