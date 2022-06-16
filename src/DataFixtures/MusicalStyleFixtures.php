@@ -17,6 +17,7 @@ class MusicalStyleFixtures extends Fixture
         for ($i = 0; $i < count(self::MUSICALSTYLES); $i++) {
             $musicalStyle = new MusicalStyle();
             $musicalStyle->setName(self::MUSICALSTYLES[$i]);
+            $this->addReference('musicalstyle_' . $i, $musicalStyle);
             $manager->persist($musicalStyle);
         }
         $manager->flush();
