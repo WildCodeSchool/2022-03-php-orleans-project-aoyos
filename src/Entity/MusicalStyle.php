@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\MusicalStyleRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MusicalStyleRepository::class)]
@@ -15,6 +17,14 @@ class MusicalStyle
 
     #[ORM\Column(type: 'string', length: 255)]
     private string $name;
+
+    #[ORM\ManyToMany(targetEntity: Artist::class, mappedBy: 'musicalStyle')]
+    private Collection $artists;
+
+    public function __construct()
+    {
+        $this->artists = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -29,6 +39,33 @@ class MusicalStyle
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Artist>
+     */
+    public function getArtists(): Collection
+    {
+        return $this->artists;
+    }
+
+    public function addArtist(Artist $artist): self
+    {
+        if (!$this->artists->contains($artist)) {
+            $this->artists[] = $artist;
+            $artist->addMusicalStyle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArtist(Artist $artist): self
+    {
+        if ($this->artists->removeElement($artist)) {
+            $artist->removeMusicalStyle($this);
+        }
 
         return $this;
     }
