@@ -11,18 +11,18 @@
 {% endblock %}
 
 {% block body %}
-	<main>
+	<main class="contact">
         <div class="d-flex flex-column align-items-center justify-content-center">
 			<h1 class="mt-5 py-4 mt-0 mb-4 position-relative">
 				<img src="{{ asset('build/images/title_underline_blue.png') }}" class="title-underline" alt="">Contactez-nous</h1>
-			<div class="card col-lg-6 bg-light">
+			<div class="card col-lg-6">
 				<div class="card-body">
 					{{ form_start(form) }}
 					{{ form_widget(form) }}
 				</div>
 			</div>
 			<div class="d-flex justify-content-center mt-3">
-				<button class="btn btn-outline-dark px-3 mb-5">
+				<button class="btn btn-outline-dark bg-white px-3 mb-5">
 					<i class="bi bi-envelope me-2"></i>Envoyer</button>
 			</div>
 			{{ form_end(form) }}

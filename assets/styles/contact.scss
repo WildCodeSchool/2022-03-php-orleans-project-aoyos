@@ -13,3 +13,7 @@ main::before {
     background-size: cover;
     clip-path: polygon(82% 35%, 100% 22%, 100% 46%, 100% 74%, 100% 100%, 42% 100%, 0 100%, 0 76%, 44% 59%);
 }
+
+.contact .card {
+    background-color: lighten($orangeLogo, 35%);
+}
