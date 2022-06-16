@@ -40,6 +40,7 @@ Encore
     .addEntry('client', './assets/styles/client.scss')
     .addEntry('registration', './assets/styles/registration.scss')
     .addEntry('dj', './assets/styles/dj.scss')
+    .addEntry('login', './assets/styles/login.scss')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')

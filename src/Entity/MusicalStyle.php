@@ -6,6 +6,7 @@ use App\Repository\MusicalStyleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: MusicalStyleRepository::class)]
 class MusicalStyle
@@ -16,6 +17,10 @@ class MusicalStyle
     private int $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        max: 255
+    )]
     private string $name;
 
     #[ORM\ManyToMany(targetEntity: Artist::class, mappedBy: 'musicalStyles')]
