@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\ArtistRepository;
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -44,6 +46,34 @@ class Artist
     #[Assert\Length(max:255, groups: ['djInfos'])]
     #[Assert\NotBlank(groups: ['djInfos'])]
     private string $address;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Length(max:255, groups: ['djProfile'])]
+    #[Assert\NotBlank(groups: ['djProfile'])]
+    private string $artistName;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Length(max:255, groups: ['djProfile'])]
+    #[Assert\NotBlank(groups: ['djProfile'])]
+    private string $equipment;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Assert\Length(max:255, groups: ['djProfile'])]
+    #[Assert\NotBlank(groups: ['djProfile'])]
+    private string $message;
+
+    #[ORM\ManyToMany(targetEntity: MusicalStyle::class, inversedBy: 'artists')]
+    #[Assert\Count(
+        min: 1,
+        groups: ['djProfile'],
+        minMessage: 'Merci de choisir au moins {{ limit }} genre musical'
+    )]
+    private Collection $musicalStyles;
+
+    public function __construct()
+    {
+        $this->musicalStyles = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -118,6 +148,66 @@ class Artist
     public function setAddress(string $address): self
     {
         $this->address = $address;
+
+        return $this;
+    }
+
+    public function getArtistName(): ?string
+    {
+        return $this->artistName;
+    }
+
+    public function setArtistName(string $artistName): self
+    {
+        $this->artistName = $artistName;
+
+        return $this;
+    }
+
+    public function getEquipment(): ?string
+    {
+        return $this->equipment;
+    }
+
+    public function setEquipment(string $equipment): self
+    {
+        $this->equipment = $equipment;
+
+        return $this;
+    }
+
+    public function getMessage(): ?string
+    {
+        return $this->message;
+    }
+
+    public function setMessage(?string $message): self
+    {
+        $this->message = $message;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, MusicalStyle>
+     */
+    public function getMusicalStyles(): Collection
+    {
+        return $this->musicalStyles;
+    }
+
+    public function addMusicalStyle(MusicalStyle $musicalStyle): self
+    {
+        if (!$this->musicalStyles->contains($musicalStyle)) {
+            $this->musicalStyles[] = $musicalStyle;
+        }
+
+        return $this;
+    }
+
+    public function removeMusicalStyle(MusicalStyle $musicalStyle): self
+    {
+        $this->musicalStyles->removeElement($musicalStyle);
 
         return $this;
     }
