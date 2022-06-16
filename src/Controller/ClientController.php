@@ -36,11 +36,12 @@ class ClientController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             if ($step === 1) {
-                $reservation->setLastname($session->get('lastname'));
-                $reservation->setFirstname($session->get('firstname'));
-                $reservation->setCompany($session->get('company'));
-                $reservation->setEmail($session->get('email'));
-                $reservation->setPhone($session->get('phone'));
+                $clientInfos = $session->get('reservationForm');
+                $reservation->setLastname($clientInfos->getLastname());
+                $reservation->setFirstname($clientInfos->getFirstname());
+                $reservation->setCompany($clientInfos->getCompany());
+                $reservation->setEmail($clientInfos->getEmail());
+                $reservation->setPhone($clientInfos->getPhone());
                 $reservationRepo->add($reservation, true);
             } else {
                 $reservationSession = $form->getData();

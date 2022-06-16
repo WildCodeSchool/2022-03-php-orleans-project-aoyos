@@ -82,18 +82,18 @@ class Reservation
 
     #[ORM\Column(type: 'datetime')]
     #[Assert\NotBlank(groups: ['eventInfos'])]
-    /**
-     * @var string A "Y-m-d H:i:s" formatted value
-     */
-    #[Assert\DateTime(groups: ['eventInfos'])]
+    #[Assert\Type(
+        'DateTimeInterface',
+        groups: ['eventInfos']
+    )]
     private DateTimeInterface $dateStart;
 
     #[ORM\Column(type: 'datetime')]
     #[Assert\NotBlank(groups: ['eventInfos'])]
-    /**
-     * @var string A "Y-m-d H:i:s" formatted value
-     */
-    #[Assert\DateTime(groups: ['eventInfos'])]
+    #[Assert\Type(
+        'DateTimeInterface',
+        groups: ['eventInfos']
+    )]
     private DateTimeInterface $dateEnd;
 
     #[ORM\Column(type: 'integer')]
