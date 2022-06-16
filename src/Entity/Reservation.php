@@ -57,24 +57,58 @@ class Reservation
     private string $phone;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(groups: ['eventInfos'])]
+    #[Assert\Length(
+        max: 255,
+        groups: ['eventInfos']
+    )]
     private string $formula;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(groups: ['eventInfos'])]
+    #[Assert\Length(
+        max: 255,
+        groups: ['eventInfos']
+    )]
     private string $eventType;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(groups: ['eventInfos'])]
+    #[Assert\Length(
+        max: 255,
+        groups: ['eventInfos']
+    )]
     private string $address;
 
     #[ORM\Column(type: 'datetime')]
+    #[Assert\NotBlank(groups: ['eventInfos'])]
+    /**
+     * @var string A "Y-m-d H:i:s" formatted value
+     */
+    #[Assert\DateTime(groups: ['eventInfos'])]
     private DateTimeInterface $dateStart;
 
     #[ORM\Column(type: 'datetime')]
+    #[Assert\NotBlank(groups: ['eventInfos'])]
+    /**
+     * @var string A "Y-m-d H:i:s" formatted value
+     */
+    #[Assert\DateTime(groups: ['eventInfos'])]
     private DateTimeInterface $dateEnd;
 
     #[ORM\Column(type: 'integer')]
+    #[Assert\NotBlank(groups: ['eventInfos'])]
+    #[Assert\Length(
+        max: 255,
+        groups: ['eventInfos']
+    )]
     private int $attendees;
 
     #[ORM\Column(type: 'text', nullable: true)]
+    #[Assert\Length(
+        max: 255,
+        groups: ['eventInfos']
+    )]
     private ?string $comment;
 
     public function getId(): ?int
