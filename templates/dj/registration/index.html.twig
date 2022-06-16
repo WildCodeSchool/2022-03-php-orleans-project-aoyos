@@ -35,9 +35,14 @@
 						</a>
 					{% endif %}
 					<button class="btn btn-dark">
+					{% if app.session.get('step') %}
 						<i class="bi bi-pencil-square"></i>
-						S'inscrire
-					</button>
+						 S'inscrire 
+						 {% else %}
+							<i class="bi bi-arrow-right-square"></i>
+						  Suivant 
+						  {% endif %}
+						  </button>
 				</div>
 				{{ form_end(form) }}
 			</div>
