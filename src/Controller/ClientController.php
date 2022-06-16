@@ -44,8 +44,8 @@ class ClientController extends AbstractController
                 $reservationRepo->add($reservation, true);
             } else {
                 $reservationSession = $form->getData();
-                $reservationSession['step'] = 1;
                 $session->set('reservationForm', $reservationSession);
+                $session->set('step', 1);
                 return $this->redirectToRoute('client_index', [], Response::HTTP_SEE_OTHER);
             }
         }

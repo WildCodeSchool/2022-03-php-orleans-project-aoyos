@@ -6,6 +6,8 @@ use App\Entity\Reservation;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -35,11 +37,12 @@ class ReservationEventInfosType extends AbstractType
             ->add('dateEnd', DateTimeType::class, [
                 'label' => 'Fin'
             ])
-            ->add('attendees', TextType::class, [
+            ->add('attendees', NumberType::class, [
                 'label' => 'Participants'
             ])
-            ->add('comment', TextType::class, [
-                'label' => 'Commentaire (optionnel)'
+            ->add('comment', TextareaType::class, [
+                'label' => 'Commentaire (optionnel)',
+                'required' => false
             ])
         ;
     }
