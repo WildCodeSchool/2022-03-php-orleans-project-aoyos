@@ -1,28 +1,27 @@
 <a class="anchor" id="services"></a>
-<section class="services container my-5 d-flex flex-column align-items-center">
-	<h1 class="py-4 mt-0 mb-4 position-relative">
-		<img src="{{ asset('build/images/title_underline_blue.png') }}" class="title-underline" alt="">Nos services</h1>
-	<div class="row g-0 gap-3 justify-content-center">
+<section class="services my-5 d-flex flex-column align-items-center position-relative">
+	<div class="container d-flex flex-column align-items-center">
+		<h1 class="py-4 mt-0 mb-4 position-relative">
+			<img src="{{ asset('build/images/title_underline_orange.png') }}" class="title-underline" alt="">Nos services</h1>
 
-		{% for article in articles %}
-			<div class="card col-lg-5 col-md-12 col-8 d-flex align-items-center flex-column flex-md-row" data-aos="fade-up">
-				<div class="col-lg-6 col-md-4 col-12">
-					<img src="{{ asset('build/images/placeholder-services.jpg') }}" class="img-fluid" alt="service DJ">
-				</div>
-				<div class="col-lg-6 col-md-8 flex-grow-1">
-					<div class="d-flex flex-column justify-content-between">
-						<div class="card-body">
-							<p class="card-text">
-								<small class="text-muted">{{ article.createdAt | date("d/m/Y")  }}</small>
-							</p>
-							<h5 class="card-title">{{ article.title }}</h5>
-							<p class="card-text">{{ article.description | u.truncate(50, '...', false) }}.</p>
+		<div class="row g-0 gap-5 justify-content-center">
+			{% for article in articles %}
+				<div class="card shadow border border-primary col-lg-5 col-md-12 col-8 d-flex align-items-center flex-column flex-md-row" data-aos="fade-up">
+					<div class="col-lg-6 col-md-4 img-services-card">
+						<img src="{{ asset('uploads/images/article/' ~ article.image) }}" class="img w-100" alt="service DJ">
+					</div>
+					<div class="col-lg-6 col-md-8 h-100 d-flex flex-column justify-content-around">
+						<div class="card-body h-75">
+							<div class="h-25">
+								<h5 class="card-title text-center text-light bg-dark border border-light p-3">{{ article.title }}</h5>
+							</div>
+							<p class="card-text pt-5">{{ article.description |u.truncate(150, '...', false) }}.</p>
 						</div>
-						<a href="#" class="card-body pt-0 text-decoration-none fst-italic">Lire la suite</a>
+						<a href="#" class="text-decoration-none fst-italic px-3 pb-3 justify-self-end">Lire la suite</a>
 					</div>
 				</div>
-			</div>
-		{% endfor %}
-		<a href="#" class="btn btn-outline-primary text-dark col-md-2 my-3">Voir plus</a>
+			{% endfor %}
+			<a href="#" class="btn btn-outline-primary text-dark col-md-2 mb-5">Voir plus</a>
+		</div>
 	</div>
 </section>
