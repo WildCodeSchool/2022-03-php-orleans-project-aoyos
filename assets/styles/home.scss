@@ -8,20 +8,82 @@ $logoHeight: 200px;
 .header-title {
     font-size: clamp(0.5rem, 10vh, 4rem);
 }
+
 .header-picture {
-    background-image: url("../images/header-aoyos.jpeg");
+    content: "";
+    z-index: -1;
+    position: relative;
+    top: 1px;
+    height: $headerHeight;
+    max-width: 100%;
+    width: $headerWidth;
+}
+
+.img-header1 {
+    background-image: url("../images/header1.jpeg");
     background-size: cover;
-    background-position: center;
     height: $headerHeight;
     width: $headerWidth;
+}
+
+.img-header2 {
+    background-image: url("../images/header2.jpeg");
+    background-size: cover;
+    height: $headerHeight;
+    width: $headerWidth;
+}
+
+.img-header3 {
+    background-image: url("../images/header3.jpeg");
+    background-size: cover;
+    height: $headerHeight;
+    width: $headerWidth;
+}
+
+.slider {
+    height: $headerHeight;
+    width: $headerWidth;
+    overflow: hidden;
+}
+
+.slider-content {
+    height: $headerHeight;
+    width: calc($headerWidth*3);
     position: relative;
+    animation: slider linear 10s infinite alternate;
+}
+
+@keyframes slider {
+  0% {
+    left: 0px;
+  }
+  30% {
+    left: 0px;
+  }
+  33% {
+    left: -#{$headerWidth};
+  }
+  63% {
+    left: -#{$headerWidth};
+  }
+  66% {
+    left: calc(-#{$headerWidth} * 2);
+  }
+  100% {
+    left: calc(-#{$headerWidth} * 2);
+  }
+}
+
+.typetext {
+    position: relative;
+    top: -260px;
 }
 
 .header-sub {
-    font-size: clamp(0.5rem, 10vh, 4rem);
+    font-size: clamp(0.5rem, 10vh, 3rem);
+    height: 60px;
 }
   
-.header-picture,
 .header-picture::before,
 .header-picture::after {
     box-shadow: 1px 1px 1px $shadowColor;
