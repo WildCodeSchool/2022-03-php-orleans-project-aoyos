@@ -9,7 +9,7 @@
 					Utilisateurs
 				</button>
 			</h2>
-			<div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne">
+			<div id="flush-collapseOne" class="accordion-collapse collapse {% if route_name in route_admin_user %}show{% endif %}" aria-labelledby="flush-headingOne">
 				<div class="accordion-body">
 					<ul>
 						<li><a class="text-decoration-none" href="#">DJ</a></li>
@@ -28,7 +28,7 @@
 					Réservations
 				</button>
 			</h2>
-			<div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo">
+			<div id="flush-collapseTwo" class="accordion-collapse collapse {% if route_name in route_admin_reservation %}show{% endif %}" aria-labelledby="flush-headingTwo">
 				<div class="accordion-body">
 					<ul>
 						<li><a class="text-decoration-none" href="#">Demandées</a></li>
@@ -49,7 +49,7 @@
 					Page d'accueil
 				</button>
 			</h2>
-			<div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree">
+			<div id="flush-collapseThree" class="accordion-collapse collapse {% if route_name in route_admin_home %}show{% endif %}" aria-labelledby="flush-headingThree">
 				<div class="accordion-body">
 					<ul>
 						<li><a class="text-decoration-none" href="{{ path('admin_team_index')}}">Équipe</a></li>
@@ -88,7 +88,7 @@
 					Page DJ
 				</button>
 			</h2>
-			<div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive">
+			<div id="flush-collapseFive" class="accordion-collapse collapse {% if route_name in route_admin_dj %}show{% endif %}" aria-labelledby="flush-headingFive">
 				<div class="accordion-body">
 					<ul>
 						<li><a class="text-decoration-none" href="{{ path('admin_musical_style_index') }}">Style musical</a></li>

@@ -1,7 +1,27 @@
 twig:
     default_path: '%kernel.project_dir%/templates'
     form_themes: ['bootstrap_5_layout.html.twig']
-
+    globals:
+        route_admin_user: []
+        route_admin_reservation: []
+        route_admin_home:
+            - 'admin_team_index'
+            - 'admin_team_member_new'
+            - 'admin_team_member_edit'
+            - 'app_admin_production_index'
+            - 'app_admin_production_new'
+            - 'app_admin_production_edit'
+            - 'admin_article_index'
+            - 'admin_article_new'
+            - 'admin_article_edit'
+            - 'app_admin_partner_index'
+            - 'app_admin_partner_new'
+            - 'app_admin_partner_edit'
+        route_admin_client: []
+        route_admin_dj:
+            - 'admin_musical_style_index'
+            - 'admin_musical_style_new'
+            - 'admin_musical_style_edit'
 when@test:
     twig:
         strict_variables: true
