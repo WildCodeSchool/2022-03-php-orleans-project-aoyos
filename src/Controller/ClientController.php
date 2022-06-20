@@ -72,8 +72,8 @@ class ClientController extends AbstractController
                 ->from($reservation->getEmail())
                 ->to($this->getParameter('mailer_from'))
                 ->subject('Une nouvelle demande de réservation')
-                ->html($this->renderView('client/new_email_reservation.html.twig', [
-
+                ->html($this->renderView('client/notification_email_reservation.html.twig', [
+                    'reservation' => $reservation
                 ]));
 
             $mailer->send($email);
