@@ -15,10 +15,10 @@
 
 {% block content %}
 	<main>
-    <div class="container">
+    <div class="container d-flex justify-content-center mt-5">
 		{% if is_granted('ROLE_USER') %}
 			<div>
-				<h1 class="mt-5 ms-5">Votre candidature est en attente de confirmation.</h1>
+				<h1 class="mt-5">Votre candidature est en attente de confirmation.</h1>
 			</div>
 		{% endif %}
 	</main>
