@@ -52,11 +52,13 @@ body {
 }
 
 .btn-client {
+    min-width: $minWidthNavButton;
     color: darken($secondary, 30%);
     border: 1px solid darken($secondary, 20%);
 }
 
 .btn-dj {
+    min-width: $minWidthNavButton;
     color: darken($primary, 30%);
     border: 1px solid darken($primary, 20%);
 }
