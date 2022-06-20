@@ -220,3 +220,35 @@ $logoHeight: 200px;
     right:13%;
     filter: drop-shadow(0 0 0.1rem $blueLogo);
 }
+
+.services::before {
+    content: '';
+    display: block;
+    position: absolute;
+    background: #f6f6f6;
+    z-index: -2;
+    height: 100%;
+    width: 100%;
+}
+.services .card-title {
+    margin-left: $productionTitleOffset;
+}
+
+.img-services-card {
+    object-fit: cover;
+    object-position: center;
+    height: 100%;
+}
+
+@media screen and (max-width: 768px) {
+    .services .card-title {
+        margin-left: 0;
+        margin-top: $productionTitleOffset;
+    }
+    .img-services-card {
+        object-fit: cover;
+        object-position: center;
+        width: 100%;
+        height: auto;
+    }
+}
