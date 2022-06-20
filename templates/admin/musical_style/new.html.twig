@@ -1,11 +1,17 @@
 {% extends 'admin/admin_base.html.twig' %}
 
-{% block title %}New MusicalStyle{% endblock %}
+{% block title %}{{parent()}} - Ajouter un genre musical{% endblock %}
 
 {% block content %}
-    <h1>Create new MusicalStyle</h1>
+	<main class="container">
 
-    {{ include('admin/musical_style/_form.html.twig') }}
+        <a href="{{ path('admin_musical_style_index') }}" class="btn btn-outline-dark px-3 mt-3">
+            <i class="bi bi-arrow-left-square"></i>
+            Retour
+        </a>
+        <h1 class="my-4">Ajouter un genre musical</h1>
+        {{ include('admin/musical_style/_form.html.twig', {'icon': '<i class=\"bi bi-plus-square\"></i>'}) }}
 
-    <a href="{{ path('admin_musical_style_index') }}">back to list</a>
+    </main>
+
 {% endblock %}

@@ -8,35 +8,93 @@ $logoHeight: 200px;
 .header-title {
     font-size: clamp(0.5rem, 7vh, 4.5rem);
 }
-.header-picture {
-    background-image: url("../images/header-aoyos.jpeg");
-    background-size: cover;
-    background-position: center;
+
+.header-pictures {
+    content: "";
+    z-index: -1;
+    position: relative;
+    height: $headerHeight;
+    max-width: 80%;
+    width: $headerWidth;
+}
+
+.img-header1 {
+    background-image: url("../images/header1.jpeg");
     height: $headerHeight;
     width: $headerWidth;
+}
+
+.img-header2 {
+    background-image: url("../images/header2.jpeg");
+    height: $headerHeight;
+    width: $headerWidth;
+}
+
+.img-header3 {
+    background-image: url("../images/header3.jpeg");
+    height: $headerHeight;
+    width: $headerWidth;
+}
+
+.slider {
+    height: $headerHeight;
+    width: $headerWidth;
+    overflow: hidden;
+}
+
+.slider-content {
+    height: $headerHeight;
+    width: calc($headerWidth*3);
     position: relative;
+    animation: slider linear 7s infinite alternate;
+}
+
+@keyframes slider {
+  0% {
+    left: 0px;
+  }
+  30% {
+    left: 0px;
+  }
+  33% {
+    left: -#{$headerWidth};
+  }
+  63% {
+    left: -#{$headerWidth};
+  }
+  66% {
+    left: calc(-#{$headerWidth} * 2);
+  }
+  100% {
+    left: calc(-#{$headerWidth} * 2);
+  }
+}
+
+.typetext {
+    position: relative;
+    top: -260px;
 }
 
 .header-sub {
     font-size: clamp(0.5rem, 6vh, 4rem);
+    height: 60px;
 }
   
-.header-picture,
-.header-picture::before,
-.header-picture::after {
+.header-pictures::before,
+.header-pictures::after {
     box-shadow: 1px 1px 1px $shadowColor;
-    border: 1px solid $dark;
+    border: 1px solid $shadowColor;
 }
   
-.header-picture::before,
-.header-picture::after {
+.header-pictures::before,
+.header-pictures::after {
     content: "";
     position: absolute;
     height: 105%;
     width: 100%;
 }
   
-.header-picture::before {
+.header-pictures::before {
     top: -10px;
     bottom: 10px;
     transform: rotate(-3deg);
@@ -44,7 +102,7 @@ $logoHeight: 200px;
     background-color: $secondary;
 }
   
-.header-picture::after {
+.header-pictures::after {
     top: -5px;
     bottom: -5px;
     transform: rotate(2deg);
@@ -162,6 +220,7 @@ $logoHeight: 200px;
     right:13%;
     filter: drop-shadow(0 0 0.1rem $blueLogo);
 }
+
 .services::before {
     content: '';
     display: block;

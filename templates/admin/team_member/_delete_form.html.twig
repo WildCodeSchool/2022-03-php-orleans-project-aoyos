@@ -1,5 +1,5 @@
 <form method="post" action="{{ path('admin_team_member_delete', {'id': team_member.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce membre ?');">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ team_member.id) }}">
-    <button class="btn btn-outline-danger btn-sm text-nowrap pb-0 px-2">
+    <button class="btn btn-outline-danger btn-sm text-nowrap px-2 my-2">
     <i class="bi bi-x-circle me-2"></i>Supprimer</button>
 </form>
