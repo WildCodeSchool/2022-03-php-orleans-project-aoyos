@@ -6,7 +6,7 @@ $productionTitleOffset: -50px;
 $logoHeight: 200px;
 
 .header-title {
-    font-size: clamp(0.5rem, 10vh, 4rem);
+    font-size: clamp(0.5rem, 7vh, 4.5rem);
 }
 .header-picture {
     background-image: url("../images/header-aoyos.jpeg");
@@ -18,7 +18,7 @@ $logoHeight: 200px;
 }
 
 .header-sub {
-    font-size: clamp(0.5rem, 10vh, 4rem);
+    font-size: clamp(0.5rem, 6vh, 4rem);
 }
   
 .header-picture,
