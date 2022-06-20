@@ -42,6 +42,7 @@ Encore
     .addEntry('dj', './assets/styles/dj.scss')
     .addEntry('login', './assets/styles/login.scss')
     .addEntry('contact', './assets/styles/contact.scss')
+    .addEntry('article', './assets/styles/article.scss')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')
