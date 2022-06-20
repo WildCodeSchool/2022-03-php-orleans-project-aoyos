@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ parent()}}
+	- Services
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('article') }}
+{% endblock %}
+
+{% block body %}
+	<main class="services my-5">
+		<div class=" d-flex flex-column align-items-center">
+			<h1 class="py-4 mt-0 mb-4 position-relative">
+				<img src="{{ asset('build/images/title_underline_orange.png') }}" class="title-underline" alt="">Nos services</h1>
+		</div>
+
+		<div class="container my-5 d-flex flex-column gap-3">
+			{% for article in articles %}
+				{% if loop.index is divisible by (2) %}
+					<div class="card col-lg-9 mb-3">
+						<div class="row g-0">
+							<div class="col-md-5">
+								<img src="{{ asset('uploads/images/article/' ~ article.image) }}" class="img-services-card w-100 rounded-start" alt="{{ article.title }}">
+							</div>
+							<div class="col-md-7 px-4">
+								<div class="card-body h-100 d-flex flex-column justify-content-between">
+									<h2 class="card-title my-5">{{ article.title }}</h2>
+									<p class="card-text">{{ article.description }}</p>
+									<p class="card-text">
+										<small class="text-muted">Publié le
+											{{ article.createdAt | date('d-m-Y') }}</small>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				{% else %}
+					<div class="card col-lg-9 mb-3 align-self-end">
+						<div class="row g-0">
+							<div class="col-md-7 px-4">
+								<div class="card-body h-100 d-flex flex-column justify-content-between">
+									<h2 class="card-title my-5">{{ article.title }}</h2>
+									<p class="card-text">{{ article.description }}</p>
+									<p class="card-text">
+										<small class="text-muted">Publié le
+											{{ article.createdAt | date('d-m-Y') }}</small>
+									</p>
+								</div>
+							</div>
+							<div class="col-md-5">
+								<img src="{{ asset('uploads/images/article/' ~ article.image) }}" class="img-services-card w-100 rounded-end" alt="{{ article.title }}">
+							</div>
+						</div>
+					</div>
+				{% endif %}
+			{% endfor %}
+
+		</div>
+	</main>
+{% endblock %}
