@@ -1,0 +1,25 @@
+{% extends 'registered_dj/registered_dj_base.html.twig' %}
+
+{% block title %}
+	{{ parent() }}
+	- Espace DJ
+{% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+{% endblock %}
+
+{% block content %}
+	<main>
+    <div class="container">
+		{% if is_granted('ROLE_USER') %}
+			<div>
+				<h1 class="mt-5 ms-5">Votre candidature est en attente de confirmation.</h1>
+			</div>
+		{% endif %}
+	</main>
+{% endblock %}

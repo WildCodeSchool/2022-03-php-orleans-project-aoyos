@@ -14,7 +14,7 @@ class RedirectionController extends AbstractController
         if (in_array('ROLE_ADMIN', $this->getUser()->getRoles(), true)) {
             return $this->redirectToRoute('adminindex', [], Response::HTTP_SEE_OTHER);
         } elseif (in_array('ROLE_USER', $this->getUser()->getRoles(), true)) {
-            return $this->redirectToRoute('app_dj', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('registered_dj_index', [], Response::HTTP_SEE_OTHER);
         } else {
             return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
         }
