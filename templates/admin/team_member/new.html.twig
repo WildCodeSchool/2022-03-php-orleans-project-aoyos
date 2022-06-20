@@ -4,11 +4,11 @@
 
 {% block content %}
 <main class="container">
-	<a href="{{ path('admin_team_index') }}" class="btn btn-outline-dark mt-3">
+	<a href="{{ path('admin_team_index') }}" class="btn btn-outline-dark px-3 mt-3">
 		<i class="bi bi-arrow-left-square"></i>
 		Retour
 	</a>
-    <h1 class="my-5">Ajouter un membre de l'équipe</h1>
+    <h1 class="my-4">Ajouter un membre à l'équipe</h1>
 
     {{ include('admin/team_member/_form.html.twig', {'icon': '<i class=\"bi bi-plus-square\"></i>'}) }}
 </main>

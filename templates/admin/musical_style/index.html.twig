@@ -8,7 +8,7 @@
 	<div class="container">
 		<h1 class="my-5">Genres musicaux</h1>
 		<div class="w-100 d-flex justify-content-end">
-			<a class="btn btn-outline-dark pb-0 px-3 me-2" href="{{ path('admin_musical_style_new') }}">
+			<a class="btn btn-outline-dark px-3 me-2" href="{{ path('admin_musical_style_new') }}">
 				<i class="bi bi-plus-square"></i>
 				Ajouter
 			</a>
@@ -26,7 +26,7 @@
 						<tr>
 							<td class="align-middle w-100">{{ musical_style.name }}</td>
 							<td class="align-middle">
-								<a class="btn btn-outline-dark btn-sm text-nowrap pb-0 px-3 mb-1" href="{{ path('admin_musical_style_edit', {'id': musical_style.id}) }}">
+								<a class="btn btn-outline-dark btn-sm text-nowrap px-3" href="{{ path('admin_musical_style_edit', {'id': musical_style.id}) }}">
 									<i class="bi bi-pen"></i>
 									Éditer
 								</a>								 
