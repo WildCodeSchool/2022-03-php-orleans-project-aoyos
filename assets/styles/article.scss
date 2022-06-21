@@ -1,7 +1,58 @@
 @import "variables.scss";
 
+.header {
+    height: 30vh;
+    &::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("../images/header-aoyos.jpeg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        z-index: -1;
+    }
+    & h1 {
+        font-size: clamp(0.5rem, 10vh, 4rem);
+    }
+}
+
 .img-services-card {
     object-fit: cover;
     object-position: center;
     height: 100%;
+}
+
+.card {
+    background-color: transparent;
+}
+
+.card-right::before {
+    content: "";
+    position: absolute;
+    width: 400px;
+    height: 200px;
+    top: -50px;
+    left: -150px;
+    background: url('../images/splash-paint.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: -1;
+    opacity: 0.3;
+}
+
+.card-left::before {
+    content: "";
+    position: absolute;
+    width: 350px;
+    height: 200px;
+    top: - 50px;
+    right: -150px;
+    background: url('../images/splash-paint.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: -1;
+    opacity: 0.3;
+    transform: rotate(320deg);
 }
