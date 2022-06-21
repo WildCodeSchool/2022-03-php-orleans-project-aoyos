@@ -12,13 +12,15 @@
 				Nouvelles réservations</h1>
 			<div class="row me-2 ms-2 mb-4 d-flex flex-row">
 				{% for reservation in reservations %}
-					<div class="col-md-3 mx-auto my-2">
+					<div class="col-md-5 col-lg-3 mx-auto my-4">
+						<h5 class="px-2 py-2 card-title border border-dark bg-light text-dark w-fit mx-auto">{{ reservation.company }}</h5>
 						<div class="card h-100 shadow border border-dark">
 							<div class="card-body">
-								<h5 class="card-title border border-dark bg-dark text-light text-center w-fit mx-auto px-2 py-2 mb-3">{{reservation.company}}</h5>
-								<h6 class="card-subtitle mb-2 text-muted px-2 py-2">{{ reservation.firstName }}
-									{{ reservation.lastName }}</h6>
-								<p class="card-text px-2 py-2">{{ reservation.email }}</p>
+								<p class="card-text text-muted px-2"> Nom du client : {{ reservation.firstName }}
+									{{ reservation.lastName }}</p>
+								<p class="card-text px-2"> Formule : {{ reservation.formula }}</p>
+								<p class="card-text px-2"> Date : {{ reservation.dateStart|date("m/d/Y") }}</p>
+								<p class="card-text px-2 pb-3"> Location : {{ reservation.address }}</p>
 							</div>
 							<a href="#" class="btn btn-outline-dark mx-2 mb-2">Voir</a>
 						</div>
@@ -31,12 +33,12 @@
 				Nouveaux Djs</h1>
 			<div class="row me-2 ms-2">
 				{% for artist in artists %}
-					<div class="col-md-3 mx-auto my-2">
+					<div class="col-md-5 col-lg-3 mx-auto my-4">
+							<h5 class="px-2 py-2 card-title border border-dark bg-light text-dark w-fit mx-auto">{{artist.firstname}}
+								{{artist.lastname}}</h5>
 						<div class="card h-100 shadow border border-dark">
 							<div class="card-body">
-								<h5 class="px-2 py-2 card-title border border-dark bg-dark text-light w-fit mx-auto mb-3">{{artist.firstname}}
-									{{artist.lastname}}</h5>
-								<h6 class="card-subtitle mb-2 text-muted px-2 py-2">
+								<h6 class="card-text mb-2 text-muted px-2 py-2">
 									{{ artist.birthdate | date("d/m/Y") }}</h6>
 								<p class="px-2 py-2">Adresse :
 									{{ artist.address }}</p>

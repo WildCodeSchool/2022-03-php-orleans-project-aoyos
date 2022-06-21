@@ -47,6 +47,12 @@ $adminCardsHeight: 300px;
     height:$adminTableImageSize;
 }
 
-.admin .card {
-    $height: $adminCardsHeight;
+.card {
+    min-height: $adminCardsHeight;
+}
+
+.card-title {
+    position: relative;
+    top: 15px;
+    z-index:1;
 }
