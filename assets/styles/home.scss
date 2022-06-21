@@ -157,7 +157,7 @@ $logoHeight: 200px;
 }
 
 .partner-image {
-    filter: opacity(0.5);
+    filter: opacity(0.5) grayscale(100%);
     object-fit: contain;
     height: $logoHeight;
     transition: filter 0.5s ease-in-out;
