@@ -6,9 +6,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[Route('/redirection', name: 'redirect_')]
 class RedirectionController extends AbstractController
 {
-    #[Route('/redirection', name: 'redirect')]
+    #[Route('/', name: 'index')]
     public function index(): response
     {
         if (in_array('ROLE_ADMIN', $this->getUser()->getRoles(), true)) {
