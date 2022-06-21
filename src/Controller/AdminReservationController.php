@@ -62,14 +62,6 @@ class AdminReservationController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'show', methods: ['GET'])]
-    public function show(Reservation $reservation): Response
-    {
-        return $this->render('admin/reservation/show.html.twig', [
-            'reservation' => $reservation,
-        ]);
-    }
-
     #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
     public function edit(
         Request $request,
