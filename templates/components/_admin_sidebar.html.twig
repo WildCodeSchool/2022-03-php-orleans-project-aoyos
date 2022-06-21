@@ -1,6 +1,8 @@
 {% set route_admin = {
 	'user': [],
-	'reservation': [],
+	'reservation': [
+		'admin_reservation_index'
+	],
 	'home': [
 		'admin_team_index',
 		'admin_team_member_new',
@@ -55,10 +57,10 @@
 			<div id="flush-collapseTwo" class="accordion-collapse collapse {% if route_name in route_admin.reservation %}show{% endif %}" aria-labelledby="flush-headingTwo">
 				<div class="accordion-body">
 					<ul>
-						<li><a class="text-decoration-none" href="#">Demandées</a></li>
-						<li><a class="text-decoration-none" href="#">Acceptées</a></li>
+						<li><a class="text-decoration-none" href="{{ path('admin_reservation_index', {'status': 'asked'}) }}">Demandées</a></li>
+						<li><a class="text-decoration-none" href="{{ path('admin_reservation_index', {'status': 'accepted'}) }}">Acceptées</a></li>
+						<li><a class="text-decoration-none" href="{{ path('admin_reservation_index', {'status': 'rejected'}) }}">Refusées</a></li>
 						<li><a class="text-decoration-none" href="#">Validées</a></li>
-						<li><a class="text-decoration-none" href="#">Passées</a></li>
 					</ul>
 				</div>
 			</div>

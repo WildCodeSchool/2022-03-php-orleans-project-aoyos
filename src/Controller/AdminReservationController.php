@@ -13,11 +13,33 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/admin/reservation', name: 'admin_reservation_')]
 class AdminReservationController extends AbstractController
 {
-    #[Route('/', name: 'index', methods: ['GET'])]
-    public function index(ReservationRepository $reservationRepo): Response
+    #[Route('/{status}', name: 'index', methods: ['GET'])]
+    public function index(ReservationRepository $reservationRepo, string $status): Response
     {
-        return $this->render('admin_reservation/index.html.twig', [
-            'reservations' => $reservationRepo->findAll(),
+        switch ($status) {
+            case 'asked':
+                $filter = null;
+                $section = 'demandées';
+                break;
+            case 'accepted':
+                $filter = true;
+                $section = 'acceptées';
+                break;
+            case 'rejected':
+                $filter = false;
+                $section = 'refusées';
+                break;
+            default:
+                $filter = null;
+                $section = 'demandées';
+        }
+
+        return $this->render('admin/reservation/index.html.twig', [
+            'reservations' => $reservationRepo->findBy(
+                ['status' => $filter],
+                ['dateStart' => 'desc']
+            ),
+            'section' => $section,
         ]);
     }
 
@@ -31,10 +53,10 @@ class AdminReservationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $reservationRepo->add($reservation, true);
 
-            return $this->redirectToRoute('app_admin_reservation_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('admin_reservation_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('admin_reservation/new.html.twig', [
+        return $this->renderForm('admin/reservation/new.html.twig', [
             'reservation' => $reservation,
             'form' => $form,
         ]);
@@ -43,7 +65,7 @@ class AdminReservationController extends AbstractController
     #[Route('/{id}', name: 'show', methods: ['GET'])]
     public function show(Reservation $reservation): Response
     {
-        return $this->render('admin_reservation/show.html.twig', [
+        return $this->render('admin/reservation/show.html.twig', [
             'reservation' => $reservation,
         ]);
     }
@@ -60,10 +82,10 @@ class AdminReservationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $reservationRepo->add($reservation, true);
 
-            return $this->redirectToRoute('app_admin_reservation_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('admin_reservation_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('admin_reservation/edit.html.twig', [
+        return $this->renderForm('admin/reservation/edit.html.twig', [
             'reservation' => $reservation,
             'form' => $form,
         ]);
@@ -79,6 +101,6 @@ class AdminReservationController extends AbstractController
             $reservationRepo->remove($reservation, true);
         }
 
-        return $this->redirectToRoute('app_admin_reservation_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('admin_reservation_index', [], Response::HTTP_SEE_OTHER);
     }
 }

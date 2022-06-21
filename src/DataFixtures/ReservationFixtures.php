@@ -15,6 +15,12 @@ class ReservationFixtures extends Fixture
         'Sur mesure',
     ];
 
+    public const STATUS = [
+        null,
+        true,
+        false,
+    ];
+
     public const NUMBER_RESERVATIONS = 10;
 
     public function load(ObjectManager $manager): void
@@ -22,6 +28,7 @@ class ReservationFixtures extends Fixture
         $faker = Factory::create();
 
         $totalFormulas = count(self::FORMULAS) - 1;
+        $totalStatus = count(self::STATUS) - 1;
 
         for ($i = 0; $i < self::NUMBER_RESERVATIONS; $i++) {
             $reservation = new Reservation();
@@ -37,6 +44,7 @@ class ReservationFixtures extends Fixture
             $reservation->setDateEnd($faker->dateTimeInInterval('+1 week', '+2 days'));
             $reservation->setAttendees($faker->randomNumber(3, true));
             $reservation->setComment($faker->paragraph());
+            $reservation->setStatus(self::STATUS[rand(0, $totalStatus)]);
 
             $manager->persist($reservation);
         }
