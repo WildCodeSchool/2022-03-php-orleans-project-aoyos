@@ -99,6 +99,9 @@ class Reservation
     #[ORM\Column(type: 'text', nullable: true)]
     private ?string $comment;
 
+    #[ORM\Column(type: 'boolean', nullable: true)]
+    private ?bool $status;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -244,6 +247,18 @@ class Reservation
     public function setComment(?string $comment): self
     {
         $this->comment = $comment;
+
+        return $this;
+    }
+
+    public function isStatus(): ?bool
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?bool $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }
