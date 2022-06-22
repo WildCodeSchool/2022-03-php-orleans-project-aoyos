@@ -1,0 +1,43 @@
+@import "variables.scss";
+
+.img-services-card {
+    object-fit: cover;
+    object-position: center;
+    height: 100%;
+}
+
+.card {
+    background-color: transparent;
+    &:nth-child(odd) {
+        align-self: end;
+        &::before {
+            content: "";
+            position: absolute;
+            width: 600px;
+            height: 300px;
+            top: -150px;
+            left: -50%;
+            background: url('../images/splash-paint.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            z-index: -1;
+            opacity: 0.2;
+        }
+    }
+    &:nth-child(even) {
+        &::before {
+            content: "";
+            position: absolute;
+            width: 600px;
+            height: 300px;
+            top: -50px;
+            right: -50%;
+            background: url('../images/splash-paint.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            z-index: -1;
+            opacity: 0.2;
+            transform: rotate(340deg);
+            }
+    }
+}

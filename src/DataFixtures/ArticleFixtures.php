@@ -18,7 +18,7 @@ class ArticleFixtures extends Fixture
             $article->setCreatedAt($faker->dateTimeBetween('-200 week'));
             $article->setDescription($faker->paragraph(3));
             $imageName = 'article' . $i . '.webp';
-            copy('https://loremflickr.com/240/320/', 'public/uploads/images/article/' . $imageName);
+            copy('https://picsum.photos/200/300?random=' . $i, 'public/uploads/images/article/' . $imageName);
             $article->setImage($imageName);
             $article->setAuthor($faker->name());
 
