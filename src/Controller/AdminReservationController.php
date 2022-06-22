@@ -18,7 +18,6 @@ class AdminReservationController extends AbstractController
     public function index(ReservationRepository $reservationRepo): Response
     {
         //Hack to retrieve enum values and use then in twig template
-        //test if validation pass
         $statusCases = ReservationStatus::cases();
         $statusColors = [];
         $statusValue = [];
