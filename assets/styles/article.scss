@@ -8,33 +8,36 @@
 
 .card {
     background-color: transparent;
-}
-
-.card-right::before {
-    content: "";
-    position: absolute;
-    width: 400px;
-    height: 200px;
-    top: -50px;
-    left: -150px;
-    background: url('../images/splash-paint.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    z-index: -1;
-    opacity: 0.3;
-}
-
-.card-left::before {
-    content: "";
-    position: absolute;
-    width: 350px;
-    height: 200px;
-    top: - 50px;
-    right: -150px;
-    background: url('../images/splash-paint.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    z-index: -1;
-    opacity: 0.3;
-    transform: rotate(320deg);
+    &:nth-child(odd) {
+        align-self: end;
+        &::before {
+            content: "";
+            position: absolute;
+            width: 600px;
+            height: 300px;
+            top: -150px;
+            left: -50%;
+            background: url('../images/splash-paint.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            z-index: -1;
+            opacity: 0.2;
+        }
+    }
+    &:nth-child(even) {
+        &::before {
+            content: "";
+            position: absolute;
+            width: 600px;
+            height: 300px;
+            top: -50px;
+            right: -50%;
+            background: url('../images/splash-paint.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            z-index: -1;
+            opacity: 0.2;
+            transform: rotate(340deg);
+            }
+    }
 }
