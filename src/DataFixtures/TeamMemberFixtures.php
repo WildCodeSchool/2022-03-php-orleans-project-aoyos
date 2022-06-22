@@ -21,6 +21,9 @@ class TeamMemberFixtures extends Fixture
             $teamMember->setName($faker->name());
             $teamMember->setPosition($faker->words(2, true));
             $teamMember->setDescription($faker->sentences(2, true));
+            $imageName = 'member' . $i . '.webp';
+            copy('https://picsum.photos/200/300?random=' . $i, 'public/uploads/images/team/' . $imageName);
+            $teamMember->setPicture($imageName);
 
             $manager->persist($teamMember);
         }

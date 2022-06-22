@@ -30,17 +30,22 @@ class Production
     #[Assert\NotBlank]
     private string $description;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     #[Assert\Length(
         max: 255
     )]
-    private ?string $imageProduction;
+    private ?string $imageProduction = '';
 
     #[Vich\UploadableField(mapping: 'production_images', fileNameProperty: 'imageProduction')]
     private ?File $imageFile = null;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
     private ?DateTimeInterface $updatedAt = null;
+
+    public function __construct()
+    {
+        $this->updatedAt = new DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {
@@ -76,7 +81,7 @@ class Production
         return $this->imageProduction;
     }
 
-    public function setImageProduction(string $image): self
+    public function setImageProduction(?string $image): self
     {
         $this->imageProduction = $image;
 

@@ -11,6 +11,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PartnerRepository::class)]
+#[Vich\Uploadable]
 class Partner
 {
     #[ORM\Id]
@@ -29,7 +30,7 @@ class Partner
     #[Assert\Length(
         max: 255
     )]
-    private ?string $logo;
+    private ?string $logo = '';
 
     #[Vich\UploadableField(mapping: 'partner_images', fileNameProperty: 'logo')]
     #[Assert\File(
@@ -68,7 +69,7 @@ class Partner
         return $this->logo;
     }
 
-    public function setLogo(string $logo): self
+    public function setLogo(?string $logo): self
     {
         $this->logo = $logo;
 
