@@ -1,8 +1,4 @@
 <?php
-/**
- *
- * @SuppressWarnings(PHPMD)
- */
 // phpcs:ignoreFile
 namespace App\Config;
 
