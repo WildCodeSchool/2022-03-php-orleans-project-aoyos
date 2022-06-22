@@ -2,7 +2,7 @@
 
 $topBarHeight: 60px;
 $sideBarWidth: 300px;
-$adminCardsHeight: 300px;
+$adminCardsHeight: 25rem;
 
 .sideBar {
     width: $sideBarWidth;
@@ -47,11 +47,16 @@ $adminCardsHeight: 300px;
     height:$adminTableImageSize;
 }
 
-.card {
-    min-height: $adminCardsHeight;
+.reservations .card {
+    height: $adminCardsHeight;
 }
 
-.card-title {
+.djs .card {
+    height: $adminCardsHeight;
+}
+
+.admin-title-card {
+    height: 80px;
     position: relative;
     top: 15px;
     z-index:1;
