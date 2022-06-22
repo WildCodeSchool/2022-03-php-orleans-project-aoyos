@@ -82,10 +82,18 @@ class Reservation
 
     #[ORM\Column(type: 'datetime')]
     #[Assert\NotBlank(groups: ['eventInfos'])]
+    #[Assert\LessThan(
+        propertyPath: 'dateEnd',
+        groups: ['eventInfos']
+    )]
     private DateTimeInterface $dateStart;
 
     #[ORM\Column(type: 'datetime')]
     #[Assert\NotBlank(groups: ['eventInfos'])]
+    #[Assert\GreaterThan(
+        propertyPath: 'dateStart',
+        groups: ['eventInfos']
+    )]
     private DateTimeInterface $dateEnd;
 
     #[ORM\Column(type: 'integer')]
