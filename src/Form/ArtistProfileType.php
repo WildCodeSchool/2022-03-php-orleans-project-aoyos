@@ -43,6 +43,7 @@ class ArtistProfileType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Artist::class,
             'validation_groups' => ['djProfile'],
+            'inherit_data' => true,
         ]);
     }
 }
