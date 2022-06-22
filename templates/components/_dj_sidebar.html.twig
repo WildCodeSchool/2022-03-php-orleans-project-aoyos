@@ -1,0 +1,40 @@
+{% set route_dj = {
+	'reservation': [],
+} %}
+<nav class="offcanvas offcanvas-start sideBar d-flex flex-column justify-content-start align-items-start justify-self-start" tabindex="-1" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling">
+	<div class="w-100 d-flex mt-3 flex-column">
+		<a class="dj-nav-link pt-4 pb-3 my-2 text-decoration-none fs-6 d-flex collapsed align-items-end gap-2" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+			<i class="bi bi-house"></i>
+			Accueil
+		</a>
+		<a class="dj-nav-link pb-2 mt-2 text-decoration-none fs-6 d-flex collapsed align-items-end gap-2" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+			<i class="bi bi-broadcast"></i>
+			Offres
+		</a>
+		<div class="accordion accordion-flush" id="accordionFlushExample">
+			<div class="accordion-item collapse show my-2">
+				<h2 class="accordion-header" id="flush-headingTwo">
+					<button class="accordion-button d-flex collapsed align-items-end gap-2" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+						<i class="bi bi-collection"></i>
+						Évènements
+					</button>
+				</h2>
+				<div id="flush-collapseTwo" class="accordion-collapse collapse {% if route_name in route_dj.reservation %}show{% endif %}" aria-labelledby="flush-headingTwo">
+					<div class="accordion-body">
+						<ul>
+							<li><a class="text-decoration-none" href="#">Passés</a></li>
+							<li><a class="text-decoration-none" href="#">À venir</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<a class="dj-nav-link pb-2 mt-2 text-decoration-none fs-6 d-flex collapsed align-items-end gap-2" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+			<i class="bi bi-broadcast"></i>
+			Mon compte
+		</a>
+	</div>
+	<div class="d-flex flex-grow-1 flex-column mx-auto align-items-center justify-content-end mb-3 ">
+		<a class="text-decoration-none fs-6 mt-2 mb-5" href="/logout">Déconnexion</a>
+	</div>
+</nav>

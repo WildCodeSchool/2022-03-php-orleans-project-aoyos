@@ -6,6 +6,7 @@
 {% block stylesheets %}
 	{{ parent() }}
 	{{ encore_entry_link_tags('admin') }}
+	{{ encore_entry_link_tags('djDashboard') }}
 {% endblock %}
 
 {% block javascripts %}
@@ -14,12 +15,12 @@
 {% endblock %}
 
 {% block navbar %}
-	{% include 'components/_admin_topBar.html.twig' %}
+	{% include 'components/_dj_topbar.html.twig' %}
 {% endblock %}
 
 {% block body %}
 	<div class="d-flex">
-		{% include 'components/_admin_sidebar.html.twig' %}
+		{% include 'components/_dj_sidebar.html.twig' %}
 		{% block content %}
 		{% endblock %}
 	</div>
