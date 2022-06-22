@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Config\ReservationStatus;
 use App\Repository\ReservationRepository;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
@@ -99,8 +100,8 @@ class Reservation
     #[ORM\Column(type: 'text', nullable: true)]
     private ?string $comment;
 
-    #[ORM\Column(type: 'boolean', nullable: true)]
-    private ?bool $status;
+    #[ORM\Column(type: 'string', length: 255)]
+    private string $status;
 
     public function getId(): ?int
     {
@@ -251,12 +252,12 @@ class Reservation
         return $this;
     }
 
-    public function isStatus(): ?bool
+    public function getStatus(): string
     {
         return $this->status;
     }
 
-    public function setStatus(?bool $status): self
+    public function setStatus(?string $status): self
     {
         $this->status = $status;
 

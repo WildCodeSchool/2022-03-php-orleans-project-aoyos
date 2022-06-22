@@ -43,7 +43,7 @@ jobs:
         run: |
           ./vendor/bin/phpcs
           ./vendor/bin/phpstan analyse src --level 6
-          ./vendor/bin/phpmd src text phpmd.xml
+          ./vendor/bin/phpmd src text phpmd.xml --exclude src/Config/*
           ./node_modules/.bin/eslint assets
 
       - name: phpunit
