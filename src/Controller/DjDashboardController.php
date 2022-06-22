@@ -8,12 +8,12 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/espace-dj', name: 'registered_dj_')]
-class RegisteredDjController extends AbstractController
+#[Route('/espace-dj', name: 'dashboard_dj_')]
+class DjDashboardController extends AbstractController
 {
     #[Route('/', name: 'index')]
     public function index(): Response
     {
-        return $this->render('registered_dj/index.html.twig');
+        return $this->render('dj_dashboard/index.html.twig');
     }
 }

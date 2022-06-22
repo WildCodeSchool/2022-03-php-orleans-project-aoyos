@@ -22,7 +22,7 @@ security:
                 login_path: login
                 check_path: login
                 enable_csrf: true
-                default_target_path: /redirection
+                default_target_path: redirect
             logout:
                 path: app_logout
 
