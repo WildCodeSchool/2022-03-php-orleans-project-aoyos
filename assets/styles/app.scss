@@ -52,11 +52,13 @@ body {
 }
 
 .btn-client {
+    min-width: $minWidthNavButton;
     color: darken($secondary, 30%);
     border: 1px solid darken($secondary, 20%);
 }
 
 .btn-dj {
+    min-width: $minWidthNavButton;
     color: darken($primary, 30%);
     border: 1px solid darken($primary, 20%);
 }
@@ -79,6 +81,9 @@ body {
 
 .footerContactInfo {
     border-right: 0.5px solid $light;
+}
+.btn-contact {
+    box-shadow:  0 .5rem 1rem rgba($light, .15);
 }
 
 .w-fit {

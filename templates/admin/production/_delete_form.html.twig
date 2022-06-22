@@ -1,7 +1,7 @@
 <form method="post" action="{{ path('app_admin_production_delete', {'id': production.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette réalisation ?');">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ production.id) }}">
-    <button class="btn btn-outline-danger pb-0 px-3 btn-sm text-nowrap">
-        <i class="bi bi-trash3"></i>
+    <button class="btn btn-outline-danger px-3 my-2 btn-sm text-nowrap">
+        <i class="bi bi-x-circle me-2"></i>
         Supprimer
     </button>
 </form>
