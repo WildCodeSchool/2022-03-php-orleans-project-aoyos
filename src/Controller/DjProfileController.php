@@ -28,7 +28,7 @@ class DjProfileController extends AbstractController
         if (
             ($formBase->isSubmitted() && $formBase->isValid())
             && ($formComplement->isSubmitted() && $formComplement->isValid())
-            ) {
+        ) {
             $artistRepository->add($artist, true);
 
             return $this->redirectToRoute('dashboard_dj_profile', [], Response::HTTP_SEE_OTHER);
