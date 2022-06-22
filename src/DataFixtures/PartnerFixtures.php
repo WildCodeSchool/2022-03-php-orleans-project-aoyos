@@ -25,7 +25,9 @@ class PartnerFixtures extends Fixture
         for ($i = 0; $i < $numberPartners; $i++) {
             $partner = new Partner();
             $partner->setName($faker->name());
-            $partner->setImage(self::PARTNERSIMG[$i]);
+            $imageName = 'partner' . $i . '.png';
+            copy(self::PARTNERSIMG[$i], 'public/uploads/images/partner/' . $imageName);
+            $partner->setLogo($imageName);
             $manager->persist($partner);
         }
         $manager->flush();
