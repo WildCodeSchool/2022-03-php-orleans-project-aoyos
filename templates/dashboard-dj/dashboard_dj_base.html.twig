@@ -15,6 +15,15 @@
 {% endblock %}
 
 {% block body %}
+		{% block message %}
+			{% for category, messages in app.flashes %}
+				{% for message in messages %}
+					<div class=" text-center alert alert-{{ category }}">
+						{{ message }}
+					</div>
+				{% endfor %}
+			{% endfor %}
+		{% endblock %}
 		{% block content %}
 		{% endblock %}
 	</div>
