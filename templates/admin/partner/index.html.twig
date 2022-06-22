@@ -14,7 +14,6 @@
         <thead>
             <tr>
                 <th>Image</th>
-                <th>Nom</th>
                 <th></th>
                 <th></th>
             </tr>
@@ -22,8 +21,7 @@
         <tbody>
         {% for partner in partners %}
             <tr>           
-                <td class="align-middle w-25"><img src="{{ partner.image }}" class="admin-table-image" alt="{{ partner.name }}"></td>
-                <td class="align-middle w-100">{{ partner.name }}</td>
+                <td class="align-middle w-100"><img src="{{ partner.image }}" class="admin-table-image" alt="{{ partner.name }}"></td>
                 <td class="align-middle text-end">
                     <a class="btn btn-outline-dark btn-sm text-nowrap px-3 my-2" href="{{ path('app_admin_partner_edit', {'id': partner.id}) }}">
                     <i class="bi bi-pen"></i>

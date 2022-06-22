@@ -17,7 +17,7 @@ class AdminTeamMemberController extends AbstractController
     public function index(TeamMemberRepository $teamMemberRepository): Response
     {
         return $this->render('admin/team_member/index.html.twig', [
-            'team_members' => $teamMemberRepository->findAll(),
+            'team_members' => $teamMemberRepository->findBy([], ['name' => 'ASC']),
         ]);
     }
 
