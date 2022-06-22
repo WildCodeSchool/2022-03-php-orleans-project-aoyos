@@ -19,6 +19,8 @@
 			<thead>
 				<tr>
 					<th>Titre</th>
+					<th>Créé le</th>
+					<th>Description</th>
 					<th>Auteur</th>
 					<th></th>
 					<th></th>
@@ -27,8 +29,10 @@
 			<tbody>
 				{% for article in articles %}
 					<tr>
-						<td class="align-middle w-25">{{ article.title |u.truncate(20,'...', false) }}</td>
-						<td class="align-middle w-100">{{ article.author }}</td>
+						<td class="align-middle">{{ article.title }}</td>
+						<td class="align-middle">{{ article.createdAt|date('d-m-Y') }}</td>
+						<td class="align-middle">{{ article.description |u.truncate(20, '...', false) }}</td>
+						<td class="align-middle">{{ article.author }}</td>
 						<td class="align-middle text-end">
 							<a class="btn btn-outline-dark btn-sm text-nowrap px-3 my-2" href="{{ path('admin_article_edit', {'id': article.id}) }}">
 								<i class="bi bi-pen"></i>
@@ -40,7 +44,7 @@
 					</tr>
 				{% else %}
 					<tr>
-						<td colspan="4">Aucun article trouvé</td>
+						<td colspan="6">Aucun article trouvé</td>
 					</tr>
 				{% endfor %}
 			</tbody>
