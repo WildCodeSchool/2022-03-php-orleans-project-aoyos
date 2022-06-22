@@ -1,0 +1,33 @@
+{% extends 'admin-dj/admin_dj_base.html.twig' %}
+
+{% block title %}
+	{{ parent() }}
+	- Profil
+{% endblock %}
+
+{% block content %}
+	<main class="container">
+		<h1 class="my-5">Profil</h1>
+
+		<h2>{{ artist.firstname }}
+			{{ artist.lastname }}
+			-
+			{{ artist.artistName }}</h2>
+		<h3>{{ artist.email }}</h3>
+
+		<div class="card p-5">
+			<p>Téléphone :
+				{{ artist.phone }}</p>
+			<p>Adresse :
+				{{ artist.address }}</p>
+			<p>Matériel :
+				{{ artist.equipment }}</p>
+			<p>Styles musicaux :</p>
+			<ul>
+				{% for musicalStyle in artist.musicalStyles %}
+					<li>{{ musicalStyle.name }}</li>
+				{% endfor %}
+			</ul>
+		</div>
+	</main>
+{% endblock %}

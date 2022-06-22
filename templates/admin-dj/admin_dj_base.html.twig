@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ parent() }} | Admin Dj
+{% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+{% endblock %}
+
+{% block navbar %}
+	{% include 'components/_admin_topBar.html.twig' %}
+{% endblock %}
+
+{% block body %}
+		{% block content %}
+		{% endblock %}
+	</div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
