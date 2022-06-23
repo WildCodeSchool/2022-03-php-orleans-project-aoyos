@@ -61,14 +61,15 @@ class DjController extends AbstractController
             } elseif ($session->get('step') === 2) {
                 $session->set('step', 3);
             } elseif ($session->get('step') === 3) {
+                $session->remove('step');
+                $session->remove('artist');
+                $artistRepository->add($artist, true);
                 $hashedPassword = $passwordHasher->hashPassword(
                     $user,
                     $form['plainPassword']->getData()
                 );
                 $user->setPassword($hashedPassword);
                 $userRepository->add($user, true);
-                $session->remove('artist');
-                $artistRepository->add($artist, true);
 
                 return $this->redirectToRoute('app_dj', [], Response::HTTP_SEE_OTHER);
             }
