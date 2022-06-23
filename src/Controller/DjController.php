@@ -10,6 +10,7 @@ use App\Form\ArtistRegistrationType;
 use App\Form\ArtistType;
 use App\Repository\ArtistRepository;
 use App\Repository\UserRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -32,16 +33,19 @@ class DjController extends AbstractController
         HttpFoundationRequest $request,
         ArtistRepository $artistRepository,
         RequestStack $stack,
+        ManagerRegistry $doctrine,
         UserRepository $userRepository,
         HasherUserPasswordHasherInterface $passwordHasher
     ): Response {
         $session = $stack->getSession();
         $artist = $session->get('artist') ?? new Artist();
+        $registryManager = $doctrine->getManager();
         $user = new User();
 
         if ($session->get('step') === 3) {
             $form = $this->createForm(ArtistRegistrationType::class, $user);
         } elseif ($session->get('step') === 2) {
+            $registryManager->persist($artist);
             $form = $this->createForm(ArtistProfileType::class, $artist);
         } else {
             $form = $this->createForm(ArtistType::class, $artist);
@@ -55,10 +59,10 @@ class DjController extends AbstractController
                 $session->set('artist', $artist);
                 $session->set('step', 2);
             } elseif ($session->get('step') === 2) {
-                $session->remove('artist');
                 $session->set('step', 3);
-                $artistRepository->add($artist, true);
             } elseif ($session->get('step') === 3) {
+                $session->remove('artist');
+                $artistRepository->add($artist, true);
                 $hashedPassword = $passwordHasher->hashPassword(
                     $user,
                     $form['plainPassword']->getData()
@@ -83,8 +87,8 @@ class DjController extends AbstractController
     public function return(RequestStack $requestStack): Response
     {
         $session = $requestStack->getSession();
-        if ($session->has('step')) {
-            $session->remove('step');
+        if ($session->get('step') > 1) {
+            $session->set('step', $session->get('step') - 1);
         }
         return $this->redirectToRoute('app_registration', [], Response::HTTP_SEE_OTHER);
     }
