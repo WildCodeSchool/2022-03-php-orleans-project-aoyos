@@ -2,11 +2,16 @@
 
 namespace App\Entity;
 
-use App\Repository\ProductionRepository;
+use DateTimeImmutable;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ProductionRepository;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ProductionRepository::class)]
+#[Vich\Uploadable]
 class Production
 {
     #[ORM\Id]
@@ -25,13 +30,26 @@ class Production
     #[Assert\NotBlank]
     private string $description;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\NotBlank]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     #[Assert\Length(
         max: 255
     )]
-    #[Assert\Url()]
-    private string $image;
+    private ?string $imageProduction = '';
+
+    #[Vich\UploadableField(mapping: 'production_images', fileNameProperty: 'imageProduction')]
+    #[Assert\File(
+        maxSize: '1M',
+        mimeTypes: ['image/jpeg', 'image/png', 'image/webp']
+    )]
+    private ?File $imageFile = null;
+
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private ?DateTimeInterface $updatedAt = null;
+
+    public function __construct()
+    {
+        $this->updatedAt = new DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {
@@ -62,15 +80,31 @@ class Production
         return $this;
     }
 
-    public function getImage(): ?string
+    public function getImageProduction(): ?string
     {
-        return $this->image;
+        return $this->imageProduction;
     }
 
-    public function setImage(string $image): self
+    public function setImageProduction(?string $image): self
     {
-        $this->image = $image;
+        $this->imageProduction = $image;
 
         return $this;
+    }
+
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new DateTimeImmutable();
+        }
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
     }
 }
