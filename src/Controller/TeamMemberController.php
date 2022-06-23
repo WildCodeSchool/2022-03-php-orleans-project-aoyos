@@ -13,7 +13,7 @@ class TeamMemberController extends AbstractController
     public function index(TeamMemberRepository $teamMemberRepository): Response
     {
         return $this->render('team/index.html.twig', [
-            'team_members' => $teamMemberRepository->findAll(),
+            'team_members' => $teamMemberRepository->findBy([], ['name' => 'ASC']),
         ]);
     }
 }
