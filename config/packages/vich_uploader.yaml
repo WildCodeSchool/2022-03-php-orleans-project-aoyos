@@ -6,6 +6,18 @@ vich_uploader:
             uri_prefix: /uploads/images/article
             upload_destination: '%kernel.project_dir%/public/uploads/images/article'
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+        team_member_images:
+            uri_prefix: /uploads/images/team
+            upload_destination: '%kernel.project_dir%/public/uploads/images/team'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+        production_images:
+            uri_prefix: /uploads/images/production
+            upload_destination: '%kernel.project_dir%/public/uploads/images/production'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+        partner_images:
+            uri_prefix: /uploads/images/partner
+            upload_destination: '%kernel.project_dir%/public/uploads/images/partner'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
 
     metadata:
         type: attribute

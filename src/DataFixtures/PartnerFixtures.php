@@ -9,7 +9,7 @@ use Faker\Factory;
 
 class PartnerFixtures extends Fixture
 {
-    public const PARTNERSIMG = [
+    public const PARTNERS_IMAGE = [
         'https://aoyos.fr/wp-content/uploads/2022/01/Sans-titre-1-1-300x300.png',
         'https://aoyos.fr/wp-content/uploads/2022/01/Sans-titre-1-2-300x300.png',
         'https://aoyos.fr/wp-content/uploads/2022/01/Sans-titre-1-3-300x300.png',
@@ -25,7 +25,9 @@ class PartnerFixtures extends Fixture
         for ($i = 0; $i < $numberPartners; $i++) {
             $partner = new Partner();
             $partner->setName($faker->name());
-            $partner->setImage(self::PARTNERSIMG[$i]);
+            $imageName = 'partner' . $i . '.png';
+            copy(self::PARTNERS_IMAGE[$i], 'public/uploads/images/partner/' . $imageName);
+            $partner->setLogo($imageName);
             $manager->persist($partner);
         }
         $manager->flush();
