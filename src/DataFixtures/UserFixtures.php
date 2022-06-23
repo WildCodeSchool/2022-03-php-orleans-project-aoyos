@@ -33,7 +33,6 @@ class UserFixtures extends Fixture
         $djUnvalidated->setEmail('dj@exemple.com');
         $djUnvalidated->setUsername('dj1');
         $djUnvalidated->setRoles(['ROLE_USER']);
-        $djUnvalidated->setArtist($this->getReference('artist_' . 0));
         $this->addReference('user_' . '0', $djUnvalidated);
         $hashedPassword = $this->passwordHasher->hashPassword(
             $djUnvalidated,
@@ -46,7 +45,6 @@ class UserFixtures extends Fixture
         $djValidated->setEmail('dj2@exemple.com');
         $djValidated->setUsername('dj2');
         $djValidated->setRoles(['ROLE_DJ']);
-        $djValidated->setArtist($this->getReference('artist_' . 1));
         $this->addReference('user_' . 1, $djValidated);
         $hashedPassword = $this->passwordHasher->hashPassword(
             $djValidated,
@@ -59,7 +57,6 @@ class UserFixtures extends Fixture
         $djValidated ->setEmail('dj3@exemple.com');
         $djValidated->setUsername('dj3');
         $djValidated->setRoles(['ROLE_DJ']);
-        $djValidated->setArtist($this->getReference('artist_' . 2));
         $this->addReference('user_' . 2, $djValidated);
         $hashedPassword = $this->passwordHasher->hashPassword(
             $djValidated,
