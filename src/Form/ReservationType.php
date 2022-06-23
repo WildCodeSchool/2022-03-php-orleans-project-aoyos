@@ -2,29 +2,67 @@
 
 namespace App\Form;
 
+use App\Config\ReservationStatus;
 use App\Entity\Reservation;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ReservationType extends AbstractType
 {
+    private array $reservationStatus;
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        foreach (ReservationStatus::cases() as $case) {
+            $this->reservationStatus[$case->value] = $case->name;
+        }
+
         $builder
-            ->add('lastname')
-            ->add('firstname')
-            ->add('company')
-            ->add('email')
-            ->add('phone')
-            ->add('formula')
-            ->add('eventType')
-            ->add('address')
-            ->add('dateStart')
-            ->add('dateEnd')
-            ->add('attendees')
-            ->add('comment')
-            ->add('status')
+            ->add('lastname', TextType::class, [
+                'label' => 'Nom'
+            ])
+            ->add('firstname', TextType::class, [
+                'label' => 'Prénom'
+            ])
+            ->add('company', TextType::class, [
+                'label' => 'Société'
+            ])
+            ->add('email', EmailType::class)
+            ->add('phone', TextType::class, [
+                'label' => 'Téléphone'
+            ])
+            ->add('formula', TextType::class, [
+                'label' => 'Formule'
+            ])
+            ->add('eventType', TextType::class, [
+                'label' => 'Type d\'évènement'
+            ])
+            ->add('address', TextType::class, [
+                'label' => 'Adresse'
+            ])
+            ->add('dateStart', DateTimeType::class, [
+                'label' => 'Début',
+                'widget' => 'single_text',
+            ])
+            ->add('dateEnd', DateTimeType::class, [
+                'label' => 'Fin',
+                'widget' => 'single_text',
+            ])
+            ->add('attendees', NumberType::class, [
+                'label' => 'Participants'
+            ])
+            ->add('comment', TextType::class, [
+                'label' => 'Commentaire'
+            ])
+            ->add('status', ChoiceType::class, [
+                'choices' => $this->reservationStatus
+            ])
         ;
     }
 
