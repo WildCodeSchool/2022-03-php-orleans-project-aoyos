@@ -29,6 +29,17 @@ class UserFixtures extends Fixture
         $admin->setPassword($hashedPassword);
         $manager->persist($admin);
 
+        $djUnvalidated = new User();
+        $djUnvalidated->setEmail('dj@exemple.com');
+        $djUnvalidated->setUsername('dj1');
+        $djUnvalidated->setRoles(['ROLE_USER']);
+        $hashedPassword = $this->passwordHasher->hashPassword(
+            $djUnvalidated,
+            'djnonvalidé'
+        );
+        $djUnvalidated->setPassword($hashedPassword);
+        $manager->persist($djUnvalidated);
+
         $manager->flush();
     }
 }

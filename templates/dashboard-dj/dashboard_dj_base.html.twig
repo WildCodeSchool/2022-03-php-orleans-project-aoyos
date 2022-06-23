@@ -1,25 +1,29 @@
 {% extends "base.html.twig" %}
 
-{% block title %}{{ parent() }} | Admin
+{% block title %}{{ parent() }} | Admin Dj
 {% endblock %}
 
 {% block stylesheets %}
 	{{ parent() }}
-	{{ encore_entry_link_tags('admin') }}
 {% endblock %}
 
 {% block javascripts %}
 	{{ parent() }}
-	{{ encore_entry_script_tags('sidebar') }}
 {% endblock %}
 
 {% block navbar %}
-	{% include 'components/_admin_topBar.html.twig' %}
 {% endblock %}
 
 {% block body %}
-	<div class="d-flex">
-		{% include 'components/_admin_sidebar.html.twig' %}
+		{% block message %}
+			{% for category, messages in app.flashes %}
+				{% for message in messages %}
+					<div class=" text-center alert alert-{{ category }}">
+						{{ message }}
+					</div>
+				{% endfor %}
+			{% endfor %}
+		{% endblock %}
 		{% block content %}
 		{% endblock %}
 	</div>

@@ -22,4 +22,16 @@ class LoginController extends AbstractController
             'error'         => $error,
          ]);
     }
+
+    #[Route('/redirection', name: 'redirect')]
+    public function redirectAfterLogin(): response
+    {
+        if (in_array('ROLE_ADMIN', $this->getUser()->getRoles(), true)) {
+            return $this->redirectToRoute('admin_index', [], Response::HTTP_SEE_OTHER);
+        } elseif (in_array('ROLE_USER', $this->getUser()->getRoles(), true)) {
+            return $this->redirectToRoute('dashboard_dj_index', [], Response::HTTP_SEE_OTHER);
+        } else {
+            return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
+        }
+    }
 }
