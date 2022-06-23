@@ -33,7 +33,7 @@ Encore
      */
     .addEntry('app', './assets/app.js')
     .addEntry('typeAnimation', './assets/typeAnimation.js')
-    .addEntry('adminSidebar', './assets/adminSidebar.js')
+    .addEntry('sidebar', './assets/sidebar.js')
     .addEntry('admin', './assets/styles/admin.scss')
     .addEntry('home', './assets/styles/home.scss')
     .addEntry('team', './assets/styles/team.scss')
