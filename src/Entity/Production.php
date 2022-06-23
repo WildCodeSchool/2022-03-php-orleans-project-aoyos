@@ -37,6 +37,10 @@ class Production
     private ?string $imageProduction = '';
 
     #[Vich\UploadableField(mapping: 'production_images', fileNameProperty: 'imageProduction')]
+    #[Assert\File(
+        maxSize: '1M',
+        mimeTypes: ['image/jpeg', 'image/png', 'image/webp']
+    )]
     private ?File $imageFile = null;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
