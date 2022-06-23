@@ -26,7 +26,6 @@ class ReservationFixtures extends Fixture implements DependentFixtureInterface
         $totalFormulas = count(self::FORMULAS) - 1;
         $status = ReservationStatus::cases();
         $totalStatus = count($status) - 1;
-        $validatedStatus = $status[1]->name;
 
         for ($i = 0; $i < self::NUMBER_RESERVATIONS; $i++) {
             $reservation = new Reservation();
@@ -43,7 +42,7 @@ class ReservationFixtures extends Fixture implements DependentFixtureInterface
             $reservation->setAttendees($faker->randomNumber(3, true));
             $reservation->setComment($faker->paragraph());
             $reservation->setStatus($status[rand(0, $totalStatus)]->name);
-            if ($reservation->getStatus() === $validatedStatus) {
+            if ($reservation->getStatus() === ReservationStatus::Validated->name) {
                 $reservation->setArtist($this->getReference('artist_' . rand(0, (ArtistFixtures::NUMBER_ARTISTS - 1))));
             }
 
