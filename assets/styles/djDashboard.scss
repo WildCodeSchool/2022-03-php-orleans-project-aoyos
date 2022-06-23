@@ -1,0 +1,47 @@
+@import "variables.scss";
+
+$topBarHeight: 60px;
+$sideBarWidth: 300px;
+
+.sideBar {
+    width: $sideBarWidth;
+    height: calc(100vh - $topBarHeight);
+    top: $topBarHeight;
+    overflow-y: auto;
+    background-color: $adminColor;
+}
+
+.sideBar a {
+    font-family: $textFont;
+    color: $light;  
+}
+
+.sideBar .accordion-item, .sideBar .accordion-button {
+    background-color: $adminColor;
+    color: $light;
+}
+
+.sideBar .accordion-button:focus, .btn:focus {
+    box-shadow: none;
+}
+
+.sideBar .bi-house-door {
+    fill: $light;
+}
+
+.topBar {
+    height: $topBarHeight;
+    background-color: $adminColor;
+    font-family: $textFont;
+    top: 0;
+    position: sticky;
+    z-index: 1;
+}
+
+.topBar h1 {
+    font-weight: normal;
+}
+
+.dj-nav-link {
+    padding-left: 1.25rem;
+}

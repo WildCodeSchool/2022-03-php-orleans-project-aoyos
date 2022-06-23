@@ -19,7 +19,6 @@
 				<tr>
 					<th>Nom</th>
 					<th>Poste occupé</th>
-					<th>Description</th>
 					<th></th>
 					<th></th>
 				</tr>
@@ -27,25 +26,19 @@
 			<tbody>
 				{% for team_member in team_members %}
 					<tr>
-						<td>{{ team_member.name }}</td>
-						<td>{{ team_member.position }}</td>
-						{% if team_member.description is defined and team_member.description is not null %}
-						<td>{{ team_member.description }}</td>
-						{% else %}
-						<td></td>
-						{% endif %}
-						<td class="align-middle">
-								<a class="btn btn-outline-dark btn-sm text-nowrap px-3 my-2" href="{{ path('admin_team_member_edit', {'id': team_member.id}) }}">
-									<i class="bi bi-pen"></i>
-									Éditer
-								</a>
-								 
+						<td class="align-middle w-25">{{ team_member.name }}</td>
+						<td class="align-middle w-100">{{ team_member.position }}</td>
+						<td class="align-middle text-end">
+							<a class="btn btn-outline-dark btn-sm text-nowrap px-3 my-2" href="{{ path('admin_team_member_edit', {'id': team_member.id}) }}">
+								<i class="bi bi-pen"></i>
+								Éditer
+							</a>	 
 						</td>
-						<td class="align-middle">{{ include('admin/team_member/_delete_form.html.twig') }}</td>
+						<td class="align-middle text-end">{{ include('admin/team_member/_delete_form.html.twig') }}</td>
 					</tr>
 				{% else %}
 					<tr>
-						<td colspan="5">Aucun membre trouvé</td>
+						<td colspan="4">Aucun membre trouvé</td>
 					</tr>
 				{% endfor %}
 			</tbody>

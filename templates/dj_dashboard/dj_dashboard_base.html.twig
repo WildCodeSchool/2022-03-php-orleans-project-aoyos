@@ -5,19 +5,24 @@
 
 {% block stylesheets %}
 	{{ parent() }}
-	{{ encore_entry_link_tags('admin') }}
+	{{ encore_entry_link_tags('djDashboard') }}
 {% endblock %}
 
 {% block javascripts %}
 	{{ parent() }}
+	{{ encore_entry_script_tags('sidebar') }}
 {% endblock %}
 
 {% block navbar %}
+{% include 'components/_dj_topbar.html.twig' %}
 {% endblock %}
 
 {% block body %}
+	<div class="d-flex">
+		{% include 'components/_dj_sidebar.html.twig' %}
 		{% block content %}
 		{% endblock %}
+	</div>
 {% endblock %}
 
 {% block footer %}
