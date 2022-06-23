@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Config\ReservationStatus;
 use App\Entity\Reservation;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -15,13 +16,15 @@ class ReservationFixtures extends Fixture
         'Sur mesure',
     ];
 
-    public const NUMBER_RESERVATIONS = 10;
+    public const NUMBER_RESERVATIONS = 50;
 
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create();
 
         $totalFormulas = count(self::FORMULAS) - 1;
+        $status = ReservationStatus::cases();
+        $totalStatus = count($status) - 1;
 
         for ($i = 0; $i < self::NUMBER_RESERVATIONS; $i++) {
             $reservation = new Reservation();
@@ -37,6 +40,7 @@ class ReservationFixtures extends Fixture
             $reservation->setDateEnd($faker->dateTimeInInterval('+1 week', '+2 days'));
             $reservation->setAttendees($faker->randomNumber(3, true));
             $reservation->setComment($faker->paragraph());
+            $reservation->setStatus($status[rand(0, $totalStatus)]->name);
 
             $manager->persist($reservation);
         }

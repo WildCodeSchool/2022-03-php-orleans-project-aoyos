@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Config\ReservationStatus;
 use App\Entity\Reservation;
 use App\Form\ReservationClientInfosType;
 use App\Form\ReservationEventInfosType;
@@ -44,6 +45,7 @@ class ClientController extends AbstractController
             } else {
                 $session->remove('reservationForm');
                 $session->remove('isReservationClientInfosValid');
+                $reservation->setStatus(ReservationStatus::Waiting->name);
                 $reservationRepo->add($reservation, true);
                 $this->sendReservationMail($reservation, $mailer);
             }
