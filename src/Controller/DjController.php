@@ -48,8 +48,8 @@ class DjController extends AbstractController
             $registryManager->persist($artist);
             $form = $this->createForm(ArtistProfileType::class, $artist);
         } else {
-            $form = $this->createForm(ArtistType::class, $artist);
             $session->set('step', 1);
+            $form = $this->createForm(ArtistType::class, $artist);
         }
 
         $form->handleRequest($request);
