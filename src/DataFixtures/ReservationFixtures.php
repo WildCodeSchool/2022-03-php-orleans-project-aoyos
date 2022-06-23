@@ -5,10 +5,11 @@ namespace App\DataFixtures;
 use App\Config\ReservationStatus;
 use App\Entity\Reservation;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 
-class ReservationFixtures extends Fixture
+class ReservationFixtures extends Fixture implements DependentFixtureInterface
 {
     public const FORMULAS = [
         'Solo',
@@ -41,10 +42,22 @@ class ReservationFixtures extends Fixture
             $reservation->setAttendees($faker->randomNumber(3, true));
             $reservation->setComment($faker->paragraph());
             $reservation->setStatus($status[rand(0, $totalStatus)]->name);
+            if ($reservation->getStatus() === 'Validated') {
+                $reservation->setArtist($this->getReference('artist_' . rand(0, (ArtistFixtures::NUMBER_ARTISTS - 1))));
+            }
 
             $manager->persist($reservation);
         }
 
         $manager->flush();
+    }
+
+    public function getDependencies()
+    {
+        // Tu retournes ici toutes les classes de fixtures dont ProgramFixtures dépend
+        return [
+            MusicalStyleFixtures::class,
+            ArtistFixtures::class
+        ];
     }
 }
