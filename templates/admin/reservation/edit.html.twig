@@ -1,13 +1,14 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/admin_base.html.twig' %}
 
-{% block title %}Edit Reservation{% endblock %}
+{% block title %}{{ parent() }} - Éditer une réservation{% endblock %}
 
-{% block body %}
-    <h1>Edit Reservation</h1>
-
-    {{ include('admin_reservation/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('app_admin_reservation_index') }}">back to list</a>
-
-    {{ include('admin_reservation/_delete_form.html.twig') }}
+{% block content %}
+<main class="container py-5">
+	<a href="{{ path('admin_reservation_index') }}" class="btn btn-outline-dark px-3 mt-3">
+		<i class="bi bi-arrow-left-square"></i>
+		Retour
+	</a>
+    <h1 class="my-4">Éditer une réservation</h1>
+    {{ include('admin/reservation/_form.html.twig', {'icon': '<i class=\"bi bi-pen\"></i>', 'button_label': 'Éditer'}) }}
+</main>
 {% endblock %}
