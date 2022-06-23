@@ -35,16 +35,16 @@ class ReservationType extends AbstractType
             ])
             ->add('email', EmailType::class)
             ->add('phone', TextType::class, [
-                'label' => 'Nom'
+                'label' => 'Téléphone'
             ])
             ->add('formula', TextType::class, [
                 'label' => 'Formule'
             ])
             ->add('eventType', TextType::class, [
-                'label' => 'Nom'
+                'label' => 'Type d\'évènement'
             ])
             ->add('address', TextType::class, [
-                'label' => 'Nom'
+                'label' => 'Adresse'
             ])
             ->add('dateStart', DateTimeType::class, [
                 'label' => 'Début',
