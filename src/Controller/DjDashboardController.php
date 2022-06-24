@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Reservation;
+use App\Entity\User;
 use App\Repository\ArtistRepository;
 use App\Repository\ReservationRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -18,17 +20,16 @@ class DjDashboardController extends AbstractController
     public const MAX_ELEMENTS = 3;
 
     #[Route('/', name: 'index')]
+    #[IsGranted('ROLE_DJ')]
     public function index(
         ReservationRepository $reservationRepo,
-        AuthenticationUtils $authenticationUtils,
-        ArtistRepository $artistRepository
     ): Response {
-        $emailArtist = $authenticationUtils->getLastUsername();
-        $artist = $artistRepository->findOneBy(['email' => $emailArtist]);
+        /** @var User */
+        $user = $this->getUser();
 
         return $this->render('dj_dashboard/index.html.twig', [
             'reservations' => $reservationRepo->findBy(
-                ['artist' => $artist->getId()],
+                ['artist' => $user->getArtist()],
                 ['id' => 'desc'],
                 self::MAX_ELEMENTS
             ),

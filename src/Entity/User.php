@@ -29,7 +29,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private string $password;
 
     #[ORM\OneToOne(mappedBy: 'user', targetEntity: Artist::class, cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: true)]
     private Artist $artist;
 
     public function getId(): ?int
