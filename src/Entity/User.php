@@ -35,6 +35,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length:64)]
     private string $password;
 
+    #[ORM\OneToOne(mappedBy: 'user', targetEntity: Artist::class, cascade: ['persist', 'remove'])]
+    private Artist $artist;
+
     public function __construct()
     {
         $this->roles = array('ROLE_USER');
@@ -120,5 +123,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getArtist(): ?Artist
+    {
+        return $this->artist;
+    }
+
+    public function setArtist(Artist $artist): self
+    {
+        // set the owning side of the relation if necessary
+        if ($artist->getUser() !== $this) {
+            $artist->setUser($this);
+        }
+
+        $this->artist = $artist;
+
+        return $this;
     }
 }
