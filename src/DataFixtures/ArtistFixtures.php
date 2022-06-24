@@ -10,7 +10,8 @@ use Faker\Factory;
 
 class ArtistFixtures extends Fixture implements DependentFixtureInterface
 {
-    public const NUMBER_ARTISTS = 5;
+    public const NUMBER_ARTISTS = 3;
+    public const EMAILS = ['dj@exemple.com', 'dj2@exemple.com', 'dj3@exemple.com'];
 
     public function load(ObjectManager $manager): void
     {
@@ -18,22 +19,23 @@ class ArtistFixtures extends Fixture implements DependentFixtureInterface
 
         $faker = Factory::create();
 
-        for ($i = 0; $i <= self::NUMBER_ARTISTS; $i++) {
+        for ($i = 0; $i < self::NUMBER_ARTISTS; $i++) {
             $artist = new Artist();
 
             $artist->setFirstname($faker->firstName());
             $artist->setLastname($faker->lastName());
             $artist->setBirthdate($faker->dateTime());
             $artist->setPhone($faker->phoneNumber());
-            $artist->setEmail($faker->email());
+            $artist->setEmail(self::EMAILS[$i]);
             $artist->setAddress($faker->address());
             $artist->setArtistName($faker->word());
             $artist->setEquipment($faker->words(3, true));
             $artist->setMessage($faker->sentence());
+            $artist->setUser($this->getReference('user_' . $i));
             $artist->addMusicalStyle(
                 $this->getReference('musicalstyle_' . rand(0, $totalMusicalStyles))
             );
-
+            $this->addReference('artist_' . $i, $artist);
 
             $manager->persist($artist);
         }
@@ -45,6 +47,7 @@ class ArtistFixtures extends Fixture implements DependentFixtureInterface
         // Tu retournes ici toutes les classes de fixtures dont ProgramFixtures dépend
         return [
             MusicalStyleFixtures::class,
+            UserFixtures::class
         ];
     }
 }

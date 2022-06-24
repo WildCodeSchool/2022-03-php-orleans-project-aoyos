@@ -111,6 +111,9 @@ class Reservation
     #[ORM\Column(type: 'string', length: 255)]
     private string $status;
 
+    #[ORM\ManyToOne(targetEntity: Artist::class, inversedBy: 'reservations')]
+    private Artist $artist;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -268,6 +271,18 @@ class Reservation
     public function setStatus(?string $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getArtist(): ?Artist
+    {
+        return $this->artist;
+    }
+
+    public function setArtist(?Artist $artist): self
+    {
+        $this->artist = $artist;
 
         return $this;
     }
