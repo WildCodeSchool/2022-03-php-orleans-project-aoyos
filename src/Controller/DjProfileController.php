@@ -32,7 +32,7 @@ class DjProfileController extends AbstractController
 
             return $this->redirectToRoute('dashboard_dj_profile', [], Response::HTTP_SEE_OTHER);
         }
-        return $this->renderForm('dashboard-dj/profile/edit.html.twig', [
+        return $this->renderForm('dj_dashboard/profile/edit.html.twig', [
             'artist' => $artist,
             'form' => $form,
         ]);
