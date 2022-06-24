@@ -5,9 +5,9 @@ namespace App\Form;
 use App\Entity\Partner;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\UrlType;
 
 class PartnerType extends AbstractType
 {
@@ -15,12 +15,12 @@ class PartnerType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                    'label' => 'Nom'
-                ])
-            ->add('image', UrlType::class, [
-                    'label' => 'Image'
-                ])
-        ;
+                'label' => 'Nom'
+            ])
+            ->add('imageFile', VichImageType::class, [
+                'label' => 'Logo',
+                'required' => false
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

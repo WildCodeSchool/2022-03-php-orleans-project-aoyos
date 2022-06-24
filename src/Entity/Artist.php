@@ -62,7 +62,7 @@ class Artist
     #[Assert\NotBlank(groups: ['djProfile'])]
     private string $message;
 
-    #[ORM\ManyToMany(targetEntity: MusicalStyle::class, inversedBy: 'artists')]
+    #[ORM\ManyToMany(targetEntity: MusicalStyle::class, inversedBy: 'artists', cascade:['persist'])]
     #[Assert\Count(
         min: 1,
         groups: ['djProfile'],
