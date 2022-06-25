@@ -25,7 +25,7 @@
 		{% block message %}
 			{% for category, messages in app.flashes %}
 				{% for message in messages %}
-					<div class=" text-center alert alert-{{ category }}">
+					<div class="m-0 text-center alert alert-{{ category }}">
 						{{ message }}
 					</div>
 				{% endfor %}
