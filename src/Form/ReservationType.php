@@ -59,14 +59,8 @@ class ReservationType extends AbstractType
             ->add('attendees', NumberType::class, [
                 'label' => 'Participants'
             ])
-            ->add('comment', TextType::class, [
-                'label' => 'Commentaire'
-            ])
-            ->add('price', NumberType::class, [
-                'label' => 'Tarif'
-            ])
-            ->add('status', ChoiceType::class, [
-                'choices' => $this->reservationStatus
+            ->add('commentClient', TextType::class, [
+                'label' => 'Commentaire client'
             ])
             ->add('musicalStyles', EntityType::class, [
                 'class' => MusicalStyle::class,
@@ -76,6 +70,15 @@ class ReservationType extends AbstractType
                 'expanded' => true,
                 'by_reference' => false,
                 ])
+            ->add('commentAdmin', TextType::class, [
+                'label' => 'Commentaire admin'
+            ])
+            ->add('price', NumberType::class, [
+                'label' => 'Tarif'
+            ])
+            ->add('status', ChoiceType::class, [
+                'choices' => $this->reservationStatus
+            ])
         ;
     }
 
