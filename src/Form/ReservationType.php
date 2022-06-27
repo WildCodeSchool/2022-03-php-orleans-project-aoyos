@@ -3,7 +3,9 @@
 namespace App\Form;
 
 use App\Config\ReservationStatus;
+use App\Entity\MusicalStyle;
 use App\Entity\Reservation;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -66,6 +68,14 @@ class ReservationType extends AbstractType
             ->add('status', ChoiceType::class, [
                 'choices' => $this->reservationStatus
             ])
+            ->add('musicalStyles', EntityType::class, [
+                'class' => MusicalStyle::class,
+                'label' => 'Genre musical',
+                'choice_label' => 'name',
+                'multiple' => true,
+                'expanded' => true,
+                'by_reference' => false,
+                ])
         ;
     }
 
