@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ArtistRepository;
 use DateTime;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -78,16 +79,7 @@ class Artist
     private ?User $user = null;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private string $siretNumber;
-
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private string $identityCard;
-
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private string $identityPhoto;
-
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private string $kbis;
+    private ?string $siretNumber = null;
 
     public function __construct()
     {
@@ -282,42 +274,6 @@ class Artist
     public function setSiretNumber(?string $siretNumber): self
     {
         $this->siretNumber = $siretNumber;
-
-        return $this;
-    }
-
-    public function getIdentityCard(): ?string
-    {
-        return $this->identityCard;
-    }
-
-    public function setIdentityCard(?string $identityCard): self
-    {
-        $this->identityCard = $identityCard;
-
-        return $this;
-    }
-
-    public function getIdentityPhoto(): ?string
-    {
-        return $this->identityPhoto;
-    }
-
-    public function setIdentityPhoto(?string $identityPhoto): self
-    {
-        $this->identityPhoto = $identityPhoto;
-
-        return $this;
-    }
-
-    public function getKbis(): ?string
-    {
-        return $this->kbis;
-    }
-
-    public function setKbis(?string $kbis): self
-    {
-        $this->kbis = $kbis;
 
         return $this;
     }
