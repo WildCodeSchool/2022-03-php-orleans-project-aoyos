@@ -22,8 +22,8 @@
 				<div id="flush-collapseTwo" class="accordion-collapse collapse {% if route_name in route_dj.reservation %}show{% endif %}" aria-labelledby="flush-headingTwo">
 					<div class="accordion-body">
 						<ul>
-							<li><a class="text-decoration-none" href="#">Passés</a></li>
-							<li><a class="text-decoration-none" href="#">À venir</a></li>
+							<li><a class="text-decoration-none" href="{{ path('dashboard_dj_my_events', {'filtre': 'passes'}) }}">Passés</a></li>
+							<li><a class="text-decoration-none" href="{{ path('dashboard_dj_my_events', {'filtre': 'a-venir'}) }}">À venir</a></li>
 						</ul>
 					</div>
 				</div>
