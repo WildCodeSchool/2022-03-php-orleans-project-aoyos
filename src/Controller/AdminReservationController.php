@@ -27,7 +27,7 @@ class AdminReservationController extends AbstractController
         }
     }
 
-    #[Route('/', name: 'index', methods: ['GET'])]
+    #[Route('/', name: 'index', methods: ['GET', 'POST'])]
     public function index(Request $request, ReservationRepository $reservationRepo): Response
     {
         $form = $this->createForm(SearchAdminReservationType::class);
@@ -40,7 +40,8 @@ class AdminReservationController extends AbstractController
             $reservations = $reservationRepo->findBy([], ['dateStart' => 'desc', 'status' => 'asc']);
         }
 
-        return $this->render('admin/reservation/index.html.twig', [
+        return $this->renderForm('admin/reservation/index.html.twig', [
+            'form' => $form,
             'reservations' => $reservations,
             'statusValue' => $this->statusValue,
             'statusColor' => $this->statusColors,

@@ -13,7 +13,7 @@ class SearchAdminReservationType extends AbstractType
     {
         $builder
             ->add('search', SearchType::class, [
-                'label' => 'Nom d’événement',
+                'label' => 'Nom de l\'événement',
             ])
         ;
     }
