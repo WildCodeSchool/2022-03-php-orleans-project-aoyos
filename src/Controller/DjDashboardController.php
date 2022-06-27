@@ -2,17 +2,12 @@
 
 namespace App\Controller;
 
-use App\Entity\Reservation;
 use App\Entity\User;
-use App\Repository\ArtistRepository;
 use App\Repository\ReservationRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/espace-dj', name: 'dashboard_dj_')]
 class DjDashboardController extends AbstractController
@@ -34,6 +29,28 @@ class DjDashboardController extends AbstractController
                 self::MAX_ELEMENTS
             ),
             'newReservations' => $reservationRepo->findBy([], ['id' => 'desc'], self::MAX_ELEMENTS)
+        ]);
+    }
+
+    #[Route('/mes-evenements-{filtre}', name: 'my_events', requirements: ['filtre' => 'passes|a-venir'])]
+    #[IsGranted('ROLE_DJ')]
+    public function events(ReservationRepository $reservationRepo, string $filtre): Response
+    {
+        /** @var User */
+        $user = $this->getUser();
+
+        $condition = '';
+        if ($filtre === 'passes') {
+            $condition = '<';
+        } elseif ($filtre === 'a-venir') {
+            $condition = '>=';
+        }
+
+        $reservations = $reservationRepo->findByArtistByDate($user->getArtist(), $condition);
+
+        return $this->render('dj_dashboard/my_events.html.twig', [
+            'reservations' => $reservations,
+            'filtre' => $filtre
         ]);
     }
 }
