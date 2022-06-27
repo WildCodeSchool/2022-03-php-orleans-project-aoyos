@@ -37,4 +37,22 @@ class DjProfileController extends AbstractController
             'form' => $form,
         ]);
     }
+
+    #[Route('/documents', name: 'documents', methods: ['GET', 'POST'])]
+    public function documents(
+        ArtistRepository $artistRepository,
+        Request $request,
+        AuthenticationUtils $authenticationUtils
+    ): Response {
+        $emailArtist = $authenticationUtils->getLastUsername();
+        $artist = $artistRepository->findOneBy(['email' => $emailArtist]);
+
+        $form = $this->createForm(ArtistEditType::class, $artist);
+        $form->handleRequest($request);
+
+        return $this->renderForm('dj_dashboard/profile/edit.html.twig', [
+            'artist' => $artist,
+            'form' => $form,
+        ]);
+    }
 }

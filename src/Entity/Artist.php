@@ -77,6 +77,18 @@ class Artist
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private string $siretNumber;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private string $identityCard;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private string $identityPhoto;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private string $kbis;
+
     public function __construct()
     {
         $this->musicalStyles = new ArrayCollection();
@@ -258,6 +270,54 @@ class Artist
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getSiretNumber(): ?string
+    {
+        return $this->siretNumber;
+    }
+
+    public function setSiretNumber(?string $siretNumber): self
+    {
+        $this->siretNumber = $siretNumber;
+
+        return $this;
+    }
+
+    public function getIdentityCard(): ?string
+    {
+        return $this->identityCard;
+    }
+
+    public function setIdentityCard(?string $identityCard): self
+    {
+        $this->identityCard = $identityCard;
+
+        return $this;
+    }
+
+    public function getIdentityPhoto(): ?string
+    {
+        return $this->identityPhoto;
+    }
+
+    public function setIdentityPhoto(?string $identityPhoto): self
+    {
+        $this->identityPhoto = $identityPhoto;
+
+        return $this;
+    }
+
+    public function getKbis(): ?string
+    {
+        return $this->kbis;
+    }
+
+    public function setKbis(?string $kbis): self
+    {
+        $this->kbis = $kbis;
 
         return $this;
     }
