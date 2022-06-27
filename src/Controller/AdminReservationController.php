@@ -39,7 +39,7 @@ class AdminReservationController extends AbstractController
         ]);
     }
 
-    #[Route('/validee', name: 'index', methods: ['GET'])]
+    #[Route('/validee', name: 'taken', methods: ['GET'])]
     public function takenReservations(ReservationRepository $reservationRepo): Response
     {
         return $this->render('admin/reservation/index.html.twig', [
