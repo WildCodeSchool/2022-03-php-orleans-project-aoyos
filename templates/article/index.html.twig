@@ -13,10 +13,10 @@
 {% block body %}
 	<main class="services-list">
 
-		<div class="header d-flex justify-content-center align-items-center my-5">
+		<div class="header d-flex justify-content-center align-items-center pt-5 mb-5">
 			<h1 class="py-4 mt-0 mb-4 position-relative"><img src="{{ asset('build/images/title_underline_blue.png') }}" class="title-underline" alt="">Services</h1>
 		</div>
-		<div class="container my-5 d-flex flex-column gap-3">
+		<div class="container mt-5 d-flex flex-column gap-3">
 			{% for article in articles %}
 				<a class="anchor" id="{{article.title}}"></a>
 				<div class="card bg-light col-lg-9 my-5">
@@ -27,7 +27,7 @@
 							</div>
 						{% endif %}
 						<div class="col-md-7 px-4">
-							<div class="card-body card-left position-relative h-100 d-flex flex-column justify-content-between">
+							<div class="card-body card-left h-100 d-flex flex-column justify-content-between">
 								<h2 class="card-title my-5">{{ article.title }}</h2>
 								<p class="card-text">{{ article.description }}</p>
 								<p class="card-text">
