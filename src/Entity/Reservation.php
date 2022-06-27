@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Config\ReservationStatus;
 use App\Repository\ReservationRepository;
 use DateTimeInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -117,6 +119,14 @@ class Reservation
     #[ORM\Column(type: 'float', nullable: true)]
     #[Assert\Positive]
     private ?float $price;
+
+    #[ORM\ManyToMany(targetEntity: MusicalStyle::class, inversedBy: 'reservations')]
+    private Collection $musicalStyles;
+
+    public function __construct()
+    {
+        $this->musicalStyles = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -299,6 +309,30 @@ class Reservation
     public function setPrice(?float $price): self
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, MusicalStyle>
+     */
+    public function getMusicalStyles(): ?Collection
+    {
+        return $this->musicalStyles;
+    }
+
+    public function addMusicalStyle(MusicalStyle $musicalStyle): self
+    {
+        if (!$this->musicalStyles->contains($musicalStyle)) {
+            $this->musicalStyles[] = $musicalStyle;
+        }
+
+        return $this;
+    }
+
+    public function removeMusicalStyle(MusicalStyle $musicalStyle): self
+    {
+        $this->musicalStyles->removeElement($musicalStyle);
 
         return $this;
     }
