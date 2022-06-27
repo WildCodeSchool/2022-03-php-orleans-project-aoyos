@@ -42,8 +42,7 @@ class ReservationRepository extends ServiceEntityRepository
     public function findTaken(): array
     {
         return $this->createQueryBuilder('r')
-            ->andWhere('r.artist = :val')
-            ->setParameter('val', 'is NOT NULL')
+            ->andWhere('r.artist is NOT NULL')
             ->orderBy('r.dateStart', 'DESC')
             ->getQuery()
             ->getResult()
