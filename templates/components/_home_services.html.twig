@@ -17,7 +17,7 @@
 							</div>
 							<p class="card-text pt-5">{{ article.description |u.truncate(150, '...', false) }}.</p>
 						</div>
-						<a href="#" class="text-decoration-none fst-italic px-3 pb-3 justify-self-end">Lire la suite</a>
+						<a href="{{ path('app_article') }}/#{{article.title}}" class="text-decoration-none fst-italic px-3 pb-3 justify-self-end">En savoir plus</a>
 					</div>
 				</div>
 			{% endfor %}
