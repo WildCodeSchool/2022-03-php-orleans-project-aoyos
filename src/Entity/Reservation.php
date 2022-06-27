@@ -112,7 +112,7 @@ class Reservation
     private string $status;
 
     #[ORM\ManyToOne(targetEntity: Artist::class, inversedBy: 'reservations')]
-    private Artist $artist;
+    private ?Artist $artist;
 
     public function getId(): ?int
     {
