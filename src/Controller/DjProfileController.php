@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Form\ArtistEditType;
+use App\Form\DocumentType;
 use App\Repository\ArtistRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -46,8 +47,9 @@ class DjProfileController extends AbstractController
     ): Response {
         $emailArtist = $authenticationUtils->getLastUsername();
         $artist = $artistRepository->findOneBy(['email' => $emailArtist]);
+        $documents = $artist->getDocuments();
 
-        $form = $this->createForm(ArtistEditType::class, $artist);
+        $form = $this->createForm(DocumentType::class, $documents);
         $form->handleRequest($request);
 
         return $this->renderForm('dj_dashboard/profile/edit.html.twig', [
