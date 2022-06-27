@@ -114,6 +114,9 @@ class Reservation
     #[ORM\ManyToOne(targetEntity: Artist::class, inversedBy: 'reservations')]
     private Artist $artist;
 
+    #[ORM\Column(type: 'float', nullable: true)]
+    private ?float $price;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -283,6 +286,18 @@ class Reservation
     public function setArtist(?Artist $artist): self
     {
         $this->artist = $artist;
+
+        return $this;
+    }
+
+    public function getPrice(): ?float
+    {
+        return $this->price;
+    }
+
+    public function setPrice(?float $price): self
+    {
+        $this->price = $price;
 
         return $this;
     }
