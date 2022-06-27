@@ -20,7 +20,7 @@ class DocumentType extends AbstractType
             ->add('identityPhotoFile', VichFileType::class, [
                 'label' => 'Photo d\'identité',
             ])
-            ->add('kbis', VichFileType::class, [
+            ->add('kbisFile', VichFileType::class, [
                 'label' => 'KBIS',
                 'required' => false
             ])

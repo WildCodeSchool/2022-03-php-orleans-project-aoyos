@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Document;
 use App\Form\ArtistEditType;
 use App\Form\DocumentType;
 use App\Repository\ArtistRepository;
+use App\Repository\DocumentRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -43,14 +45,24 @@ class DjProfileController extends AbstractController
     public function documents(
         ArtistRepository $artistRepository,
         Request $request,
-        AuthenticationUtils $authenticationUtils
+        AuthenticationUtils $authenticationUtils,
+        DocumentRepository $documentRepository,
     ): Response {
         $emailArtist = $authenticationUtils->getLastUsername();
         $artist = $artistRepository->findOneBy(['email' => $emailArtist]);
-        $documents = $artist->getDocuments();
+        $document = $artist->getDocuments() ?? new Document();
 
-        $form = $this->createForm(DocumentType::class, $documents);
+        $form = $this->createForm(DocumentType::class, $document);
         $form->handleRequest($request);
+
+        if (($form->isSubmitted() && $form->isValid())) {
+            $document->setArtist($artist);
+            $documentRepository->add($document, true);
+
+            $this->addFlash('success', 'Votre profil a bien été modifié.');
+
+            return $this->redirectToRoute('dashboard_dj_profile', [], Response::HTTP_SEE_OTHER);
+        }
 
         return $this->renderForm('dj_dashboard/profile/edit.html.twig', [
             'artist' => $artist,
