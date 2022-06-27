@@ -107,9 +107,6 @@ class Reservation
     )]
     private int $attendees;
 
-    #[ORM\Column(type: 'text', nullable: true)]
-    private ?string $comment;
-
     #[ORM\Column(type: 'string', length: 255)]
     private string $status;
 
@@ -122,6 +119,12 @@ class Reservation
 
     #[ORM\ManyToMany(targetEntity: MusicalStyle::class, inversedBy: 'reservations')]
     private Collection $musicalStyles;
+
+    #[ORM\Column(type: 'text', nullable: true)]
+    private ?string $commentClient;
+
+    #[ORM\Column(type: 'text', nullable: true)]
+    private ?string $commentAdmin;
 
     public function __construct()
     {
@@ -265,18 +268,6 @@ class Reservation
         return $this;
     }
 
-    public function getComment(): ?string
-    {
-        return $this->comment;
-    }
-
-    public function setComment(?string $comment): self
-    {
-        $this->comment = $comment;
-
-        return $this;
-    }
-
     public function getStatus(): string
     {
         return $this->status;
@@ -333,6 +324,30 @@ class Reservation
     public function removeMusicalStyle(MusicalStyle $musicalStyle): self
     {
         $this->musicalStyles->removeElement($musicalStyle);
+
+        return $this;
+    }
+
+    public function getCommentClient(): ?string
+    {
+        return $this->commentClient;
+    }
+
+    public function setCommentClient(?string $commentClient): self
+    {
+        $this->commentClient = $commentClient;
+
+        return $this;
+    }
+
+    public function getCommentAdmin(): ?string
+    {
+        return $this->commentAdmin;
+    }
+
+    public function setCommentAdmin(?string $commentAdmin): self
+    {
+        $this->commentAdmin = $commentAdmin;
 
         return $this;
     }
