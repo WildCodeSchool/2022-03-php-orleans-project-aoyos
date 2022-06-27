@@ -1,6 +1,6 @@
 @import "variables.scss";
 
-$djCardsHeight: 25rem;
+$djCardsHeight: 15rem;
 $topBarHeight: 60px;
 $sideBarWidth: 300px;
 
@@ -47,13 +47,13 @@ $sideBarWidth: 300px;
     padding-left: 1.25rem;
 }
 
-.dj-title-card {
-    height: 80px;
-    position: relative;
-    top: 15px;
-    z-index: 1;
-}
-
 .reservations-dj .card {
     height: $djCardsHeight;
+}
+
+.dj-title-side {
+    position: relative;
+    left: -8px;
+    height: calc($djCardsHeight - 2px);
+    clip-path: polygon(0 0, 100% 0, 90% 100%, 0% 100%);
 }
