@@ -2,9 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\Artist;
 use App\Entity\Reservation;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Reservation>
@@ -45,21 +46,31 @@ class ReservationRepository extends ServiceEntityRepository
             ->andWhere('r.artist is NOT NULL')
             ->orderBy('r.dateStart', 'DESC')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-//    /**
-//     * @return Reservation[] Returns an array of Reservation objects
-//     */
+
+    public function findByArtistByDate(Artist $artist, string $condition): array
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.artist = :artist')
+            ->setParameter('artist', $artist)
+            ->andWhere('r.dateEnd ' . $condition . ' current_date()')
+            ->orderBy('r.dateEnd', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+    //    /**
+    //     * @return Reservation[] Returns an array of Reservation objects
+    //     */
 
 
-//    public function findOneBySomeField($value): ?Reservation
-//    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    public function findOneBySomeField($value): ?Reservation
+    //    {
+    //        return $this->createQueryBuilder('r')
+    //            ->andWhere('r.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }
