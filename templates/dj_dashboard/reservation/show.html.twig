@@ -24,15 +24,15 @@
                 {{ reservation.dateEnd ? reservation.dateEnd|date('d-m-Y H:i') : '' }}</p>
 				<hr/>
 				<h3 class="text-muted">Technique</h3>
-				<div class="d-flex"><p class="text-primary dj-property">Nombre d'attendants <i class="bi bi-arrow-right"></i></p> <p class=""> &nbsp {{ reservation.attendees }} personnes</p></div>
-				<div class="d-flex"><p class=" text-primary dj-property">Genre <i class="bi bi-arrow-right"></i> </p> <p class=""> </div>
-				<div class="d-flex"><p class="text-primary dj-property">Salaire <i class="bi bi-arrow-right"></i></p> <p class=""> </div>
+				<div class="d-flex"><p class="dj-property">Nombre d'attendants <i class="bi bi-arrow-right"></i></p> <p class=""> &nbsp {{ reservation.attendees }} personnes</p></div>
+				<div class="d-flex"><p class="dj-property">Genre <i class="bi bi-arrow-right"></i> </p> <p class=""> </div>
+				<div class="d-flex"><p class="dj-property">Salaire <i class="bi bi-arrow-right"></i></p> <p class=""> </div>
 				<hr/>
 				<h3 class="text-muted">Informations</h3>
-				<div class="d-flex"><p class="text-primary dj-property">Localisation <i class="bi bi-arrow-right"></i></p><p class=""> &nbsp{{ reservation.address }}</p></div>
-				<div class="d-flex"><p class="text-primary dj-property">Téléphone <i class="bi bi-arrow-right"></i></p><p class=""> &nbsp{{ reservation.phone }}</p></div>
-				<div class="d-flex"><p class="text-primary dj-property">E-mail <i class="bi bi-arrow-right"></i></p> <p class=""> &nbsp {{ reservation.email }}</p></div>
-				<div class="d-flex"><p class="text-primary dj-property">Commentaire d'Aoyos <i class="bi bi-arrow-right"></i></p> <p class=""> &nbsp " "</p></div>
+				<div class="d-flex"><p class="dj-property">Localisation <i class="bi bi-arrow-right"></i></p><p class=""> &nbsp{{ reservation.address }}</p></div>
+				<div class="d-flex"><p class="dj-property">Téléphone <i class="bi bi-arrow-right"></i></p><p class=""> &nbsp{{ reservation.phone }}</p></div>
+				<div class="d-flex"><p class="dj-property">E-mail <i class="bi bi-arrow-right"></i></p> <p class=""> &nbsp {{ reservation.email }}</p></div>
+				<div class="d-flex"><p class="dj-property">Commentaire d'Aoyos <i class="bi bi-arrow-right"></i></p> <p class=""> &nbsp " "</p></div>
 				<hr/>
 			<div class="btn-section w-100">
 			{% if reservation.artist is defined and reservation.artist == app.user.artist %}
