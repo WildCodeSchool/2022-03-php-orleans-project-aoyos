@@ -115,6 +115,7 @@ class Reservation
     private Artist $artist;
 
     #[ORM\Column(type: 'float', nullable: true)]
+    #[Assert\Positive]
     private ?float $price;
 
     public function getId(): ?int
