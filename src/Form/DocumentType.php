@@ -4,7 +4,7 @@ namespace App\Form;
 
 use App\Entity\Document;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextType as TypeTextType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichImageType;
@@ -30,7 +30,7 @@ class DocumentType extends AbstractType
                 'download_uri' => false,
                 'allow_delete' => false,
             ])
-            ->add('siretNumber', TypeTextType::class, [
+            ->add('siretNumber', TextType::class, [
                 'label' => 'SIRET',
                 'attr' => ['placeholder' => '802 954 785 00028'],
                 ])

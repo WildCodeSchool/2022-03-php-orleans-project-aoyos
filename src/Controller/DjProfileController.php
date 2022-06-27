@@ -43,13 +43,11 @@ class DjProfileController extends AbstractController
 
     #[Route('/documents', name: 'documents', methods: ['GET', 'POST'])]
     public function documents(
-        ArtistRepository $artistRepository,
         Request $request,
-        AuthenticationUtils $authenticationUtils,
         DocumentRepository $documentRepository,
     ): Response {
-        $emailArtist = $authenticationUtils->getLastUsername();
-        $artist = $artistRepository->findOneBy(['email' => $emailArtist]);
+        /** @phpstan-ignore-next-line */
+        $artist = $this->getUser()->getArtist();
         $document = $artist->getDocuments() ?? new Document();
 
         $form = $this->createForm(DocumentType::class, $document);
@@ -61,7 +59,7 @@ class DjProfileController extends AbstractController
 
             $this->addFlash('success', 'Votre profil a bien été modifié.');
 
-            return $this->redirectToRoute('dashboard_dj_profile', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('dashboard_dj_documents', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('dj_dashboard/profile/edit.html.twig', [
