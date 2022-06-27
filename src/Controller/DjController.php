@@ -10,6 +10,7 @@ use App\Form\ArtistRegistrationType;
 use App\Form\ArtistType;
 use App\Repository\ArtistRepository;
 use App\Repository\UserRepository;
+use App\Service\DistanceCalculator;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
@@ -35,7 +36,8 @@ class DjController extends AbstractController
         RequestStack $stack,
         ManagerRegistry $doctrine,
         UserRepository $userRepository,
-        HasherUserPasswordHasherInterface $passwordHasher
+        HasherUserPasswordHasherInterface $passwordHasher,
+        DistanceCalculator $distanceCalculator,
     ): Response {
         $session = $stack->getSession();
         $artist = $session->get('artist') ?? new Artist();
@@ -70,6 +72,7 @@ class DjController extends AbstractController
                 $user->setPassword($hashedPassword);
                 $userRepository->add($user, true);
                 $artist->setUser($user);
+                $distanceCalculator->setArtistCoordinates($artist);
                 $artistRepository->add($artist, true);
 
 
