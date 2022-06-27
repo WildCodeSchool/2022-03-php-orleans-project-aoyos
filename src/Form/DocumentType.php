@@ -17,18 +17,18 @@ class DocumentType extends AbstractType
             ->add('identityCardFile', VichImageType::class, [
                 'label' => 'Carte d\'identité',
                 'download_uri' => false,
-                'delete_label' => 'Supprimer ?',
+                'allow_delete' => false,
             ])
             ->add('identityPhotoFile', VichImageType::class, [
                 'label' => 'Photo d\'identité',
                 'download_uri' => false,
-                'delete_label' => 'Supprimer ?',
+                'allow_delete' => false,
             ])
             ->add('kbisFile', VichImageType::class, [
                 'label' => 'KBIS',
                 'required' => false,
                 'download_uri' => false,
-                'delete_label' => 'Supprimer ?',
+                'allow_delete' => false,
             ])
             ->add('siretNumber', TypeTextType::class, [
                 'label' => 'SIRET',
