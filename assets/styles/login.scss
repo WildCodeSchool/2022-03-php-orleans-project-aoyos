@@ -2,6 +2,12 @@
 
 $widthBtnLogin : 2rem;
 
+.login {
+    background-image: url('../images/dotsagain.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
 .h1-login {
     font-size: clamp(2rem, 10vh, 3rem);
 }
@@ -12,7 +18,8 @@ $widthBtnLogin : 2rem;
 }
 
 .block-color {
-    background-color: lighten($primary, 20%);
+    background-color: rgba(255, 255, 255, 0.6);
     border-radius: 4px 4px;
-    filter: drop-shadow(0 0 0.1rem $primary);
+    filter: drop-shadow(0 0 0.1rem $light);
+    border: 1px solid $primary;
 }
