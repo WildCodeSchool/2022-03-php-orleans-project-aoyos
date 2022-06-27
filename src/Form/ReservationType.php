@@ -60,6 +60,9 @@ class ReservationType extends AbstractType
             ->add('comment', TextType::class, [
                 'label' => 'Commentaire'
             ])
+            ->add('price', NumberType::class, [
+                'label' => 'Tarif'
+            ])
             ->add('status', ChoiceType::class, [
                 'choices' => $this->reservationStatus
             ])
