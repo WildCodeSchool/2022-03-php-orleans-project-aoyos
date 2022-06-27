@@ -78,8 +78,8 @@ class Artist
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private ?string $siretNumber = null;
+    #[ORM\OneToOne(inversedBy: 'artist', targetEntity: Document::class, cascade: ['persist', 'remove'])]
+    private ?Document $documents = null;
 
     public function __construct()
     {
@@ -266,14 +266,14 @@ class Artist
         return $this;
     }
 
-    public function getSiretNumber(): ?string
+    public function getDocuments(): ?Document
     {
-        return $this->siretNumber;
+        return $this->documents;
     }
 
-    public function setSiretNumber(?string $siretNumber): self
+    public function setDocuments(?Document $documents): self
     {
-        $this->siretNumber = $siretNumber;
+        $this->documents = $documents;
 
         return $this;
     }
