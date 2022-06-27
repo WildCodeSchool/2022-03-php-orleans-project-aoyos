@@ -26,8 +26,8 @@ class DistanceCalculator
         $data = $response->toArray();
         $coordX = $data['features'][0]['geometry']['coordinates'][0];
         $coordY = $data['features'][0]['geometry']['coordinates'][1];
-        $coordinates->setX($coordX);
-        $coordinates->setY($coordY);
+        $coordinates->setCoordX($coordX);
+        $coordinates->setCoordY($coordY);
         $this->coordinateRepository->add($coordinates, true);
         $artist->setCoordinates($coordinates);
     }
