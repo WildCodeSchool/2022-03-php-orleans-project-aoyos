@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -59,8 +60,8 @@ class ReservationType extends AbstractType
             ->add('attendees', NumberType::class, [
                 'label' => 'Participants'
             ])
-            ->add('commentClient', TextType::class, [
-                'label' => 'Commentaire client'
+            ->add('commentClient', TextareaType::class, [
+                'label' => 'Commentaire client (non visible côté DJ)'
             ])
             ->add('musicalStyles', EntityType::class, [
                 'class' => MusicalStyle::class,
@@ -70,8 +71,8 @@ class ReservationType extends AbstractType
                 'expanded' => true,
                 'by_reference' => false,
                 ])
-            ->add('commentAdmin', TextType::class, [
-                'label' => 'Commentaire admin'
+            ->add('commentAdmin', TextareaType::class, [
+                'label' => 'Commentaire admin (visible côté DJ)'
             ])
             ->add('price', NumberType::class, [
                 'label' => 'Tarif'
