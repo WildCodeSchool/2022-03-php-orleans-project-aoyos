@@ -51,6 +51,10 @@ $sideBarWidth: 300px;
     height: $djCardsHeight;
 }
 
+.artist-documents img {
+    max-width: 100%;
+}
+
 .dj-title-side {
     position: relative;
     left: -8px;
