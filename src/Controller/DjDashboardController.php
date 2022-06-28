@@ -12,6 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 #[Route('/espace-dj', name: 'dashboard_dj_')]
 class DjDashboardController extends AbstractController
@@ -52,18 +53,26 @@ class DjDashboardController extends AbstractController
     public function acceptReservation(
         Reservation $reservation,
         ManagerRegistry $doctrine,
+        ValidatorInterface $validator
     ): Response {
         /** @var User */
         $user = $this->getUser();
 
         $entityManager = $doctrine->getManager();
+
         if ($reservation->getStatus() === ReservationStatus::Waiting->name && $reservation->getArtist() === null) {
             $reservation->setArtist($user->getArtist());
             $reservation->setStatus(ReservationStatus::Validated->name);
             $entityManager->persist($reservation);
-        }
-        $entityManager->flush();
 
+            if (count($validator->validate($reservation)) === 0) {
+                $entityManager->flush();
+
+                $this->addFlash('success', 'L\'évènement vous a été attribué !');
+            } else {
+                $this->addFlash('danger', 'Cet évènement n\'est plus disponible.');
+            }
+        }
         return $this->redirectToRoute('dashboard_dj_show', ['id' => $reservation->getId()], Response::HTTP_SEE_OTHER);
     }
 }
