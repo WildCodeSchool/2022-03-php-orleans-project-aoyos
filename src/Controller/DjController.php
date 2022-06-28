@@ -12,6 +12,7 @@ use App\Repository\ArtistRepository;
 use App\Repository\UserRepository;
 use App\Service\DistanceCalculator;
 use Doctrine\Persistence\ManagerRegistry;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -58,7 +59,11 @@ class DjController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             if ($session->get('step') === 1) {
-                $distanceCalculator->setCoordinates($artist);
+                try {
+                    $distanceCalculator->setCoordinates($artist);
+                } catch (Exception $e) {
+                    $this->addFlash('warning', 'Adresse non trouvée.');
+                }
                 $session->set('artist', $artist);
                 $session->set('step', 2);
             } elseif ($session->get('step') === 2) {

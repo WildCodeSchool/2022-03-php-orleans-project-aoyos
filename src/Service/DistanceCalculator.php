@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Model\Localizable;
+use Exception;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class DistanceCalculator
@@ -30,6 +31,8 @@ class DistanceCalculator
             $longitude = $data['features'][0]['geometry']['coordinates'][0];
             $latitude = $data['features'][0]['geometry']['coordinates'][1];
             $localizable->setLatitude($latitude)->setLongitude($longitude);
+        } else {
+            throw new Exception();
         }
     }
 }
