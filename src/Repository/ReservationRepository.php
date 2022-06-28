@@ -39,20 +39,19 @@ class ReservationRepository extends ServiceEntityRepository
         }
     }
 
+    public function findTaken(): array
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.artist is NOT NULL')
+            ->orderBy('r.dateStart', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 //    /**
 //     * @return Reservation[] Returns an array of Reservation objects
 //     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('r.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+
 
 //    public function findOneBySomeField($value): ?Reservation
 //    {

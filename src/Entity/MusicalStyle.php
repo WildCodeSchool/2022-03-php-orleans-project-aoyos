@@ -26,9 +26,13 @@ class MusicalStyle
     #[ORM\ManyToMany(targetEntity: Artist::class, mappedBy: 'musicalStyles')]
     private Collection $artists;
 
+    #[ORM\ManyToMany(targetEntity: Reservation::class, mappedBy: 'musicalStyles')]
+    private Collection $reservations;
+
     public function __construct()
     {
         $this->artists = new ArrayCollection();
+        $this->reservations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -70,6 +74,33 @@ class MusicalStyle
     {
         if ($this->artists->removeElement($artist)) {
             $artist->removeMusicalStyle($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Reservation>
+     */
+    public function getReservations(): ?Collection
+    {
+        return $this->reservations;
+    }
+
+    public function addReservation(Reservation $reservation): self
+    {
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations[] = $reservation;
+            $reservation->addMusicalStyle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservation(Reservation $reservation): self
+    {
+        if ($this->reservations->removeElement($reservation)) {
+            $reservation->removeMusicalStyle($this);
         }
 
         return $this;

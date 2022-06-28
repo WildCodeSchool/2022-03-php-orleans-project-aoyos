@@ -116,16 +116,16 @@ $logoHeight: 200px;
 
 .production > div::after {
     content: '';
-    display: block;
     position: absolute;
     width: 100%;
     height: 100%;
     z-index: -1;
-    background-image: url("../images/bg_production.svg");
-    background-size: 50%;
-    background-position-x: right;
+    background-image: url("../images/cloud_lines.png");
+    background-size: 80%;
     background-repeat: no-repeat;
-    opacity: 0.2;
+    background-position-x: right;
+    background-position-y: center;
+    opacity: 0.5;
 }
 
 .production .card {

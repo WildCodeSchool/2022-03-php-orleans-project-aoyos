@@ -9,10 +9,11 @@
     <table class="table table-hover">
         <thead>
             <tr>
+                <th>Nom</th>
                 <th>Société</th>
-                <th>Adresse</th>
                 <th>Début</th>
                 <th>Fin</th>
+                <th>Tarif</th>
                 <th>Validée</th>
                 <th></th>
                 <th></th>
@@ -21,10 +22,11 @@
         <tbody>
         {% for reservation in reservations %}
             <tr>
+                <td>{{ reservation.eventType }}</td>
                 <td>{{ reservation.company }}</td>
-                <td>{{ reservation.address }}</td>
-                <td>{{ reservation.dateStart ? reservation.dateStart|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ reservation.dateEnd ? reservation.dateEnd|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ reservation.dateStart ? reservation.dateStart|date('d-m-Y H:i') : '' }}</td>
+                <td>{{ reservation.dateEnd ? reservation.dateEnd|date('d-m-Y H:i') : '' }}</td>
+                <td class="align-middle">{{ reservation.price ? reservation.price ~ '€' : 'Non précisé' }}</td>
                 <td class="align-middle text-center text-light rounded-1 bg-{{ statusColor[reservation.status] }}">{{ statusValue[reservation.status] }}</td>
                 <td class="align-middle text-end">
                     <a class="btn btn-outline-dark btn-sm text-nowrap px-3 my-2" href="{{ path('admin_reservation_edit', {'id': reservation.id}) }}">

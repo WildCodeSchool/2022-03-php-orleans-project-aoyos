@@ -40,7 +40,7 @@ class ReservationFixtures extends Fixture implements DependentFixtureInterface
             $reservation->setDateStart($faker->dateTimeInInterval('+1 week', '+1 days'));
             $reservation->setDateEnd($faker->dateTimeInInterval('+1 week', '+2 days'));
             $reservation->setAttendees($faker->randomNumber(3, true));
-            $reservation->setComment($faker->paragraph());
+            $reservation->setCommentClient($faker->paragraph());
             $reservation->setStatus($status[rand(0, $totalStatus)]->name);
             if ($reservation->getStatus() === ReservationStatus::Validated->name) {
                 $reservation->setArtist($this->getReference('artist_' . rand(0, (ArtistFixtures::NUMBER_ARTISTS - 1))));
