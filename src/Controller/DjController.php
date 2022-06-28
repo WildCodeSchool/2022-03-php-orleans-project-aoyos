@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Artist;
-use App\Entity\MusicalStyle;
 use App\Entity\User;
 use App\Form\ArtistProfileType;
 use App\Form\ArtistRegistrationType;
@@ -16,7 +15,6 @@ use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface as HasherUserPasswordHasherInterface;
-use Symfony\Component\PasswordHasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/dj', name: 'app_')]
@@ -72,16 +70,19 @@ class DjController extends AbstractController
                 $artist->setUser($user);
                 $artistRepository->add($artist, true);
 
+                $this->addFlash('success', 'Votre demande a bien été transmise.');
 
                 return $this->redirectToRoute('app_dj', [], Response::HTTP_SEE_OTHER);
             }
+
             return $this->redirectToRoute('app_registration', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm(
             'dj/registration/index.html.twig',
-            [ 'form' => $form,
-             'artist' => $artist,
+            [
+                'form' => $form,
+                'artist' => $artist,
             ]
         );
     }
