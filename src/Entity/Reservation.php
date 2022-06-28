@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Config\ReservationStatus;
-use App\Model\Localizable;
 use App\Repository\ReservationRepository;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -12,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]
-class Reservation implements Localizable
+class Reservation
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

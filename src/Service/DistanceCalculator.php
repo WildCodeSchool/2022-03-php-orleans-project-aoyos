@@ -2,33 +2,27 @@
 
 namespace App\Service;
 
-use App\Entity\Artist;
 use App\Entity\Coordinate;
-use App\Repository\ArtistRepository;
+use App\Model\Localizable;
 use App\Repository\CoordinateRepository;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class DistanceCalculator
 {
     public function __construct(
-        private CoordinateRepository $coordinateRepository,
         private HttpClientInterface $client,
     ) {
     }
 
-    public function setArtistCoordinates(Artist $artist): void
+    public function setCoordinates(Localizable $localizable): void
     {
-        $coordinates = new Coordinate();
         $response = $this->client->request(
             'GET',
-            'https://api-adresse.data.gouv.fr/search/?q=' . $artist->getAddress()
+            'https://api-adresse.data.gouv.fr/search/?q=' . $localizable->getAddress()
         );
         $data = $response->toArray();
-        $coordX = $data['features'][0]['geometry']['coordinates'][0];
-        $coordY = $data['features'][0]['geometry']['coordinates'][1];
-        $coordinates->setCoordX($coordX);
-        $coordinates->setCoordY($coordY);
-        $this->coordinateRepository->add($coordinates, true);
-        $artist->setCoordinates($coordinates);
+        $longitude = $data['features'][0]['geometry']['coordinates'][0];
+        $latitude = $data['features'][0]['geometry']['coordinates'][1];
+        $localizable->setLatitude($latitude)->setLongitude($longitude);
     }
 }
