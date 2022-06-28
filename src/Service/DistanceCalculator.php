@@ -4,8 +4,6 @@ namespace App\Service;
 
 use App\Model\Localizable;
 use Exception;
-use LogicException;
-use Symfony\Component\HttpClient\Exception\TransportException;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class DistanceCalculator
