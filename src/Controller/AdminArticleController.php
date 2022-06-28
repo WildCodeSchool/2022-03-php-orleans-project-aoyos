@@ -32,6 +32,8 @@ class AdminArticleController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $articleRepository->add($article, true);
 
+            $this->addFlash('success', 'Votre article a bien été ajouté.');
+
             return $this->redirectToRoute('admin_article_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -58,6 +60,8 @@ class AdminArticleController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $articleRepository->add($article, true);
 
+            $this->addFlash('success', 'Votre article a bien été édité.');
+
             return $this->redirectToRoute('admin_article_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -73,6 +77,8 @@ class AdminArticleController extends AbstractController
         if ($this->isCsrfTokenValid('delete' . $article->getId(), $request->request->get('_token'))) {
             $articleRepository->remove($article, true);
         }
+
+        $this->addFlash('success', 'Votre article a bien été supprimé.');
 
         return $this->redirectToRoute('admin_article_index', [], Response::HTTP_SEE_OTHER);
     }

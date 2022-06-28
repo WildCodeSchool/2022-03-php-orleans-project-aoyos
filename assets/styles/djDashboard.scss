@@ -1,6 +1,6 @@
 @import "variables.scss";
 
-$djCardsHeight: 25rem;
+$djCardsHeight: 15rem;
 $topBarHeight: 60px;
 $sideBarWidth: 300px;
 $djShowCardWidth: 15rem;
@@ -48,13 +48,6 @@ $djShowCardWidth: 15rem;
     padding-left: 1.25rem;
 }
 
-.dj-title-card {
-    height: 80px;
-    position: relative;
-    top: 15px;
-    z-index: 1;
-}
-
 .reservations-dj .card {
     height: $djCardsHeight;
 }
@@ -74,5 +67,15 @@ $djShowCardWidth: 15rem;
 .dj-property {
     color: saturate($primary, 20%);
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 1.1rem; }
+    
+.artist-documents img {
+    max-width: 100%;
+}
+
+.dj-title-side {
+    position: relative;
+    left: -8px;
+    height: calc($djCardsHeight - 2px);
+    clip-path: polygon(0 0, 100% 0, 90% 100%, 0% 100%);
 }

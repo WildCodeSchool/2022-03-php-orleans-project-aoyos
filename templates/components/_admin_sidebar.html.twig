@@ -1,7 +1,8 @@
 {% set route_admin = {
 	'user': [],
 	'reservation': [
-		'admin_reservation_index'
+		'admin_reservation_index',
+		'admin_reservation_taken'
 	],
 	'home': [
 		'admin_team_index',
@@ -58,7 +59,7 @@
 				<div class="accordion-body">
 					<ul>
 						<li><a class="text-decoration-none" href="{{ path('admin_reservation_index') }}">Non prises</a></li>
-						<li><a class="text-decoration-none" href="#">Prises par un DJ</a></li>
+						<li><a class="text-decoration-none" href="{{ path('admin_reservation_taken') }}">Prises par un DJ</a></li>
 					</ul>
 				</div>
 			</div>

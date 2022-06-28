@@ -13,6 +13,7 @@
                 <th>Société</th>
                 <th>Début</th>
                 <th>Fin</th>
+                <th>Tarif</th>
                 <th>Validée</th>
                 <th></th>
                 <th></th>
@@ -25,6 +26,7 @@
                 <td>{{ reservation.company }}</td>
                 <td>{{ reservation.dateStart ? reservation.dateStart|date('d-m-Y H:i') : '' }}</td>
                 <td>{{ reservation.dateEnd ? reservation.dateEnd|date('d-m-Y H:i') : '' }}</td>
+                <td class="align-middle">{{ reservation.price ? reservation.price ~ '€' : 'Non précisé' }}</td>
                 <td class="align-middle text-center text-light rounded-1 bg-{{ statusColor[reservation.status] }}">{{ statusValue[reservation.status] }}</td>
                 <td class="align-middle text-end">
                     <a class="btn btn-outline-dark btn-sm text-nowrap px-3 my-2" href="{{ path('admin_reservation_edit', {'id': reservation.id}) }}">
