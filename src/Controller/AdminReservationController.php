@@ -27,7 +27,7 @@ class AdminReservationController extends AbstractController
         }
     }
 
-    #[Route('/', name: 'index', methods: ['GET', 'POST'])]
+    #[Route('/', name: 'index', methods: ['GET'])]
     public function index(Request $request, ReservationRepository $reservationRepo): Response
     {
         $form = $this->createForm(SearchAdminReservationType::class);

@@ -12,6 +12,7 @@ class SearchAdminReservationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->setMethod('GET')
             ->add('search', SearchType::class, [
                 'label' => 'Nom de l\'événement',
             ])
