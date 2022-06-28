@@ -53,11 +53,11 @@ class ReservationRepository extends ServiceEntityRepository
 //     */
 
 
-    public function findLikeEventType(string $eventType): ?Reservation
+    public function findLikeEventType(string $eventType): array
     {
         return $this->createQueryBuilder('r')
-           ->andWhere('r.eventType = :enventType')
-           ->setParameter('enventType', '%' . $eventType . '%')
+           ->andWhere('r.eventType LIKE :eventType')
+           ->setParameter('eventType', '%' . $eventType . '%')
            ->getQuery()
            ->getResult()
         ;
