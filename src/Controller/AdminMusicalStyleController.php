@@ -31,6 +31,8 @@ class AdminMusicalStyleController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $musicStyleRepository->add($musicalStyle, true);
 
+            $this->addFlash('success', 'Votre genre musical a bien été ajouté.');
+
             return $this->redirectToRoute('admin_musical_style_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -52,6 +54,8 @@ class AdminMusicalStyleController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $musicStyleRepository->add($musicalStyle, true);
 
+            $this->addFlash('success', 'Votre genre musical a bien été édité.');
+
             return $this->redirectToRoute('admin_musical_style_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -70,6 +74,8 @@ class AdminMusicalStyleController extends AbstractController
         if ($this->isCsrfTokenValid('delete' . $musicalStyle->getId(), $request->request->get('_token'))) {
             $musicStyleRepository->remove($musicalStyle, true);
         }
+
+        $this->addFlash('success', 'Votre genre musical a bien été supprimé.');
 
         return $this->redirectToRoute('admin_musical_style_index', [], Response::HTTP_SEE_OTHER);
     }

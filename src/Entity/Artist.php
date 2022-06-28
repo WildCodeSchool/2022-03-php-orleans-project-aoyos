@@ -77,6 +77,9 @@ class Artist
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
+    #[ORM\OneToOne(inversedBy: 'artist', targetEntity: Document::class, cascade: ['persist', 'remove'])]
+    private ?Document $documents = null;
+
     public function __construct()
     {
         $this->musicalStyles = new ArrayCollection();
@@ -258,6 +261,18 @@ class Artist
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getDocuments(): ?Document
+    {
+        return $this->documents;
+    }
+
+    public function setDocuments(?Document $documents): self
+    {
+        $this->documents = $documents;
 
         return $this;
     }

@@ -11,7 +11,7 @@ use Faker\Factory;
 class ArtistFixtures extends Fixture implements DependentFixtureInterface
 {
     public const NUMBER_ARTISTS = 3;
-    public const EMAILS = ['dj@exemple.com', 'dj2@exemple.com', 'dj3@exemple.com'];
+    public const EMAILS = ['dj1@exemple.com', 'dj2@exemple.com', 'dj3@exemple.com'];
 
     public function load(ObjectManager $manager): void
     {
