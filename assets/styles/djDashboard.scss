@@ -3,6 +3,7 @@
 $djCardsHeight: 15rem;
 $topBarHeight: 60px;
 $sideBarWidth: 300px;
+$djShowCardWidth: 15rem;
 
 .sideBar {
     width: $sideBarWidth;
@@ -51,6 +52,23 @@ $sideBarWidth: 300px;
     height: $djCardsHeight;
 }
 
+.dj-show-reservation {
+    background-image: url(../images/dots.png);
+    background-size: cover;
+    width: 100%;
+}
+
+.dj-show-reservation-card {
+    background-color: rgba($color: $light, $alpha: 0.8);
+    border: 1px solid $primary;
+    min-width: $djShowCardWidth;
+}
+
+.dj-property {
+    color: saturate($primary, 20%);
+    font-weight: 600;
+    font-size: 1.1rem; }
+    
 .artist-documents img {
     max-width: 100%;
 }
