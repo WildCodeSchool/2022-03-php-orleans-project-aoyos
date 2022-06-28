@@ -24,7 +24,7 @@
                 {{ reservation.dateEnd ? reservation.dateEnd|date('d-m-Y H:i') : '' }}</p>
 				<hr/>
 				<h3 class="text-muted">Technique</h3>
-				<div class="d-flex"><p class="dj-property">Nombre d'attendants <i class="bi bi-arrow-right"></i></p> <p class=""> &nbsp {{ reservation.attendees }} personnes</p></div>
+				<div class="d-flex"><p class="dj-property">Nombre de participants <i class="bi bi-arrow-right"></i></p> <p class=""> &nbsp {{ reservation.attendees }} personnes</p></div>
 				<div class="d-flex"><p class="dj-property">Genre <i class="bi bi-arrow-right"></i> </p> <p class=""> </div>
 				<div class="d-flex"><p class="dj-property">Salaire <i class="bi bi-arrow-right"></i></p> <p class=""> </div>
 				<hr/>
@@ -38,9 +38,9 @@
 			{% if reservation.artist is defined and reservation.artist == app.user.artist %}
 				<a href="#" class="btn btn-outline-danger btn-lg w-100 mx-2 ">Annuler</a>
 			{% elseif reservation.artist is not null and reservation.artist != app.user.artist %}
-			<p></p>
+				<p class="text-muted fs-5">Cet évènement est déjà réservé par un autre DJ.</p>
 			{% else %}
-			{{ include('dj_dashboard/reservation/_accept_reservation.html.twig') }}
+				{{ include('dj_dashboard/reservation/_accept_reservation.html.twig') }}
 			{% endif %}
 			</div>
 			</div>

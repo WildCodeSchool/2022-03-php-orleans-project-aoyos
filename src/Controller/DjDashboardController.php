@@ -57,10 +57,11 @@ class DjDashboardController extends AbstractController
         $user = $this->getUser();
 
         $entityManager = $doctrine->getManager();
-
-        $reservation->setArtist($user->getArtist());
-        $reservation->setStatus(ReservationStatus::cases()[1]->name);
-        $entityManager->persist($reservation);
+        if ($reservation->getStatus() === ReservationStatus::Waiting->name && $reservation->getArtist() === null) {
+            $reservation->setArtist($user->getArtist());
+            $reservation->setStatus(ReservationStatus::Validated->name);
+            $entityManager->persist($reservation);
+        }
         $entityManager->flush();
 
         return $this->redirectToRoute('dashboard_dj_show', ['id' => $reservation->getId()], Response::HTTP_SEE_OTHER);
