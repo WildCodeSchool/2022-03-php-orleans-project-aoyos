@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Config\ReservationStatus;
 use App\Entity\Reservation;
 use App\Form\ReservationType;
+use App\Form\SearchAdminReservationType;
 use App\Repository\ReservationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,13 +28,21 @@ class AdminReservationController extends AbstractController
     }
 
     #[Route('/', name: 'index', methods: ['GET'])]
-    public function index(ReservationRepository $reservationRepo): Response
+    public function index(Request $request, ReservationRepository $reservationRepo): Response
     {
-        return $this->render('admin/reservation/index.html.twig', [
-            'reservations' => $reservationRepo->findBy(
-                [],
-                ['dateStart' => 'desc', 'status' => 'asc']
-            ),
+        $form = $this->createForm(SearchAdminReservationType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $search = $form->getData()['search'];
+            $reservations = $reservationRepo->findLikeEventType($search);
+        } else {
+            $reservations = $reservationRepo->findBy([], ['dateStart' => 'desc', 'status' => 'asc']);
+        }
+
+        return $this->renderForm('admin/reservation/index.html.twig', [
+            'form' => $form,
+            'reservations' => $reservations,
             'statusValue' => $this->statusValue,
             'statusColor' => $this->statusColors,
         ]);
