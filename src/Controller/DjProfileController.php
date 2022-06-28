@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Document;
 use App\Form\ArtistEditType;
 use App\Form\ArtistProfileType;
+use App\Form\ArtistType;
 use App\Form\DocumentType;
 use App\Repository\ArtistRepository;
 use App\Repository\DocumentRepository;
@@ -26,7 +27,7 @@ class DjProfileController extends AbstractController
         $emailArtist = $authenticationUtils->getLastUsername();
         $artist = $artistRepository->findOneBy(['email' => $emailArtist]);
 
-        $form = $this->createForm(ArtistEditType::class, $artist);
+        $form = $this->createForm(ArtistType::class, $artist);
         $form->handleRequest($request);
 
         if (($form->isSubmitted() && $form->isValid())) {
@@ -84,7 +85,7 @@ class DjProfileController extends AbstractController
             $artistRepository->add($artist, true);
             $this->addFlash('success', 'Votre profil a bien été modifié.');
 
-            return $this->redirectToRoute('dashboard_dj_documents', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('dashboard_dj_artist', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('dj_dashboard/profile/edit.html.twig', [
