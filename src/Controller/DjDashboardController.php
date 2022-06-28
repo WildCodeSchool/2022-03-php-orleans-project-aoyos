@@ -32,25 +32,20 @@ class DjDashboardController extends AbstractController
         ]);
     }
 
-    #[Route('/mes-evenements-{filtre}', name: 'my_events', requirements: ['filtre' => 'passes|a-venir'])]
+    #[Route('/mes-evenements/{filter}', name: 'my_events', requirements: ['filter' => 'passes|a-venir'])]
     #[IsGranted('ROLE_DJ')]
-    public function events(ReservationRepository $reservationRepo, string $filtre): Response
+    public function events(ReservationRepository $reservationRepo, string $filter): Response
     {
         /** @var User */
         $user = $this->getUser();
 
-        $condition = '';
-        if ($filtre === 'passes') {
-            $condition = '<';
-        } elseif ($filtre === 'a-venir') {
-            $condition = '>=';
-        }
-
-        $reservations = $reservationRepo->findByArtistByDate($user->getArtist(), $condition);
+        $reservations = $reservationRepo->findByArtistByDate($user->getArtist(), $filter);
 
         return $this->render('dj_dashboard/my_events.html.twig', [
             'reservations' => $reservations,
-            'filtre' => $filtre
+            'filter' => $filter,
+            'passes' => ReservationRepository::PAST_EVENTS,
+            'avenir' => ReservationRepository::FUTURE_EVENTS,
         ]);
     }
 }
