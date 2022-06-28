@@ -60,12 +60,7 @@ class DjController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             if ($session->get('step') === 1) {
-                try {
-                    $distanceCalculator->setCoordinates($artist);
-                } catch (TransportException $te) {
-                    $this->addFlash('warning', 'Une erreur est survenue lors de la récupération de l\'adresse'
-                    . ', vous pouvez cependant poursuivre votre inscription.');
-                }
+                $this->addCoordinates($distanceCalculator, $artist);
                 $session->set('artist', $artist);
                 $session->set('step', 2);
             } elseif ($session->get('step') === 2) {
@@ -105,5 +100,18 @@ class DjController extends AbstractController
             $session->remove('step');
         }
         return $this->redirectToRoute('app_registration', [], Response::HTTP_SEE_OTHER);
+    }
+
+    private function addCoordinates(DistanceCalculator $distanceCalculator, Artist $artist): void
+    {
+        try {
+            $distanceCalculator->setCoordinates($artist);
+        } catch (TransportException $te) {
+            $this->addFlash('warning', 'Une erreur est survenue lors de la récupération de l\'adresse'
+            . ', vous pouvez cependant poursuivre votre inscription.');
+        } catch (Exception $e) {
+            $this->addFlash('warning', $e->getMessage()
+            . ', vous pouvez cependant poursuivre votre inscription.');
+        }
     }
 }
