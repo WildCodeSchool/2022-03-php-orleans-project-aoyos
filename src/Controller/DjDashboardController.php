@@ -20,7 +20,7 @@ class DjDashboardController extends AbstractController
     public const MAX_ELEMENTS = 3;
 
     #[Route('/', name: 'index')]
-    #[IsGranted('ROLE_DJ')]
+    #[IsGranted('ROLE_USER')]
     public function index(
         ReservationRepository $reservationRepo,
     ): Response {
