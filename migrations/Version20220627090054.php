@@ -24,7 +24,6 @@ final class Version20220627090054 extends AbstractMigration
         $this->addSql('ALTER TABLE artist ADD documents_id INT DEFAULT NULL');
         $this->addSql('ALTER TABLE artist ADD CONSTRAINT FK_15996875F0F2752 FOREIGN KEY (documents_id) REFERENCES document (id)');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_15996875F0F2752 ON artist (documents_id)');
-        $this->addSql('DROP INDEX UNIQ_8D93D649E7927C74 ON user');
     }
 
     public function down(Schema $schema): void
@@ -34,6 +33,5 @@ final class Version20220627090054 extends AbstractMigration
         $this->addSql('DROP TABLE document');
         $this->addSql('DROP INDEX UNIQ_15996875F0F2752 ON artist');
         $this->addSql('ALTER TABLE artist DROP documents_id');
-        $this->addSql('CREATE UNIQUE INDEX UNIQ_8D93D649E7927C74 ON user (email)');
     }
 }
