@@ -34,7 +34,7 @@ class ArtistType extends AbstractType
             'attr' => ['placeholder' => 'hello@aoyos.fr'],
             ])
             ->add('address', TextType::class, [
-            'label' => 'Adresse',
+            'label' => 'Ville',
             'attr' => ['placeholder' => '15 rue des Halles, 75 001 Paris'],
             ])
         ;
