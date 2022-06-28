@@ -14,6 +14,7 @@ use App\Service\DistanceCalculator;
 use Doctrine\Persistence\ManagerRegistry;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpClient\Exception\TransportException;
 use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
@@ -61,8 +62,9 @@ class DjController extends AbstractController
             if ($session->get('step') === 1) {
                 try {
                     $distanceCalculator->setCoordinates($artist);
-                } catch (Exception $e) {
-                    $this->addFlash('warning', 'Adresse non trouvée.');
+                } catch (TransportException $te) {
+                    $this->addFlash('warning', 'Une erreur est survenue lors de la récupération de l\'adresse'
+                    . ', vous pouvez cependant poursuivre votre inscription.');
                 }
                 $session->set('artist', $artist);
                 $session->set('step', 2);

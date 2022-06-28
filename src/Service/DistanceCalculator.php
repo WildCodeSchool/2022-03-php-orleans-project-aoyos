@@ -26,13 +26,18 @@ class DistanceCalculator
                 ]
             ]
         );
+
         if ($response->getStatusCode() === 200) {
             $data = $response->toArray();
-            $longitude = $data['features'][0]['geometry']['coordinates'][0];
-            $latitude = $data['features'][0]['geometry']['coordinates'][1];
-            $localizable->setLatitude($latitude)->setLongitude($longitude);
+            if (isset($data['features'][0])) {
+                $longitude = $data['features'][0]['geometry']['coordinates'][0];
+                $latitude = $data['features'][0]['geometry']['coordinates'][1];
+                $localizable->setLatitude($latitude)->setLongitude($longitude);
+            } else {
+                throw new Exception('Adresse non trouvée');
+            }
         } else {
-            throw new Exception();
+            throw new Exception('Une erreur est survenue lors de la récupération de l\'adresse');
         }
     }
 }
