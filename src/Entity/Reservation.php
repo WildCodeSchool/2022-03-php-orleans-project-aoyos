@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Config\ReservationStatus;
 use App\Repository\ReservationRepository;
 use DateTimeInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -105,14 +107,29 @@ class Reservation
     )]
     private int $attendees;
 
-    #[ORM\Column(type: 'text', nullable: true)]
-    private ?string $comment;
-
     #[ORM\Column(type: 'string', length: 255)]
     private string $status;
 
     #[ORM\ManyToOne(targetEntity: Artist::class, inversedBy: 'reservations')]
-    private Artist $artist;
+    private ?Artist $artist = null;
+
+    #[ORM\Column(type: 'float', nullable: true)]
+    #[Assert\Positive]
+    private ?float $price;
+
+    #[ORM\ManyToMany(targetEntity: MusicalStyle::class, inversedBy: 'reservations')]
+    private Collection $musicalStyles;
+
+    #[ORM\Column(type: 'text', nullable: true)]
+    private ?string $commentClient;
+
+    #[ORM\Column(type: 'text', nullable: true)]
+    private ?string $commentAdmin;
+
+    public function __construct()
+    {
+        $this->musicalStyles = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -251,18 +268,6 @@ class Reservation
         return $this;
     }
 
-    public function getComment(): ?string
-    {
-        return $this->comment;
-    }
-
-    public function setComment(?string $comment): self
-    {
-        $this->comment = $comment;
-
-        return $this;
-    }
-
     public function getStatus(): string
     {
         return $this->status;
@@ -283,6 +288,66 @@ class Reservation
     public function setArtist(?Artist $artist): self
     {
         $this->artist = $artist;
+
+        return $this;
+    }
+
+    public function getPrice(): ?float
+    {
+        return $this->price;
+    }
+
+    public function setPrice(?float $price): self
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, MusicalStyle>
+     */
+    public function getMusicalStyles(): ?Collection
+    {
+        return $this->musicalStyles;
+    }
+
+    public function addMusicalStyle(MusicalStyle $musicalStyle): self
+    {
+        if (!$this->musicalStyles->contains($musicalStyle)) {
+            $this->musicalStyles[] = $musicalStyle;
+        }
+
+        return $this;
+    }
+
+    public function removeMusicalStyle(MusicalStyle $musicalStyle): self
+    {
+        $this->musicalStyles->removeElement($musicalStyle);
+
+        return $this;
+    }
+
+    public function getCommentClient(): ?string
+    {
+        return $this->commentClient;
+    }
+
+    public function setCommentClient(?string $commentClient): self
+    {
+        $this->commentClient = $commentClient;
+
+        return $this;
+    }
+
+    public function getCommentAdmin(): ?string
+    {
+        return $this->commentAdmin;
+    }
+
+    public function setCommentAdmin(?string $commentAdmin): self
+    {
+        $this->commentAdmin = $commentAdmin;
 
         return $this;
     }

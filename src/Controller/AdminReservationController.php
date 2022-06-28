@@ -14,25 +14,38 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/admin/reservation', name: 'admin_reservation_')]
 class AdminReservationController extends AbstractController
 {
+    private array $statusColors = [];
+    private array $statusValue = [];
+
+    public function __construct()
+    {
+        $statusCases = ReservationStatus::cases();
+        foreach ($statusCases as $case) {
+            $this->statusColors[$case->name] = $case->getColor();
+            $this->statusValue[$case->name] = $case->value;
+        }
+    }
+
     #[Route('/', name: 'index', methods: ['GET'])]
     public function index(ReservationRepository $reservationRepo): Response
     {
-        //Hack to retrieve enum values and use then in twig template
-        $statusCases = ReservationStatus::cases();
-        $statusColors = [];
-        $statusValue = [];
-        foreach ($statusCases as $case) {
-            $statusColors[$case->name] = $case->getColor();
-            $statusValue[$case->name] = $case->value;
-        }
-
         return $this->render('admin/reservation/index.html.twig', [
             'reservations' => $reservationRepo->findBy(
                 [],
                 ['dateStart' => 'desc', 'status' => 'asc']
             ),
-            'statusValue' => $statusValue,
-            'statusColor' => $statusColors,
+            'statusValue' => $this->statusValue,
+            'statusColor' => $this->statusColors,
+        ]);
+    }
+
+    #[Route('/validee', name: 'taken', methods: ['GET'])]
+    public function takenReservations(ReservationRepository $reservationRepo): Response
+    {
+        return $this->render('admin/reservation/index.html.twig', [
+            'reservations' => $reservationRepo->findTaken(),
+            'statusValue' => $this->statusValue,
+            'statusColor' => $this->statusColors,
         ]);
     }
 

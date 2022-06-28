@@ -3,12 +3,15 @@
 namespace App\Form;
 
 use App\Config\ReservationStatus;
+use App\Entity\MusicalStyle;
 use App\Entity\Reservation;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -57,8 +60,22 @@ class ReservationType extends AbstractType
             ->add('attendees', NumberType::class, [
                 'label' => 'Participants'
             ])
-            ->add('comment', TextType::class, [
-                'label' => 'Commentaire'
+            ->add('commentClient', TextareaType::class, [
+                'label' => 'Commentaire client (non visible côté DJ)'
+            ])
+            ->add('musicalStyles', EntityType::class, [
+                'class' => MusicalStyle::class,
+                'label' => 'Genre musical',
+                'choice_label' => 'name',
+                'multiple' => true,
+                'expanded' => true,
+                'by_reference' => false,
+                ])
+            ->add('commentAdmin', TextareaType::class, [
+                'label' => 'Commentaire admin (visible côté DJ)'
+            ])
+            ->add('price', NumberType::class, [
+                'label' => 'Tarif'
             ])
             ->add('status', ChoiceType::class, [
                 'choices' => $this->reservationStatus

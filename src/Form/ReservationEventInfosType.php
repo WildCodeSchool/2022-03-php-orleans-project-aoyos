@@ -45,7 +45,7 @@ class ReservationEventInfosType extends AbstractType
                 'label' => 'Participants',
                 'attr' => ['placeholder' => '150'],
             ])
-            ->add('comment', TextareaType::class, [
+            ->add('commentClient', TextareaType::class, [
                 'label' => 'Commentaire (optionnel)',
                 'required' => false
             ])

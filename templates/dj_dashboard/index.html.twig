@@ -14,68 +14,30 @@
 
 {% block content %}
 	<main>
-    <div class="container d-flex flex-column mt-5">
-		{% if is_granted('ROLE_USER') and not is_granted('ROLE_DJ') %}
-			<div class="d-flex justify-content-center mt-5">
-				<h1 class="mt-5">Votre candidature est en attente de confirmation.</h1>
-			</div>
-		{% else %}
-			<section class="reservations-dj">
-				<h1 class="mt-3 mb-2 ms-3">
-				Mes évènements
-				</h1>
-			<div class="row me-2 ms-2 mb-1 d-flex flex-row">
-				{% for reservation in reservations %}
-					<div class="col-md-10 col-lg-6 col-xl-4 mx-auto my-3 my-xl-2">
-						<div class="bg-dark dj-title-card d-flex align-items-center">
-							<h5 class="px-2 card-title text-light mx-auto w-75 text-center">{{ reservation.company }}</h5>
-						</div>
-						<div class="card shadow border border-dark">
-							<div class="card-body d-flex flex-column">
-								<p class="card-text px-2 mt-3"> <strong>Nom :</strong> {{ reservation.firstName }}
-									{{ reservation.lastName }}</p>
-									<hr/>
-								<p class="card-text px-2"> <strong>Formule :</strong> {{ reservation.formula }}</p>
-								<hr/>
-								<p class="card-text px-2"> <strong>Date :</strong> {{ reservation.dateStart|date("m/d/Y") }}</p>
-								<hr/>
-								<div class="d-flex flex-grow-1 align-items-center">
-								<p class="card-text px-2 "> <strong>Adresse :</strong> {{ reservation.address|u.truncate(50, '...', false) }}</p>
-								</div>
-							</div>
-							<a href="#" class="btn btn-outline-dark mx-2 mb-2">Voir</a>
-						</div>
+		<div class="container d-flex flex-column mt-5">
+			{% if is_granted('ROLE_USER') and not is_granted('ROLE_DJ') %}
+				<div class="d-flex justify-content-center mt-5">
+					<h1 class="mt-5">Votre candidature est en attente de confirmation.</h1>
+				</div>
+			{% else %}
+				<section class="reservations-dj">
+					<h1 class="mt-3 mb-2 ms-3">
+						Mes évènements
+					</h1>
+					<div class="row me-2 ms-2 mb-1 d-flex flex-row w-100">
+						{% for reservation in reservations %}
+							{% include 'dj_dashboard/_cards_dj.html.twig' %}
+						{% endfor %}
 					</div>
-				{% endfor %}
-			</div>
-			<h1 class="mt-3 mb-2 ms-3">
-				Nouveaux évènements
-				</h1>
-			<div class="row me-2 ms-2 mb-1 d-flex flex-row">
-				{% for newReservation in newReservations %}
-					<div class="col-md-10 col-lg-6 col-xl-4 mx-auto my-3 my-xl-2">
-						<div class="bg-dark dj-title-card d-flex align-items-center">
-							<h5 class="px-2 card-title text-light mx-auto w-75 text-center">{{ newReservation.company }}</h5>
-						</div>
-						<div class="card shadow border border-dark">
-							<div class="card-body d-flex flex-column">
-								<p class="card-text px-2 mt-3"> <strong>Nom :</strong> {{ newReservation.firstName }}
-									{{ newReservation.lastName }}</p>
-									<hr/>
-								<p class="card-text px-2"> <strong>Formule :</strong> {{ newReservation.formula }}</p>
-								<hr/>
-								<p class="card-text px-2"> <strong>Date :</strong> {{ newReservation.dateStart|date("m/d/Y") }}</p>
-								<hr/>
-								<div class="d-flex flex-grow-1 align-items-center">
-								<p class="card-text px-2 "> <strong>Adresse :</strong> {{ newReservation.address|u.truncate(50, '...', false) }}</p>
-								</div>
-							</div>
-							<a href="#" class="btn btn-outline-dark mx-2 mb-2">Voir</a>
-						</div>
+					<h1 class="mt-3 mb-2 ms-3">
+						Nouveaux évènements
+					</h1>
+					<div class="row me-2 ms-2 mb-1 d-flex flex-row w-100">
+						{% for reservation in newReservations %}
+							{% include 'dj_dashboard/_cards_dj.html.twig' %}
+						{% endfor %}
 					</div>
-				{% endfor %}
+				{% endif %}
 			</div>
-		{% endif %}
-	</div>
-	</main>
+		</main>
 {% endblock %}
