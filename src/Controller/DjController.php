@@ -72,7 +72,7 @@ class DjController extends AbstractController
                 $user->setPassword($hashedPassword);
                 $userRepository->add($user, true);
                 $artist->setUser($user);
-                $distanceCalculator->setArtistCoordinates($artist);
+                $distanceCalculator->setCoordinates($artist);
                 $artistRepository->add($artist, true);
 
 
