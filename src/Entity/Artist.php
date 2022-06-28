@@ -77,9 +77,6 @@ class Artist
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
-    #[ORM\OneToOne(inversedBy: 'artist', targetEntity: Coordinate::class, cascade: ['persist', 'remove'])]
-    private Coordinate $coordinates;
-
     public function __construct()
     {
         $this->musicalStyles = new ArrayCollection();
@@ -261,18 +258,6 @@ class Artist
     public function setUser(?User $user): self
     {
         $this->user = $user;
-
-        return $this;
-    }
-
-    public function getCoordinates(): ?Coordinate
-    {
-        return $this->coordinates;
-    }
-
-    public function setCoordinates(?Coordinate $coordinates): self
-    {
-        $this->coordinates = $coordinates;
 
         return $this;
     }
