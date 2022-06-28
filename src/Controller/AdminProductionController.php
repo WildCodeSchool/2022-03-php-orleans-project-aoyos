@@ -31,6 +31,8 @@ class AdminProductionController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $productionRepository->add($production, true);
 
+            $this->addFlash('success', 'Votre réalisation a bien été ajoutée.');
+
             return $this->redirectToRoute('app_admin_production_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -48,6 +50,8 @@ class AdminProductionController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $productionRepository->add($production, true);
+
+            $this->addFlash('success', 'Votre réalisation a bien été éditée.');
 
             return $this->redirectToRoute('app_admin_production_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -67,6 +71,8 @@ class AdminProductionController extends AbstractController
         if ($this->isCsrfTokenValid('delete' . $production->getId(), $request->request->get('_token'))) {
             $productionRepository->remove($production, true);
         }
+
+        $this->addFlash('success', 'Votre réalisation a bien été supprimée.');
 
         return $this->redirectToRoute('app_admin_production_index', [], Response::HTTP_SEE_OTHER);
     }

@@ -31,6 +31,8 @@ class AdminPartnerController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $partnerRepository->add($partner, true);
 
+            $this->addFlash('success', 'Votre partenaire a bien été ajouté.');
+
             return $this->redirectToRoute('app_admin_partner_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -49,6 +51,8 @@ class AdminPartnerController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $partnerRepository->add($partner, true);
 
+            $this->addFlash('success', 'Votre partenaire a bien été édité.');
+
             return $this->redirectToRoute('app_admin_partner_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -64,6 +68,8 @@ class AdminPartnerController extends AbstractController
         if ($this->isCsrfTokenValid('delete' . $partner->getId(), $request->request->get('_token'))) {
             $partnerRepository->remove($partner, true);
         }
+
+        $this->addFlash('success', 'Votre partenaire a bien été supprimé.');
 
         return $this->redirectToRoute('app_admin_partner_index', [], Response::HTTP_SEE_OTHER);
     }

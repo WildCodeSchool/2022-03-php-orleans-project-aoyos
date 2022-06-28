@@ -80,6 +80,8 @@ class AdminReservationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $reservationRepo->add($reservation, true);
 
+            $this->addFlash('success', 'Votre réservation a bien été éditée.');
+
             return $this->redirectToRoute('admin_reservation_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -98,6 +100,8 @@ class AdminReservationController extends AbstractController
         if ($this->isCsrfTokenValid('delete' . $reservation->getId(), $request->request->get('_token'))) {
             $reservationRepo->remove($reservation, true);
         }
+
+        $this->addFlash('success', 'Votre réservation a bien été supprimée.');
 
         return $this->redirectToRoute('admin_reservation_index', [], Response::HTTP_SEE_OTHER);
     }
