@@ -58,6 +58,7 @@ class DjController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             if ($session->get('step') === 1) {
+                $distanceCalculator->setCoordinates($artist);
                 $session->set('artist', $artist);
                 $session->set('step', 2);
             } elseif ($session->get('step') === 2) {
@@ -72,9 +73,7 @@ class DjController extends AbstractController
                 $user->setPassword($hashedPassword);
                 $userRepository->add($user, true);
                 $artist->setUser($user);
-                $distanceCalculator->setCoordinates($artist);
                 $artistRepository->add($artist, true);
-
 
                 return $this->redirectToRoute('app_dj', [], Response::HTTP_SEE_OTHER);
             }
