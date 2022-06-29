@@ -293,6 +293,9 @@ class Artist implements Localizable
     public function setLatitude(?float $latitude): self
     {
         $this->latitude = $latitude;
+        
+        return $this;
+    }
 
     public function getDocuments(): ?Document
     {
