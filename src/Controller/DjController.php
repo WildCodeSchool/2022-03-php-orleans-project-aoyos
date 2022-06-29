@@ -74,16 +74,19 @@ class DjController extends AbstractController
                 $userRepository->add($user, true);
                 $artist->setUser($user);
                 $artistRepository->add($artist, true);
+                $this->addFlash('success', 'Votre demande a bien été transmise.');
 
                 return $this->redirectToRoute('app_dj', [], Response::HTTP_SEE_OTHER);
             }
+
             return $this->redirectToRoute('app_registration', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm(
             'dj/registration/index.html.twig',
-            [ 'form' => $form,
-             'artist' => $artist,
+            [
+                'form' => $form,
+                'artist' => $artist,
             ]
         );
     }

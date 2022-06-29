@@ -18,6 +18,10 @@ vich_uploader:
             uri_prefix: /uploads/images/partner
             upload_destination: '%kernel.project_dir%/public/uploads/images/partner'
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+        dj_documents:
+            uri_prefix: /uploads/images/dj
+            upload_destination: '%kernel.project_dir%/public/uploads/images/dj'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
 
     metadata:
         type: attribute

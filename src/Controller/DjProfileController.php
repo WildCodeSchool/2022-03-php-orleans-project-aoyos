@@ -2,8 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Document;
 use App\Form\ArtistEditType;
+use App\Form\ArtistProfileType;
+use App\Form\ArtistType;
+use App\Form\DocumentType;
 use App\Repository\ArtistRepository;
+use App\Repository\DocumentRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,7 +27,7 @@ class DjProfileController extends AbstractController
         $emailArtist = $authenticationUtils->getLastUsername();
         $artist = $artistRepository->findOneBy(['email' => $emailArtist]);
 
-        $form = $this->createForm(ArtistEditType::class, $artist);
+        $form = $this->createForm(ArtistType::class, $artist);
         $form->handleRequest($request);
 
         if (($form->isSubmitted() && $form->isValid())) {
@@ -32,6 +37,57 @@ class DjProfileController extends AbstractController
 
             return $this->redirectToRoute('dashboard_dj_profile', [], Response::HTTP_SEE_OTHER);
         }
+        return $this->renderForm('dj_dashboard/profile/edit.html.twig', [
+            'artist' => $artist,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/documents', name: 'documents', methods: ['GET', 'POST'])]
+    public function documents(
+        Request $request,
+        DocumentRepository $documentRepository,
+    ): Response {
+        /** @phpstan-ignore-next-line */
+        $artist = $this->getUser()->getArtist();
+        $document = $artist->getDocuments() ?? new Document();
+
+        $form = $this->createForm(DocumentType::class, $document);
+        $form->handleRequest($request);
+
+        if (($form->isSubmitted() && $form->isValid())) {
+            $document->setArtist($artist);
+            $documentRepository->add($document, true);
+
+            $this->addFlash('success', 'Votre profil a bien été modifié.');
+
+            return $this->redirectToRoute('dashboard_dj_documents', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('dj_dashboard/profile/edit.html.twig', [
+            'artist' => $artist,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/artist', name: 'artist', methods: ['GET', 'POST'])]
+    public function artist(
+        Request $request,
+        ArtistRepository $artistRepository,
+    ): Response {
+        /** @phpstan-ignore-next-line */
+        $artist = $this->getUser()->getArtist();
+
+        $form = $this->createForm(ArtistProfileType::class, $artist);
+        $form->handleRequest($request);
+
+        if (($form->isSubmitted() && $form->isValid())) {
+            $artistRepository->add($artist, true);
+            $this->addFlash('success', 'Votre profil a bien été modifié.');
+
+            return $this->redirectToRoute('dashboard_dj_artist', [], Response::HTTP_SEE_OTHER);
+        }
+
         return $this->renderForm('dj_dashboard/profile/edit.html.twig', [
             'artist' => $artist,
             'form' => $form,

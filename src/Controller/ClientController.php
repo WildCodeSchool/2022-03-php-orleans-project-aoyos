@@ -48,7 +48,10 @@ class ClientController extends AbstractController
                 $reservation->setStatus(ReservationStatus::Waiting->name);
                 $reservationRepo->add($reservation, true);
                 $this->sendReservationMail($reservation, $mailer);
+
+                $this->addFlash('success', 'Votre demande a bien été transmise.');
             }
+
             return $this->redirectToRoute('client_index', ['_fragment' => 'reservation'], Response::HTTP_SEE_OTHER);
         }
 

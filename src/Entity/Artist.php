@@ -83,6 +83,10 @@ class Artist implements Localizable
 
     #[ORM\Column(type: 'float', nullable: true)]
     private ?float $latitude;
+    
+    #[ORM\OneToOne(inversedBy: 'artist', targetEntity: Document::class, cascade: ['persist', 'remove'])]
+    private ?Document $documents = null;
+
 
     public function __construct()
     {
@@ -289,6 +293,15 @@ class Artist implements Localizable
     public function setLatitude(?float $latitude): self
     {
         $this->latitude = $latitude;
+
+    public function getDocuments(): ?Document
+    {
+        return $this->documents;
+    }
+
+    public function setDocuments(?Document $documents): self
+    {
+        $this->documents = $documents;
 
         return $this;
     }

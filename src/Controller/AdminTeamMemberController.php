@@ -31,6 +31,8 @@ class AdminTeamMemberController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $teamMemberRepository->add($teamMember, true);
 
+            $this->addFlash('success', 'Votre collaborateur a bien été ajouté.');
+
             return $this->redirectToRoute('admin_team_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -60,6 +62,8 @@ class AdminTeamMemberController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $teamMemberRepository->add($teamMember, true);
 
+            $this->addFlash('success', 'Votre collaborateur a bien été édité.');
+
             return $this->redirectToRoute('admin_team_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -78,6 +82,8 @@ class AdminTeamMemberController extends AbstractController
         if ($this->isCsrfTokenValid('delete' . $teamMember->getId(), $request->request->get('_token'))) {
             $teamMemberRepository->remove($teamMember, true);
         }
+
+        $this->addFlash('success', 'Votre collaborateur a bien été supprimé.');
 
         return $this->redirectToRoute('admin_team_index', [], Response::HTTP_SEE_OTHER);
     }
