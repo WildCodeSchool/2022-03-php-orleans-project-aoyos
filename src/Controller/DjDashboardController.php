@@ -44,8 +44,6 @@ class DjDashboardController extends AbstractController
         return $this->render('dj_dashboard/my_events.html.twig', [
             'reservations' => $reservations,
             'filter' => $filter,
-            'passes' => ReservationRepository::PAST_EVENTS,
-            'avenir' => ReservationRepository::FUTURE_EVENTS,
         ]);
     }
 }
