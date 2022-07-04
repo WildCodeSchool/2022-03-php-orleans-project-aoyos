@@ -1,0 +1,32 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block title %}
+	{{ parent() }}- {{artist.artistName}}
+{% endblock %}
+
+{% block content %}
+	<main class="container">
+
+			<h1 class="my-5 text-center">
+				{{ artist.artistName }}
+			</h1>
+			<div class="d-flex">
+			<div class="d-flex flex-column shadow p-4 w-50 mx-5">
+			<h2 class="text-muted fs-2">Coordonnées</h3>
+			<p class="fs-6 text-muted m-0">Prénom : <span class="fs-5 text-dark"> {{ artist.firstName }}</span></p>
+			<p class="fs-6 text-muted m-0">Nom de famille : <span class="fs-5 text-dark"> {{ artist.lastName }}</span></p>
+			<p class="fs-6 text-muted m-0">Téléphone : <span class="fs-5 text-dark"> {{ artist.phone }}</span></p>
+			<p class="fs-6 text-muted m-0">Email : <span class="fs-5 text-dark"> {{ artist.email }}</span></p>
+			<p class="fs-6 text-muted m-0">Adresse : <span class="fs-5 text-dark"> {{ artist.address }}</span></p>
+			</div>
+			<div class="d-flex flex-column shadow p-4 w-50">
+			<h2 class="text-muted fs-2">Profil d'artiste</h2>
+			<p class="fs-6 text-muted m-0">Nom d'artiste : <span class="fs-5 text-dark"> {{ artist.artistName }}</span></p>
+			<p class="fs-6 text-muted m-0">Équipement : <span class="fs-5 text-dark"> {{ artist.artistName }}</span></p>
+			{% for musicalStyle in artist.musicalStyles %}
+			<p class="fs-6 text-muted m-0">Genre musical : <span class="fs-5 text-dark">{{ musicalStyle.name }}</span></p>
+			{% endfor %}
+			</div>
+			</div>
+	</main>
+{% endblock %}
