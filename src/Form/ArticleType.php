@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Article;
 use Symfony\Component\Form\AbstractType;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -18,8 +19,8 @@ class ArticleType extends AbstractType
             ->add('title', TextType::class, [
                 'label' => 'Titre'
             ])
-            ->add('description', TextareaType::class, [
-                'label' => 'Description'
+            ->add('description', CKEditorType::class, [
+                'config_name' => 'my_config'
             ])
             ->add('author', TextType::class, [
                 'label' => 'Auteur'
