@@ -23,7 +23,7 @@
 				<div class="form-group my-5">
 					<label for="password" class="mb-2 fs-5 text-dark">Mot de passe</label>
 					<input type="password" class="form-control border-primary fs-5" id="password" name="_password"/>
-					<a class="text-dark" href="/reinitialisation-mot-de-passe">Mot de passe perdu</a>
+					<a class="text-dark" href="{{ path('app_forgot_password_request') }}">Mot de passe perdu</a>
 				</div>
 
 				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
