@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Reservation;
 use App\Entity\User;
-use App\Repository\ArtistRepository;
 use App\Config\ReservationStatus;
 use App\Repository\ReservationRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -42,7 +41,6 @@ class DjDashboardController extends AbstractController
     public function show(
         Reservation $reservation,
     ): Response {
-
         return $this->render('dj_dashboard/reservation/show.html.twig', [
             'reservation' => $reservation
         ]);
