@@ -12,6 +12,7 @@ class ArtistFixtures extends Fixture implements DependentFixtureInterface
 {
     public const NUMBER_ARTISTS = 3;
     public const EMAILS = ['dj1@exemple.com', 'dj2@exemple.com', 'dj3@exemple.com'];
+    public const ORLEANS_COORDINATES = [47.873527, 1.910865];
 
     public function load(ObjectManager $manager): void
     {
@@ -31,6 +32,8 @@ class ArtistFixtures extends Fixture implements DependentFixtureInterface
             $artist->setArtistName($faker->word());
             $artist->setEquipment($faker->words(3, true));
             $artist->setMessage($faker->sentence());
+            $artist->setLatitude(self::ORLEANS_COORDINATES[0]);
+            $artist->setLongitude(self::ORLEANS_COORDINATES[1]);
             $artist->setUser($this->getReference('user_' . $i));
             $artist->addMusicalStyle(
                 $this->getReference('musicalstyle_' . rand(0, $totalMusicalStyles))

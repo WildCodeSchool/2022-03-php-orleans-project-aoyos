@@ -51,6 +51,6 @@ class DistanceCalculator
         $distance = 2 * self::EARTH_RADIUS_KM * sin(sqrt(sin($latitudeDifference / 2) * sin($latitudeDifference / 2)
         + cos($radiusLatitudeStart) * cos($radiusLatitudeEnd)
         * sin($longitudeDifference / 2) * sin($longitudeDifference / 2)));
-        return $distance;
+        return round($distance, 0);
     }
 }
