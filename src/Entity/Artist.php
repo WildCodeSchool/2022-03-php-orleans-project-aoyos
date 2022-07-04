@@ -87,6 +87,18 @@ class Artist implements Localizable
     #[ORM\OneToOne(inversedBy: 'artist', targetEntity: Document::class, cascade: ['persist', 'remove'])]
     private ?Document $documents = null;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Assert\Url]
+    private ?string $instagram;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Assert\Url]
+    private ?string $soundCloud;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Assert\Url]
+    private ?string $facebook;
+
 
     public function __construct()
     {
@@ -305,6 +317,42 @@ class Artist implements Localizable
     public function setDocuments(?Document $documents): self
     {
         $this->documents = $documents;
+
+        return $this;
+    }
+
+    public function getInstagram(): ?string
+    {
+        return $this->instagram;
+    }
+
+    public function setInstagram(?string $instagram): self
+    {
+        $this->instagram = $instagram;
+
+        return $this;
+    }
+
+    public function getSoundCloud(): ?string
+    {
+        return $this->soundCloud;
+    }
+
+    public function setSoundCloud(?string $soundCloud): self
+    {
+        $this->soundCloud = $soundCloud;
+
+        return $this;
+    }
+
+    public function getFacebook(): ?string
+    {
+        return $this->facebook;
+    }
+
+    public function setFacebook(?string $facebook): self
+    {
+        $this->facebook = $facebook;
 
         return $this;
     }
