@@ -12,6 +12,9 @@
 					<p class="card-text px-2 ">
 						<i class="bi bi-caret-right-fill"></i>
 						{{ reservation.address|u.truncate(50, '...', false) }}</p>
+					<p class="card-text px-2 ">
+						<i class="bi bi-caret-right-fill"></i>
+						{{ reservation.distance }} km</p>
 					<a href="#" class="btn btn-outline-primary mx-2 mb-2">En savoir plus</a>
 					{% if reservation.artist is defined and reservation.artist == app.user.artist %}
 						<a href="#" class="btn btn-outline-danger mx-2 ">Annuler</a>

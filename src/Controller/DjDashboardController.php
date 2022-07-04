@@ -6,6 +6,7 @@ use App\Entity\Reservation;
 use App\Entity\User;
 use App\Config\ReservationStatus;
 use App\Repository\ReservationRepository;
+use App\Service\DistanceCalculator;
 use Doctrine\Persistence\ManagerRegistry;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,17 +23,34 @@ class DjDashboardController extends AbstractController
     #[IsGranted('ROLE_USER')]
     public function index(
         ReservationRepository $reservationRepo,
+        DistanceCalculator $distanceCalculator,
     ): Response {
         /** @var User */
         $user = $this->getUser();
+        $reservations = $reservationRepo->findBy(
+            ['artist' => $user->getArtist()],
+            ['id' => 'desc'],
+            self::MAX_ELEMENTS
+        );
+        $newReservations = $reservationRepo->findBy(
+            [],
+            ['id' => 'desc'],
+            self::MAX_ELEMENTS
+        );
+
+        foreach ($reservations as $reservation) {
+            $distance = $distanceCalculator->getDistance($user->getArtist(), $reservation);
+            $reservation->setDistance($distance);
+        }
+
+        foreach ($newReservations as $newReservation) {
+            $distance = $distanceCalculator->getDistance($user->getArtist(), $newReservation);
+            $newReservation->setDistance($distance);
+        }
 
         return $this->render('dj_dashboard/index.html.twig', [
-            'reservations' => $reservationRepo->findBy(
-                ['artist' => $user->getArtist()],
-                ['id' => 'desc'],
-                self::MAX_ELEMENTS
-            ),
-            'newReservations' => $reservationRepo->findBy([], ['id' => 'desc'], self::MAX_ELEMENTS)
+            'reservations' => $reservations,
+            'newReservations' => $newReservations,
         ]);
     }
 
