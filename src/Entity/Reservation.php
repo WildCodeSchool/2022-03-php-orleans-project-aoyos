@@ -126,6 +126,12 @@ class Reservation
     #[ORM\Column(type: 'text', nullable: true)]
     private ?string $commentAdmin;
 
+    #[ORM\Column(type: 'float', nullable: true)]
+    private float $longitude;
+
+    #[ORM\Column(type: 'float', nullable: true)]
+    private float $latitude;
+
     public function __construct()
     {
         $this->musicalStyles = new ArrayCollection();
@@ -348,6 +354,30 @@ class Reservation
     public function setCommentAdmin(?string $commentAdmin): self
     {
         $this->commentAdmin = $commentAdmin;
+
+        return $this;
+    }
+
+    public function getLongitude(): ?float
+    {
+        return $this->longitude;
+    }
+
+    public function setLongitude(?float $longitude): self
+    {
+        $this->longitude = $longitude;
+
+        return $this;
+    }
+
+    public function getLatitude(): ?float
+    {
+        return $this->latitude;
+    }
+
+    public function setLatitude(?float $latitude): self
+    {
+        $this->latitude = $latitude;
 
         return $this;
     }
