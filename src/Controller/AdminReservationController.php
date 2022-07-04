@@ -49,10 +49,21 @@ class AdminReservationController extends AbstractController
     }
 
     #[Route('/validee', name: 'taken', methods: ['GET'])]
-    public function takenReservations(ReservationRepository $reservationRepo): Response
+    public function takenReservations(Request $request, ReservationRepository $reservationRepo): Response
     {
-        return $this->render('admin/reservation/index.html.twig', [
-            'reservations' => $reservationRepo->findTaken(),
+        $form = $this->createForm(SearchAdminReservationType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $search = $form->getData()['search'];
+            $reservations = $reservationRepo->findTakenWithSearch($search);
+        } else {
+            $reservations = $reservationRepo->findTaken();
+        }
+
+        return $this->renderForm('admin/reservation/index.html.twig', [
+            'form' => $form,
+            'reservations' => $reservations,
             'statusValue' => $this->statusValue,
             'statusColor' => $this->statusColors,
         ]);

@@ -2,9 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\Artist;
 use App\Entity\Reservation;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Reservation>
@@ -16,6 +17,9 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ReservationRepository extends ServiceEntityRepository
 {
+    public const PAST_EVENTS = 'passes';
+    public const FUTURE_EVENTS = 'a-venir';
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Reservation::class);
@@ -45,21 +49,60 @@ class ReservationRepository extends ServiceEntityRepository
             ->andWhere('r.artist is NOT NULL')
             ->orderBy('r.dateStart', 'DESC')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-//    /**
-//     * @return Reservation[] Returns an array of Reservation objects
-//     */
+
+    public function findByArtistByDate(Artist $artist, string $filter): array
+    {
+        $condition = '';
+        if ($filter === self::PAST_EVENTS) {
+            $condition = '<';
+        } elseif ($filter === self::FUTURE_EVENTS) {
+            $condition = '>=';
+        }
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.artist = :artist')
+            ->setParameter('artist', $artist)
+            ->andWhere('r.dateEnd ' . $condition . ' current_date()')
+            ->orderBy('r.dateEnd', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+    //    /**
+    //     * @return Reservation[] Returns an array of Reservation objects
+    //     */
+
+
+    //    public function findOneBySomeField($value): ?Reservation
+    //    {
+    //        return $this->createQueryBuilder('r')
+    //            ->andWhere('r.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
+    public function findTakenWithSearch(string $eventType): array
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.artist is NOT NULL')
+            ->andWhere('r.eventType LIKE :eventType')
+            ->setParameter('eventType', '%' . $eventType . '%')
+            ->orderBy('r.dateStart', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+    //    /**
+    //     * @return Reservation[] Returns an array of Reservation objects
+    //     */
 
 
     public function findLikeEventType(string $eventType): array
     {
         return $this->createQueryBuilder('r')
-           ->andWhere('r.eventType LIKE :eventType')
-           ->setParameter('eventType', '%' . $eventType . '%')
-           ->getQuery()
-           ->getResult()
-        ;
+            ->andWhere('r.eventType LIKE :eventType')
+            ->setParameter('eventType', '%' . $eventType . '%')
+            ->getQuery()
+            ->getResult();
     }
 }
