@@ -1,9 +1,13 @@
-<h1>Hi!</h1>
+{% extends "layout_email.html.twig" %}
 
-<p>To reset your password, please visit the following link</p>
+{% block body %}
+    <h1>Bonjour,</h1>
 
-<a href="{{ url('app_reset_password', {token: resetToken.token}) }}">{{ url('app_reset_password', {token: resetToken.token}) }}</a>
+    <p>Ce mail vous a été envoyé suite à une demande de réinitialisation de mot de passe.</p>
+    <p>Si vous n'êtes pas l'auteur de la demande, merci d'ignorer ce mail sinon cliquez sur le lien ci-dessous</p>
 
-<p>This link will expire in {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.</p>
+    <a href="{{ url('app_reset_password', {token: resetToken.token}) }}">{{ url('app_reset_password', {token: resetToken.token}) }}</a>
 
-<p>Cheers!</p>
+    <p>Cordialement,</p>
+    <p>L'équipe d'aoyos</p>
+{% endblock %}
