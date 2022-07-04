@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Config\ReservationStatus;
+use App\Model\Localizable;
 use App\Repository\ReservationRepository;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -11,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]
-class Reservation
+class Reservation implements Localizable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -107,9 +108,6 @@ class Reservation
     )]
     private int $attendees;
 
-    #[ORM\Column(type: 'text', nullable: true)]
-    private ?string $comment;
-
     #[ORM\Column(type: 'string', length: 255)]
     private string $status;
 
@@ -122,6 +120,18 @@ class Reservation
 
     #[ORM\ManyToMany(targetEntity: MusicalStyle::class, inversedBy: 'reservations')]
     private Collection $musicalStyles;
+
+    #[ORM\Column(type: 'text', nullable: true)]
+    private ?string $commentClient;
+
+    #[ORM\Column(type: 'text', nullable: true)]
+    private ?string $commentAdmin;
+
+    #[ORM\Column(type: 'float', nullable: true)]
+    private float $longitude;
+
+    #[ORM\Column(type: 'float', nullable: true)]
+    private float $latitude;
 
     public function __construct()
     {
@@ -265,18 +275,6 @@ class Reservation
         return $this;
     }
 
-    public function getComment(): ?string
-    {
-        return $this->comment;
-    }
-
-    public function setComment(?string $comment): self
-    {
-        $this->comment = $comment;
-
-        return $this;
-    }
-
     public function getStatus(): string
     {
         return $this->status;
@@ -333,6 +331,54 @@ class Reservation
     public function removeMusicalStyle(MusicalStyle $musicalStyle): self
     {
         $this->musicalStyles->removeElement($musicalStyle);
+
+        return $this;
+    }
+
+    public function getCommentClient(): ?string
+    {
+        return $this->commentClient;
+    }
+
+    public function setCommentClient(?string $commentClient): self
+    {
+        $this->commentClient = $commentClient;
+
+        return $this;
+    }
+
+    public function getCommentAdmin(): ?string
+    {
+        return $this->commentAdmin;
+    }
+
+    public function setCommentAdmin(?string $commentAdmin): self
+    {
+        $this->commentAdmin = $commentAdmin;
+
+        return $this;
+    }
+
+    public function getLongitude(): ?float
+    {
+        return $this->longitude;
+    }
+
+    public function setLongitude(?float $longitude): self
+    {
+        $this->longitude = $longitude;
+
+        return $this;
+    }
+
+    public function getLatitude(): ?float
+    {
+        return $this->latitude;
+    }
+
+    public function setLatitude(?float $latitude): self
+    {
+        $this->latitude = $latitude;
 
         return $this;
     }

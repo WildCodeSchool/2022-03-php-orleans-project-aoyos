@@ -30,13 +30,13 @@ class UserFixtures extends Fixture
         $manager->persist($admin);
 
         $djUnvalidated = new User();
-        $djUnvalidated->setEmail('dj@exemple.com');
-        $djUnvalidated->setUsername('dj1');
+        $djUnvalidated->setEmail('dj1@exemple.com');
+        $djUnvalidated->setUsername('djnonvalidé');
         $djUnvalidated->setRoles(['ROLE_USER']);
-        $this->addReference('user_' . '0', $djUnvalidated);
+        $this->addReference('user_' . 0, $djUnvalidated);
         $hashedPassword = $this->passwordHasher->hashPassword(
             $djUnvalidated,
-            'djnonvalidé'
+            'dj1'
         );
         $djUnvalidated->setPassword($hashedPassword);
         $manager->persist($djUnvalidated);
@@ -48,7 +48,7 @@ class UserFixtures extends Fixture
         $this->addReference('user_' . 1, $djValidated);
         $hashedPassword = $this->passwordHasher->hashPassword(
             $djValidated,
-            'djvalidé1'
+            'dj2'
         );
         $djValidated->setPassword($hashedPassword);
         $manager->persist($djValidated);
@@ -60,7 +60,7 @@ class UserFixtures extends Fixture
         $this->addReference('user_' . 2, $djValidated);
         $hashedPassword = $this->passwordHasher->hashPassword(
             $djValidated,
-            'djvalidé2'
+            'dj3'
         );
         $djValidated->setPassword($hashedPassword);
         $manager->persist($djValidated);

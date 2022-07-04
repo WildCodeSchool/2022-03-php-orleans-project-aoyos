@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Model\Localizable;
 use App\Repository\ArtistRepository;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ArtistRepository::class)]
-class Artist
+class Artist implements Localizable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -76,6 +77,16 @@ class Artist
     #[ORM\OneToOne(inversedBy: 'artist', targetEntity: User::class, cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
+
+    #[ORM\Column(type: 'float', nullable: true)]
+    private ?float $longitude;
+
+    #[ORM\Column(type: 'float', nullable: true)]
+    private ?float $latitude;
+
+    #[ORM\OneToOne(inversedBy: 'artist', targetEntity: Document::class, cascade: ['persist', 'remove'])]
+    private ?Document $documents = null;
+
 
     public function __construct()
     {
@@ -258,6 +269,42 @@ class Artist
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getLongitude(): ?float
+    {
+        return $this->longitude;
+    }
+
+    public function setLongitude(?float $longitude): self
+    {
+        $this->longitude = $longitude;
+
+        return $this;
+    }
+
+    public function getLatitude(): ?float
+    {
+        return $this->latitude;
+    }
+
+    public function setLatitude(?float $latitude): self
+    {
+        $this->latitude = $latitude;
+
+        return $this;
+    }
+
+    public function getDocuments(): ?Document
+    {
+        return $this->documents;
+    }
+
+    public function setDocuments(?Document $documents): self
+    {
+        $this->documents = $documents;
 
         return $this;
     }

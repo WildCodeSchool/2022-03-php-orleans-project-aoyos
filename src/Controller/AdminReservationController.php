@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Config\ReservationStatus;
 use App\Entity\Reservation;
 use App\Form\ReservationType;
+use App\Form\SearchAdminReservationType;
 use App\Repository\ReservationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,23 +28,42 @@ class AdminReservationController extends AbstractController
     }
 
     #[Route('/', name: 'index', methods: ['GET'])]
-    public function index(ReservationRepository $reservationRepo): Response
+    public function index(Request $request, ReservationRepository $reservationRepo): Response
     {
-        return $this->render('admin/reservation/index.html.twig', [
-            'reservations' => $reservationRepo->findBy(
-                [],
-                ['dateStart' => 'desc', 'status' => 'asc']
-            ),
+        $form = $this->createForm(SearchAdminReservationType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $search = $form->getData()['search'];
+            $reservations = $reservationRepo->findLikeEventType($search);
+        } else {
+            $reservations = $reservationRepo->findBy([], ['dateStart' => 'desc', 'status' => 'asc']);
+        }
+
+        return $this->renderForm('admin/reservation/index.html.twig', [
+            'form' => $form,
+            'reservations' => $reservations,
             'statusValue' => $this->statusValue,
             'statusColor' => $this->statusColors,
         ]);
     }
 
     #[Route('/validee', name: 'taken', methods: ['GET'])]
-    public function takenReservations(ReservationRepository $reservationRepo): Response
+    public function takenReservations(Request $request, ReservationRepository $reservationRepo): Response
     {
-        return $this->render('admin/reservation/index.html.twig', [
-            'reservations' => $reservationRepo->findTaken(),
+        $form = $this->createForm(SearchAdminReservationType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $search = $form->getData()['search'];
+            $reservations = $reservationRepo->findTakenWithSearch($search);
+        } else {
+            $reservations = $reservationRepo->findTaken();
+        }
+
+        return $this->renderForm('admin/reservation/index.html.twig', [
+            'form' => $form,
+            'reservations' => $reservations,
             'statusValue' => $this->statusValue,
             'statusColor' => $this->statusColors,
         ]);
@@ -80,6 +100,8 @@ class AdminReservationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $reservationRepo->add($reservation, true);
 
+            $this->addFlash('success', 'Votre réservation a bien été éditée.');
+
             return $this->redirectToRoute('admin_reservation_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -98,6 +120,8 @@ class AdminReservationController extends AbstractController
         if ($this->isCsrfTokenValid('delete' . $reservation->getId(), $request->request->get('_token'))) {
             $reservationRepo->remove($reservation, true);
         }
+
+        $this->addFlash('success', 'Votre réservation a bien été supprimée.');
 
         return $this->redirectToRoute('admin_reservation_index', [], Response::HTTP_SEE_OTHER);
     }

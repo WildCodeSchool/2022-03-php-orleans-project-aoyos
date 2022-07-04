@@ -51,7 +51,7 @@ class DjDashboardController extends AbstractController
             'filter' => $filter,
         ]);
     }
-    
+
     #[Route('/reservation/{id}', name: 'show', methods: ['GET'])]
     #[IsGranted('ROLE_DJ')]
     public function show(

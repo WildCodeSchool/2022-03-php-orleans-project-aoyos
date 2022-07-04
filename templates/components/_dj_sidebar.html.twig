@@ -1,9 +1,13 @@
 {% set route_dj = {
-	'reservation': [],
+	'profile': [
+		'dashboard_dj_profile',
+		'dashboard_dj_documents',
+		'dashboard_dj_artist',
+	]
 } %}
 <nav class="offcanvas offcanvas-start sideBar d-flex flex-column justify-content-start align-items-start justify-self-start" tabindex="-1" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling">
 	<div class="w-100 d-flex mt-3 flex-column">
-		<a class="dj-nav-link pt-4 pb-3 my-2 text-decoration-none fs-6" href="#">
+		<a class="dj-nav-link pt-4 pb-3 my-2 text-decoration-none fs-6" href="{{ path('dashboard_dj_index') }}">
 			<i class="bi bi-house"></i>
 			Accueil
 		</a>
@@ -19,7 +23,7 @@
 						Évènements
 					</button>
 				</h2>
-				<div id="flush-collapseTwo" class="accordion-collapse collapse {% if route_name in route_dj.reservation %}show{% endif %}" aria-labelledby="flush-headingTwo">
+				<div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo">
 					<div class="accordion-body">
 						<ul>
 							<li><a class="text-decoration-none" href="{{ path('dashboard_dj_my_events', {'filter': 'passes'}) }}">Passés</a></li>
@@ -29,10 +33,25 @@
 				</div>
 			</div>
 		</div>
-		<a class="dj-nav-link pb-2 mt-2 text-decoration-none fs-6" href="{{ path('dashboard_dj_profile') }}">
-			<i class="bi bi-person"></i>
-			Mon compte
-		</a>
+		<div class="accordion accordion-flush" id="accordionFlushExample">
+			<div class="accordion-item collapse show my-2">
+				<h2 class="accordion-header" id="flush-headingThree">
+					<button class="accordion-button d-flex collapsed align-items-end gap-2" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+						<i class="bi bi-collection"></i>
+						Mon compte
+					</button>
+				</h2>
+				<div id="flush-collapseThree" class="accordion-collapse collapse {% if route_name in route_dj.profile %}show{% endif %}" aria-labelledby="flush-headingThree">
+					<div class="accordion-body">
+						<ul>
+							<li><a class="text-decoration-none" href="{{ path('dashboard_dj_profile') }}">Informations personnelles</a></li>
+							<li><a class="text-decoration-none" href="{{ path('dashboard_dj_artist') }}">Profil d'artiste</a></li>
+							<li><a class="text-decoration-none" href="{{ path('dashboard_dj_documents') }}">Documents</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 	<div class="d-flex flex-grow-1 flex-column mx-auto align-items-center justify-content-end mb-3 ">
 		<a class="text-decoration-none fs-6 mb-5" href="/logout">Déconnexion</a>
