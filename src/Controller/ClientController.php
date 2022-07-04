@@ -7,7 +7,10 @@ use App\Entity\Reservation;
 use App\Form\ReservationClientInfosType;
 use App\Form\ReservationEventInfosType;
 use App\Repository\ReservationRepository;
+use App\Service\DistanceCalculator;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpClient\Exception\TransportException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,7 +26,8 @@ class ClientController extends AbstractController
         Request $request,
         RequestStack $requestStack,
         ReservationRepository $reservationRepo,
-        MailerInterface $mailer
+        MailerInterface $mailer,
+        DistanceCalculator $distanceCalculator
     ): Response {
         $session = $requestStack->getSession();
         $reservation = $session->get('reservationForm') ?? new Reservation();
@@ -46,6 +50,15 @@ class ClientController extends AbstractController
                 $session->remove('reservationForm');
                 $session->remove('isReservationClientInfosValid');
                 $reservation->setStatus(ReservationStatus::Waiting->name);
+                try {
+                    $distanceCalculator->setCoordinates($reservation);
+                } catch (TransportException $te) {
+                    $this->addFlash('warning', 'Une erreur est survenue lors de la récupération de l\'adresse'
+                    . ', vous pouvez cependant poursuivre votre inscription.');
+                } catch (Exception $e) {
+                    $this->addFlash('warning', $e->getMessage()
+                    . ', vous pouvez cependant poursuivre votre inscription.');
+                }
                 $reservationRepo->add($reservation, true);
                 $this->sendReservationMail($reservation, $mailer);
 
@@ -73,7 +86,7 @@ class ClientController extends AbstractController
 
     private function sendReservationMail(Reservation $reservation, MailerInterface $mailer): void
     {
-            $email = (new Email())
+        $email = (new Email())
                 ->from($reservation->getEmail())
                 ->to($this->getParameter('mailer_from'))
                 ->subject('Une nouvelle demande de réservation')
@@ -81,6 +94,6 @@ class ClientController extends AbstractController
                     'reservation' => $reservation
                 ]));
 
-            $mailer->send($email);
+        $mailer->send($email);
     }
 }
