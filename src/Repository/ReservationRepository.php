@@ -48,6 +48,17 @@ class ReservationRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+    public function findTakenWithSearch(string $eventType): array
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.artist is NOT NULL')
+            ->andWhere('r.eventType LIKE :eventType')
+            ->setParameter('eventType', '%' . $eventType . '%')
+            ->orderBy('r.dateStart', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 //    /**
 //     * @return Reservation[] Returns an array of Reservation objects
 //     */
