@@ -2,7 +2,7 @@
 
 {% block title %}
 	{{ parent() }}
-	- Accueil client
+	- Reservation client
 {% endblock %}
 
 {% block stylesheets %}
@@ -10,13 +10,9 @@
 	{{ encore_entry_link_tags('client') }}
 {% endblock %}
 
-{% block javascripts %}
-	{{ parent() }}
-	{{ encore_entry_script_tags('typeAnimation') }}
-{% endblock %}
-
 {% block body %}
 	<main>
-		{% include "components/client/_header.html.twig" %}
+        {% include "components/client/_form.html.twig" %}
+		{% include "components/client/_sales_proposal.html.twig" %}
 	</main>
 {% endblock %}
