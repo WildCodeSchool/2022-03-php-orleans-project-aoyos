@@ -5,6 +5,11 @@
 	{{ encore_entry_link_tags('login') }}
 {% endblock %}
 
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('statusReservationSearch') }}
+{% endblock %}
+
 {% block body %}
 <main class="login">
 	<div class="container d-flex flex-column align-items-center">

@@ -28,7 +28,10 @@ class SearchAdminReservationType extends AbstractType
             ->add('status', ChoiceType::class, [
                 'label' => 'Statut',
                 'required' => false,
-                'choices' => $this->reservationStatus
+                'choices' => $this->reservationStatus,
+                'attr' => [
+                    'onchange' => 'document.forms["search_admin_reservation"].submit()'
+                ]
             ])
         ;
     }
