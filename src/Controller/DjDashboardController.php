@@ -2,17 +2,19 @@
 
 namespace App\Controller;
 
-use App\Entity\Reservation;
 use App\Entity\User;
-use App\Repository\ArtistRepository;
+use App\Entity\Reservation;
 use App\Config\ReservationStatus;
+use Symfony\Component\Mime\Email;
+use App\Repository\ArtistRepository;
 use App\Repository\ReservationRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/espace-dj', name: 'dashboard_dj_')]
 class DjDashboardController extends AbstractController
@@ -37,6 +39,21 @@ class DjDashboardController extends AbstractController
         ]);
     }
 
+    #[Route('/mes-evenements/{filter}', name: 'my_events', requirements: ['filter' => 'passes|a-venir'])]
+    #[IsGranted('ROLE_DJ')]
+    public function events(ReservationRepository $reservationRepo, string $filter): Response
+    {
+        /** @var User */
+        $user = $this->getUser();
+
+        $reservations = $reservationRepo->findByArtistByDate($user->getArtist(), $filter);
+
+        return $this->render('dj_dashboard/my_events.html.twig', [
+            'reservations' => $reservations,
+            'filter' => $filter,
+        ]);
+    }
+
     #[Route('/reservation/{id}', name: 'show', methods: ['GET'])]
     #[IsGranted('ROLE_DJ')]
     public function show(
@@ -53,7 +70,8 @@ class DjDashboardController extends AbstractController
     public function acceptReservation(
         Reservation $reservation,
         ManagerRegistry $doctrine,
-        ValidatorInterface $validator
+        ValidatorInterface $validator,
+        MailerInterface $mailer
     ): Response {
         /** @var User */
         $user = $this->getUser();
@@ -67,6 +85,16 @@ class DjDashboardController extends AbstractController
 
             if (count($validator->validate($reservation)) === 0) {
                 $entityManager->flush();
+
+                $email = (new Email())
+                ->from($user->getEmail())
+                ->to($this->getParameter('mailer_from'))
+                ->subject('Du nouveau sur l\'espace DJ')
+                ->html($this->renderView('dj_dashboard/notification_email_reservation_validated.html.twig', [
+                    'reservation' => $reservation
+                ]));
+
+                $mailer->send($email);
 
                 $this->addFlash('success', 'L\'évènement vous a été attribué !');
             } else {
