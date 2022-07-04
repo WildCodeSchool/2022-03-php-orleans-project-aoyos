@@ -103,7 +103,10 @@ class DjDashboardController extends AbstractController
 
         $entityManager = $doctrine->getManager();
 
-        if ($reservation->getStatus() === ReservationStatus::Validated->name && $reservation->getArtist() === $user->getArtist()) {
+        if (
+            $reservation->getStatus() === ReservationStatus::Validated->name
+            && $reservation->getArtist() === $user->getArtist()
+        ) {
             $reservation->setArtist(null);
             $reservation->setStatus(ReservationStatus::Waiting->name);
             $entityManager->persist($reservation);
