@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Artist;
 use App\Repository\ArtistRepository;
 use App\Repository\ReservationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,6 +20,14 @@ class AdminController extends AbstractController
         return $this->render('admin/index.html.twig', [
             'artists' => $artistRepository->findBy([], ['id' => 'DESC'], self::MAX_ELEMENTS),
             'reservations' => $reservationRepo->findBy([], ['id' => 'DESC'], self::MAX_ELEMENTS),
+        ]);
+    }
+
+    #[Route('/dj/{id}', name: 'dj_show', methods: ['GET'])]
+    public function show(Artist $artist): Response
+    {
+        return $this->render('admin/dj/show.html.twig', [
+            'artist' => $artist,
         ]);
     }
 }
