@@ -36,7 +36,7 @@
 				<hr/>
 			<div class="btn-section w-100">
 			{% if reservation.artist is defined and reservation.artist == app.user.artist %}
-				<a href="#" class="btn btn-outline-danger btn-lg w-100 mx-2 ">Annuler</a>
+				{{ include('dj_dashboard/reservation/_cancel_reservation.html.twig') }}
 			{% elseif reservation.artist is not null and reservation.artist != app.user.artist %}
 				<p class="text-muted fs-5">Cet évènement est déjà réservé par un autre DJ.</p>
 			{% else %}
