@@ -21,4 +21,12 @@ class AdminController extends AbstractController
             'reservations' => $reservationRepo->findBy([], ['id' => 'DESC'], self::MAX_ELEMENTS),
         ]);
     }
+
+    #[Route('/dj', name: 'dj_list')]
+    public function djIndex(ArtistRepository $artistRepository): Response
+    {
+        return $this->render('admin/dj/index.html.twig', [
+            'artists' => $artistRepository->findBy([], ['id' => 'DESC'])
+        ]);
+    }
 }
