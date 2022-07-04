@@ -1,34 +1,32 @@
 <a class="anchor" id="reservation"></a>
-<section class="reservation-form p-5 pb-3 mb-5">
-    <div class="container p-1 rounded-3 border border-dark">
-        <div class="px-5 py-3 rounded-3 border border-dark">
-        <h1 class="w-fit mx-auto mt-2 mb-2 position-relative">
-            <img src="{{ asset('build/images/title_underline_blue.png') }}" class="title-underline" alt="">
-            Réservation
-        </h1>
-        <p class="text-center w-75 mx-auto fs-5 mb-4">Accompagnement personnalisé<br />Proposition et devis en moins de 24 heures<br />
-    Vous pouvez aussi nous appeler dès maintenant : 01 70 06 05 70</p>
-        <h1 class="h5 mb-4">Étape: {% if step %}2{% else %}1{% endif %}/2</h1>
-            {{ form_start(form) }}
-                {{ form_widget(form) }}
-                <div class="w-100 d-flex {% if step %}justify-content-between{% else %}justify-content-end{% endif %}">
-                    {% if step == 1 %}
-                        <a href="{{path('client_back')}}" class="btn btn-outline-dark">
-                            <i class="bi bi-arrow-left-square"></i>
-                            Retour
-                        </a>
+<section class="p-5 pb-3 mb-5">
+    <div class="reservation-form container p-5 rounded-3" data-aos="fade-in">
+    <h1 class="w-fit mx-auto mb-2 position-relative">
+        <img src="{{ asset('build/images/title_underline_purple.png') }}" class="title-underline" alt="">
+        Réservation
+    </h1>
+    <p class="text-center w-75 mx-auto fs-5 mb-4">Accompagnement personnalisé<br />Proposition et devis en moins de 24 heures<br />
+Vous pouvez aussi nous appeler dès maintenant : 01 70 06 05 70</p>
+    <h1 class="h5 mb-4">Étape: {% if step %}2{% else %}1{% endif %}/2</h1>
+        {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <div class="w-100 d-flex {% if step %}justify-content-between{% else %}justify-content-end{% endif %}">
+                {% if step == 1 %}
+                    <a href="{{path('client_back')}}" class="btn btn-outline-dark">
+                        <i class="bi bi-arrow-left-square"></i>
+                        Retour
+                    </a>
+                {% endif %}
+                <button class="btn btn-dark px-3">
+                    {% if step  %}
+                        <i class="bi bi-pencil-square"></i>
+                        Réserver
+                    {% else %}
+                        <i class="bi bi-arrow-right-square"></i>
+                        Suivant
                     {% endif %}
-                    <button class="btn btn-dark px-3">
-                        {% if step  %}
-                            <i class="bi bi-pencil-square"></i>
-                            Réserver
-                        {% else %}
-                            <i class="bi bi-arrow-right-square"></i>
-                            Suivant
-                        {% endif %}
-                    </button>
-                </div>
-            {{ form_end(form) }}
-        </div>
+                </button>
+            </div>
+        {{ form_end(form) }}
     </div>
 </section>
