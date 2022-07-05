@@ -5,9 +5,12 @@ namespace App\Controller;
 use App\Entity\Artist;
 use App\Repository\ArtistRepository;
 use App\Repository\ReservationRepository;
+use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 #[Route('/admin', name: 'admin_')]
 class AdminController extends AbstractController
@@ -37,5 +40,31 @@ class AdminController extends AbstractController
         return $this->render('admin/dj/index.html.twig', [
             'artists' => $artistRepository->findBy([], ['id' => 'DESC'])
         ]);
+    }
+
+    #[Route('/dj/{id}/valider', name: 'dj_validate', methods: ['POST'])]
+    public function validateDj(
+        Request $request,
+        Artist $artist,
+        ManagerRegistry $doctrine,
+        ValidatorInterface $validator
+    ): Response {
+        $entityManager = $doctrine->getManager();
+
+        if ($this->isCsrfTokenValid('validate' . $artist->getId(), $request->request->get('_token'))) {
+            if ($artist->getUser()->getRoles() === ['ROLE_USER']) {
+                $artist->getUser()->setRoles(['ROLE_DJ']);
+                $entityManager->persist($artist);
+
+                if (count($validator->validate($artist)) === 0) {
+                    $entityManager->flush();
+
+                    $this->addFlash('success', 'Vous avez accepté un nouveau DJ avec succès.');
+                } else {
+                    $this->addFlash('danger', 'Ce DJ existe déjà.');
+                }
+            }
+        }
+        return $this->redirectToRoute('dj_list', [], Response::HTTP_SEE_OTHER);
     }
 }
