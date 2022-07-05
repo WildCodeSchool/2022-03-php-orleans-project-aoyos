@@ -53,6 +53,7 @@ class AdminReservationController extends AbstractController
     public function takenReservations(Request $request, ReservationRepository $reservationRepo): Response
     {
         $form = $this->createForm(SearchAdminReservationType::class);
+        $form->remove('status');
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
