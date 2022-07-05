@@ -22,11 +22,11 @@
 					<a class="anchor" id="{{article.title}}"></a>
 					<div class="row g-0">
 						{% if loop.index is even %}
-							<div class="col-md-5">
+							<div class="col-md-5 order-first order-md-0">
 								<img src="{{ asset('uploads/images/article/' ~ article.image) }}" class="img-services-card w-100 rounded-start" alt="{{ article.title }}">
 							</div>
 						{% endif %}
-						<div class="col-md-7 px-4">
+						<div class="col-md-7 px-4 order-last order-md-0">
 							<div class="card-body card-left h-100 d-flex flex-column justify-content-between">
 								<h2 class="card-title my-5">{{ article.title }}</h2>
 								<p class="card-text">{{ article.description | raw }}</p>
