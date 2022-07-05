@@ -12,7 +12,13 @@
 					<p class="card-text px-2 ">
 						<i class="bi bi-caret-right-fill"></i>
 						{{ reservation.address|u.truncate(50, '...', false) }}</p>
+
 					<a href="{{ path('dashboard_dj_show', {'id': reservation.id}) }}" class="btn btn-outline-primary mx-2 mb-2">En savoir plus</a>
+
+					<p class="card-text px-2 ">
+						<i class="bi bi-caret-right-fill"></i>
+						{{ reservation.distance }} km</p>
+
 					{% if reservation.artist is defined and reservation.artist == app.user.artist %}
 						{{ include('dj_dashboard/reservation/_cancel_reservation.html.twig') }}
 					{% elseif reservation.artist is empty and reservation.status != 'Rejected' %}

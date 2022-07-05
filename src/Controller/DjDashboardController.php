@@ -8,6 +8,7 @@ use App\Config\ReservationStatus;
 use Symfony\Component\Mime\Email;
 use App\Repository\ArtistRepository;
 use App\Repository\ReservationRepository;
+use App\Service\DistanceCalculator;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,17 +26,34 @@ class DjDashboardController extends AbstractController
     #[IsGranted('ROLE_USER')]
     public function index(
         ReservationRepository $reservationRepo,
+        DistanceCalculator $distanceCalculator,
     ): Response {
         /** @var User */
         $user = $this->getUser();
+        $reservations = $reservationRepo->findBy(
+            ['artist' => $user->getArtist()],
+            ['id' => 'desc'],
+            self::MAX_ELEMENTS
+        );
+        $newReservations = $reservationRepo->findBy(
+            [],
+            ['id' => 'desc'],
+            self::MAX_ELEMENTS
+        );
+
+        foreach ($reservations as $reservation) {
+            $distance = $distanceCalculator->getDistance($user->getArtist(), $reservation);
+            $reservation->setDistance($distance);
+        }
+
+        foreach ($newReservations as $newReservation) {
+            $distance = $distanceCalculator->getDistance($user->getArtist(), $newReservation);
+            $newReservation->setDistance($distance);
+        }
 
         return $this->render('dj_dashboard/index.html.twig', [
-            'reservations' => $reservationRepo->findBy(
-                ['artist' => $user->getArtist()],
-                ['id' => 'desc'],
-                self::MAX_ELEMENTS
-            ),
-            'newReservations' => $reservationRepo->findBy([], ['id' => 'desc'], self::MAX_ELEMENTS)
+            'reservations' => $reservations,
+            'newReservations' => $newReservations,
         ]);
     }
 
@@ -44,7 +62,6 @@ class DjDashboardController extends AbstractController
     public function show(
         Reservation $reservation,
     ): Response {
-
         return $this->render('dj_dashboard/reservation/show.html.twig', [
             'reservation' => $reservation
         ]);
