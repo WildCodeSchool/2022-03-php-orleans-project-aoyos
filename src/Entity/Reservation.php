@@ -11,6 +11,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
+/** * @SuppressWarnings(PHPMD.TooManyFields) */
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]
 class Reservation implements Localizable
 {
