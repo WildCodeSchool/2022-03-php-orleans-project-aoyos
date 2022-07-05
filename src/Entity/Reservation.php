@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Config\ReservationStatus;
+use App\Model\Localizable;
 use App\Repository\ReservationRepository;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -10,8 +11,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
+/** * @SuppressWarnings(PHPMD.TooManyFields) */
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]
-class Reservation
+class Reservation implements Localizable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -126,6 +128,14 @@ class Reservation
     #[ORM\Column(type: 'text', nullable: true)]
     private ?string $commentAdmin;
 
+    #[ORM\Column(type: 'float', nullable: true)]
+    private float $longitude;
+
+    #[ORM\Column(type: 'float', nullable: true)]
+    private float $latitude;
+
+    private float $distance = 0;
+
     public function __construct()
     {
         $this->musicalStyles = new ArrayCollection();
@@ -144,6 +154,18 @@ class Reservation
     public function setLastname(string $lastname): self
     {
         $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    public function getDistance(): float
+    {
+        return $this->distance;
+    }
+
+    public function setDistance(float $distance): self
+    {
+        $this->distance = $distance;
 
         return $this;
     }
@@ -348,6 +370,30 @@ class Reservation
     public function setCommentAdmin(?string $commentAdmin): self
     {
         $this->commentAdmin = $commentAdmin;
+
+        return $this;
+    }
+
+    public function getLongitude(): ?float
+    {
+        return $this->longitude;
+    }
+
+    public function setLongitude(?float $longitude): self
+    {
+        $this->longitude = $longitude;
+
+        return $this;
+    }
+
+    public function getLatitude(): ?float
+    {
+        return $this->latitude;
+    }
+
+    public function setLatitude(?float $latitude): self
+    {
+        $this->latitude = $latitude;
 
         return $this;
     }

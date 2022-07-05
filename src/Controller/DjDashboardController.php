@@ -2,17 +2,20 @@
 
 namespace App\Controller;
 
-use App\Entity\Reservation;
 use App\Entity\User;
-use App\Repository\ArtistRepository;
+use App\Entity\Reservation;
 use App\Config\ReservationStatus;
+use Symfony\Component\Mime\Email;
+use App\Repository\ArtistRepository;
 use App\Repository\ReservationRepository;
+use App\Service\DistanceCalculator;
 use Doctrine\Persistence\ManagerRegistry;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/espace-dj', name: 'dashboard_dj_')]
 class DjDashboardController extends AbstractController
@@ -23,17 +26,34 @@ class DjDashboardController extends AbstractController
     #[IsGranted('ROLE_USER')]
     public function index(
         ReservationRepository $reservationRepo,
+        DistanceCalculator $distanceCalculator,
     ): Response {
         /** @var User */
         $user = $this->getUser();
+        $reservations = $reservationRepo->findBy(
+            ['artist' => $user->getArtist()],
+            ['id' => 'desc'],
+            self::MAX_ELEMENTS
+        );
+        $newReservations = $reservationRepo->findBy(
+            [],
+            ['id' => 'desc'],
+            self::MAX_ELEMENTS
+        );
+
+        foreach ($reservations as $reservation) {
+            $distance = $distanceCalculator->getDistance($user->getArtist(), $reservation);
+            $reservation->setDistance($distance);
+        }
+
+        foreach ($newReservations as $newReservation) {
+            $distance = $distanceCalculator->getDistance($user->getArtist(), $newReservation);
+            $newReservation->setDistance($distance);
+        }
 
         return $this->render('dj_dashboard/index.html.twig', [
-            'reservations' => $reservationRepo->findBy(
-                ['artist' => $user->getArtist()],
-                ['id' => 'desc'],
-                self::MAX_ELEMENTS
-            ),
-            'newReservations' => $reservationRepo->findBy([], ['id' => 'desc'], self::MAX_ELEMENTS)
+            'reservations' => $reservations,
+            'newReservations' => $newReservations,
         ]);
     }
 
@@ -42,7 +62,6 @@ class DjDashboardController extends AbstractController
     public function show(
         Reservation $reservation,
     ): Response {
-
         return $this->render('dj_dashboard/reservation/show.html.twig', [
             'reservation' => $reservation
         ]);
@@ -53,7 +72,8 @@ class DjDashboardController extends AbstractController
     public function acceptReservation(
         Reservation $reservation,
         ManagerRegistry $doctrine,
-        ValidatorInterface $validator
+        ValidatorInterface $validator,
+        MailerInterface $mailer
     ): Response {
         /** @var User */
         $user = $this->getUser();
@@ -68,9 +88,60 @@ class DjDashboardController extends AbstractController
             if (count($validator->validate($reservation)) === 0) {
                 $entityManager->flush();
 
+                $email = (new Email())
+                    ->from($user->getEmail())
+                    ->to($this->getParameter('mailer_from'))
+                    ->subject('Du nouveau sur l\'espace DJ')
+                    ->html($this->renderView('dj_dashboard/notification_email_reservation_validated.html.twig', [
+                        'reservation' => $reservation
+                    ]));
+
+                $mailer->send($email);
+
                 $this->addFlash('success', 'L\'évènement vous a été attribué !');
             } else {
                 $this->addFlash('danger', 'Cet évènement n\'est plus disponible.');
+            }
+        }
+        return $this->redirectToRoute('dashboard_dj_show', ['id' => $reservation->getId()], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/reservation/{id}/annuler', name: 'cancel_reservation', methods: ['POST'])]
+    #[IsGranted('ROLE_DJ')]
+    public function cancelReservation(
+        Reservation $reservation,
+        ManagerRegistry $doctrine,
+        ValidatorInterface $validator,
+        MailerInterface $mailer
+    ): Response {
+        /** @var User */
+        $user = $this->getUser();
+
+        $entityManager = $doctrine->getManager();
+
+        if (
+            $reservation->getStatus() === ReservationStatus::Validated->name
+            && $reservation->getArtist() === $user->getArtist()
+        ) {
+            $reservation->setArtist(null);
+            $reservation->setStatus(ReservationStatus::Waiting->name);
+            $entityManager->persist($reservation);
+
+            if (count($validator->validate($reservation)) === 0) {
+                $entityManager->flush();
+
+                $email = (new Email())
+                    ->from($user->getEmail())
+                    ->to($this->getParameter('mailer_from'))
+                    ->subject('Du nouveau sur l\'espace DJ')
+                    ->html($this->renderView('dj_dashboard/notification_email_reservation_canceled.html.twig', [
+                        'reservation' => $reservation,
+                        'artist' => $user->getArtist()
+                    ]));
+
+                $mailer->send($email);
+
+                $this->addFlash('success', 'L\'évènement vous a été retiré !');
             }
         }
         return $this->redirectToRoute('dashboard_dj_show', ['id' => $reservation->getId()], Response::HTTP_SEE_OTHER);

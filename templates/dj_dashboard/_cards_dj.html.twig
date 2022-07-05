@@ -8,15 +8,23 @@
 				<div class="col-md-12 col-lg-12 col-xl-6 d-flex flex-column justify-content-center w-50">
 					<p class="card-text px-2">
 						<i class="bi bi-caret-right-fill"></i>
-						{{ reservation.dateStart|date("m/d/Y") }}</p>
+						{{ reservation.dateStart|date("d/m/Y") }}</p>
 					<p class="card-text px-2 ">
 						<i class="bi bi-caret-right-fill"></i>
 						{{ reservation.address|u.truncate(50, '...', false) }}</p>
-					<a href="#" class="btn btn-outline-primary mx-2 mb-2">En savoir plus</a>
+
+					<a href="{{ path('dashboard_dj_show', {'id': reservation.id}) }}" class="btn btn-outline-primary mx-2 mb-2">En savoir plus</a>
+
+					<p class="card-text px-2 ">
+						<i class="bi bi-caret-right-fill"></i>
+						{{ reservation.distance }} km</p>
+
 					{% if reservation.artist is defined and reservation.artist == app.user.artist %}
-						<a href="#" class="btn btn-outline-danger mx-2 ">Annuler</a>
+						{{ include('dj_dashboard/reservation/_cancel_reservation.html.twig') }}
+					{% elseif reservation.artist is empty and reservation.status != 'Rejected' %}
+						{% include 'dj_dashboard/reservation/_accept_reservation.html.twig' %}
 					{% else %}
-						<a href="#" class="btn btn-outline-secondary mx-2 ">Accepter</a>
+						<p class="text-center">Cet évènement est déjà réservé par un autre DJ.</p>
 					{% endif %}
 				</div>
 			</div>

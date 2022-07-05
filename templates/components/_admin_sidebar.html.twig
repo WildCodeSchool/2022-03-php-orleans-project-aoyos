@@ -1,5 +1,7 @@
 {% set route_admin = {
-	'user': [],
+	'user': [
+		'admin_dj_list',
+	],
 	'reservation': [
 		'admin_reservation_index',
 		'admin_reservation_taken'
@@ -39,7 +41,7 @@
 			<div id="flush-collapseOne" class="accordion-collapse collapse {% if route_name in route_admin.user %}show{% endif %}" aria-labelledby="flush-headingOne">
 				<div class="accordion-body">
 					<ul>
-						<li><a class="text-decoration-none" href="#">DJ</a></li>
+						<li><a class="text-decoration-none" href="{{ path('admin_dj_list') }}">DJ</a></li>
 						<li><a class="text-decoration-none" href="#">Client</a></li>
 					</ul>
 				</div>

@@ -1,0 +1,13 @@
+{% extends "layout_email.html.twig" %}
+
+{% block body %}
+    <h1>Bonjour,</h1>
+
+    <p>Ce mail vous a été envoyé suite à une demande de réinitialisation de mot de passe.</p>
+    <p>Si vous n'êtes pas l'auteur de la demande, merci de l'ignorer sinon cliquez sur le lien ci-dessous</p>
+
+    <a href="{{ url('app_reset_password', {token: resetToken.token}) }}">{{ url('app_reset_password', {token: resetToken.token}) }}</a>
+
+    <p>Cordialement,</p>
+    <p>L'équipe d'aoyos</p>
+{% endblock %}

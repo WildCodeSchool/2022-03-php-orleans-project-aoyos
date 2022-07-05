@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ parent() }}
+	- Reservation client
+{% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	{{ encore_entry_link_tags('client') }}
+{% endblock %}
+
+{% block body %}
+	<main>
+        {% include "components/client/_form.html.twig" %}
+		{% include "components/client/_sales_proposal.html.twig" %}
+	</main>
+{% endblock %}

@@ -1,9 +1,13 @@
 {% set route_dj = {
-	'reservation': [],
+	'profile': [
+		'dashboard_dj_profile',
+		'dashboard_dj_documents',
+		'dashboard_dj_artist',
+	]
 } %}
 <nav class="offcanvas offcanvas-start sideBar d-flex flex-column justify-content-start align-items-start justify-self-start" tabindex="-1" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling">
 	<div class="w-100 d-flex mt-3 flex-column">
-		<a class="dj-nav-link pt-4 pb-3 my-2 text-decoration-none fs-6" href="#">
+		<a class="dj-nav-link pt-4 pb-3 my-2 text-decoration-none fs-6" href="{{ path('dashboard_dj_index') }}">
 			<i class="bi bi-house"></i>
 			Accueil
 		</a>
@@ -19,11 +23,11 @@
 						Évènements
 					</button>
 				</h2>
-				<div id="flush-collapseTwo" class="accordion-collapse collapse {% if route_name in route_dj.reservation %}show{% endif %}" aria-labelledby="flush-headingTwo">
+				<div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo">
 					<div class="accordion-body">
 						<ul>
-							<li><a class="text-decoration-none" href="#">Passés</a></li>
-							<li><a class="text-decoration-none" href="#">À venir</a></li>
+							<li><a class="text-decoration-none" href="{{ path('dashboard_dj_my_events', {'filter': 'passes'}) }}">Passés</a></li>
+							<li><a class="text-decoration-none" href="{{ path('dashboard_dj_my_events', {'filter': 'a-venir'}) }}">À venir</a></li>
 						</ul>
 					</div>
 				</div>
@@ -37,11 +41,11 @@
 						Mon compte
 					</button>
 				</h2>
-				<div id="flush-collapseThree" class="accordion-collapse collapse {% if route_name in route_dj.reservation %}show{% endif %}" aria-labelledby="flush-headingThree">
+				<div id="flush-collapseThree" class="accordion-collapse collapse {% if route_name in route_dj.profile %}show{% endif %}" aria-labelledby="flush-headingThree">
 					<div class="accordion-body">
 						<ul>
 							<li><a class="text-decoration-none" href="{{ path('dashboard_dj_profile') }}">Informations personnelles</a></li>
-							<li><a class="text-decoration-none" href="#">Profil d'artiste</a></li>
+							<li><a class="text-decoration-none" href="{{ path('dashboard_dj_artist') }}">Profil d'artiste</a></li>
 							<li><a class="text-decoration-none" href="{{ path('dashboard_dj_documents') }}">Documents</a></li>
 						</ul>
 					</div>

@@ -9,8 +9,11 @@ use App\Form\ArtistRegistrationType;
 use App\Form\ArtistType;
 use App\Repository\ArtistRepository;
 use App\Repository\UserRepository;
+use App\Service\Locator;
 use Doctrine\Persistence\ManagerRegistry;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpClient\Exception\TransportException;
 use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,7 +36,8 @@ class DjController extends AbstractController
         RequestStack $stack,
         ManagerRegistry $doctrine,
         UserRepository $userRepository,
-        HasherUserPasswordHasherInterface $passwordHasher
+        HasherUserPasswordHasherInterface $passwordHasher,
+        Locator $locator,
     ): Response {
         $session = $stack->getSession();
         $artist = $session->get('artist') ?? new Artist();
@@ -54,6 +58,7 @@ class DjController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             if ($session->get('step') === 1) {
+                $this->addCoordinates($locator, $artist);
                 $session->set('artist', $artist);
                 $session->set('step', 2);
             } elseif ($session->get('step') === 2) {
@@ -69,7 +74,6 @@ class DjController extends AbstractController
                 $userRepository->add($user, true);
                 $artist->setUser($user);
                 $artistRepository->add($artist, true);
-
                 $this->addFlash('success', 'Votre demande a bien été transmise.');
 
                 return $this->redirectToRoute('app_dj', [], Response::HTTP_SEE_OTHER);
@@ -97,5 +101,18 @@ class DjController extends AbstractController
             $session->remove('step');
         }
         return $this->redirectToRoute('app_registration', [], Response::HTTP_SEE_OTHER);
+    }
+
+    private function addCoordinates(Locator $locator, Artist $artist): void
+    {
+        try {
+            $locator->setCoordinates($artist);
+        } catch (TransportException $te) {
+            $this->addFlash('warning', 'Une erreur est survenue lors de la récupération de l\'adresse'
+            . ', vous pouvez cependant poursuivre votre inscription.');
+        } catch (Exception $e) {
+            $this->addFlash('warning', $e->getMessage()
+            . ', vous pouvez cependant poursuivre votre inscription.');
+        }
     }
 }
