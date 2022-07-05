@@ -17,6 +17,8 @@ class ReservationFixtures extends Fixture implements DependentFixtureInterface
         'Sur mesure',
     ];
 
+    public const AOYOS_PARIS_COORDINATES = [48.860147, 2.346209];
+
     public const NUMBER_RESERVATIONS = 50;
 
     public function load(ObjectManager $manager): void
@@ -45,6 +47,8 @@ class ReservationFixtures extends Fixture implements DependentFixtureInterface
             if ($reservation->getStatus() === ReservationStatus::Validated->name) {
                 $reservation->setArtist($this->getReference('artist_' . rand(0, (ArtistFixtures::NUMBER_ARTISTS - 1))));
             }
+            $reservation->setLatitude(self::AOYOS_PARIS_COORDINATES[0]);
+            $reservation->setLongitude(self::AOYOS_PARIS_COORDINATES[1]);
 
             $manager->persist($reservation);
         }
