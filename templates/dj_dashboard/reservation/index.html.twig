@@ -1,0 +1,41 @@
+{% extends 'dj_dashboard/dj_dashboard_base.html.twig' %}
+
+{% block title %}
+	{{ parent() }}
+	- Offres
+{% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+{% endblock %}
+
+{% block content %}
+	<main class="container dj-reservations d-flex flex-column">
+		<h1 class="my-5">Offres disponibles</h1>
+
+		<div class="row mx-3">
+
+			{{ form_start(form) }}
+			{{ form_label(form.search) }}
+			{{ form_errors(form.search) }}
+			<div class="input-group mb-4 w-50">
+				{{ form_widget(form.search) }}
+				<button class="btn btn-outline-dark">
+					<i class="bi bi-search"></i>
+					Rechercher
+				</button>
+			</div>
+			{{ form_end(form) }}
+
+			{% for reservation in reservations %}
+				{% include 'dj_dashboard/_cards_dj.html.twig' %}
+			{% endfor %}
+
+
+		</div>
+	</main>
+{% endblock %}

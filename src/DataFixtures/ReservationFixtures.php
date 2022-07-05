@@ -45,6 +45,14 @@ class ReservationFixtures extends Fixture implements DependentFixtureInterface
             if ($reservation->getStatus() === ReservationStatus::Validated->name) {
                 $reservation->setArtist($this->getReference('artist_' . rand(0, (ArtistFixtures::NUMBER_ARTISTS - 1))));
             }
+            if ($reservation->getStatus() === ReservationStatus::Waiting->name) {
+                $reservation->addMusicalStyle(
+                    $this->getReference('musicalstyle_' . rand(0, count(MusicalStyleFixtures::MUSICALSTYLES) - 1))
+                );
+                $reservation->addMusicalStyle(
+                    $this->getReference('musicalstyle_' . rand(0, count(MusicalStyleFixtures::MUSICALSTYLES) - 1))
+                );
+            }
 
             $manager->persist($reservation);
         }

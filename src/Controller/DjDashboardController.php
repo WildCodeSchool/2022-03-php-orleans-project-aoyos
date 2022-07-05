@@ -6,8 +6,10 @@ use App\Entity\User;
 use App\Entity\Reservation;
 use App\Config\ReservationStatus;
 use App\Repository\ArtistRepository;
+use App\Form\SearchDjReservationsType;
 use App\Repository\ReservationRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -60,6 +62,27 @@ class DjDashboardController extends AbstractController
 
         return $this->render('dj_dashboard/reservation/show.html.twig', [
             'reservation' => $reservation
+        ]);
+    }
+
+    #[Route('/reservations', name: 'reservations', methods: 'GET')]
+    #[IsGranted('ROLE_DJ')]
+    public function reservations(ReservationRepository $reservationRepo, Request $request): Response
+    {
+
+        $form = $this->createForm(SearchDjReservationsType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $search = $form->getData()['search'];
+            $reservations = $reservationRepo->findLikeMusicalStyle($search);
+        } else {
+            $reservations = $reservationRepo->findBy(['status' => 'Waiting'], ['dateStart' => 'ASC']);
+        }
+
+        return $this->renderForm('dj_dashboard/reservation/index.html.twig', [
+            'reservations' => $reservations,
+            'form' => $form
         ]);
     }
 
