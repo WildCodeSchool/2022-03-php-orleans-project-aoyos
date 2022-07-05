@@ -7,6 +7,7 @@ use App\Entity\MusicalStyle;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -35,6 +36,18 @@ class ArtistProfileType extends AbstractType
                 'expanded' => true,
                 'by_reference' => false,
                 ])
+            ->add('instagram', UrlType::class, [
+                'label' => 'Lien Instagram',
+                'required' => false
+            ])
+            ->add('soundCloud', UrlType::class, [
+                'label' => 'Lien SoundCloud',
+                'required' => false
+            ])
+            ->add('facebook', UrlType::class, [
+                'label' => 'Lien Facebook',
+                'required' => false
+            ])
         ;
     }
 
