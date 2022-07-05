@@ -6,7 +6,6 @@ use App\Entity\Artist;
 use App\Entity\Reservation;
 use App\Service\DistanceCalculator;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\HttpClient\MockHttpClient;
 
 class DistanceTest extends TestCase
 {
@@ -18,8 +17,7 @@ class DistanceTest extends TestCase
         $reservation = new Reservation();
         $reservation->setLongitude(2.346209);
         $reservation->setLatitude(48.860147);
-        $client = new MockHttpClient();
-        $distanceCalculator = new DistanceCalculator($client);
+        $distanceCalculator = new DistanceCalculator();
 
         $this->assertEquals(114, $distanceCalculator->getDistance($artist, $reservation));
     }

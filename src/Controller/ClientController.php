@@ -7,7 +7,7 @@ use App\Entity\Reservation;
 use App\Form\ReservationClientInfosType;
 use App\Form\ReservationEventInfosType;
 use App\Repository\ReservationRepository;
-use App\Service\DistanceCalculator;
+use App\Service\Coordinates;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpClient\Exception\TransportException;
@@ -27,7 +27,7 @@ class ClientController extends AbstractController
         RequestStack $requestStack,
         ReservationRepository $reservationRepo,
         MailerInterface $mailer,
-        DistanceCalculator $distanceCalculator
+        Coordinates $coordinates
     ): Response {
         $session = $requestStack->getSession();
         $reservation = $session->get('reservationForm') ?? new Reservation();
@@ -51,7 +51,7 @@ class ClientController extends AbstractController
                 $session->remove('isReservationClientInfosValid');
                 $reservation->setStatus(ReservationStatus::Waiting->name);
                 try {
-                    $distanceCalculator->setCoordinates($reservation);
+                    $coordinates->setCoordinates($reservation);
                 } catch (TransportException $te) {
                     $this->addFlash('warning', 'Une erreur est survenue lors de la récupération de l\'adresse'
                     . ', vous pouvez cependant poursuivre votre inscription.');
