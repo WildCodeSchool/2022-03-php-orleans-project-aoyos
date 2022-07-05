@@ -1,0 +1,16 @@
+{% extends "layout_email.html.twig" %}
+
+{% block title %}
+	{{ parent() }}
+	- Attribution d'évènement
+{% endblock %}
+
+{% block body %}
+	<h1 class="fs-4">Bonjour aoyos</h1>
+	<h2 class="fs-5 my-3">{{ reservation.artist.artistName }} a accepté l'évènement de {{ reservation.company }}</h2>
+    <h3 class="mt-3">Détail de l'évènement : </h3>
+    <p class="m-3">Formule: {{ reservation.formula }}</p>
+	<p class="m-3">Lieu: {{ reservation.address }}</p>
+	<p class="m-3">Du {{ reservation.dateStart |date('d-m-Y H:i') }} au {{ reservation.dateEnd |date('d-m-Y H:i') }}</p>
+    <p class="m-3">Participants: {{ reservation.attendees }}</p>
+{% endblock %}
