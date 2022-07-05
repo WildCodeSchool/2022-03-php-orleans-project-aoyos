@@ -65,6 +65,6 @@ class AdminController extends AbstractController
                 }
             }
         }
-        return $this->redirectToRoute('dj_list', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('admin_dj_list', [], Response::HTTP_SEE_OTHER);
     }
 }
