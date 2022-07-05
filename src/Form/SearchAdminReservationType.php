@@ -29,9 +29,6 @@ class SearchAdminReservationType extends AbstractType
                 'label' => 'Statut',
                 'required' => false,
                 'choices' => $this->reservationStatus,
-                'attr' => [
-                    'onchange' => 'document.forms["search_admin_reservation"].submit()'
-                ]
             ])
         ;
     }

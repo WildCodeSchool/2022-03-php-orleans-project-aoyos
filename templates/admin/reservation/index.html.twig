@@ -1,5 +1,10 @@
 {% extends 'admin/admin_base.html.twig' %}
 
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('searchStatusSubmit') }}
+{% endblock %}
+
 {% block title %}Réservations{% endblock %}
 
 {% block content %}
