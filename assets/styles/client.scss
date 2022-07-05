@@ -73,3 +73,8 @@ $typeDivHeight: 60px;
 .price {
     color: darken($purpleLogo, 25%);
 }
+
+.reservation-form {
+    background-color: lighten($secondary, 20%);
+    filter: drop-shadow(0 0 0.1rem $secondary);
+}
