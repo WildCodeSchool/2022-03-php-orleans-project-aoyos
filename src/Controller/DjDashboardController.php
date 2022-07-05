@@ -88,4 +88,45 @@ class DjDashboardController extends AbstractController
         }
         return $this->redirectToRoute('dashboard_dj_show', ['id' => $reservation->getId()], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/reservation/{id}/annuler', name: 'cancel_reservation', methods: ['POST'])]
+    #[IsGranted('ROLE_DJ')]
+    public function cancelReservation(
+        Reservation $reservation,
+        ManagerRegistry $doctrine,
+        ValidatorInterface $validator,
+        MailerInterface $mailer
+    ): Response {
+        /** @var User */
+        $user = $this->getUser();
+
+        $entityManager = $doctrine->getManager();
+
+        if (
+            $reservation->getStatus() === ReservationStatus::Validated->name
+            && $reservation->getArtist() === $user->getArtist()
+        ) {
+            $reservation->setArtist(null);
+            $reservation->setStatus(ReservationStatus::Waiting->name);
+            $entityManager->persist($reservation);
+
+            if (count($validator->validate($reservation)) === 0) {
+                $entityManager->flush();
+
+                $email = (new Email())
+                    ->from($user->getEmail())
+                    ->to($this->getParameter('mailer_from'))
+                    ->subject('Du nouveau sur l\'espace DJ')
+                    ->html($this->renderView('dj_dashboard/notification_email_reservation_canceled.html.twig', [
+                        'reservation' => $reservation,
+                        'artist' => $user->getArtist()
+                    ]));
+
+                $mailer->send($email);
+
+                $this->addFlash('success', 'L\'évènement vous a été retiré !');
+            }
+        }
+        return $this->redirectToRoute('dashboard_dj_show', ['id' => $reservation->getId()], Response::HTTP_SEE_OTHER);
+    }
 }

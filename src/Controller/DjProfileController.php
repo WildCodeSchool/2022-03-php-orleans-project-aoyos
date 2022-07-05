@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Document;
-use App\Form\ArtistEditType;
 use App\Form\ArtistProfileType;
 use App\Form\ArtistType;
 use App\Form\DocumentType;
@@ -13,7 +12,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 #[Route('/espace-dj', name: 'dashboard_dj_')]
 class DjProfileController extends AbstractController
@@ -22,11 +20,9 @@ class DjProfileController extends AbstractController
     public function index(
         ArtistRepository $artistRepository,
         Request $request,
-        AuthenticationUtils $authenticationUtils
     ): Response {
-        $emailArtist = $authenticationUtils->getLastUsername();
-        $artist = $artistRepository->findOneBy(['email' => $emailArtist]);
-
+        /** @phpstan-ignore-next-line */
+        $artist = $this->getUser()->getArtist();
         $form = $this->createForm(ArtistType::class, $artist);
         $form->handleRequest($request);
 

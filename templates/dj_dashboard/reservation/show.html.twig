@@ -78,10 +78,11 @@
 						&nbsp " "</p>
 				</div>
 				<hr/>
+
 				<div class="btn-section w-100">
 
 					{% if reservation.artist is defined and reservation.artist == app.user.artist %}
-						<a href="#" class="btn btn-outline-danger mx-2 ">Annuler</a>
+				    {{ include('dj_dashboard/reservation/_cancel_reservation.html.twig') }}
 					{% elseif reservation.artist is empty and reservation.status != 'Rejected' %}
 						{% include 'dj_dashboard/reservation/_accept_reservation.html.twig' %}
 					{% else %}

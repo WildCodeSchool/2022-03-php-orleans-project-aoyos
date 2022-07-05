@@ -1,0 +1,15 @@
+{% extends "layout_email.html.twig" %}
+
+{% block title %}
+	{{ parent() }}
+	- Presation annulée
+{% endblock %}
+
+{% block body %}
+	<h1 class="fs-4">Bonjour aoyos</h1>
+	<h2 class="fs-5 my-3">{{ artist.artistName }} s'est retiré de l'évènement {{ reservation.company }}</h2>
+    <h3 class="mt-3">Pour contacter l'artiste : </h3>
+    <p class="m-3">{{ artist.firstname }} {{ artist.lastname }}</p>
+    <p class="m-3">{{ artist.phone }}</p>
+    <p class="m-3">{{ artist.email }}</p>
+{% endblock %}
