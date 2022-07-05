@@ -22,7 +22,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class ClientController extends AbstractController
 {
     #[Route('/', name: 'index')]
-    public function index(
+    public function index(): response
+    {
+        return $this->render('client/index.html.twig');
+    }
+
+    #[Route('/reservation', name: 'reservation')]
+    public function reservation(
         Request $request,
         RequestStack $requestStack,
         ReservationRepository $reservationRepo,
@@ -65,10 +71,10 @@ class ClientController extends AbstractController
                 $this->addFlash('success', 'Votre demande a bien été transmise.');
             }
 
-            return $this->redirectToRoute('client_index', ['_fragment' => 'reservation'], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('client_reservation', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('client/index.html.twig', [
+        return $this->renderForm('client/reservation.html.twig', [
             'form' => $form,
             'step' => $step
         ]);
@@ -81,7 +87,7 @@ class ClientController extends AbstractController
         if ($session->has('isReservationClientInfosValid')) {
             $session->remove('isReservationClientInfosValid');
         }
-        return $this->redirectToRoute('client_index', ['_fragment' => 'reservation'], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('client_reservation', [], Response::HTTP_SEE_OTHER);
     }
 
     private function sendReservationMail(Reservation $reservation, MailerInterface $mailer): void
