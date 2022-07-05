@@ -9,7 +9,7 @@ use App\Form\ArtistRegistrationType;
 use App\Form\ArtistType;
 use App\Repository\ArtistRepository;
 use App\Repository\UserRepository;
-use App\Service\Coordinates;
+use App\Service\Locator;
 use Doctrine\Persistence\ManagerRegistry;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -37,7 +37,7 @@ class DjController extends AbstractController
         ManagerRegistry $doctrine,
         UserRepository $userRepository,
         HasherUserPasswordHasherInterface $passwordHasher,
-        Coordinates $coordinates,
+        Locator $locator,
     ): Response {
         $session = $stack->getSession();
         $artist = $session->get('artist') ?? new Artist();
@@ -58,7 +58,7 @@ class DjController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             if ($session->get('step') === 1) {
-                $this->addCoordinates($coordinates, $artist);
+                $this->addCoordinates($locator, $artist);
                 $session->set('artist', $artist);
                 $session->set('step', 2);
             } elseif ($session->get('step') === 2) {
@@ -103,10 +103,10 @@ class DjController extends AbstractController
         return $this->redirectToRoute('app_registration', [], Response::HTTP_SEE_OTHER);
     }
 
-    private function addCoordinates(Coordinates $coordinates, Artist $artist): void
+    private function addCoordinates(Locator $locator, Artist $artist): void
     {
         try {
-            $coordinates->setCoordinates($artist);
+            $locator->setCoordinates($artist);
         } catch (TransportException $te) {
             $this->addFlash('warning', 'Une erreur est survenue lors de la récupération de l\'adresse'
             . ', vous pouvez cependant poursuivre votre inscription.');

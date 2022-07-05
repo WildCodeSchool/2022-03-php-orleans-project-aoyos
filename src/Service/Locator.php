@@ -6,7 +6,7 @@ use App\Model\Localizable;
 use Exception;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-class Coordinates
+class Locator
 {
     public const URL = 'https://api-adresse.data.gouv.fr/search/';
 
