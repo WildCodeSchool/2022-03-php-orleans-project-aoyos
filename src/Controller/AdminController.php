@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 #[Route('/admin', name: 'admin_')]
 class AdminController extends AbstractController
@@ -47,22 +46,18 @@ class AdminController extends AbstractController
         Request $request,
         Artist $artist,
         ManagerRegistry $doctrine,
-        ValidatorInterface $validator
     ): Response {
         $entityManager = $doctrine->getManager();
 
         if ($this->isCsrfTokenValid('validate' . $artist->getId(), $request->request->get('_token'))) {
-            if ($artist->getUser()->getRoles() === ['ROLE_USER']) {
+            if (!in_array('ROLE_DJ', $artist->getUser()->getRoles())) {
                 $artist->getUser()->setRoles(['ROLE_DJ']);
-                $entityManager->persist($artist);
 
-                if (count($validator->validate($artist)) === 0) {
-                    $entityManager->flush();
+                $entityManager->flush();
 
-                    $this->addFlash('success', 'Vous avez accepté un nouveau DJ avec succès.');
-                } else {
-                    $this->addFlash('danger', 'Ce DJ existe déjà.');
-                }
+                $this->addFlash('success', 'Vous avez accepté un nouveau DJ avec succès.');
+            } else {
+                $this->addFlash('danger', 'Ce DJ existe déjà.');
             }
         }
         return $this->redirectToRoute('admin_dj_list', [], Response::HTTP_SEE_OTHER);
