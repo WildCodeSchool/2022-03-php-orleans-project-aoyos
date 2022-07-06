@@ -7,9 +7,11 @@ use App\Entity\Reservation;
 use App\Config\ReservationStatus;
 use Symfony\Component\Mime\Email;
 use App\Repository\ArtistRepository;
+use App\Form\SearchDjReservationsType;
 use App\Repository\ReservationRepository;
 use App\Service\DistanceCalculator;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -64,6 +66,27 @@ class DjDashboardController extends AbstractController
     ): Response {
         return $this->render('dj_dashboard/reservation/show.html.twig', [
             'reservation' => $reservation
+        ]);
+    }
+
+    #[Route('/reservations', name: 'reservations', methods: 'GET')]
+    #[IsGranted('ROLE_DJ')]
+    public function reservations(ReservationRepository $reservationRepo, Request $request): Response
+    {
+
+        $form = $this->createForm(SearchDjReservationsType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $musicalStyleName = $form->getData()['musicalStyle']->getName();
+            $reservations = $reservationRepo->findByMusicalStyle($musicalStyleName);
+        } else {
+            $reservations = $reservationRepo->findBy(['status' => 'Waiting'], ['dateStart' => 'ASC']);
+        }
+
+        return $this->renderForm('dj_dashboard/reservation/index.html.twig', [
+            'reservations' => $reservations,
+            'form' => $form
         ]);
     }
 

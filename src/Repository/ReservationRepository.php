@@ -115,4 +115,17 @@ class ReservationRepository extends ServiceEntityRepository
 
         return $queryBuilder->getQuery()->getResult();
     }
+
+    public function findByMusicalStyle(string $musicalStyleName): array
+    {
+        return $this->createQueryBuilder('r')
+            ->innerjoin('r.musicalStyles', 'm')
+            ->select('r')
+            ->andWhere('r.status = :Waiting')
+            ->andWhere('m.name = :musicalStyle')
+            ->setParameter('musicalStyle', $musicalStyleName)
+            ->setParameter('Waiting', 'Waiting')
+            ->getQuery()
+            ->getResult();
+    }
 }

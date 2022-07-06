@@ -1,0 +1,37 @@
+{% extends 'dj_dashboard/dj_dashboard_base.html.twig' %}
+
+{% block title %}
+	{{ parent() }}
+	- Offres
+{% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+{% endblock %}
+
+{% block content %}
+	<main class="container dj-reservations d-flex flex-column">
+		<h1 class="my-5">Offres disponibles</h1>
+
+		<div class="row mx-3">
+
+			{{ form_start(form) }}
+			{{ form_label(form.musicalStyle) }}
+			{{ form_errors(form.musicalStyle) }}
+			<div class="input-group mb-4 w-50">
+				{{ form_widget(form.musicalStyle, { 'attr' : { 'onChange' : 'this.form.submit()' }} ) }}
+			</div>
+			{{ form_end(form) }}
+
+			{% for reservation in reservations %}
+				{% include 'dj_dashboard/_cards_dj.html.twig' %}
+			{% endfor %}
+
+
+		</div>
+	</main>
+{% endblock %}
