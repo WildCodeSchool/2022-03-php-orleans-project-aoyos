@@ -42,17 +42,7 @@ class ArticleRepository extends ServiceEntityRepository
 //    /**
 //     * @return Article[] Returns an array of Article objects
 //     */
-    public function findByCity(string $search): array
-    {
-        return $this->createQueryBuilder('a')
-           ->andWhere('a.address = :search')
-           ->setParameter('search', $search)
-           ->orderBy('a.id', 'ASC')
-           ->getQuery()
-           ->getResult()
-        ;
-    }
-
+//
 //    public function findOneBySomeField($value): ?Article
 //    {
 //        return $this->createQueryBuilder('a')

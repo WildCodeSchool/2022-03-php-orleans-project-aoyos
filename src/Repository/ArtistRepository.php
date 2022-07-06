@@ -39,6 +39,18 @@ class ArtistRepository extends ServiceEntityRepository
         }
     }
 
+    public function findByCity(?string $address): array
+    {
+        return $this->createQueryBuilder('a')
+           ->where('a.address LIKE :address')
+           ->setParameter('address', '%' . $address . '%')
+           ->orderBy('a.id', 'ASC')
+           ->getQuery()
+           ->getResult()
+        ;
+    }
+
+
 //    /**
 //     * @return Artist[] Returns an array of Artist objects
 //     */

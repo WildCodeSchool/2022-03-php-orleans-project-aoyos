@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Artist;
+use App\Form\AdminArtistType;
 use App\Repository\ArtistRepository;
 use App\Repository\ReservationRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -33,11 +34,22 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/dj', name: 'dj_list')]
-    public function djIndex(ArtistRepository $artistRepository): Response
+    #[Route('/dj', name: 'dj_list', methods: ['GET'])]
+    public function djIndex(ArtistRepository $artistRepository, Request $request): Response
     {
-        return $this->render('admin/dj/index.html.twig', [
-            'artists' => $artistRepository->findBy([], ['id' => 'DESC'])
+        $form = $this->createForm(AdminArtistType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $search = $form->getData()['search'];
+            $artists = $artistRepository->findByCity($search);
+        } else {
+            $artists = $artistRepository->findBy([], ['id' => 'DESC']);
+        }
+
+        return $this->renderForm('admin/dj/index.html.twig', [
+            'artists' => $artists,
+            'form' => $form,
         ]);
     }
 
