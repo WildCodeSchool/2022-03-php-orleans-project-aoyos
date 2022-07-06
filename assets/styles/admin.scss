@@ -62,10 +62,10 @@ $adminCardsHeight: 25rem;
     z-index:1;
 }
 
-.reservation-show-admin input[type=search] {
+.reservation-show-admin input[type=search], .reservation-show-admin select {
     border-color: $dark;
 }
 
-.reservation-show-admin input[type=search]:focus {
+.reservation-show-admin input[type=search]:focus , .reservation-show-admin select:focus {
     box-shadow: none;
 }

@@ -1,6 +1,13 @@
+@import "variables.scss";
+
 .title-underline {
     height: 60%;
     top: 35%;
     right:2%;
     opacity: 0.8;
+}
+
+.registration-form > div {
+    background-color: lighten($secondary, 20%);
+    filter: drop-shadow(0 0 0.1rem $secondary);
 }

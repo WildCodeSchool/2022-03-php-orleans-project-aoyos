@@ -97,13 +97,23 @@ class ReservationRepository extends ServiceEntityRepository
     //     */
 
 
-    public function findLikeEventType(string $eventType): array
+    public function findLikeEventType(?string $search = '', ?string $status = ''): array
     {
-        return $this->createQueryBuilder('r')
-            ->andWhere('r.eventType LIKE :eventType')
-            ->setParameter('eventType', '%' . $eventType . '%')
-            ->getQuery()
-            ->getResult();
+        $queryBuilder = $this->createQueryBuilder('r');
+
+        if ($search) {
+                $queryBuilder->andWhere('r.eventType LIKE :eventType')
+                ->setParameter('eventType', '%' . $search . '%')
+                ->orWhere('r.company LIKE :company')
+                ->setParameter('company', '%' . $search . '%');
+        }
+
+        if ($status) {
+            $queryBuilder->andWhere('r.status = :status')
+                ->setParameter('status', $status);
+        }
+
+        return $queryBuilder->getQuery()->getResult();
     }
 
     public function findByMusicalStyle(string $musicalStyleName): array

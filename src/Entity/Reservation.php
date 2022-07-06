@@ -11,6 +11,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
+/** * @SuppressWarnings(PHPMD.TooManyFields) */
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]
 class Reservation implements Localizable
 {
@@ -133,6 +134,8 @@ class Reservation implements Localizable
     #[ORM\Column(type: 'float', nullable: true)]
     private float $latitude;
 
+    private float $distance = 0;
+
     public function __construct()
     {
         $this->musicalStyles = new ArrayCollection();
@@ -151,6 +154,18 @@ class Reservation implements Localizable
     public function setLastname(string $lastname): self
     {
         $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    public function getDistance(): float
+    {
+        return $this->distance;
+    }
+
+    public function setDistance(float $distance): self
+    {
+        $this->distance = $distance;
 
         return $this;
     }
