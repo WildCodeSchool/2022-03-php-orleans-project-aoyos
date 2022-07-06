@@ -15,68 +15,73 @@
 {% block content %}
 	<main class="w-100 dj-show-reservation">
 		<div class="container-fluid d-flex flex-column align-items-center my-5">
-			<div class="dj-show-reservation-card p-5 w-50">
+			<div class="dj-show-reservation-card p-5 col-xxl-6">
 				<h1 class="mt-3 mb-2">
 					{{ reservation.eventType }}
 				</h1>
 				<h2 class="text-primary text-shadow">{{ reservation.company }}</h2>
-				<p class="h5 text-muted">{{ reservation.dateStart ? reservation.dateStart|date('d-m-Y H:i') : '' }}
+				<p class="h5">{{ reservation.dateStart ? reservation.dateStart|date('d-m-Y H:i') : '' }}
 					<i class="bi bi-arrow-right"></i>
 					{{ reservation.dateEnd ? reservation.dateEnd|date('d-m-Y H:i') : '' }}</p>
 				<hr/>
-				<h3 class="text-muted">Technique</h3>
-				<div class="d-flex">
-					<p class="dj-property">Nombre de participants
+				<h3>Technique</h3>
+				<div class="d-lg-flex">
+					<p class="dj-property text-nowrap mb-1">Nombre de participants
 						<i class="bi bi-arrow-right"></i>
 					</p>
-					<p class="">
+					<p class="mt-0">
 						&nbsp
 						{{ reservation.attendees }}
 						personnes</p>
 				</div>
-				<div class="d-flex">
-					<p class="dj-property">Genre
+				<div class="d-lg-flex">
+					<p class="dj-property text-nowrap mb-1">Genre
 						<i class="bi bi-arrow-right"></i>
 					</p>
-					<p class=""></p>
+					<p class="mt-0">
+						&nbsp{% for musicalStyle in reservation.musicalStyles %}
+							{{ musicalStyle.name }}{% if not loop.last %}, {% endif %}
+						{% endfor %}
+					</p>
 				</div>
-				<div class="d-flex">
-					<p class="dj-property">Salaire
+				<div class="d-lg-flex">
+					<p class="dj-property text-nowrap mb-1">Tarif prestation
 						<i class="bi bi-arrow-right"></i>
 					</p>
-					<p class=""></p>
+					<p class="mt-0">
+						&nbsp{{ reservation.price }}€
+					</p>
 				</div>
 				<hr/>
-				<h3 class="text-muted">Informations</h3>
-				<div class="d-flex">
-					<p class="dj-property">Localisation
+				<h3>Informations</h3>
+				<div class="d-lg-flex">
+					<p class="dj-property text-nowrap mb-1">Localisation
 						<i class="bi bi-arrow-right"></i>
 					</p>
-					<p class="">
+					<p class="mt-0">
 						&nbsp{{ reservation.address }}</p>
 				</div>
-				<div class="d-flex">
-					<p class="dj-property">Téléphone
+				<div class="d-lg-flex">
+					<p class="dj-property text-nowrap mb-1">Téléphone
 						<i class="bi bi-arrow-right"></i>
 					</p>
-					<p class="">
+					<p class="mt-0">
 						&nbsp{{ reservation.phone }}</p>
 				</div>
-				<div class="d-flex">
-					<p class="dj-property">E-mail
+				<div class="d-lg-flex">
+					<p class="dj-property text-nowrap mb-1">E-mail
 						<i class="bi bi-arrow-right"></i>
 					</p>
-					<p class="">
+					<p class="mt-0">
 						&nbsp
 						{{ reservation.email }}</p>
 				</div>
-				<div class="d-flex">
-					<p class="dj-property">Commentaire d'Aoyos
+					<p class="dj-property text-nowrap mb-1">Commentaire d'Aoyos
 						<i class="bi bi-arrow-right"></i>
 					</p>
-					<p class="">
-						&nbsp " "</p>
-				</div>
+					<p class="mt-0">
+						&nbsp {{ reservation.commentAdmin ?? 'Pas de commentaire' }}
+					</p>
 				<hr/>
 
 				<div class="btn-section w-100">
