@@ -5,6 +5,17 @@
 {% block content %}
 <main class="container">
     <h1 class="my-5">DJs</h1>
+    {{ form_start(form) }}
+    {{ form_label(form.search) }}
+    {{ form_errors(form.search) }} 
+    <div class="input-group mb-3 w-50">
+        {{ form_widget(form.search) }}
+        <button class="btn btn-outline-dark">
+            <i class="bi bi-search"></i>
+            Rechercher
+        </button>
+    {{ form_end(form) }}
+    </div>
     <table class="table table-hover">
         <thead>
             <tr>
