@@ -82,12 +82,14 @@ class ReservationRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
-    public function findTakenWithSearch(string $eventType): array
+    public function findTakenWithSearch(string $search): array
     {
         return $this->createQueryBuilder('r')
             ->andWhere('r.artist is NOT NULL')
             ->andWhere('r.eventType LIKE :eventType')
-            ->setParameter('eventType', '%' . $eventType . '%')
+            ->setParameter('eventType', '%' . $search . '%')
+            ->orWhere('r.company LIKE :company')
+            ->setParameter('company', '%' . $search . '%')
             ->orderBy('r.dateStart', 'DESC')
             ->getQuery()
             ->getResult();
