@@ -1,6 +1,6 @@
 @import "variables.scss";
 
-$djCardsHeight: 15rem;
+$djCardsHeight: 18rem;
 $topBarHeight: 60px;
 $sideBarWidth: 300px;
 $djShowCardWidth: 15rem;
@@ -74,8 +74,5 @@ $djShowCardWidth: 15rem;
 }
 
 .dj-title-side {
-    position: relative;
-    left: -8px;
-    height: calc($djCardsHeight - 2px);
-    clip-path: polygon(0 0, 100% 0, 90% 100%, 0% 100%);
+    background: linear-gradient(95deg, rgba(2,0,36,1) 0%, rgba(2,0,36,1) 85%, rgba(255,255,255,1) 85%, rgba(255,255,255,1) 90%);
 }

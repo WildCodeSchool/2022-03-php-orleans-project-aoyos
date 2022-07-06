@@ -22,7 +22,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/espace-dj', name: 'dashboard_dj_')]
 class DjDashboardController extends AbstractController
 {
-    public const MAX_ELEMENTS = 3;
+    public const MAX_ELEMENTS = 4;
 
     #[Route('/', name: 'index')]
     #[IsGranted('ROLE_USER')]
@@ -73,7 +73,6 @@ class DjDashboardController extends AbstractController
     #[IsGranted('ROLE_DJ')]
     public function reservations(ReservationRepository $reservationRepo, Request $request): Response
     {
-
         $form = $this->createForm(SearchDjReservationsType::class);
         $form->handleRequest($request);
 
