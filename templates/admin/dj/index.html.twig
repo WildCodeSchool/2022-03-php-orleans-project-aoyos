@@ -13,6 +13,8 @@
                 <th>Adresse</th>
                 <th>Matériel</th>
                 <th></th>
+                <th></th>
+
             </tr>
         </thead>
         <tbody>
@@ -26,6 +28,14 @@
                     <a class="btn btn-outline-dark btn-sm text-nowrap px-3 my-2" href="{{ path('admin_dj_show', {'id': artist.id}) }}">
                     <i class="bi bi-card-list pe-1"></i>
                     Détails</a></td>
+                {% if artist.user.roles == ['ROLE_USER'] %}
+                <td class="align-middle text-end"> {{ include('admin/dj/_dj_validate_form.html.twig') }} </td>
+                {% else %}
+                 <td class="align-start text-end">
+                    <a class="btn btn-outline-danger btn-sm text-nowrap px-3 my-2">
+                    <i class="bi bi-card-list pe-1"></i>
+                    Supprimer</a></td>
+                {% endif %}
             </tr>
         {% else %}
             <tr>
