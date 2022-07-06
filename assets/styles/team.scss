@@ -7,13 +7,13 @@ $teamTitleOffset: -30px;
     height: $teamCardSize;
 }
 
-.team .card-img-top {
+.team .card-img-top, .artists .card-img-top {
     object-fit: cover;
     object-position: center;
     height: $teamImgSize;
 }
 
-.team h2 {
+.team h2, .artists h2 {
     margin-top: $teamTitleOffset;
 }
 
