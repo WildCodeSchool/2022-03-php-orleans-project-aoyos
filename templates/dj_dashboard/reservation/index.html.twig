@@ -20,14 +20,10 @@
 		<div class="row mx-3">
 
 			{{ form_start(form) }}
-			{{ form_label(form.search) }}
-			{{ form_errors(form.search) }}
+			{{ form_label(form.musicalStyle) }}
+			{{ form_errors(form.musicalStyle) }}
 			<div class="input-group mb-4 w-50">
-				{{ form_widget(form.search) }}
-				<button class="btn btn-outline-dark">
-					<i class="bi bi-search"></i>
-					Rechercher
-				</button>
+				{{ form_widget(form.musicalStyle, { 'attr' : { 'onChange' : 'this.form.submit()' }} ) }}
 			</div>
 			{{ form_end(form) }}
 

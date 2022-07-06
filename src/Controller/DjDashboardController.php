@@ -74,8 +74,8 @@ class DjDashboardController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $search = $form->getData()['search'];
-            $reservations = $reservationRepo->findLikeMusicalStyle($search);
+            $musicalStyleName = $form->getData()['musicalStyle']->getName();
+            $reservations = $reservationRepo->findByMusicalStyle($musicalStyleName);
         } else {
             $reservations = $reservationRepo->findBy(['status' => 'Waiting'], ['dateStart' => 'ASC']);
         }

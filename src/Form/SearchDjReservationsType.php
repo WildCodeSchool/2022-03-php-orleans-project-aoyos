@@ -2,6 +2,8 @@
 
 namespace App\Form;
 
+use App\Entity\MusicalStyle;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -13,8 +15,12 @@ class SearchDjReservationsType extends AbstractType
     {
         $builder
             ->setMethod('GET')
-            ->add('search', SearchType::class, [
-                'label' => 'Genre musical',
+            ->add('musicalStyle', EntityType::class, [
+                'label' => 'Recherche par genre musical',
+                'class' => MusicalStyle::class,
+                'choice_label' => function ($musicalStyle) {
+                    return $musicalStyle->getName();
+                },
             ])
         ;
     }

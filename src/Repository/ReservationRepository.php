@@ -106,13 +106,13 @@ class ReservationRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function findLikeMusicalStyle(string $musicalStyle): array
+    public function findByMusicalStyle(string $musicalStyleName): array
     {
         return $this->createQueryBuilder('r')
             ->innerjoin('r.musicalStyles', 'm')
             ->select('r')
-            ->andWhere('m.name LIKE :musicalStyle')
-            ->setParameter('musicalStyle', '%' . $musicalStyle . '%')
+            ->andWhere('m.name = :musicalStyle')
+            ->setParameter('musicalStyle', $musicalStyleName)
             ->getQuery()
             ->getResult();
     }
