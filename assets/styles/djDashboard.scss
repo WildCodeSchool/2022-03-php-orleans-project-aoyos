@@ -1,6 +1,6 @@
 @import "variables.scss";
 
-$djCardsHeight: 18rem;
+$djCardsHeight: 20rem;
 $topBarHeight: 60px;
 $sideBarWidth: 300px;
 $djShowCardWidth: 15rem;
@@ -48,7 +48,7 @@ $djShowCardWidth: 15rem;
     padding-left: 1.25rem;
 }
 
-.reservations-dj .card {
+.reservations-dj .card-dj {
     height: $djCardsHeight;
 }
 
@@ -73,6 +73,26 @@ $djShowCardWidth: 15rem;
     max-width: 100%;
 }
 
-.dj-title-side {
-    background: linear-gradient(95deg, rgba(2,0,36,1) 0%, rgba(2,0,36,1) 85%, rgba(255,255,255,1) 85%, rgba(255,255,255,1) 90%);
+.dj-my-events > div:first-child {
+    background: linear-gradient(98deg, $primary 0%, $primary 85%, rgba(255,255,255,1) 86%, rgba(255,255,255,1) 100%);
 }
+.dj-new-events > div:first-child {
+    background: linear-gradient(98deg, $secondary 0%, $secondary 85%, rgba(255,255,255,1) 86%, rgba(255,255,255,1) 100%);
+}
+
+@media screen and (max-width: 992px) {
+    .dj-my-events > div:first-child {
+        height: 20%;
+        background: $primary;
+    }
+    .dj-new-events > div:first-child {
+        height: 20%;
+        background: $secondary;
+    }
+    .dj-my-events > div:nth-child(2) {
+        height: 80%;
+    }
+    .dj-new-events > div:nth-child(2) {
+        height: 80%;
+    }
+  }
