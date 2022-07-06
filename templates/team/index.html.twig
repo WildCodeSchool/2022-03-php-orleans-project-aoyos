@@ -28,6 +28,16 @@
 						</div>
 					</div>
 				{% endfor %}
+
+				{% for artist in artists %}
+					<div class="col-lg-4 col-md-5 mx-auto py-2">
+						<div class="card shadow border border-primary">
+								<h2 class=" px-2 py-2 card-title shadow border border-primary bg-dark text-light fs-3 w-fit mx-auto">{{artist.artist.fullname}}</h2>
+							</div>
+							<span class="text-end px-2 py-2 fs-5">DJ</span>
+						</div>
+					</div>
+				{% endfor %}
 			</div>
 		</div>
 	</section>
