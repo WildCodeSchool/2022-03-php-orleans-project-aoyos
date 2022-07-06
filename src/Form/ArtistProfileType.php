@@ -26,7 +26,7 @@ class ArtistProfileType extends AbstractType
                 ])
             ->add('message', TextType::class, [
                 'label' => 'Message',
-                'attr' => ['placeholder' => 'Je suis un super DJ mais..!'],
+                'attr' => ['placeholder' => 'Informations supplémentaires'],
                 ])
             ->add('musicalStyles', EntityType::class, [
                 'class' => MusicalStyle::class,
