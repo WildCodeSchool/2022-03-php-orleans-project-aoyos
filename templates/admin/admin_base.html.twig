@@ -23,14 +23,8 @@
 {% block body %}
 	<div class="d-flex">
 		{% include 'components/_admin_sidebar.html.twig' %}
-		<div class="mx-auto">
-			{% for category, messages in app.flashes %}
-				{% for message in messages %}
-					<div class="mt-3 text-center alert alert-{{ category }}">
-						{{ message }}
-					</div>
-				{% endfor %}
-			{% endfor %}
+		<div class="w-100">
+			{% include 'components/_flash_message.html.twig' %}
 			{% block content %}
 			{% endblock %}
 		</div>
