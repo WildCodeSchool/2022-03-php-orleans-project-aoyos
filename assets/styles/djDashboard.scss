@@ -65,7 +65,7 @@ $djShowCardWidth: 15rem;
 }
 
 .dj-property {
-    color: saturate($primary, 20%);
+    color: darken($primary, 20%);
     font-weight: 600;
     font-size: 1.1rem; }
     
