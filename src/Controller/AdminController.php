@@ -74,4 +74,20 @@ class AdminController extends AbstractController
         }
         return $this->redirectToRoute('admin_dj_list', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/dj/{id}/desactiver', name: 'dj_deactivate', methods: ['POST'])]
+
+    public function deactivateDj(
+        Request $request,
+        Artist $artist,
+        ManagerRegistry $doctrine,
+    ): Response {
+        $entityManager = $doctrine->getManager();
+        if ($this->isCsrfTokenValid('deactivate' . $artist->getId(), $request->request->get('_token'))) {
+            $artist->getUser()->setRoles(['ROLE_USER']);
+            $entityManager->flush();
+            $this->addFlash('success', 'Vous avez désactivé ce DJ avec succès.');
+        }
+        return $this->redirectToRoute('admin_dj_list', [], Response::HTTP_SEE_OTHER);
+    }
 }
