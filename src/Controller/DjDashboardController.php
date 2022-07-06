@@ -146,4 +146,21 @@ class DjDashboardController extends AbstractController
         }
         return $this->redirectToRoute('dashboard_dj_show', ['id' => $reservation->getId()], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/mes-evenements/{filter}', name: 'my_events', requirements: ['filter' => 'passes|a-venir'])]
+    #[IsGranted('ROLE_DJ')]
+    public function events(ReservationRepository $reservationRepo, string $filter): Response
+    {
+        /** @var User */
+        $user = $this->getUser();
+
+        $reservations = $reservationRepo->findByArtistByDate($user->getArtist(), $filter);
+
+        return $this->render('dj_dashboard/my_events.html.twig', [
+            'reservations' => $reservations,
+            'filter' => $filter,
+            'passes' => ReservationRepository::PAST_EVENTS,
+            'avenir' => ReservationRepository::FUTURE_EVENTS,
+        ]);
+    }
 }
