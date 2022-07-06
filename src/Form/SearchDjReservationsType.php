@@ -3,9 +3,9 @@
 namespace App\Form;
 
 use App\Entity\MusicalStyle;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -18,11 +18,15 @@ class SearchDjReservationsType extends AbstractType
             ->add('musicalStyle', EntityType::class, [
                 'label' => 'Recherche par genre musical',
                 'class' => MusicalStyle::class,
+                'placeholder' => 'Tous les genres musicaux',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('m')
+                        ->orderBy('m.name', 'ASC');
+                },
                 'choice_label' => function ($musicalStyle) {
                     return $musicalStyle->getName();
                 },
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
