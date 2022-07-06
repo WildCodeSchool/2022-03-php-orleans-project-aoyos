@@ -38,13 +38,19 @@
 					<p class="dj-property text-nowrap mb-1">Genre
 						<i class="bi bi-arrow-right"></i>
 					</p>
-					<p class="mt-0"></p>
+					<p class="mt-0">
+						&nbsp{% for musicalStyle in reservation.musicalStyles %}
+							{{ musicalStyle.name }}{% if not loop.last %}, {% endif %}
+						{% endfor %}
+					</p>
 				</div>
 				<div class="d-lg-flex">
-					<p class="dj-property text-nowrap mb-1">Salaire
+					<p class="dj-property text-nowrap mb-1">Tarif prestation
 						<i class="bi bi-arrow-right"></i>
 					</p>
-					<p class="mt-0"></p>
+					<p class="mt-0">
+						&nbsp{{ reservation.price }}€
+					</p>
 				</div>
 				<hr/>
 				<h3>Informations</h3>
