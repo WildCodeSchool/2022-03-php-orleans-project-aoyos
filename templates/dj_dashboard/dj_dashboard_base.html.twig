@@ -14,14 +14,26 @@
 {% endblock %}
 
 {% block navbar %}
-{% include 'components/_dj_topbar.html.twig' %}
+	{% include 'components/_dj_topbar.html.twig' %}
+{% endblock %}
+
+{% block message %}
 {% endblock %}
 
 {% block body %}
 	<div class="d-flex">
 		{% include 'components/_dj_sidebar.html.twig' %}
-		{% block content %}
-		{% endblock %}
+		<div class="mx-auto">
+			{% for category, messages in app.flashes %}
+				{% for message in messages %}
+				<div class="mt-3 text-center alert alert-{{ category }}">
+					{{ message }}
+				</div>
+				{% endfor %}
+			{% endfor %}
+			{% block content %}
+			{% endblock %}
+		</div>
 	</div>
 {% endblock %}
 
