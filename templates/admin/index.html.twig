@@ -30,7 +30,7 @@
 								<p class="card-text px-2 "> <strong>Adresse :</strong> {{ reservation.address|u.truncate(50, '...', false) }}</p>
 								</div>
 							</div>
-							<a href="#" class="btn btn-outline-dark mx-2 mb-2">Voir</a>
+							<a href="{{ path('admin_reservation_edit', {'id': reservation.id}) }}" class="btn btn-outline-dark mx-2 mb-2">Voir</a>
 						</div>
 					</div>
 				{% endfor %}
@@ -70,7 +70,7 @@
 									</p>
 								</div>
 							</div>
-						<a href="#" class="btn btn-outline-dark mx-2 mb-2">Voir</a>
+						<a href="{{ path('admin_dj_show', {'id': artist.id}) }}" class="btn btn-outline-dark mx-2 mb-2">Voir</a>
 						</div>
 					</div>
 				{% endfor %}
