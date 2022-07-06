@@ -22,7 +22,7 @@ class SearchAdminReservationType extends AbstractType
         $builder
             ->setMethod('GET')
             ->add('search', SearchType::class, [
-                'label' => 'Nom de l\'événement',
+                'label' => 'Nom de l\'événement ou de société',
                 'required' => false
             ])
             ->add('status', ChoiceType::class, [
