@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block content %}
-	<main>
+	<main class="mx-auto">
 		<div class="container d-flex flex-column mt-5">
 			{% if is_granted('ROLE_USER') and not is_granted('ROLE_DJ') %}
 				<div class="d-flex justify-content-center mt-5">
@@ -24,7 +24,7 @@
 					<h1 class="mt-3 mb-2 ms-3">
 						Mes évènements
 					</h1>
-					<div class="row me-2 ms-2 mb-1 d-flex flex-row w-100">
+					<div class="row">
 						{% for reservation in reservations %}
 							{% include 'dj_dashboard/_cards_dj.html.twig' %}
 						{% endfor %}
@@ -32,7 +32,7 @@
 					<h1 class="mt-3 mb-2 ms-3">
 						Nouveaux évènements
 					</h1>
-					<div class="row me-2 ms-2 mb-1 d-flex flex-row w-100">
+					<div class="row">
 						{% for reservation in newReservations %}
 							{% include 'dj_dashboard/_cards_dj.html.twig' %}
 						{% endfor %}
