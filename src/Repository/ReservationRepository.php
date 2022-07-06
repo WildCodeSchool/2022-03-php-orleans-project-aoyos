@@ -82,12 +82,14 @@ class ReservationRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
-    public function findTakenWithSearch(string $eventType): array
+    public function findTakenWithSearch(string $search): array
     {
         return $this->createQueryBuilder('r')
             ->andWhere('r.artist is NOT NULL')
             ->andWhere('r.eventType LIKE :eventType')
-            ->setParameter('eventType', '%' . $eventType . '%')
+            ->setParameter('eventType', '%' . $search . '%')
+            ->orWhere('r.company LIKE :company')
+            ->setParameter('company', '%' . $search . '%')
             ->orderBy('r.dateStart', 'DESC')
             ->getQuery()
             ->getResult();
@@ -97,12 +99,15 @@ class ReservationRepository extends ServiceEntityRepository
     //     */
 
 
-    public function findLikeEventType(?string $eventType = '', ?string $status = ''): array
+    public function findLikeEventType(?string $search = '', ?string $status = ''): array
     {
         $queryBuilder = $this->createQueryBuilder('r');
-        if ($eventType) {
-            $queryBuilder->andWhere('r.eventType LIKE :eventType')
-                ->setParameter('eventType', '%' . $eventType . '%');
+
+        if ($search) {
+                $queryBuilder->andWhere('r.eventType LIKE :eventType')
+                ->setParameter('eventType', '%' . $search . '%')
+                ->orWhere('r.company LIKE :company')
+                ->setParameter('company', '%' . $search . '%');
         }
 
         if ($status) {
@@ -111,5 +116,18 @@ class ReservationRepository extends ServiceEntityRepository
         }
 
         return $queryBuilder->getQuery()->getResult();
+    }
+
+    public function findByMusicalStyle(string $musicalStyleName): array
+    {
+        return $this->createQueryBuilder('r')
+            ->innerjoin('r.musicalStyles', 'm')
+            ->select('r')
+            ->andWhere('r.status = :Waiting')
+            ->andWhere('m.name = :musicalStyle')
+            ->setParameter('musicalStyle', $musicalStyleName)
+            ->setParameter('Waiting', 'Waiting')
+            ->getQuery()
+            ->getResult();
     }
 }

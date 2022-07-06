@@ -7,9 +7,11 @@ use App\Entity\Reservation;
 use App\Config\ReservationStatus;
 use Symfony\Component\Mime\Email;
 use App\Repository\ArtistRepository;
+use App\Form\SearchDjReservationsType;
 use App\Repository\ReservationRepository;
 use App\Service\DistanceCalculator;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,7 +22,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/espace-dj', name: 'dashboard_dj_')]
 class DjDashboardController extends AbstractController
 {
-    public const MAX_ELEMENTS = 3;
+    public const MAX_ELEMENTS = 4;
 
     #[Route('/', name: 'index')]
     #[IsGranted('ROLE_USER')]
@@ -64,6 +66,30 @@ class DjDashboardController extends AbstractController
     ): Response {
         return $this->render('dj_dashboard/reservation/show.html.twig', [
             'reservation' => $reservation
+        ]);
+    }
+
+    #[Route('/reservations', name: 'reservations', methods: 'GET')]
+    #[IsGranted('ROLE_DJ')]
+    public function reservations(ReservationRepository $reservationRepo, Request $request): Response
+    {
+        $form = $this->createForm(SearchDjReservationsType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            if (!$form->getData()['musicalStyle']) {
+                $reservations = $reservationRepo->findBy(['status' => 'Waiting'], ['dateStart' => 'ASC']);
+            } else {
+                $musicalStyleName = $form->getData()['musicalStyle']->getName();
+                $reservations = $reservationRepo->findByMusicalStyle($musicalStyleName);
+            }
+        } else {
+            $reservations = $reservationRepo->findBy(['status' => 'Waiting'], ['dateStart' => 'ASC']);
+        }
+
+        return $this->renderForm('dj_dashboard/reservation/index.html.twig', [
+            'reservations' => $reservations,
+            'form' => $form
         ]);
     }
 
@@ -145,5 +171,22 @@ class DjDashboardController extends AbstractController
             }
         }
         return $this->redirectToRoute('dashboard_dj_show', ['id' => $reservation->getId()], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/mes-evenements/{filter}', name: 'my_events', requirements: ['filter' => 'passes|a-venir'])]
+    #[IsGranted('ROLE_DJ')]
+    public function events(ReservationRepository $reservationRepo, string $filter): Response
+    {
+        /** @var User */
+        $user = $this->getUser();
+
+        $reservations = $reservationRepo->findByArtistByDate($user->getArtist(), $filter);
+
+        return $this->render('dj_dashboard/my_events.html.twig', [
+            'reservations' => $reservations,
+            'filter' => $filter,
+            'passes' => ReservationRepository::PAST_EVENTS,
+            'avenir' => ReservationRepository::FUTURE_EVENTS,
+        ]);
     }
 }

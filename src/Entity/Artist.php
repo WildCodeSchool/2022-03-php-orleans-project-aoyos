@@ -19,12 +19,12 @@ class Artist implements Localizable
     private int $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\Length(max:255, groups: ['djInfos'])]
+    #[Assert\Length(max: 255, groups: ['djInfos'])]
     #[Assert\NotBlank(groups: ['djInfos'])]
     private string $firstname;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\Length(max:255, groups: ['djInfos'])]
+    #[Assert\Length(max: 255, groups: ['djInfos'])]
     #[Assert\NotBlank(groups: ['djInfos'])]
     private string $lastname;
 
@@ -33,37 +33,37 @@ class Artist implements Localizable
     private DateTime $birthdate;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\Length(max:255, groups: ['djInfos'])]
+    #[Assert\Length(max: 255, groups: ['djInfos'])]
     #[Assert\NotBlank(groups: ['djInfos'])]
     private string $phone;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\Length(max:255, groups: ['djInfos'])]
+    #[Assert\Length(max: 255, groups: ['djInfos'])]
     #[Assert\NotBlank(groups: ['djInfos'])]
     #[Assert\Email(groups: ['djInfos'])]
     private string $email;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\Length(max:255, groups: ['djInfos'])]
+    #[Assert\Length(max: 255, groups: ['djInfos'])]
     #[Assert\NotBlank(groups: ['djInfos'])]
     private string $address;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\Length(max:255, groups: ['djProfile'])]
+    #[Assert\Length(max: 255, groups: ['djProfile'])]
     #[Assert\NotBlank(groups: ['djProfile'])]
     private string $artistName;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\Length(max:255, groups: ['djProfile'])]
+    #[Assert\Length(max: 255, groups: ['djProfile'])]
     #[Assert\NotBlank(groups: ['djProfile'])]
     private string $equipment;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    #[Assert\Length(max:255, groups: ['djProfile'])]
+    #[Assert\Length(max: 255, groups: ['djProfile'])]
     #[Assert\NotBlank(groups: ['djProfile'])]
     private string $message;
 
-    #[ORM\ManyToMany(targetEntity: MusicalStyle::class, inversedBy: 'artists', cascade:['persist'])]
+    #[ORM\ManyToMany(targetEntity: MusicalStyle::class, inversedBy: 'artists', cascade: ['persist'])]
     #[Assert\Count(
         min: 1,
         groups: ['djProfile'],
@@ -119,7 +119,6 @@ class Artist implements Localizable
     public function setFirstname(string $firstname): self
     {
         $this->firstname = $firstname;
-
         return $this;
     }
 
@@ -133,6 +132,11 @@ class Artist implements Localizable
         $this->lastname = $lastname;
 
         return $this;
+    }
+
+    public function getFullname(): ?string
+    {
+        return $this->firstname . ' ' . $this->lastname;
     }
 
     public function getBirthdate(): ?\DateTime

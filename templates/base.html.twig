@@ -23,13 +23,7 @@
 			{% include 'components/_navbar.html.twig' %}
 		{% endblock %}
 		{% block message %}
-			{% for category, messages in app.flashes %}
-				{% for message in messages %}
-					<div class="m-0 text-center alert alert-{{ category }}">
-						{{ message }}
-					</div>
-				{% endfor %}
-			{% endfor %}
+			{% include 'components/_flash_message.html.twig' %}
 		{% endblock %}
 		{% block body %}{% endblock %}
 		{% block footer %}

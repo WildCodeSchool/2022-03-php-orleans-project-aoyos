@@ -5,6 +5,17 @@
 {% block content %}
 <main class="container">
     <h1 class="my-5">DJs</h1>
+    {{ form_start(form) }}
+    {{ form_label(form.search) }}
+    {{ form_errors(form.search) }} 
+    <div class="input-group mb-3 w-50">
+        {{ form_widget(form.search) }}
+        <button class="btn btn-outline-dark">
+            <i class="bi bi-search"></i>
+            Rechercher
+        </button>
+    {{ form_end(form) }}
+    </div>
     <table class="table table-hover">
         <thead>
             <tr>
@@ -13,6 +24,8 @@
                 <th>Adresse</th>
                 <th>Matériel</th>
                 <th></th>
+                <th></th>
+
             </tr>
         </thead>
         <tbody>
@@ -26,6 +39,11 @@
                     <a class="btn btn-outline-dark btn-sm text-nowrap px-3 my-2" href="{{ path('admin_dj_show', {'id': artist.id}) }}">
                     <i class="bi bi-card-list pe-1"></i>
                     Détails</a></td>
+                {% if artist.user.roles == ['ROLE_USER'] %}
+                <td class="align-middle text-end"> {{ include('admin/dj/_dj_validate_form.html.twig') }} </td>
+                {% else %}
+                <td class="align-middle text-end"> {{ include('admin/dj/_dj_deactivate_form.html.twig') }} </td>
+                {% endif %}
             </tr>
         {% else %}
             <tr>

@@ -17,11 +17,17 @@
 	{% include 'components/_admin_topBar.html.twig' %}
 {% endblock %}
 
+{% block message %}
+{% endblock %}
+
 {% block body %}
 	<div class="d-flex">
 		{% include 'components/_admin_sidebar.html.twig' %}
-		{% block content %}
-		{% endblock %}
+		<div class="w-100">
+			{% include 'components/_flash_message.html.twig' %}
+			{% block content %}
+			{% endblock %}
+		</div>
 	</div>
 {% endblock %}
 
