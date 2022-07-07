@@ -14,6 +14,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ArtistProfileType extends AbstractType
 {
+    public const EQUIPMENT_CHOICE = [
+        'Platines et contrôleur' => 'Platines et contrôleur',
+        'Platines, contrôleur et sonorisation' => 'Platines, contrôleur et sonorisation',
+        'Platines, contrôleur, sonorisation et lumière' => 'Platines, contrôleur, sonorisation et lumière'
+    ];
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -23,11 +29,7 @@ class ArtistProfileType extends AbstractType
                 ])
             ->add('equipment', ChoiceType::class, [
                 'label' => 'Matériel',
-                'choices'  => [
-                    'Platines et contrôleur' => 'Platines et contrôleur',
-                    'Platines, contrôleur et sonorisation' => 'Platines, contrôleur et sonorisation',
-                    'Platines, contrôleur, sonorisation et lumière' => 'Platines, contrôleur, sonorisation et lumière'
-                ],
+                'choices'  => self::EQUIPMENT_CHOICE,
                 'multiple' => false,
                 'expanded' => true,
             ])
