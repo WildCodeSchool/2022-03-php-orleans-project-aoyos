@@ -1,4 +1,17 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <div class="d-flex gap-5 justify-content-center align-items-end">
+        <div>
+            {{ form_label(form.dateStart) }}
+            {{ form_errors(form.dateStart) }}
+            {{ form_widget(form.dateStart) }}
+        </div>
+        <div>
+            {{ form_label(form.dateEnd) }}
+            {{ form_errors(form.dateEnd) }}
+            {{ form_widget(form.dateEnd) }}
+        </div>
+        <div>
+            <button class="btn btn-outline-dark">{{ button_label|default('Save') }}</button>
+        </div>
+    </div>
 {{ form_end(form) }}

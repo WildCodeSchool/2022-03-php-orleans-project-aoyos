@@ -5,12 +5,6 @@
 {% block content %}
     <main class="container">
         <h1 class="my-5">Mes indisponibilités</h1>
-        <div class="w-100 d-flex justify-content-end">
-            <a class="btn btn-outline-dark px-3 me-2" href="#">
-                <i class="bi bi-plus-square"></i>
-                Ajouter
-            </a>
-        </div>
         <table class="table">
             <thead>
                 <tr>
@@ -38,5 +32,7 @@
             {% endfor %}
             </tbody>
         </table>
+            <h2 class="h3 mt-5">Nouvelle indisponibilité</h2>
+            {{ include('dj_dashboard/unavailability/_form.html.twig') }}
     </main>
 {% endblock %}

@@ -8,7 +8,6 @@ use App\Config\ReservationStatus;
 use App\Entity\Unavailability;
 use App\Form\ArtistBillType;
 use Symfony\Component\Mime\Email;
-use App\Repository\ArtistRepository;
 use App\Form\SearchDjReservationsType;
 use App\Form\UnavailabilityType;
 use App\Repository\ReservationRepository;
@@ -231,33 +230,27 @@ class DjDashboardController extends AbstractController
         ]);
     }
 
-    #[Route('/indisponibilites', name: 'unavailability', methods: 'GET')]
+    #[Route('/indisponibilites', name: 'unavailability', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_DJ')]
-    public function unavailabilityShow(UnavailabilityRepository $unavailabilityRepo): Response
+    public function unavailabilityShow(Request $request, UnavailabilityRepository $unavailabilityRepo): Response
     {
         /** @var User */
         $user = $this->getUser();
 
         $unavailabilities = $unavailabilityRepo->findBy(['artist' => $user->getArtist()], ['dateStart' => 'ASC']);
-        return $this->render('dj_dashboard/unavailability/index.html.twig', [
-            'unavailabilities' => $unavailabilities,
-        ]);
-    }
 
-    #[Route('/indisponibilites/ajout', name: 'unavailability_add', methods: ['GET', 'POST'])]
-    public function new(Request $request, UnavailabilityRepository $unavailabilityRepo): Response
-    {
         $unavailability = new Unavailability();
         $form = $this->createForm(UnavailabilityType::class, $unavailability);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $unavailability->setArtist($user->getArtist());
             $unavailabilityRepo->add($unavailability, true);
 
             return $this->redirectToRoute('dashboard_dj_unavailability', [], Response::HTTP_SEE_OTHER);
         }
-
-        return $this->renderForm('dj_dashboard/unavailability/new.html.twig', [
+        return $this->renderForm('dj_dashboard/unavailability/index.html.twig', [
+            'unavailabilities' => $unavailabilities,
             'unavailability' => $unavailability,
             'form' => $form,
         ]);

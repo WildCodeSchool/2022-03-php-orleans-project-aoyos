@@ -18,7 +18,7 @@ class UnavailabilityType extends AbstractType
                 'widget' => 'single_text',
             ])
             ->add('dateEnd', DateType::class, [
-                'label' => 'Début',
+                'label' => 'Fin',
                 'widget' => 'single_text',
             ])
         ;
