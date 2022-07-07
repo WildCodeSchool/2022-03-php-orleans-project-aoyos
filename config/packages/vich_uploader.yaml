@@ -22,6 +22,10 @@ vich_uploader:
             uri_prefix: /uploads/images/dj
             upload_destination: '%kernel.project_dir%/public/uploads/images/dj'
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+        bills:
+            uri_prefix: /uploads/images/bill
+            upload_destination: '%kernel.project_dir%/public/uploads/images/bill'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
 
     metadata:
         type: attribute

@@ -1,0 +1,54 @@
+{% extends 'dj_dashboard/dj_dashboard_base.html.twig' %}
+
+{% block title %}{{ parent() }} - Mes indisponibilités{% endblock %}
+
+{% block content %}
+    <main class="container">
+        <h1 class="mt-5 mb-4">Mes indisponibilités</h1>
+        <table class="table table-hover w-75 mx-auto">
+            <thead>
+                <tr>
+                    <th>Début</th>
+                    <th>Fin</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for unavailability in unavailabilities %}
+                <tr>
+                    <td class="align-middle">{{ unavailability.dateStart|date('d-m-Y') }}</td>
+                    <td class="align-middle">{{ unavailability.dateEnd|date('d-m-Y') }}</td>
+                    <td class="text-end">
+                        <a class="btn btn-outline-dark btn-sm text-nowrap px-3 my-2" href="#">
+                            <i class="bi bi-pen"></i>
+                            Éditer
+                        </a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">Aucune indisponibilité trouvée</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+            <h1 class="mt-5 mb-4">Nouvelle indisponibilité</h1>
+            {{ form_start(form) }}
+            <div class="d-flex flex-column flex-lg-row gap-5 justify-content-center">
+                <div>
+                    {{ form_label(form.dateStart) }}
+                    {{ form_errors(form.dateStart) }}
+                    {{ form_widget(form.dateStart) }}
+                </div>
+                <div>
+                    {{ form_label(form.dateEnd) }}
+                    {{ form_errors(form.dateEnd) }}
+                    {{ form_widget(form.dateEnd) }}
+                </div>
+                <div class="align-self-end">
+                    <button class="btn btn-outline-dark">Ajouter</button>
+                </div>
+            </div>
+            {{ form_end(form) }}
+    </main>
+{% endblock %}
