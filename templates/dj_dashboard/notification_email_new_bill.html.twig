@@ -1,0 +1,20 @@
+{% extends "layout_email.html.twig" %}
+
+{% block title %}
+	{{ parent() }}
+	- Nouvelle facture
+{% endblock %}
+
+{% block body %}
+	<h1 class="fs-4">Bonjour aoyos</h1>
+	<h2 class="fs-5 my-3">Une nouvelle facture de
+		{{ user.artist.fullname }}
+	</h2>
+	<p class="m-3">Pour l'évènement
+		{{ reservation.company }}</p>
+	<p class="m-3">Du
+		{{ reservation.dateStart |date('d-m-Y H:i') }}
+		au
+		{{ reservation.dateEnd |date('d-m-Y H:i') }}</p>
+
+{% endblock %}

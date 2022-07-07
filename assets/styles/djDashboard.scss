@@ -73,6 +73,10 @@ $djShowCardWidth: 15rem;
     max-width: 100%;
 }
 
+.vich-image img {
+    width: 50%;
+}
+
 .dj-my-events > div:first-child {
     background: linear-gradient(98deg, $primary 0%, $primary 85%, rgba(255,255,255,1) 86%, rgba(255,255,255,1) 100%);
 }
@@ -96,3 +100,4 @@ $djShowCardWidth: 15rem;
         height: 80%;
     }
   }
+
