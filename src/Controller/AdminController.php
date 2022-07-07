@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Artist;
 use App\Form\AdminArtistType;
 use App\Repository\ArtistRepository;
+use App\Repository\DocumentRepository;
 use App\Repository\ReservationRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
@@ -88,6 +89,30 @@ class AdminController extends AbstractController
             $entityManager->flush();
             $this->addFlash('success', 'Vous avez désactivé ce DJ avec succès.');
         }
+        return $this->redirectToRoute('admin_dj_list', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/dj/{id}/supprimer', name: 'dj_delete', methods: ['POST'])]
+    public function deleteDj(
+        Request $request,
+        Artist $artist,
+        ArtistRepository $artistRepository,
+        DocumentRepository $documentRepository,
+    ): Response {
+        if ($this->isCsrfTokenValid('delete' . $artist->getId(), $request->request->get('_token'))) {
+            if ($artist->getReservations() != null) {
+                foreach ($artist->getReservations() as $reservation) {
+                    $reservation->setArtist(null);
+                }
+            }
+            if ($artist->getDocuments() != null) {
+                    $documentRepository->remove($artist->getDocuments(), true);
+            }
+            $artistRepository->remove($artist, true);
+        }
+
+        $this->addFlash('success', 'Le dj a bien été supprimé.');
+
         return $this->redirectToRoute('admin_dj_list', [], Response::HTTP_SEE_OTHER);
     }
 }

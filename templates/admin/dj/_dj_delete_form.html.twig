@@ -1,0 +1,5 @@
+<form method="post" action="{{ path('admin_dj_delete', {'id': artist.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce dj ?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ artist.id) }}">
+    <button class="btn btn-outline-danger btn-lg text-nowrap px-2 my-2">
+    <i class="bi bi-x-circle me-2"></i>Supprimer cet artiste</button>
+</form>
