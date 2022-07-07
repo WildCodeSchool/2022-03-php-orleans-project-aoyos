@@ -1,0 +1,42 @@
+{% extends 'dj_dashboard/dj_dashboard_base.html.twig' %}
+
+{% block title %}{{ parent() }} - Mes indisponibilités{% endblock %}
+
+{% block content %}
+    <main class="container">
+        <h1 class="my-5">Mes indisponibilités</h1>
+        <div class="w-100 d-flex justify-content-end">
+            <a class="btn btn-outline-dark px-3 me-2" href="#">
+                <i class="bi bi-plus-square"></i>
+                Ajouter
+            </a>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Début</th>
+                    <th>Fin</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for unavailability in unavailabilities %}
+                <tr>
+                    <td class="align-middle">{{ unavailability.dateStart|date('d-m-Y') }}</td>
+                    <td class="align-middle w-100">{{ unavailability.dateEnd|date('d-m-Y') }}</td>
+                    <td>
+                        <a class="btn btn-outline-dark btn-sm text-nowrap px-3 my-2" href="#">
+                            <i class="bi bi-pen"></i>
+                            Éditer
+                        </a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">Aucune indisponibilité trouvée</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </main>
+{% endblock %}

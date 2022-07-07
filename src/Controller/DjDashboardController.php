@@ -9,6 +9,7 @@ use Symfony\Component\Mime\Email;
 use App\Repository\ArtistRepository;
 use App\Form\SearchDjReservationsType;
 use App\Repository\ReservationRepository;
+use App\Repository\UnavailabilityRepository;
 use App\Service\DistanceCalculator;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
@@ -187,6 +188,16 @@ class DjDashboardController extends AbstractController
             'filter' => $filter,
             'passes' => ReservationRepository::PAST_EVENTS,
             'avenir' => ReservationRepository::FUTURE_EVENTS,
+        ]);
+    }
+
+    #[Route('/indisponibilites', name: 'unavailability', methods: 'GET')]
+    #[IsGranted('ROLE_DJ')]
+    public function unavailabilityShow(UnavailabilityRepository $unavailabilityRepo): Response
+    {
+        $unavailabilities = $unavailabilityRepo->findBy(['artist' => $this->getUser()], ['dateStart' => 'ASC']);
+        return $this->render('dj_dashboard/unavailability/index.html.twig', [
+            'unavailabilities' => $unavailabilities,
         ]);
     }
 }
