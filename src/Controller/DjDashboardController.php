@@ -11,6 +11,7 @@ use App\Repository\ArtistRepository;
 use App\Form\SearchDjReservationsType;
 use App\Repository\ReservationRepository;
 use App\Service\DistanceCalculator;
+use DateTime;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
@@ -76,7 +77,9 @@ class DjDashboardController extends AbstractController
         $form = $this->createForm(ArtistBillType::class, $reservation);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        $now = new DateTime();
+
+        if ($form->isSubmitted() && $form->isValid() && ($reservation->getDateEnd() < $now)) {
             $reservationRepo->add($reservation, true);
 
             $email = (new Email())
