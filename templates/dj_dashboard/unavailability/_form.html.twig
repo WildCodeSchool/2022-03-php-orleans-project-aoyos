@@ -1,5 +1,5 @@
 {{ form_start(form) }}
-    <div class="d-flex gap-5 justify-content-center align-items-end">
+    <div class="d-flex flex-column flex-lg-row gap-5 justify-content-center">
         <div>
             {{ form_label(form.dateStart) }}
             {{ form_errors(form.dateStart) }}
@@ -10,8 +10,8 @@
             {{ form_errors(form.dateEnd) }}
             {{ form_widget(form.dateEnd) }}
         </div>
-        <div>
-            <button class="btn btn-outline-dark">{{ button_label|default('Save') }}</button>
+        <div class="align-self-end">
+            <button class="btn btn-outline-dark">Ajouter</button>
         </div>
     </div>
 {{ form_end(form) }}

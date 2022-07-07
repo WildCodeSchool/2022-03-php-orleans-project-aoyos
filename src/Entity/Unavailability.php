@@ -20,14 +20,14 @@ class Unavailability
     private Artist $artist;
 
     #[ORM\Column(type: 'date')]
-    #[Assert\LessThan(
+    #[Assert\LessThanOrEqual(
         propertyPath: 'dateEnd'
     )]
     #[Assert\GreaterThanOrEqual('today')]
     private DateTimeInterface $dateStart;
 
     #[ORM\Column(type: 'date')]
-    #[Assert\GreaterThan(
+    #[Assert\GreaterThanOrEqual(
         propertyPath: 'dateStart'
     )]
     private DateTimeInterface $dateEnd;

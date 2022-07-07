@@ -246,7 +246,7 @@ class DjDashboardController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $unavailability->setArtist($user->getArtist());
             $unavailabilityRepo->add($unavailability, true);
-
+            $this->addFlash('success', 'L\'indisponibilité a été ajoutée');
             return $this->redirectToRoute('dashboard_dj_unavailability', [], Response::HTTP_SEE_OTHER);
         }
         return $this->renderForm('dj_dashboard/unavailability/index.html.twig', [
