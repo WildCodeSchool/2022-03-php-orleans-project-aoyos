@@ -73,7 +73,7 @@ class DjDashboardController extends AbstractController
     ): Response {
         /** @var User */
         $user = $this->getUser();
-        if ($reservation->getArtist() !== $user->getArtist()) {
+        if ($reservation->getArtist() !== $user->getArtist() && $reservation->getArtist() !== null) {
             $this->denyAccessUnlessGranted('Accès interdit à cette réservation');
         }
         $form = $this->createForm(ArtistBillType::class, $reservation);
