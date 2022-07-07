@@ -31,6 +31,10 @@ $djShowCardWidth: 15rem;
     fill: $light;
 }
 
+.sideBar > div > a {
+    font-family: $titleFont;
+}
+
 .topBar {
     height: $topBarHeight;
     background-color: $adminColor;

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Unavailability{% endblock %}
+
+{% block body %}
+    <h1>Edit Unavailability</h1>
+
+    {{ include('jevais_tedelete/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_jevais_tedelete_index') }}">back to list</a>
+
+    {{ include('jevais_tedelete/_delete_form.html.twig') }}
+{% endblock %}
