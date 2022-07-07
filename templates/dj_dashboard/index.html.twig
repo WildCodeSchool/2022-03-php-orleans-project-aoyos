@@ -18,7 +18,7 @@
 			{% if is_granted('ROLE_USER') and not is_granted('ROLE_DJ') %}
 				<div class="d-flex flex-column justify-content-center align-items-center mt-5">
 					<h1 class="mt-5">Votre candidature est en attente de confirmation.</h1>
-					<p class="fs-4 text-muted">Afin qu'Aoyos puisse valider votre candidature, merci de compléter <a href="{{ path('dashboard_dj_documents') }}">votre dossier</a>.</p>
+					<p class="fs-4 text-muted">Afin qu'aoyos puisse valider votre candidature, merci de compléter <a href="{{ path('dashboard_dj_documents') }}">votre dossier</a>.</p>
 				</div>
 			{% else %}
 				<section class="reservations-dj">
