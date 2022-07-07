@@ -2,17 +2,25 @@
 
 namespace App\Entity;
 
-use App\Config\ReservationStatus;
-use App\Model\Localizable;
-use App\Repository\ReservationRepository;
+use DateTimeImmutable;
 use DateTimeInterface;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Model\Localizable;
 use Doctrine\ORM\Mapping as ORM;
+use App\Config\ReservationStatus;
+use App\Repository\ReservationRepository;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Component\HttpFoundation\File\File;
+use Doctrine\Common\Collections\ArrayCollection;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/** * @SuppressWarnings(PHPMD.TooManyFields) */
+/**
+ *
+ * @SuppressWarnings(PHPMD.TooManyFields)
+ * @SuppressWarnings(PHPMD.ExcessivePublicCount)
+ */
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]
+#[Vich\Uploadable]
 class Reservation implements Localizable
 {
     #[ORM\Id]
@@ -136,9 +144,26 @@ class Reservation implements Localizable
 
     private float $distance = 0;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Assert\Length(
+        max: 255
+    )]
+    private ?string $bill = null;
+
+    #[Vich\UploadableField(mapping: 'bills', fileNameProperty: 'bill')]
+    #[Assert\File(
+        maxSize: '2M',
+        mimeTypes: ['image/jpeg', 'image/png', 'image/webp', 'application/pdf', 'application/x-pdf' ]
+    )]
+    private ?File $billFile = null;
+
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private ?DateTimeInterface $updatedAt = null;
+
     public function __construct()
     {
         $this->musicalStyles = new ArrayCollection();
+        $this->updatedAt = new DateTimeImmutable();
     }
 
     public function getId(): ?int
@@ -396,5 +421,33 @@ class Reservation implements Localizable
         $this->latitude = $latitude;
 
         return $this;
+    }
+
+    public function getBill(): ?string
+    {
+        return $this->bill;
+    }
+
+    public function setBill(?string $bill): self
+    {
+        $this->bill = $bill;
+
+        return $this;
+    }
+
+    public function setBillFile(?File $billFile = null): void
+    {
+        $this->billFile = $billFile;
+
+        if (null !== $billFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new DateTimeImmutable();
+        }
+    }
+
+    public function getBillFile(): ?File
+    {
+        return $this->billFile;
     }
 }
