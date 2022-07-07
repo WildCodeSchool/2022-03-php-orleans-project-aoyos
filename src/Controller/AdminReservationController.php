@@ -127,4 +127,12 @@ class AdminReservationController extends AbstractController
 
         return $this->redirectToRoute('admin_reservation_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/facturees', name: 'billed', methods: ['GET'])]
+    public function billedReservations(ReservationRepository $reservationRepo): Response
+    {
+        return $this->render('admin/reservation/billed.html.twig', [
+            'reservations' => $reservationRepo->findAll(),
+        ]);
+    }
 }
