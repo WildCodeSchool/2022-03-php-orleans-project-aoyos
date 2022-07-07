@@ -111,8 +111,11 @@ class DjDashboardController extends AbstractController
 
     #[Route('/reservations', name: 'reservations', methods: 'GET')]
     #[IsGranted('ROLE_DJ')]
-    public function reservations(ReservationRepository $reservationRepo, Request $request): Response
-    {
+    public function reservations(
+        ReservationRepository $reservationRepo,
+        Request $request,
+        DistanceCalculator $distanceCalculator
+    ): Response {
         $form = $this->createForm(SearchDjReservationsType::class);
         $form->handleRequest($request);
 
@@ -125,6 +128,13 @@ class DjDashboardController extends AbstractController
             }
         } else {
             $reservations = $reservationRepo->findBy(['status' => 'Validated'], ['dateStart' => 'ASC']);
+        }
+
+        /** @var User */
+        $user = $this->getUser();
+        foreach ($reservations as $reservation) {
+            $distance = $distanceCalculator->getDistance($user->getArtist(), $reservation);
+            $reservation->setDistance($distance);
         }
 
         return $this->renderForm('dj_dashboard/reservation/index.html.twig', [
