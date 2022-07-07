@@ -72,10 +72,12 @@ class ReservationType extends AbstractType
                 'by_reference' => false,
                 ])
             ->add('commentAdmin', TextareaType::class, [
-                'label' => 'Commentaire admin (visible côté DJ)'
+                'label' => 'Commentaire admin (visible côté DJ)',
+                'required' => false
             ])
             ->add('price', NumberType::class, [
-                'label' => 'Tarif'
+                'label' => 'Tarif',
+                'required' => false
             ])
             ->add('status', ChoiceType::class, [
                 'choices' => $this->reservationStatus
