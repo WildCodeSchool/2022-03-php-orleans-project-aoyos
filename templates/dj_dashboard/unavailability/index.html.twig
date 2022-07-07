@@ -33,6 +33,22 @@
             </tbody>
         </table>
             <h1 class="mt-5 mb-4">Nouvelle indisponibilité</h1>
-            {{ include('dj_dashboard/unavailability/_form.html.twig') }}
+            {{ form_start(form) }}
+            <div class="d-flex flex-column flex-lg-row gap-5 justify-content-center">
+                <div>
+                    {{ form_label(form.dateStart) }}
+                    {{ form_errors(form.dateStart) }}
+                    {{ form_widget(form.dateStart) }}
+                </div>
+                <div>
+                    {{ form_label(form.dateEnd) }}
+                    {{ form_errors(form.dateEnd) }}
+                    {{ form_widget(form.dateEnd) }}
+                </div>
+                <div class="align-self-end">
+                    <button class="btn btn-outline-dark">Ajouter</button>
+                </div>
+            </div>
+            {{ form_end(form) }}
     </main>
 {% endblock %}
