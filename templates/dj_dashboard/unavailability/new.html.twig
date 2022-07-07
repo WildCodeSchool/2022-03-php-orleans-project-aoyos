@@ -1,11 +1,9 @@
-{% extends 'base.html.twig' %}
+{% extends 'dj_dashboard/dj_dashboard_base.html.twig' %}
 
 {% block title %}New Unavailability{% endblock %}
 
-{% block body %}
+{% block content %}
     <h1>Create new Unavailability</h1>
 
-    {{ include('jevais_tedelete/_form.html.twig') }}
-
-    <a href="{{ path('app_jevais_tedelete_index') }}">back to list</a>
+    {{ include('dj_dashboard/unavailability/_form.html.twig') }}
 {% endblock %}
