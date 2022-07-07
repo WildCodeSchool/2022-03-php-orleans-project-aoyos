@@ -105,6 +105,7 @@ class ReservationRepository extends ServiceEntityRepository
 
         if ($search) {
                 $queryBuilder->andWhere('r.eventType LIKE :eventType')
+                ->andWhere('r.artist is NULL')
                 ->setParameter('eventType', '%' . $search . '%')
                 ->orWhere('r.company LIKE :company')
                 ->setParameter('company', '%' . $search . '%');

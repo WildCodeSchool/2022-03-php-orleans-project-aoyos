@@ -38,7 +38,7 @@ class AdminReservationController extends AbstractController
             $status = $form->getData()['status'];
             $reservations = $reservationRepo->findLikeEventType($search, $status);
         } else {
-            $reservations = $reservationRepo->findBy([], ['dateStart' => 'desc', 'status' => 'asc']);
+            $reservations = $reservationRepo->findBy(['artist' => null], ['dateStart' => 'desc', 'status' => 'asc']);
         }
 
         return $this->renderForm('admin/reservation/index.html.twig', [
