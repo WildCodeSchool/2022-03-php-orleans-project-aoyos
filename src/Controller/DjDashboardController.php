@@ -5,11 +5,13 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Reservation;
 use App\Config\ReservationStatus;
+use App\Form\ArtistBillType;
 use Symfony\Component\Mime\Email;
 use App\Repository\ArtistRepository;
 use App\Form\SearchDjReservationsType;
 use App\Repository\ReservationRepository;
 use App\Service\DistanceCalculator;
+use DateTime;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
@@ -59,13 +61,50 @@ class DjDashboardController extends AbstractController
         ]);
     }
 
-    #[Route('/reservation/{id}', name: 'show', methods: ['GET'])]
+    #[Route('/reservation/{id}', name: 'show', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_DJ')]
     public function show(
         Reservation $reservation,
+        ReservationRepository $reservationRepo,
+        Request $request,
+        MailerInterface $mailer
     ): Response {
-        return $this->render('dj_dashboard/reservation/show.html.twig', [
-            'reservation' => $reservation
+        /** @var User */
+        $user = $this->getUser();
+        if ($reservation->getArtist() !== $user->getArtist()) {
+            $this->denyAccessUnlessGranted('Accès interdit à cette réservation');
+        }
+        $form = $this->createForm(ArtistBillType::class, $reservation);
+        $form->handleRequest($request);
+
+        $now = new DateTime();
+
+        if ($form->isSubmitted() && $form->isValid() && ($reservation->getDateEnd() < $now)) {
+            $reservationRepo->add($reservation, true);
+
+            $email = (new Email())
+            ->from($user->getEmail())
+            ->to($this->getParameter('mailer_from'))
+            ->subject('Une nouvelle facture')
+            ->html($this->renderView('dj_dashboard/notification_email_new_bill.html.twig', [
+                'reservation' => $reservation,
+                'user' => $user
+            ]));
+
+            $mailer->send($email);
+
+            $this->addFlash('success', 'Votre facture a bien été enregistrée.');
+
+            return $this->redirectToRoute(
+                'dashboard_dj_show',
+                ['id' => $reservation->getId()],
+                Response::HTTP_SEE_OTHER
+            );
+        }
+
+        return $this->renderForm('dj_dashboard/reservation/show.html.twig', [
+            'reservation' => $reservation,
+            'form' => $form
         ]);
     }
 
@@ -78,13 +117,13 @@ class DjDashboardController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             if (!$form->getData()['musicalStyle']) {
-                $reservations = $reservationRepo->findBy(['status' => 'Waiting'], ['dateStart' => 'ASC']);
+                $reservations = $reservationRepo->findBy(['status' => 'Validated'], ['dateStart' => 'ASC']);
             } else {
                 $musicalStyleName = $form->getData()['musicalStyle']->getName();
                 $reservations = $reservationRepo->findByMusicalStyle($musicalStyleName);
             }
         } else {
-            $reservations = $reservationRepo->findBy(['status' => 'Waiting'], ['dateStart' => 'ASC']);
+            $reservations = $reservationRepo->findBy(['status' => 'Validated'], ['dateStart' => 'ASC']);
         }
 
         return $this->renderForm('dj_dashboard/reservation/index.html.twig', [
@@ -106,9 +145,8 @@ class DjDashboardController extends AbstractController
 
         $entityManager = $doctrine->getManager();
 
-        if ($reservation->getStatus() === ReservationStatus::Waiting->name && $reservation->getArtist() === null) {
+        if ($reservation->getStatus() === ReservationStatus::Validated->name && $reservation->getArtist() === null) {
             $reservation->setArtist($user->getArtist());
-            $reservation->setStatus(ReservationStatus::Validated->name);
             $entityManager->persist($reservation);
 
             if (count($validator->validate($reservation)) === 0) {
