@@ -25,4 +25,10 @@ class HomeController extends AbstractController
             'productions' => $productionRepository->findBy([], ['id' => 'DESC']),
         ]);
     }
+
+    #[Route('/mentions-legales', name: 'app_home_mentions')]
+    public function legalMentions(): Response
+    {
+        return $this->render('home/legal_mentions.html.twig');
+    }
 }
