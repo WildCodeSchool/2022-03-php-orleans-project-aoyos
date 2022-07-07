@@ -23,8 +23,8 @@
             {% for unavailability in unavailabilities %}
                 <tr>
                     <td class="align-middle">{{ unavailability.dateStart|date('d-m-Y') }}</td>
-                    <td class="align-middle w-100">{{ unavailability.dateEnd|date('d-m-Y') }}</td>
-                    <td>
+                    <td class="align-middle">{{ unavailability.dateEnd|date('d-m-Y') }}</td>
+                    <td class="text-end">
                         <a class="btn btn-outline-dark btn-sm text-nowrap px-3 my-2" href="#">
                             <i class="bi bi-pen"></i>
                             Éditer

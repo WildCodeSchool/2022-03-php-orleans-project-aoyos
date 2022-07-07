@@ -195,7 +195,10 @@ class DjDashboardController extends AbstractController
     #[IsGranted('ROLE_DJ')]
     public function unavailabilityShow(UnavailabilityRepository $unavailabilityRepo): Response
     {
-        $unavailabilities = $unavailabilityRepo->findBy(['artist' => $this->getUser()], ['dateStart' => 'ASC']);
+        /** @var User */
+        $user = $this->getUser();
+
+        $unavailabilities = $unavailabilityRepo->findBy(['artist' => $user->getArtist()], ['dateStart' => 'ASC']);
         return $this->render('dj_dashboard/unavailability/index.html.twig', [
             'unavailabilities' => $unavailabilities,
         ]);
