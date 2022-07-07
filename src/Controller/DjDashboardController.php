@@ -5,10 +5,11 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Reservation;
 use App\Config\ReservationStatus;
+use App\Entity\Unavailability;
 use App\Form\ArtistBillType;
 use Symfony\Component\Mime\Email;
-use App\Repository\ArtistRepository;
 use App\Form\SearchDjReservationsType;
+use App\Form\UnavailabilityType;
 use App\Repository\ReservationRepository;
 use App\Repository\UnavailabilityRepository;
 use App\Service\DistanceCalculator;
@@ -229,16 +230,29 @@ class DjDashboardController extends AbstractController
         ]);
     }
 
-    #[Route('/indisponibilites', name: 'unavailability', methods: 'GET')]
+    #[Route('/indisponibilites', name: 'unavailability', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_DJ')]
-    public function unavailabilityShow(UnavailabilityRepository $unavailabilityRepo): Response
+    public function unavailabilityShowAdd(Request $request, UnavailabilityRepository $unavailabilityRepo): Response
     {
         /** @var User */
         $user = $this->getUser();
 
         $unavailabilities = $unavailabilityRepo->findBy(['artist' => $user->getArtist()], ['dateStart' => 'ASC']);
-        return $this->render('dj_dashboard/unavailability/index.html.twig', [
+
+        $unavailability = new Unavailability();
+        $form = $this->createForm(UnavailabilityType::class, $unavailability);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $unavailability->setArtist($user->getArtist());
+            $unavailabilityRepo->add($unavailability, true);
+            $this->addFlash('success', 'L\'indisponibilité a été ajoutée');
+            return $this->redirectToRoute('dashboard_dj_unavailability', [], Response::HTTP_SEE_OTHER);
+        }
+        return $this->renderForm('dj_dashboard/unavailability/index.html.twig', [
             'unavailabilities' => $unavailabilities,
+            'unavailability' => $unavailability,
+            'form' => $form,
         ]);
     }
 }

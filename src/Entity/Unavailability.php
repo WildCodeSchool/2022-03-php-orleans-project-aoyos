@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\UnavailabilityRepository;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UnavailabilityRepository::class)]
 class Unavailability
@@ -19,9 +20,16 @@ class Unavailability
     private Artist $artist;
 
     #[ORM\Column(type: 'date')]
+    #[Assert\LessThanOrEqual(
+        propertyPath: 'dateEnd'
+    )]
+    #[Assert\GreaterThanOrEqual('today')]
     private DateTimeInterface $dateStart;
 
     #[ORM\Column(type: 'date')]
+    #[Assert\GreaterThanOrEqual(
+        propertyPath: 'dateStart'
+    )]
     private DateTimeInterface $dateEnd;
 
     public function getId(): ?int

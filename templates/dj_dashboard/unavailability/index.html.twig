@@ -4,14 +4,8 @@
 
 {% block content %}
     <main class="container">
-        <h1 class="my-5">Mes indisponibilités</h1>
-        <div class="w-100 d-flex justify-content-end">
-            <a class="btn btn-outline-dark px-3 me-2" href="#">
-                <i class="bi bi-plus-square"></i>
-                Ajouter
-            </a>
-        </div>
-        <table class="table">
+        <h1 class="mt-5 mb-4">Mes indisponibilités</h1>
+        <table class="table table-hover w-75 mx-auto">
             <thead>
                 <tr>
                     <th>Début</th>
@@ -38,5 +32,23 @@
             {% endfor %}
             </tbody>
         </table>
+            <h1 class="mt-5 mb-4">Nouvelle indisponibilité</h1>
+            {{ form_start(form) }}
+            <div class="d-flex flex-column flex-lg-row gap-5 justify-content-center">
+                <div>
+                    {{ form_label(form.dateStart) }}
+                    {{ form_errors(form.dateStart) }}
+                    {{ form_widget(form.dateStart) }}
+                </div>
+                <div>
+                    {{ form_label(form.dateEnd) }}
+                    {{ form_errors(form.dateEnd) }}
+                    {{ form_widget(form.dateEnd) }}
+                </div>
+                <div class="align-self-end">
+                    <button class="btn btn-outline-dark">Ajouter</button>
+                </div>
+            </div>
+            {{ form_end(form) }}
     </main>
 {% endblock %}
