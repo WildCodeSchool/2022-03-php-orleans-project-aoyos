@@ -10,6 +10,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
+/** * @SuppressWarnings(PHPMD.ExcessiveClassComplexity) */
 #[ORM\Entity(repositoryClass: ArtistRepository::class)]
 class Artist implements Localizable
 {
@@ -99,11 +100,15 @@ class Artist implements Localizable
     #[Assert\Url]
     private ?string $facebook;
 
+    #[ORM\OneToMany(mappedBy: 'artist', targetEntity: Unavailability::class, orphanRemoval: true)]
+    private Collection $unavailabilities;
+
 
     public function __construct()
     {
         $this->musicalStyles = new ArrayCollection();
         $this->reservations = new ArrayCollection();
+        $this->unavailabilities = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -357,6 +362,36 @@ class Artist implements Localizable
     public function setFacebook(?string $facebook): self
     {
         $this->facebook = $facebook;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Unavailability>
+     */
+    public function getUnavailabilities(): Collection
+    {
+        return $this->unavailabilities;
+    }
+
+    public function addUnavailability(Unavailability $unavailability): self
+    {
+        if (!$this->unavailabilities->contains($unavailability)) {
+            $this->unavailabilities[] = $unavailability;
+            $unavailability->setArtist($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUnavailability(Unavailability $unavailability): self
+    {
+        if ($this->unavailabilities->removeElement($unavailability)) {
+            // set the owning side to null (unless already changed)
+            if ($unavailability->getArtist() === $this) {
+                $unavailability->setArtist(null);
+            }
+        }
 
         return $this;
     }
