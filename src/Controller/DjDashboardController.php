@@ -232,7 +232,7 @@ class DjDashboardController extends AbstractController
 
     #[Route('/indisponibilites', name: 'unavailability', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_DJ')]
-    public function unavailabilityShow(Request $request, UnavailabilityRepository $unavailabilityRepo): Response
+    public function unavailabilityShowAdd(Request $request, UnavailabilityRepository $unavailabilityRepo): Response
     {
         /** @var User */
         $user = $this->getUser();
