@@ -25,4 +25,10 @@ class HomeController extends AbstractController
             'productions' => $productionRepository->findBy([], ['id' => 'DESC']),
         ]);
     }
+
+    #[Route('/conditions-generales', name: 'app_general_conditions')]
+    public function generalConditions(): Response
+    {
+        return $this->render('home/general_conditions.html.twig');
+    }
 }
