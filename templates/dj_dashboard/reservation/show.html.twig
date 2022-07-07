@@ -40,11 +40,15 @@
 					</p>
 					<p class="mt-0">
 						&nbsp
-						{% for musicalStyle in reservation.musicalStyles %}
-							{{ musicalStyle.name }}
-							{% if not loop.last %},
-							{% endif %}
-						{% endfor %}
+						{% if reservation.musicalStyles is not empty %}
+							{% for musicalStyle in reservation.musicalStyles %}
+								{{ musicalStyle.name }}
+								{% if not loop.last %},
+								{% endif %}
+							{% endfor %}
+						{% else %}
+							Non précisé.
+						{% endif %}
 					</p>
 				</div>
 				<div class="d-lg-flex">
@@ -52,7 +56,12 @@
 						<i class="bi bi-arrow-right"></i>
 					</p>
 					<p class="mt-0">
-						&nbsp{{ reservation.price }}€
+						&nbsp
+						{% if reservation.price %}
+							{{ reservation.price }}€
+						{% else %}
+							&nbspNon précisé.
+						{% endif %}
 					</p>
 				</div>
 				<hr/>
