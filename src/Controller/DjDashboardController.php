@@ -78,13 +78,13 @@ class DjDashboardController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             if (!$form->getData()['musicalStyle']) {
-                $reservations = $reservationRepo->findBy(['status' => 'Waiting'], ['dateStart' => 'ASC']);
+                $reservations = $reservationRepo->findBy(['status' => 'Validated'], ['dateStart' => 'ASC']);
             } else {
                 $musicalStyleName = $form->getData()['musicalStyle']->getName();
                 $reservations = $reservationRepo->findByMusicalStyle($musicalStyleName);
             }
         } else {
-            $reservations = $reservationRepo->findBy(['status' => 'Waiting'], ['dateStart' => 'ASC']);
+            $reservations = $reservationRepo->findBy(['status' => 'Validated'], ['dateStart' => 'ASC']);
         }
 
         return $this->renderForm('dj_dashboard/reservation/index.html.twig', [
@@ -106,9 +106,8 @@ class DjDashboardController extends AbstractController
 
         $entityManager = $doctrine->getManager();
 
-        if ($reservation->getStatus() === ReservationStatus::Waiting->name && $reservation->getArtist() === null) {
+        if ($reservation->getStatus() === ReservationStatus::Validated->name && $reservation->getArtist() === null) {
             $reservation->setArtist($user->getArtist());
-            $reservation->setStatus(ReservationStatus::Validated->name);
             $entityManager->persist($reservation);
 
             if (count($validator->validate($reservation)) === 0) {
