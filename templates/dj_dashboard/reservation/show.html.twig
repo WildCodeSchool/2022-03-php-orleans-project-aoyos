@@ -20,6 +20,7 @@
 					{{ reservation.eventType }}
 				</h1>
 				<h2 class="text-primary text-shadow">{{ reservation.company }}</h2>
+				<iframe width="100%" height="300px" src="https://www.openstreetmap.org/export/embed.html?bbox={{ reservation.longitude +0.03 }}%2C{{ reservation.latitude +0.03 }}%2C{{ reservation.longitude -0.03 }}%2C{{ reservation.latitude -0.03 }}&amp;layer=mapnik&amp;marker={{ reservation.latitude }}%2C{{ reservation.longitude }}"></iframe>
 				<p class="h5">{{ reservation.dateStart ? reservation.dateStart|date('d-m-Y H:i') : '' }}
 					<i class="bi bi-arrow-right"></i>
 					{{ reservation.dateEnd ? reservation.dateEnd|date('d-m-Y H:i') : '' }}</p>
