@@ -200,7 +200,6 @@ class DjDashboardController extends AbstractController
             && $reservation->getArtist() === $user->getArtist()
         ) {
             $reservation->setArtist(null);
-            $reservation->setStatus(ReservationStatus::Waiting->name);
             $entityManager->persist($reservation);
 
             if (count($validator->validate($reservation)) === 0) {
