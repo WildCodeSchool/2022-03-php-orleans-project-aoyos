@@ -265,4 +265,19 @@ class DjDashboardController extends AbstractController
             'form' => $form,
         ]);
     }
+
+    #[Route('/indisponibilites/{id}', name: 'unavailability_delete', methods: ['POST'])]
+    public function delete(
+        Request $request,
+        Unavailability $unavailability,
+        UnavailabilityRepository $unavailabilityRepo
+    ): Response {
+        if ($this->isCsrfTokenValid('delete' . $unavailability->getId(), $request->request->get('_token'))) {
+            $unavailabilityRepo->remove($unavailability, true);
+        }
+
+        $this->addFlash('success', 'Votre indisponibilité a bien été supprimée.');
+
+        return $this->redirectToRoute('dashboard_dj_unavailability', [], Response::HTTP_SEE_OTHER);
+    }
 }
