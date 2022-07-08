@@ -17,15 +17,17 @@
 						{{ reservation.distance }}
 						km</span>
 				</div>
+				{% if reservation.artist == app.user.artist %}
 				<div class="w-100 px-2 mb-2">
 					<a href="{{ path('dashboard_dj_show', {'id': reservation.id}) }}" class="btn btn-outline-primary w-100">En savoir plus</a>
 				</div>
+				{% endif %}
 				{% if reservation.artist is defined and reservation.artist == app.user.artist %}
 					{{ include('dj_dashboard/reservation/_cancel_reservation.html.twig') }}
 				{% elseif reservation.artist is empty and reservation.status != 'Rejected' %}
 					{% include 'dj_dashboard/reservation/_accept_reservation.html.twig' %}
 				{% else %}
-					<p class="text-center">Cet évènement est déjà réservé par un autre DJ.</p>
+					<p class="text-center py-2">Cet évènement est déjà réservé par un autre DJ.</p>
 				{% endif %}
 			</div>
 		</div>
