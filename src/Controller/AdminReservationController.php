@@ -132,7 +132,7 @@ class AdminReservationController extends AbstractController
     public function billedReservations(ReservationRepository $reservationRepo): Response
     {
         return $this->render('admin/reservation/billed.html.twig', [
-            'reservations' => $reservationRepo->findAll(),
+            'reservations' => $reservationRepo->findBy([], ['dateEnd' => 'DESC']),
         ]);
     }
 }
