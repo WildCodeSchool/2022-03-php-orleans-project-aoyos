@@ -36,6 +36,9 @@ class AdminReservationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $search = $form->getData()['search'];
             $status = $form->getData()['status'];
+            if ($status === null && $search === null) {
+                return $this->redirectToRoute('admin_reservation_index', [], Response::HTTP_SEE_OTHER);
+            }
             $reservations = $reservationRepo->findLikeEventType($search, $status);
         } else {
             $reservations = $reservationRepo->findBy(['artist' => null], ['dateStart' => 'desc', 'status' => 'asc']);

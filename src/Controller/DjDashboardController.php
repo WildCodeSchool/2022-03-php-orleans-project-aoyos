@@ -42,7 +42,7 @@ class DjDashboardController extends AbstractController
             self::MAX_ELEMENTS
         );
         $newReservations = $reservationRepo->findBy(
-            [],
+            ['status' => 'Validated'],
             ['id' => 'desc'],
             self::MAX_ELEMENTS
         );
@@ -179,7 +179,7 @@ class DjDashboardController extends AbstractController
                 $this->addFlash('danger', 'Cet évènement n\'est plus disponible.');
             }
         }
-        return $this->redirectToRoute('dashboard_dj_show', ['id' => $reservation->getId()], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('dashboard_dj_reservations', [], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/reservation/{id}/annuler', name: 'cancel_reservation', methods: ['POST'])]
@@ -200,7 +200,6 @@ class DjDashboardController extends AbstractController
             && $reservation->getArtist() === $user->getArtist()
         ) {
             $reservation->setArtist(null);
-            $reservation->setStatus(ReservationStatus::Waiting->name);
             $entityManager->persist($reservation);
 
             if (count($validator->validate($reservation)) === 0) {
@@ -220,7 +219,7 @@ class DjDashboardController extends AbstractController
                 $this->addFlash('success', 'L\'évènement vous a été retiré !');
             }
         }
-        return $this->redirectToRoute('dashboard_dj_show', ['id' => $reservation->getId()], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('dashboard_dj_reservations', [], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/mes-evenements/{filter}', name: 'my_events', requirements: ['filter' => 'passes|a-venir'])]
@@ -264,5 +263,20 @@ class DjDashboardController extends AbstractController
             'unavailability' => $unavailability,
             'form' => $form,
         ]);
+    }
+
+    #[Route('/indisponibilites/{id}', name: 'unavailability_delete', methods: ['POST'])]
+    public function delete(
+        Request $request,
+        Unavailability $unavailability,
+        UnavailabilityRepository $unavailabilityRepo
+    ): Response {
+        if ($this->isCsrfTokenValid('delete' . $unavailability->getId(), $request->request->get('_token'))) {
+            $unavailabilityRepo->remove($unavailability, true);
+        }
+
+        $this->addFlash('success', 'Votre indisponibilité a bien été supprimée.');
+
+        return $this->redirectToRoute('dashboard_dj_unavailability', [], Response::HTTP_SEE_OTHER);
     }
 }
