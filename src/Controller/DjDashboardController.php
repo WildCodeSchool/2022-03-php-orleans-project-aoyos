@@ -42,7 +42,7 @@ class DjDashboardController extends AbstractController
             self::MAX_ELEMENTS
         );
         $newReservations = $reservationRepo->findBy(
-            [],
+            ['status' => 'Validated'],
             ['id' => 'desc'],
             self::MAX_ELEMENTS
         );
