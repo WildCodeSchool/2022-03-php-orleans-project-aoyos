@@ -179,7 +179,7 @@ class DjDashboardController extends AbstractController
                 $this->addFlash('danger', 'Cet évènement n\'est plus disponible.');
             }
         }
-        return $this->redirectToRoute('dashboard_dj_show', ['id' => $reservation->getId()], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('dashboard_dj_reservations', [], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/reservation/{id}/annuler', name: 'cancel_reservation', methods: ['POST'])]
@@ -219,7 +219,7 @@ class DjDashboardController extends AbstractController
                 $this->addFlash('success', 'L\'évènement vous a été retiré !');
             }
         }
-        return $this->redirectToRoute('dashboard_dj_show', ['id' => $reservation->getId()], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('dashboard_dj_reservations', [], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/mes-evenements/{filter}', name: 'my_events', requirements: ['filter' => 'passes|a-venir'])]
