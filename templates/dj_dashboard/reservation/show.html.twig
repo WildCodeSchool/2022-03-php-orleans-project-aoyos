@@ -41,11 +41,7 @@
 					<p class="mt-0">
 						&nbsp
 						{% if reservation.musicalStyles is not empty %}
-							{% for musicalStyle in reservation.musicalStyles %}
-								{{ musicalStyle.name }}
-								{% if not loop.last %},
-								{% endif %}
-							{% endfor %}
+							{{ reservation.musicalStyles|map(m => m.name)|join(', ') }}
 						{% else %}
 							Non précisé.
 						{% endif %}
