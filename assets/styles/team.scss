@@ -20,3 +20,17 @@ $teamTitleOffset: -30px;
 .w-fit {
     width: fit-content;
 }
+
+.bg-up {
+    background-image: url("../images/dotsagain.png");
+    background-repeat: no-repeat;
+    background-position-y: 20%;
+}
+
+.artists {
+    background-image: url("../images/cloud_lines.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position-y: 20%;
+    background-position-x: 90%;
+}
