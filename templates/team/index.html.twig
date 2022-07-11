@@ -11,8 +11,8 @@
 {% endblock %}
 
 {% block body %}
-	<main class="container">
-		<section class="team pb-5 d-flex flex-column align-items-center">
+	<main class="bg-up">
+		<section class="team container pb-5 d-flex flex-column align-items-center">
 			<h1 class="text-center py-4 mt-0 mb-4 position-relative">
 				<img src="{{ asset('build/images/title_underline_blue.png') }}" class="title-underline" alt="">Notre équipe</h1>
 			<div class="row">
@@ -31,7 +31,8 @@
 			</div>
 		</section>
 
-		<section class="artists mb-5">
+		<section class="artists">
+			<div class="container mb-5">
 			<h1 class="text-center my-5">Nos artistes</h1>
 			<div class="row">
 				{% for artist in artists %}
@@ -70,6 +71,7 @@
 					</div>
 				{% endfor %}
 			</div>
+		</div>
 		</section>
 	</main>
 {% endblock %}
