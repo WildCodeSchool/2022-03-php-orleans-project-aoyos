@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Artist;
 use App\Entity\MusicalStyle;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -44,6 +45,13 @@ class ArtistProfileType extends AbstractType
                 'multiple' => true,
                 'expanded' => true,
                 'by_reference' => false,
+                'attr' => [
+                    'class' => 'musical-styles'
+                ],
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('m')
+                        ->orderBy('m.name', 'ASC');
+                },
                 ])
             ->add('instagram', UrlType::class, [
                 'label' => 'Lien Instagram',

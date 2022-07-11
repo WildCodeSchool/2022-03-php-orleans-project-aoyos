@@ -11,3 +11,12 @@
     background-color: lighten($secondary, 20%);
     filter: drop-shadow(0 0 0.1rem $secondary);
 }
+
+.musical-styles {
+    columns: 20rem;
+}
+
+.form-label, .col-form-label {
+    font-family: $titleFont;
+    font-weight: 600;
+}
