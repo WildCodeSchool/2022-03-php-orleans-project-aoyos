@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ parent() }}
+	- Accueil
+{% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	{{ encore_entry_link_tags('error_page') }}
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+{% endblock %}
+
+{% block navbar %}{% endblock %}
+
+{% block body %}
+	<main class="error-page d-flex flex-column justify-content-center align-items-center">
+		<h1>ERREUR</h1>
+		<h2 class="text-center"> 500</h2>
+		<h3 class="text-center">Notre serveur semble rencontrer un problème, nous faisons notre possible pour que le site soit de nouveau accessible.</h3>
+	</main>
+{% endblock %}
+
+{% block footer %}{% endblock %}
