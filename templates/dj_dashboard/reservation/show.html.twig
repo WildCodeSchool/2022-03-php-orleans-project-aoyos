@@ -20,11 +20,13 @@
 					{{ reservation.eventType }}
 				</h1>
 				<h2 class="text-primary text-shadow">{{ reservation.company }}</h2>
-				{% set zoom = 0.03 %}
-				<iframe width="100%" height="300px" src="https://www.openstreetmap.org/export/embed.html?bbox={{ reservation.longitude + zoom }}%2C{{ reservation.latitude + zoom }}%2C{{ reservation.longitude - zoom }}%2C{{ reservation.latitude - zoom }}&amp;layer=mapnik&amp;marker={{ reservation.latitude }}%2C{{ reservation.longitude }}"></iframe>
-				<p class="h5">{{ reservation.dateStart ? reservation.dateStart|date('d-m-Y H:i') : '' }}
+				<p class="h4">{{ reservation.dateStart ? reservation.dateStart|date('d-m-Y H:i') : '' }}
 					<i class="bi bi-arrow-right"></i>
 					{{ reservation.dateEnd ? reservation.dateEnd|date('d-m-Y H:i') : '' }}</p>
+					<p class="h5 text-muted">
+					{{ reservation.address }}</p>
+				{% set zoom = 0.03 %}
+				<iframe width="100%" height="250px" src="https://www.openstreetmap.org/export/embed.html?bbox={{ reservation.longitude + zoom }}%2C{{ reservation.latitude + zoom }}%2C{{ reservation.longitude - zoom }}%2C{{ reservation.latitude - zoom }}&amp;layer=mapnik&amp;marker={{ reservation.latitude }}%2C{{ reservation.longitude }}"></iframe>
 				<hr/>
 				<h3>Technique</h3>
 				<div class="d-lg-flex">
@@ -65,13 +67,6 @@
 				<hr/>
 				<h3>Informations</h3>
 				<div class="d-lg-flex">
-					<p class="dj-property text-nowrap mb-1">Localisation
-						<i class="bi bi-arrow-right"></i>
-					</p>
-					<p class="mt-0">
-						&nbsp{{ reservation.address }}</p>
-				</div>
-				<div class="d-lg-flex">
 					<p class="dj-property text-nowrap mb-1">Téléphone
 						<i class="bi bi-arrow-right"></i>
 					</p>
@@ -89,7 +84,7 @@
 				<p class="dj-property text-nowrap mb-1">Commentaire d'Aoyos
 					<i class="bi bi-arrow-right"></i>
 				</p>
-				<p class="mt-0">
+				<p class="mt-0 mb-4">
 					&nbsp
 					{{ reservation.commentAdmin ?? 'Pas de commentaire' }}
 				</p>
@@ -97,7 +92,7 @@
 				{% if date(reservation.dateEnd|date('d-m-Y')) < date("now"|date('d-m-Y')) %}
 					{{ form_start(form) }}
 					{{ form_widget(form) }}
-					<div class="d-flex justify-content-end">
+					<div class="d-flex justify-content-end mt-5">
 					
 						<button class="btn btn-outline-dark px-3 mb-5">
 							{% if reservation.bill is null %}
@@ -109,7 +104,7 @@
 					</div>
 					{{ form_end(form) }}
 				{% endif %}
-				<div class="btn-section w-100">
+				<div class="btn-section w-100 mt-4">
 					{% if date(reservation.dateEnd|date('d-m-Y')) > date("now"|date('d-m-Y')) %}
 						{% if reservation.artist is defined and reservation.artist == app.user.artist %}
 							{{ include('dj_dashboard/reservation/_cancel_reservation.html.twig') }}

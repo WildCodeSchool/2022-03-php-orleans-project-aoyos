@@ -1,6 +1,6 @@
 @import "variables.scss";
 
-$djCardsHeight: 20rem;
+$djCardsHeight: 18rem;
 $topBarHeight: 60px;
 $sideBarWidth: 300px;
 $djShowCardWidth: 15rem;
@@ -52,8 +52,13 @@ $djShowCardWidth: 15rem;
     padding-left: 1.25rem;
 }
 
-.reservations-dj .card-dj {
+.reservations-dj .card-dj, .card-dj {
     height: $djCardsHeight;
+}
+
+.resa-header {
+    font-family: $titleFont;
+    font-weight: 500;
 }
 
 .dj-show-reservation {
@@ -84,6 +89,17 @@ $djShowCardWidth: 15rem;
     background-color: rgba($color: $light, $alpha: 0.8);
     border: 1px solid $primary;
     min-width: $djShowCardWidth;
+    
+.dj-other-events {
+    opacity:0.4;
+}
+
+.dj-other-events > div:first-child {
+    background: linear-gradient(98deg, $secondary 0%, $secondary 85%, rgba(255,255,255,1) 86%, rgba(255,255,255,1) 100%);
+}
+
+.dj-other-events:hover {
+    opacity:1;
 }
 
 .artist-documents img {
@@ -114,6 +130,13 @@ $djShowCardWidth: 15rem;
         height: 80%;
     }
     .dj-new-events > div:nth-child(2) {
+        height: 80%;
+    }
+    .dj-other-events > div:first-child {
+        height: 20%;
+        background: $secondary;
+    }
+    .dj-other-events > div:nth-child(2) {
         height: 80%;
     }
   }
