@@ -67,7 +67,7 @@ $djShowCardWidth: 15rem;
     width: 100%;
 }
 
-.dj-show-reservation-card {
+.dj-big-card {
     background-color: rgba($color: $light, $alpha: 0.8);
     border: 1px solid $primary;
     min-width: $djShowCardWidth;
@@ -97,6 +97,22 @@ $djShowCardWidth: 15rem;
 
 .vich-image img {
     width: 50%;
+}
+
+.dj-unavaibility {
+    background-image: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url("../images/dotsagain.png");
+    background-size: cover;
+    width: 100%;
+}
+
+.btn-add-indisponibility {
+    border-color: darken($primary, 20%);
+}
+
+.btn-add-indisponibility:hover {
+    color: $dark;
+    box-shadow: 0px 0px 4px $primary;
+    background-color: transparent;
 }
 
 .dj-my-events > div:first-child {
