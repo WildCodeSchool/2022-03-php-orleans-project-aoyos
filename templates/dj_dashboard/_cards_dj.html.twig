@@ -1,6 +1,6 @@
 <div class="col-lg-6 my-3">
 	<div class="card-dj shadow border border-dark rounded-3 w-100">
-		<div class="d-lg-flex h-100 rounded-3 {% if reservation.artist is defined and reservation.artist == app.user.artist %} dj-my-events {% else %} dj-new-events {% endif %}">
+		<div class="d-lg-flex h-100 rounded-3 {% if reservation.artist is defined and reservation.artist == app.user.artist %} dj-my-events {% elseif reservation.artist is not null and reservation.artist != app.user.artist %} dj-other-events {% else %} dj-new-events {% endif %}">
 			<div class="d-flex flex-column justify-content-around align-items-start px-5 rounded-3 col-lg-6">
 				<h1 class="h4 text-light">{{ reservation.company }}</h1>
 				<div class="d-none d-lg-flex flex-column resa-header">
@@ -8,17 +8,17 @@
 					<i class="bi bi-calendar me-2"></i>
 						{{ reservation.dateStart|date("d/m/Y") }}</p>
 					<p class="card-text text-light fs-5">
-						~
+						<i class="bi bi-cursor-fill me-1"></i>
 						{{ reservation.distance }}
 						km</p>
 				</div>
 			</div>
 			<div class="d-flex flex-column justify-content-between col-lg-6">
-				<div class="my-2 flex-grow-1 justify-content-around flex-column d-flex px-2">
-					<p class="card-text">
+				<div class="my-3 flex-grow-1 justify-content-around flex-column d-flex px-2">
+					<p class="card-text m-0">
 						<i class="bi bi-geo-alt-fill me-1"></i>
 						{{ reservation.address|u.truncate(50, '...', false) }}</p>
-					<p class="card-text">
+					<p class="card-text m-0">
 						<i class="bi bi-telephone-fill me-1"></i>
 						{{ reservation.phone }}
 					</p>
@@ -27,7 +27,7 @@
 						{{ reservation.price }}
 						€</p>
 				</div>
-				<div class="w-100 pe-3 pb-3">
+				<div class="w-100 pe-lg-3 pb-lg-3 pb-2">
 					{% if reservation.artist is defined and reservation.artist == app.user.artist %}
 						<div class="w-100 px-2 mb-2">
 							<a href="{{ path('dashboard_dj_show', {'id': reservation.id}) }}" class="btn btn-outline-primary w-100">En savoir plus</a>
