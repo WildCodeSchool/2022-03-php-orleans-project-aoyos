@@ -121,5 +121,12 @@ $djShowCardWidth: 15rem;
     .dj-new-events > div:nth-child(2) {
         height: 80%;
     }
+    .dj-other-events > div:first-child {
+        height: 20%;
+        background: $secondary;
+    }
+    .dj-other-events > div:nth-child(2) {
+        height: 80%;
+    }
   }
 
