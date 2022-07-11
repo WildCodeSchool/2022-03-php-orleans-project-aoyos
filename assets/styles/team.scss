@@ -22,9 +22,13 @@ $teamTitleOffset: -30px;
 }
 
 .bg-up {
-    background-image: url("../images/dotsagain.png");
+    background-image: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url("../images/dotsagain.png");
     background-repeat: no-repeat;
     background-position-y: 20%;
+}
+
+section {
+    opacity:1;
 }
 
 .artists {
