@@ -1,59 +1,61 @@
 {% extends 'dj_dashboard/dj_dashboard_base.html.twig' %}
 
-{% block title %}{{ parent() }} - Mes indisponibilités{% endblock %}
+{% block title %}
+	{{ parent() }}
+	- Mes indisponibilités
+{% endblock %}
 
 {% block content %}
-    <main class="container-fluid dj-unavaibility h-100 d-flex flex-column mt-5 align-items-center">
-    <div class="dj-big-card d-flex flex-column justify-content-center p-5 col-xxl-10">
-        <h1 class="mt-2 mb-4 ms-lg-5">Mes indisponibilités</h1>
-        <table class="table table-hover w-75 mx-auto">
-            <thead>
-                <tr>
-                    <th>Début</th>
-                    <th>Fin</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for unavailability in unavailabilities %}
-                <tr>
-                    <td class="align-middle">{{ unavailability.dateStart|date('d-m-Y') }}</td>
-                    <td class="align-middle">{{ unavailability.dateEnd|date('d-m-Y') }}</td>
-                    <td class="text-end">
-                        <form method="post" action="{{ path('dashboard_dj_unavailability_delete', {'id': unavailability.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette indisponibilité ?');">
-                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ unavailability.id) }}">
-                            <button class="btn btn-outline-danger text-nowrap px-4 my-2">
-                            <i class="bi bi-x-circle me-2"></i>Supprimer</button>
-                        </form>
-                    </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="3">Aucune indisponibilité trouvée</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-            <h1 class="mt-5 mb-4 ms-lg-5">Nouvelle indisponibilité</h1>
-            {{ form_start(form) }}
-            <div class="d-flex flex-column flex-lg-row gap-5 justify-content-center">
-                <div>
-                    {{ form_label(form.dateStart) }}
-                    {{ form_errors(form.dateStart) }}
-                    {{ form_widget(form.dateStart) }}
-                </div>
-                <div>
-                    {{ form_label(form.dateEnd) }}
-                    {{ form_errors(form.dateEnd) }}
-                    {{ form_widget(form.dateEnd) }}
-                </div>
-                <div class="align-self-end">
-                    <button class="btn btn-add-indisponibility text-dark px-5">
-                    <i class="bi bi-plus-circle me-1"></i>
-                    Ajouter</button>
-                </div>
-            </div>
-            {{ form_end(form) }}
-        </div>
-    </main>
+	<main class="container-fluid dj-unavaibility h-100 d-flex flex-column mt-5 align-items-center">
+		<div class="dj-big-card d-flex flex-column justify-content-center p-5 col-xxl-10">
+			<h1 class="mt-2 mb-4 ms-lg-5">Mes indisponibilités</h1>
+			{{ form_start(form) }}
+			<div class="d-flex flex-column flex-lg-row gap-5 mt-4 mb-5 justify-content-center">
+				<div>
+					{{ form_label(form.dateStart) }}
+					{{ form_errors(form.dateStart) }}
+					{{ form_widget(form.dateStart) }}
+				</div>
+				<div>
+					{{ form_label(form.dateEnd) }}
+					{{ form_errors(form.dateEnd) }}
+					{{ form_widget(form.dateEnd) }}
+				</div>
+				<div class="align-self-end">
+					<button class="btn btn-add-indisponibility text-dark px-5">
+						<i class="bi bi-plus-circle me-1"></i>
+						Ajouter</button>
+				</div>
+			</div>
+			{{ form_end(form) }}
+			<table class="table table-hover w-75 mb-5 mx-auto">
+				<thead>
+					<tr>
+						<th>Début</th>
+						<th>Fin</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for unavailability in unavailabilities %}
+						<tr>
+							<td class="align-middle">{{ unavailability.dateStart|date('d-m-Y') }}</td>
+							<td class="align-middle">{{ unavailability.dateEnd|date('d-m-Y') }}</td>
+							<td class="text-end">
+								<form method="post" action="{{ path('dashboard_dj_unavailability_delete', {'id': unavailability.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette indisponibilité ?');">
+									<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ unavailability.id) }}">
+									<button class="btn btn-outline-danger text-nowrap px-4 my-2">
+										<i class="bi bi-x-circle me-2"></i>Supprimer</button>
+								</form>
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="3">Aucune indisponibilité trouvée</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</main>
 {% endblock %}
