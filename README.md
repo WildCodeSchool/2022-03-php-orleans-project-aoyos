@@ -3,11 +3,11 @@
 ## Introduction
 
 Hello fellow dev and welcome to the aoyos website project. 
-aoyos is an agence that coordinates events and is an intermediary between customers and Djs.
+aoyos is an agency that coordinates events and is an intermediary between customers and Djs.
 
 First of all, before we begin, we will introduce the main points of our project. 
 
-The website is divided in three main parts : 
+The website is divided into three main parts : 
 
 -> A main website, which is mostly meant to introduce aoyos to the general public and has no particular feature aside from two forms : one for customers to submit their dj-ing requests, and one for djs to register.
 -> Once the djs are registered, they have a their own subsidiary website that they can use to modify their profiles, see all the events and position themselves on the ones they’re interested in. They can also upload their own invoices for the admin to see. 
@@ -15,7 +15,7 @@ The website is divided in three main parts :
 
 Now that this is out of the way, here are the technical aspects: 
 
-This project is based on a symfony website-skeleton project with some additional library (webpack, fixtures) and tools to validate code standards.
+This project is based on a symfony website-skeleton project with some additional libraries (webpack, fixtures) and tools to validate code standards.
 
 * GrumPHP, as pre-commit hook, will run 2 tools when `git commit` is run :
 
@@ -110,7 +110,7 @@ Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c6
 ## Authors
 
 Wild Code School trainers team
-aoyos devs team
+aoyos dev team
 
 ## License
 
@@ -138,6 +138,6 @@ SOFTWARE.
 
 ## Acknowledgments
 
-Thank you to our trainers, Sylvain and Thibault for accompagnying us throughout this project. 
+Thanks to our trainers, Sylvain and Thibault for accompagnying us throughout this project. 
 Special thanks as well to our customers from aoyos, Gaëtan and Alice, for trusting us with this project. 
-And thank you to the Wild Code School for providing us with the base for this project.
+And thanks to the Wild Code School for providing us with the base for this project.
