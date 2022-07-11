@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ parent() }}
+	- Accueil
+{% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	{{ encore_entry_link_tags('error_page') }}
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+{% endblock %}
+
+{% block navbar %}{% endblock %}
+
+{% block body %}
+	<main class="error-page d-flex flex-column justify-content-center align-items-center">
+		<h1>ERREUR</h1>
+		<h2 class="text-center">403</h2>
+		<h3 class="text-center">Vous tentez d'accéder à une page qui ne vous est pas autorisée.</h3>
+	</main>
+{% endblock %}
+
+{% block footer %}{% endblock %}
