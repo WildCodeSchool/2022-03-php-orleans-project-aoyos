@@ -28,12 +28,12 @@
 						€</p>
 				</div>
 				<div class="w-100 pe-lg-3 pb-lg-3 pb-2">
-					{% if reservation.artist is null or reservation.artist == app.user.artist %}
 						<div class="w-100 px-2 mb-2">
 							<a href="{{ path('dashboard_dj_show', {'id': reservation.id}) }}" class="btn btn-outline-primary w-100">En savoir plus</a>
 						</div>
+					{% if reservation.artist == app.user.artist %}
 						{{ include('dj_dashboard/reservation/_cancel_reservation.html.twig') }}
-					{% elseif reservation.artist is empty and reservation.status != 'Rejected' %}
+					{% elseif reservation.artist is null and reservation.status != 'Rejected' %}
 						{% include 'dj_dashboard/reservation/_accept_reservation.html.twig' %}
 					{% else %}
 						<p class=" py-2 border-2 border-dark mx-2 border-top mb-0">Cet évènement est déjà réservé par un autre DJ.</p>
