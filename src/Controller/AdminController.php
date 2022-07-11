@@ -26,6 +26,14 @@ class AdminController extends AbstractController
         ]);
     }
 
+    #[Route('/dj/indisponibilite', name: 'dj_unavailability', methods: ['GET'])]
+    public function djUnavailability(ArtistRepository $artistRepository): Response
+    {
+        return $this->render('admin/dj/unavailability.html.twig', [
+            'artists' => $artistRepository->findBy([], ['firstname' => 'ASC']),
+        ]);
+    }
+
     #[Route('/dj/{id}', name: 'dj_show', methods: ['GET'])]
     public function show(Artist $artist): Response
     {

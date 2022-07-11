@@ -45,6 +45,7 @@ Encore
     .addEntry('djDashboard', './assets/styles/djDashboard.scss')
     .addEntry('article', './assets/styles/article.scss')
     .addEntry('searchStatusSubmit', './assets/searchStatusSubmit.js')
+    .addEntry('error_page', './assets/styles/error_page.scss')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')

@@ -1,10 +1,21 @@
-# Project 3 - Starter Kit - Symfony
+#Project aoyos - Starter Kit - Symfony
 
-## Presentation
+## Introduction
 
-This starter kit is here to easily start a repository for Wild Code School students.
+Hello fellow dev and welcome to the aoyos website project. 
+aoyos is an agency that coordinates events and is an intermediary between customers and Djs.
 
-It's symfony website-skeleton project with some additional library (webpack, fixtures) and tools to validate code standards.
+First of all, before we begin, we will introduce the main points of our project. 
+
+The website is divided into three main parts : 
+
+-> A main website, which is mostly meant to introduce aoyos to the general public and has no particular feature aside from two forms : one for customers to submit their dj-ing requests, and one for djs to register.
+-> Once the djs are registered, they have a their own subsidiary website that they can use to modify their profiles, see all the events and position themselves on the ones they’re interested in. They can also upload their own invoices for the admin to see. 
+-> And finally, the admin part from which the admin can administrate all parts of their website.
+
+Now that this is out of the way, here are the technical aspects: 
+
+This project is based on a symfony website-skeleton project with some additional libraries (webpack, fixtures) and tools to validate code standards.
 
 * GrumPHP, as pre-commit hook, will run 2 tools when `git commit` is run :
 
@@ -19,12 +30,14 @@ It's symfony website-skeleton project with some additional library (webpack, fix
     * Tasks to check if vendor, .idea, env.local are not versionned,
     * PHP_CodeSniffer, PHPStan and PHPmd with same configuration as GrumPHP.
 
-## Getting Started for Students
+Now that you have a better understanding of how the project is built, let's get started. 
+
+## Getting Started
 
 ### Prerequisites
 
-1. Check composer is installed
-2. Check yarn & node are installed
+1. Check that composer is installed
+2. Check that yarn & node are installed
 
 ### Install
 
@@ -97,6 +110,7 @@ Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c6
 ## Authors
 
 Wild Code School trainers team
+aoyos dev team
 
 ## License
 
@@ -124,3 +138,6 @@ SOFTWARE.
 
 ## Acknowledgments
 
+Thanks to our trainers, Sylvain and Thibault for accompagnying us throughout this project. 
+Special thanks as well to our customers from aoyos, Gaëtan and Alice, for trusting us with this project. 
+And thanks to the Wild Code School for providing us with the base for this project.

@@ -69,3 +69,7 @@ $adminCardsHeight: 25rem;
 .reservation-show-admin input[type=search]:focus , .reservation-show-admin select:focus {
     box-shadow: none;
 }
+
+.reservations-billed-admin .modal-content {
+    height: 100vh;
+}

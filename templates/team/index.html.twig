@@ -11,13 +11,13 @@
 {% endblock %}
 
 {% block body %}
-	<main class="container">
-		<section class="team pb-5 d-flex flex-column align-items-center">
+	<main class="bg-up">
+		<section class="team container pb-5 d-flex flex-column align-items-center">
 			<h1 class="text-center py-4 mt-0 mb-4 position-relative">
 				<img src="{{ asset('build/images/title_underline_blue.png') }}" class="title-underline" alt="">Notre équipe</h1>
-			<div class="row">
+			<div class="row justify-content-center">
 				{% for team_member in team_members %}
-					<div class="col-lg-4 col-md-5 mx-auto py-2">
+					<div class="col-lg-4 col-md-5 py-2">
 						<div class="card shadow border border-primary">
 							<img src="{{ asset('uploads/images/team/' ~ team_member.picture) }}" class="card-img-top" alt="{{ team_member.name }}">
 							<div class="card-body px-0">
@@ -31,11 +31,12 @@
 			</div>
 		</section>
 
-		<section class="artists mb-5">
+		<section class="artists">
+			<div class="container mb-5">
 			<h1 class="text-center my-5">Nos artistes</h1>
-			<div class="row">
+			<div class="row justify-content-center">
 				{% for artist in artists %}
-					<div class="col-lg-4 col-md-5 mx-auto py-2">
+					<div class="col-lg-4 col-md-5 py-2">
 						<div class="card shadow border border-primary">
 							<img src="{{ asset('build/images/bg_client.webp') }}" class="card-img-top" alt="{{ artist.artist.fullname }}">
 							<div class="card-body px-0 pb-0 mb-0">
@@ -70,6 +71,7 @@
 					</div>
 				{% endfor %}
 			</div>
+		</div>
 		</section>
 	</main>
 {% endblock %}
