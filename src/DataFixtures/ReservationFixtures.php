@@ -17,6 +17,8 @@ class ReservationFixtures extends Fixture implements DependentFixtureInterface
         'Sur mesure',
     ];
 
+    public const MAX_PRICE = 10000;
+
     public const AOYOS_PARIS_COORDINATES = [48.860147, 2.346209];
 
     public const NUMBER_RESERVATIONS = 50;
@@ -43,6 +45,7 @@ class ReservationFixtures extends Fixture implements DependentFixtureInterface
             $reservation->setDateEnd($faker->dateTimeInInterval('+1 week', '+2 days'));
             $reservation->setAttendees($faker->randomNumber(3, true));
             $reservation->setCommentClient($faker->paragraph());
+            $reservation->setPrice($faker->numberBetween(0, self::MAX_PRICE));
             $reservation->setStatus($status[rand(0, $totalStatus)]->name);
             if ($reservation->getStatus() === ReservationStatus::Validated->name) {
                 $reservation->setArtist($this->getReference('artist_' . rand(0, (ArtistFixtures::NUMBER_ARTISTS - 1))));
