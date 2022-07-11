@@ -8,10 +8,13 @@ use App\Form\ArtistType;
 use App\Form\DocumentType;
 use App\Repository\ArtistRepository;
 use App\Repository\DocumentRepository;
+use App\Service\Locator;
+use Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpClient\Exception\TransportException;
 
 #[Route('/espace-dj', name: 'dashboard_dj_')]
 class DjProfileController extends AbstractController
@@ -20,6 +23,7 @@ class DjProfileController extends AbstractController
     public function index(
         ArtistRepository $artistRepository,
         Request $request,
+        Locator $locator
     ): Response {
         /** @phpstan-ignore-next-line */
         $artist = $this->getUser()->getArtist();
@@ -27,9 +31,15 @@ class DjProfileController extends AbstractController
         $form->handleRequest($request);
 
         if (($form->isSubmitted() && $form->isValid())) {
+            try {
+                $locator->setCoordinates($artist);
+                $this->addFlash('success', 'Votre profil a bien été modifié.');
+            } catch (TransportException $te) {
+                $this->addFlash('warning', 'Une erreur est survenue lors de la récupération de l\'adresse');
+            } catch (Exception $e) {
+                $this->addFlash('warning', $e->getMessage());
+            }
             $artistRepository->add($artist, true);
-
-            $this->addFlash('success', 'Votre profil a bien été modifié.');
 
             return $this->redirectToRoute('dashboard_dj_profile', [], Response::HTTP_SEE_OTHER);
         }
