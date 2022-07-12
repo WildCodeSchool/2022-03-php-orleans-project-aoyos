@@ -7,15 +7,16 @@
 
 {% block body %}
 <main class="login">
+<div class="row">
 	<div class="container d-flex flex-column align-items-center">
-		<div class="block-color w-75 m-5 d-flex align-items-center flex-column">
+		<div class="block-color col-10 col-lg-6 m-5 d-flex align-items-center flex-column">
 			<h1 class="text-center h1-login py-5 position-relative">
 				<img src="{{ asset('build/images/title_underline_purple.png') }}" class="title-underline" alt="">
 				Connexion</h1>
 			{% if error %}
-				<div class="fs-5 w-50 text-center mt-2 alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+				<div class="fs-5 col-10 col-lg-6 text-center mt-2 alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 			{% endif %}
-			<form class="w-50 mb-5" action="{{ path('login') }}" method="post">
+			<form class="col-10 col-lg-6 mb-5" action="{{ path('login') }}" method="post">
 				<div class="form-group my-5">
 					<label for="username" class="mb-2 fs-5 text-dark">Email</label>
 					<input type="text" class="form-control border-primary fs-5" id="username" name="_username" value="{{ last_username }}"/>
@@ -34,6 +35,7 @@
 				</div>
 			</form>
 		</div>
+	</div>
 	</div>
 </main>
 {% endblock %}
