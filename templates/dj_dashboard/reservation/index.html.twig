@@ -23,13 +23,20 @@
 			{{ form_label(form.musicalStyle) }}
 			{{ form_errors(form.musicalStyle) }}
 			<div class="input-group mb-4 w-50">
-				{{ form_widget(form.musicalStyle, { 'attr' : { 'onChange' : 'this.form.submit()' }} ) }}
+				{{ form_widget(form.musicalStyle, { 'attr' : { 'onChange' : 'this.form.submit()' }}
+				) }}
 			</div>
 			{{ form_end(form) }}
 
+		{% if reservations is not empty %}
 			{% for reservation in reservations %}
-				{% include 'dj_dashboard/_cards_dj.html.twig' %}
+				{% if reservation.artist is null %}
+					{% include 'dj_dashboard/_cards_dj.html.twig' %}
+				{% endif %}
 			{% endfor %}
+		{% else %}
+			<h2 class="h4 text-center">Aucun évènement</h2>
+		{% endif %}
 		</div>
 	</main>
 {% endblock %}

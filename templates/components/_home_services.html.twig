@@ -5,6 +5,7 @@
 			<img src="{{ asset('build/images/title_underline_orange.png') }}" class="title-underline" alt="">Nos services</h1>
 
 		<div class="row g-0 gap-5 justify-content-center">
+		{% if articles is not empty %}
 			{% for article in articles %}
 				<div class="card shadow border border-primary col-lg-5 col-md-12 col-8 d-flex align-items-center flex-column flex-md-row" data-aos="fade-up">
 					<div class="col-lg-6 col-md-4 img-services-card">
@@ -22,6 +23,9 @@
 				</div>
 			{% endfor %}
 			<a href="{{ path('app_article') }}" class="btn btn-outline-primary text-dark col-md-2 mb-5">Voir plus</a>
+			{% else %}
+			<h2 class="h3 text-center">Aucun service</h2>
+			{% endif %}
 		</div>
 	</div>
 </section>

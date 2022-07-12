@@ -7,7 +7,10 @@ use App\Entity\Reservation;
 use App\Form\ReservationType;
 use App\Form\SearchAdminReservationType;
 use App\Repository\ReservationRepository;
+use App\Service\Locator;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpClient\Exception\TransportException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -97,15 +100,22 @@ class AdminReservationController extends AbstractController
     public function edit(
         Request $request,
         Reservation $reservation,
-        ReservationRepository $reservationRepo
+        ReservationRepository $reservationRepo,
+        Locator $locator
     ): Response {
         $form = $this->createForm(ReservationType::class, $reservation);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            try {
+                $locator->setCoordinates($reservation);
+                $this->addFlash('success', 'Votre réservation a bien été éditée.');
+            } catch (TransportException $te) {
+                $this->addFlash('warning', 'Une erreur est survenue lors de la récupération de l\'adresse');
+            } catch (Exception $e) {
+                $this->addFlash('warning', $e->getMessage());
+            }
             $reservationRepo->add($reservation, true);
-
-            $this->addFlash('success', 'Votre réservation a bien été éditée.');
 
             return $this->redirectToRoute('admin_reservation_index', [], Response::HTTP_SEE_OTHER);
         }
