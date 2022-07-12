@@ -41,7 +41,7 @@
 				</button>
 			</h2>
 			<div id="flush-collapseOne" class="accordion-collapse collapse {% if route_name in route_admin.user %}show{% endif %}" aria-labelledby="flush-headingOne">
-				<div class="accordion-body">
+				<div class="accordion-body pb-0">
 					<ul>
 						<li><a class="text-decoration-none" href="{{ path('admin_dj_list') }}">Équipe DJs</a></li>
 						<li><a class="text-decoration-none" href="{{ path('admin_dj_unavailability') }}">Indisponibilités</a></li>
@@ -60,7 +60,7 @@
 				</button>
 			</h2>
 			<div id="flush-collapseTwo" class="accordion-collapse collapse {% if route_name in route_admin.reservation %}show{% endif %}" aria-labelledby="flush-headingTwo">
-				<div class="accordion-body">
+				<div class="accordion-body pb-0">
 					<ul>
 						<li><a class="text-decoration-none" href="{{ path('admin_reservation_index') }}">Non prises</a></li>
 						<li><a class="text-decoration-none" href="{{ path('admin_reservation_taken') }}">Prises par un DJ</a></li>
@@ -80,7 +80,7 @@
 				</button>
 			</h2>
 			<div id="flush-collapseThree" class="accordion-collapse collapse {% if route_name in route_admin.home %}show{% endif %}" aria-labelledby="flush-headingThree">
-				<div class="accordion-body">
+				<div class="accordion-body pb-0">
 					<ul>
 						<li><a class="text-decoration-none" href="{{ path('admin_team_index')}}">Équipe</a></li>
 						<li><a class="text-decoration-none" href="{{ path('app_admin_production_index')}}">Réalisations</a></li>
@@ -101,7 +101,7 @@
 				</button>
 			</h2>
 			<div id="flush-collapseFive" class="accordion-collapse collapse {% if route_name in route_admin.dj %}show{% endif %}" aria-labelledby="flush-headingFive">
-				<div class="accordion-body">
+				<div class="accordion-body pb-0">
 					<ul>
 						<li><a class="text-decoration-none" href="{{ path('admin_musical_style_index') }}">Style musical</a></li>
 					</ul>
