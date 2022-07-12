@@ -11,9 +11,9 @@
 {% endblock %}
 
 {% block body %}
-	<main class="bg-up">
+	<main class="bg-up h-100">
 		<section class="team container pb-5 d-flex flex-column align-items-center">
-			<h1 class="text-center py-4 mt-0 mb-4 position-relative">
+			<h1 class="text-center py-4 mt-3 mb-4 position-relative">
 				<img src="{{ asset('build/images/title_underline_blue.png') }}" class="title-underline" alt="">Notre équipe</h1>
 			<div class="row justify-content-center">
 			{% if team_members is not empty %}
@@ -23,7 +23,7 @@
 							<img src="{{ asset('uploads/images/team/' ~ team_member.picture) }}" class="card-img-top" alt="{{ team_member.name }}">
 							<div class="card-body px-0">
 								<h2 class=" px-2 py-2 card-title shadow border border-primary bg-dark text-light fs-3 w-fit mx-auto">{{team_member.name}}</h2>
-								<p class="card-text px-2 py-3">{{ team_member.description}}</p>
+								<p class="card-text px-2 mx-4 py-3">{{ team_member.description}}</p>
 							</div>
 							<span class="text-end px-2 py-2 fs-5">{{team_member.position}}</span>
 						</div>
@@ -37,7 +37,8 @@
 
 		<section class="artists">
 			<div class="container mb-5">
-			<h1 class="text-center my-5">Nos artistes</h1>
+			<h1 class="text-center py-4 mb-4 position-relative">
+			<img src="{{ asset('build/images/title_underline_purple.png') }}" class="title-underline w-25 pe-5" alt="">Nos artistes</h1>
 			<div class="row justify-content-center">
 			{% if artists is not empty %}
 				{% for artist in artists %}
