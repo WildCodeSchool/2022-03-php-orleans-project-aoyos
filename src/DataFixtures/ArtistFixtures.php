@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use App\Repository\MusicalStyleRepository;
 use App\Entity\Artist;
 use Faker\Factory;
 
@@ -13,10 +14,16 @@ class ArtistFixtures extends Fixture implements DependentFixtureInterface
     public const NUMBER_ARTISTS = 3;
     public const EMAILS = ['dj1@exemple.com', 'dj2@exemple.com', 'dj3@exemple.com'];
     public const ORLEANS_COORDINATES = [47.873527, 1.910865];
+    private MusicalStyleRepository $musicalStyleRepo;
+
+    public function __construct(MusicalStyleRepository $musicalStyleRepo)
+    {
+        $this->musicalStyleRepo = $musicalStyleRepo;
+    }
 
     public function load(ObjectManager $manager): void
     {
-        $totalMusicalStyles = count(MusicalStyleFixtures::MUSICALSTYLES) - 1;
+        $totalMusicalStyles = 13;
 
         $faker = Factory::create();
 
@@ -36,7 +43,7 @@ class ArtistFixtures extends Fixture implements DependentFixtureInterface
             $artist->setLongitude(self::ORLEANS_COORDINATES[1]);
             $artist->setUser($this->getReference('user_' . $i));
             $artist->addMusicalStyle(
-                $this->getReference('musicalstyle_' . rand(0, $totalMusicalStyles))
+                $this->musicalStyleRepo->findOneBy(['id' => rand(0, $totalMusicalStyles)])
             );
             $this->addReference('artist_' . $i, $artist);
 
@@ -49,7 +56,6 @@ class ArtistFixtures extends Fixture implements DependentFixtureInterface
     {
         // Tu retournes ici toutes les classes de fixtures dont ProgramFixtures dépend
         return [
-            MusicalStyleFixtures::class,
             UserFixtures::class
         ];
     }

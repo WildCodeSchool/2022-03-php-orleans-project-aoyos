@@ -4,8 +4,10 @@ namespace App\DataFixtures;
 
 use App\Config\ReservationStatus;
 use App\Entity\Reservation;
+use App\Repository\MusicalStyleRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 
@@ -23,6 +25,13 @@ class ReservationFixtures extends Fixture implements DependentFixtureInterface
 
     public const NUMBER_RESERVATIONS = 50;
 
+    private MusicalStyleRepository $musicalStyleRepo;
+
+    public function __construct(MusicalStyleRepository $musicalStyleRepo)
+    {
+        $this->musicalStyleRepo = $musicalStyleRepo;
+    }
+
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create();
@@ -30,6 +39,7 @@ class ReservationFixtures extends Fixture implements DependentFixtureInterface
         $totalFormulas = count(self::FORMULAS) - 1;
         $status = ReservationStatus::cases();
         $totalStatus = count($status) - 1;
+        $totalMusicalStyles = 13;
 
         for ($i = 0; $i < self::NUMBER_RESERVATIONS; $i++) {
             $reservation = new Reservation();
@@ -52,10 +62,10 @@ class ReservationFixtures extends Fixture implements DependentFixtureInterface
             }
             if ($reservation->getStatus() === ReservationStatus::Waiting->name) {
                 $reservation->addMusicalStyle(
-                    $this->getReference('musicalstyle_' . rand(0, count(MusicalStyleFixtures::MUSICALSTYLES) - 1))
+                    $this->musicalStyleRepo->findOneBy(['id' => rand(0, $totalMusicalStyles)])
                 );
                 $reservation->addMusicalStyle(
-                    $this->getReference('musicalstyle_' . rand(0, count(MusicalStyleFixtures::MUSICALSTYLES) - 1))
+                    $this->musicalStyleRepo->findOneBy(['id' => rand(0, $totalMusicalStyles)])
                 );
             }
             $reservation->setLatitude(self::AOYOS_PARIS_COORDINATES[0]);
@@ -71,7 +81,6 @@ class ReservationFixtures extends Fixture implements DependentFixtureInterface
     {
         // Tu retournes ici toutes les classes de fixtures dont ProgramFixtures dépend
         return [
-            MusicalStyleFixtures::class,
             ArtistFixtures::class
         ];
     }
