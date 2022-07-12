@@ -6,36 +6,33 @@
 {% endblock %}
 
 {% block body %}
-<main class="login">
-<div class="row">
-	<div class="container d-flex flex-column align-items-center">
-		<div class="block-color col-10 col-lg-6 m-5 d-flex align-items-center flex-column">
-			<h1 class="text-center h1-login py-5 position-relative">
-				<img src="{{ asset('build/images/title_underline_purple.png') }}" class="title-underline" alt="">
-				Connexion</h1>
-			{% if error %}
-				<div class="fs-5 col-10 col-lg-6 text-center mt-2 alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-			{% endif %}
-			<form class="col-10 col-lg-6 mb-5" action="{{ path('login') }}" method="post">
-				<div class="form-group my-5">
-					<label for="username" class="mb-2 fs-5 text-dark">Email</label>
-					<input type="text" class="form-control border-primary fs-5" id="username" name="_username" value="{{ last_username }}"/>
+	<main class="login">
+		<div class="row">
+			<div class="container d-flex flex-column align-items-center">
+				<div class="block-color col-10 col-lg-6 m-5 d-flex align-items-center flex-column">
+					<h1 class="text-center h1-login py-5 position-relative">
+						<img src="{{ asset('build/images/title_underline_purple.png') }}" class="title-underline" alt="">
+						Connexion</h1>
+					{% if error %}
+						<div class="fs-5 col-10 col-lg-6 text-center mt-2 alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+					{% endif %}
+					<form class="col-10 col-lg-6 mb-5" action="{{ path('login') }}" method="post">
+						<div class="form-group my-5">
+							<label for="username" class="mb-2 fs-5 text-dark">Email</label>
+							<input type="text" class="form-control border-primary fs-5" id="username" name="_username" value="{{ last_username }}"/>
+						</div>
+						<div class="form-group my-5">
+							<label for="password" class="mb-2 fs-5 text-dark">Mot de passe</label>
+							<input type="password" class="form-control border-primary fs-5" id="password" name="_password"/>
+							<a class="text-dark" href="{{ path('app_forgot_password_request') }}">Mot de passe perdu</a>
+						</div>
+						<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+						<div class="d-flex justify-content-end">
+							<button class="btn login-btn btn-lg btn-outline-primary bg-white fs-5 text-dark mt-4 text-dark" type="submit">Connexion</button>
+						</div>
+					</form>
 				</div>
-				<div class="form-group my-5">
-					<label for="password" class="mb-2 fs-5 text-dark">Mot de passe</label>
-					<input type="password" class="form-control border-primary fs-5" id="password" name="_password"/>
-					<a class="text-dark" href="{{ path('app_forgot_password_request') }}">Mot de passe perdu</a>
-				</div>
-
-				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-				
-				<div class="d-flex justify-content-end">
-					<button class="btn login-btn btn-lg btn-outline-primary bg-white fs-5 text-dark mt-4 text-dark" type="submit">Connexion</button>
-				</div>
-			</form>
+			</div>
 		</div>
-	</div>
-	</div>
-</main>
+	</main>
 {% endblock %}
