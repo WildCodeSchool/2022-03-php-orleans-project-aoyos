@@ -16,6 +16,7 @@
 			<h1 class="text-center py-4 mt-0 mb-4 position-relative">
 				<img src="{{ asset('build/images/title_underline_blue.png') }}" class="title-underline" alt="">Notre équipe</h1>
 			<div class="row justify-content-center">
+			{% if team_members is not empty %}
 				{% for team_member in team_members %}
 					<div class="col-lg-4 col-md-5 py-2">
 						<div class="card shadow border border-primary">
@@ -28,6 +29,9 @@
 						</div>
 					</div>
 				{% endfor %}
+			{% else %}
+				<h2 class="text-center h4">Aucun membre dans l'équipe</h2>
+			{% endif %}
 			</div>
 		</section>
 
@@ -35,6 +39,7 @@
 			<div class="container mb-5">
 			<h1 class="text-center my-5">Nos artistes</h1>
 			<div class="row justify-content-center">
+			{% if artists is not empty %}
 				{% for artist in artists %}
 					<div class="col-lg-4 col-md-5 py-2">
 						<div class="card shadow border border-primary">
@@ -70,6 +75,9 @@
 						</div>
 					</div>
 				{% endfor %}
+				{% else %}
+					<h2 class="h4 text-center">Aucun DJ</h2>
+				{% endif %}
 			</div>
 		</div>
 		</section>
