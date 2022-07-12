@@ -78,6 +78,17 @@ $djShowCardWidth: 15rem;
     font-weight: 600;
     font-size: 1.1rem; 
 }
+
+.dj-profile {
+    background-image: url(../images/gradient_lines.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.dj-profile-card {
+    background-color: rgba($color: $light, $alpha: 0.8);
+    border: 1px solid $primary;
+    min-width: $djShowCardWidth;
     
 .dj-other-events {
     opacity:0.4;
