@@ -80,6 +80,7 @@ class DjController extends AbstractController
                 $user->setPassword($hashedPassword);
                 $userRepository->add($user, true);
                 $artist->setUser($user);
+                $artist->setEmail($user->getEmail());
                 $artistRepository->add($artist, true);
                 $this->addFlash('success', 'Votre demande a bien été transmise.');
 
