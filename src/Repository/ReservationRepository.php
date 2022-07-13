@@ -82,7 +82,7 @@ class ReservationRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
-    public function findTakenWithSearch(string $search): array
+    public function findTakenWithSearch(?string $search): array
     {
         return $this->createQueryBuilder('r')
             ->andWhere('r.artist is NOT NULL')
