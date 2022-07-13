@@ -1,11 +1,23 @@
-<a class="anchor" id="productions"></a>
-<section class="production mt-5 py-5">
-	<div class="container-fluid d-flex flex-column align-items-center position-relative">
-		<h1 class="py-4 mt-0 mb-4 position-relative" data-aos="fade-up">
-			<img src="{{ asset('build/images/title_underline_blue.png') }}" class="title-underline" alt="">Nos réalisations</h1>
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ parent()}}
+	- Réalisations
+{% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	{{ encore_entry_link_tags('home') }}
+{% endblock %}
+
+{% block body %}
+	<section class="production my-3">
+		<div class="container-fluid d-flex flex-column align-items-center position-relative">
+			<h1 class="py-4 mt-0 mb-4 position-relative" data-aos="fade-up">
+				<img src="{{ asset('build/images/title_underline_blue.png') }}" class="title-underline" alt="">Nos réalisations</h1>
 			<div class="row justify-content-center mx-5 mx-lg-0">
 				{% if productions is not empty %}
-					{% for production in productions %}	
+					{% for production in productions %}
 						<div class="col-lg-3 px-0 m-4">
 							<div class="card shadow border border-secondary" data-aos="fade-in">
 								<img src="{{ asset('uploads/images/production/' ~ production.imageProduction) }}" class="card-img-top border-bottom border-dark" alt="{{ production.title }}">
@@ -16,11 +28,10 @@
 							</div>
 						</div>
 					{% endfor %}
-					<div class="d-flex justify-content-center">
-					<a href="{{ path('production_index') }}" class="btn btn-outline-primary text-dark col-md-2 mb-5">Voir plus</a>
-					</div>
 				{% else %}
 					<h2 class="h3 text-center">Aucune réalisation</h2>
 				{% endif %}
+			</div>
 		</div>
-</div></section>
+	</section>
+{% endblock %}

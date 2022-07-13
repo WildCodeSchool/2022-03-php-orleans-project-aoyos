@@ -12,6 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     public const MAX_ARTICLES = 4;
+    public const MAX_PRODUCTIONS = 3;
 
     #[Route('/', name: 'app_home')]
     public function index(
@@ -22,7 +23,7 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig', [
             'articles' => $articleRepository->findBy([], ['createdAt' => 'DESC'], self::MAX_ARTICLES),
             'partners' => $partnerRepository->findAll(),
-            'productions' => $productionRepository->findBy([], ['id' => 'DESC']),
+            'productions' => $productionRepository->findBy([], ['id' => 'DESC'], self::MAX_PRODUCTIONS),
         ]);
     }
 
