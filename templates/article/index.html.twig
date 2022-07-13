@@ -12,11 +12,11 @@
 
 {% block body %}
 	<main class="services-list">
-
 		<div class="header d-flex justify-content-center align-items-center pt-5">
 			<h1 class="py-4 mt-0 mb-4 position-relative"><img src="{{ asset('build/images/title_underline_blue.png') }}" class="title-underline" alt="">Nos services</h1>
 		</div>
-		<div class="container mb-5 d-flex flex-column gap-3">
+		<div class="container mt-5 d-flex flex-column gap-3">
+		{% if articles is not empty %}
 			{% for article in articles %}
 				<div class="card bg-light col-lg-9 my-md-5 my-3">
 					<a class="anchor" id="{{article.title}}"></a>
@@ -44,7 +44,9 @@
 					</div>
 				</div>
 			{% endfor %}
-
+		{% else %}
+		<h2 class="h4 text-center">Aucun service</h2>
+		{% endif %}
 		</div>
 	</main>
 {% endblock %}

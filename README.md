@@ -42,14 +42,21 @@ Now that you have a better understanding of how the project is built, let's get 
 ### Install
 
 1. Clone this project
-2. Run `composer install`
-3. Run `yarn install`
-4. Run `yarn encore dev` to build assets
+2. Duplicate the .env file and name it .env.local
+3. To create you database, in .env.local, at the line "DATABASE_URL=" change the line just above to correspond to your needs.
+4. To use the mailer, insert at the line MAILER_DSN your own mailer link (mailtrap for exemple). On the line MAILER_FROM_ADDRESS enter the e-mail you want to be used in your e-mails.
+5. Run `composer install`
+6. Run `yarn install`
+7. Run `yarn encore dev` to build assets
 
 ### Working
 
 1. Run `symfony server:start` to launch your local php web server
 2. Run `yarn run dev --watch` to launch your local server for assets (or `yarn dev-server` do the same with Hot Module Reload activated)
+3. To use the database, enter in your terminal symfony console doctrice:database:create (d:d:c).
+4. If migrations exist, use symfony console doctrice:make:migration (d:m:m). 
+5. If fixtures exist, use symfony console doctrice:fixtures:load (d:f:l).
+6. To drop the database and start anew, use symfony console doctrice:database:drop --force (d:d:d --force).
 
 ### Testing
 

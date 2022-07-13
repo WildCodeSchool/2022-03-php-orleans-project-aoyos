@@ -58,19 +58,19 @@ class ClientController extends AbstractController
                 $reservation->setStatus(ReservationStatus::Waiting->name);
                 try {
                     $locator->setCoordinates($reservation);
+                    $this->addFlash('success', 'Votre demande a bien été transmise.');
                 } catch (TransportException $te) {
                     $this->addFlash('warning', 'Une erreur est survenue lors de la récupération de l\'adresse'
-                    . ', vous pouvez cependant poursuivre votre inscription.');
+                    . ' mais votre demande a bien été transmise.');
                 } catch (Exception $e) {
                     $this->addFlash('warning', $e->getMessage()
-                    . ', vous pouvez cependant poursuivre votre inscription.');
+                    . ' mais votre demande a bien été transmise.');
                 }
                 $reservationRepo->add($reservation, true);
                 $this->sendReservationMail($reservation, $mailer);
 
-                $this->addFlash('success', 'Votre demande a bien été transmise.');
+                return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
             }
-
             return $this->redirectToRoute('client_reservation', [], Response::HTTP_SEE_OTHER);
         }
 

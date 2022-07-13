@@ -29,10 +29,6 @@ class ArtistType extends AbstractType
             'label' => 'Téléphone',
             'attr' => ['placeholder' => '01 70 06 05 70'],
             ])
-            ->add('email', EmailType::class, [
-            'label' => 'Email',
-            'attr' => ['placeholder' => 'hello@aoyos.fr'],
-            ])
             ->add('address', TextType::class, [
             'label' => 'Adresse',
             'attr' => ['placeholder' => '15 rue des Halles, 75 001 Paris'],
