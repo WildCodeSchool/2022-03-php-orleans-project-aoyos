@@ -22,6 +22,7 @@
 			<thead>
 				<tr>
 					<th></th>
+					<th>Nom d'artiste</th>
 					<th>Nom</th>
 					<th>Matériel</th>
 					<th>Réservations prises</th>
@@ -43,6 +44,7 @@
 								<span class="badge bg-danger">Indisponible</span>
 							{% endif %}
 						</td>
+						<td class="align-middle">{{ artist.artistName }}</td>
 						<td class="align-middle">{{ artist.fullname }}</td>
 						<td class="align-middle">{{ artist.equipment }}</td>
 						<td class="align-middle">{{ artist.reservations|length }}</td>
