@@ -12,11 +12,11 @@ main {
 }
 
 .header-title {
-    font-size: clamp(0.5rem, 10vh, 4rem);
+    font-size: clamp(3rem, 3.5vw, 6rem);
 }
 
 .header-sub {
-    font-size: clamp(0.5rem, 10vh, 4rem);
+    font-size: clamp(3rem, 3.5vw, 6rem);
 }
 
 .dj-btn {
@@ -31,4 +31,8 @@ main {
 .btn-hover:hover {
     box-shadow: 0px 0px 4px $primary;
     background-color: transparent;
+}
+
+#typeWriting {
+    font-size: clamp(3rem, 3.5vw, 6rem);
 }

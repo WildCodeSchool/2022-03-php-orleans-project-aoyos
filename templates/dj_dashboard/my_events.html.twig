@@ -25,44 +25,46 @@
 					à venir
 				{% endif %}
 			</h1>
-			<table class="table table-hover my-4">
-				<thead>
-					<tr>
-						<th>Société</th>
-						<th>Début</th>
-						<th>Fin</th>
-						<th>Tarif</th>
-						{% if filter == constant('App\\Repository\\ReservationRepository::PAST_EVENTS') %}
-							<th class="text-center">Facture</th>
-						{% endif %}
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					{% for reservation in reservations %}
+			<div class="table-responsive">
+				<table class="table table-hover my-4">
+					<thead>
 						<tr>
-							<td class="align-middle">{{ reservation.company }}</td>
-							<td class="align-middle">{{ reservation.dateStart ? reservation.dateStart|date('d-m-Y H:i') : '' }}</td>
-							<td class="align-middle">{{ reservation.dateEnd ? reservation.dateEnd|date('d-m-Y H:i') : '' }}</td>
-							<td class="align-middle">{{ reservation.price ? reservation.price ~ '€' : 'Non précisé' }}</td>
+							<th>Société</th>
+							<th>Début</th>
+							<th>Fin</th>
+							<th>Tarif</th>
 							{% if filter == constant('App\\Repository\\ReservationRepository::PAST_EVENTS') %}
-								<td class="align-middle text-center">
-									<i class="bi bi-{{ reservation.bill ? 'check2-square' : 'file-excel' }}"></i>
-								</td>
+								<th class="text-center">Facture</th>
 							{% endif %}
-							<td class="align-middle text-end">
-								<a class="btn btn-outline-dark btn-sm text-nowrap px-3 me-2" href="{{ path('dashboard_dj_show', {'id': reservation.id}) }}">
-									<i class="bi bi-eye"></i>
-									Détail</a>
-							</td>
+							<th></th>
 						</tr>
-					{% else %}
-						<tr>
-							<td colspan="7">Aucun évènement trouvé</td>
-						</tr>
-					{% endfor %}
-				</tbody>
-			</table>
+					</thead>
+					<tbody>
+						{% for reservation in reservations %}
+							<tr>
+								<td class="align-middle">{{ reservation.company }}</td>
+								<td class="align-middle">{{ reservation.dateStart ? reservation.dateStart|date('d-m-Y H:i') : '' }}</td>
+								<td class="align-middle">{{ reservation.dateEnd ? reservation.dateEnd|date('d-m-Y H:i') : '' }}</td>
+								<td class="align-middle">{{ reservation.price ? reservation.price ~ '€' : 'Non précisé' }}</td>
+								{% if filter == constant('App\\Repository\\ReservationRepository::PAST_EVENTS') %}
+									<td class="align-middle text-center">
+										<i class="bi bi-{{ reservation.bill ? 'check2-square' : 'file-excel' }}"></i>
+									</td>
+								{% endif %}
+								<td class="align-middle text-end">
+									<a class="btn btn-outline-dark btn-sm text-nowrap px-3 me-2" href="{{ path('dashboard_dj_show', {'id': reservation.id}) }}">
+										<i class="bi bi-eye"></i>
+										Détail</a>
+								</td>
+							</tr>
+						{% else %}
+							<tr>
+								<td colspan="7">Aucun évènement trouvé</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
 		</section>
 	</main>
 {% endblock %}

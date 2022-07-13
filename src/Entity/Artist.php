@@ -39,9 +39,9 @@ class Artist implements Localizable
     private string $phone;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\Length(max: 255, groups: ['djInfos'])]
-    #[Assert\NotBlank(groups: ['djInfos'])]
-    #[Assert\Email(groups: ['djInfos'])]
+    #[Assert\Length(max: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Email]
     private string $email;
 
     #[ORM\Column(type: 'string', length: 255)]
@@ -61,7 +61,6 @@ class Artist implements Localizable
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     #[Assert\Length(max: 255, groups: ['djProfile'])]
-    #[Assert\NotBlank(groups: ['djProfile'])]
     private string $message;
 
     #[ORM\ManyToMany(targetEntity: MusicalStyle::class, inversedBy: 'artists', cascade: ['persist'])]

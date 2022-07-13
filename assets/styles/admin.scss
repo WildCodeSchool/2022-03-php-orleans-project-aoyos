@@ -73,3 +73,21 @@ $adminCardsHeight: 25rem;
 .reservations-billed-admin .modal-content {
     height: 100vh;
 }
+
+.admin-events > div:first-child {
+    background: linear-gradient(98deg, $secondary 0%, $secondary 85%, rgba(255,255,255,1) 86%, rgba(255,255,255,1) 100%);
+}
+.admin-djs > div:first-child {
+    background: linear-gradient(98deg, $primary 0%, $primary 85%, rgba(255,255,255,1) 86%, rgba(255,255,255,1) 100%);
+}
+
+@media screen and (max-width: 992px) {
+    .admin-events > div:first-child {
+        height: 4rem;
+        background: $secondary;
+    }
+    .admin-djs > div:first-child {
+        height: 4rem;
+        background: $primary;
+    }
+}

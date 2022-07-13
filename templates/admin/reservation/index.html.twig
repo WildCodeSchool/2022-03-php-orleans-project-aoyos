@@ -9,13 +9,17 @@
 
 {% block content %}
 <main class="reservation-show-admin container">
-    <h1 class="my-5">Réservations</h1>
+    <h1 class="my-5">Réservations {% if route_name == 'admin_reservation_index' %}
+     non prises
+    {% else %}
+     prises par un DJ
+    {% endif %}
+    </h1>
     {{ form_start(form) }}
     {{ form_label(form.search) }}
     {{ form_errors(form.search) }} 
     <div class="input-group mb-3 w-50">
         {{ form_widget(form.search) }}
-        
         <button class="btn btn-outline-dark">
             <i class="bi bi-search"></i>
             Rechercher

@@ -101,11 +101,11 @@ class ReservationRepository extends ServiceEntityRepository
 
     public function findLikeEventType(?string $search = '', ?string $status = ''): array
     {
-        $queryBuilder = $this->createQueryBuilder('r');
+        $queryBuilder = $this->createQueryBuilder('r')
+                        ->andWhere('r.artist is NULL');
 
         if ($search) {
-                $queryBuilder->andWhere('r.eventType LIKE :eventType')
-                ->andWhere('r.artist is NULL')
+            $queryBuilder->andWhere('r.eventType LIKE :eventType')
                 ->setParameter('eventType', '%' . $search . '%')
                 ->orWhere('r.company LIKE :company')
                 ->setParameter('company', '%' . $search . '%');

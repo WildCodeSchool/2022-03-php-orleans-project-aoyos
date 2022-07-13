@@ -23,6 +23,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[Vich\Uploadable]
 class Reservation implements Localizable
 {
+    public const MAX_INT_NUMBER = 2147483647;
+    public const MIN_ATTENDEES = 1;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
@@ -111,8 +114,9 @@ class Reservation implements Localizable
 
     #[ORM\Column(type: 'integer')]
     #[Assert\NotBlank(groups: ['eventInfos'])]
-    #[Assert\Length(
-        max: 255,
+    #[Assert\Range(
+        min: self::MIN_ATTENDEES,
+        max: self::MAX_INT_NUMBER,
         groups: ['eventInfos']
     )]
     private int $attendees;
