@@ -17,12 +17,12 @@ class DocumentType extends AbstractType
             ->add('identityCardFile', VichImageType::class, [
                 'label' => 'Carte d\'identité',
                 'download_uri' => false,
-                'allow_delete' => false,
+                'required' => false,
             ])
             ->add('identityPhotoFile', VichImageType::class, [
                 'label' => 'Photo d\'identité',
                 'download_uri' => false,
-                'allow_delete' => false,
+                'required' => false,
             ])
             ->add('kbisFile', VichImageType::class, [
                 'label' => 'KBIS',
