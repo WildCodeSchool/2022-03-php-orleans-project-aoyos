@@ -45,10 +45,16 @@ body {
 .nav-link {
     font-family: $titleFont;
     font-weight: 200;
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
 }
 
 .nav-item {
      list-style: none;
+}
+
+.btn-nav {
+    font-family: $titleFont;
+    font-weight: 200;
 }
 
 .btn-client {
