@@ -11,7 +11,7 @@
 								<img src="{{ asset('uploads/images/production/' ~ production.imageProduction) }}" class="card-img-top border-bottom border-dark" alt="{{ production.title }}">
 								<div class="card-body d-flex flex-column justify-content-around pb-3">
 									<h5 class="card-title w-fit mx-auto text-center text-light bg-dark border border-light p-3">{{ production.title | u.truncate(20, '...', false)}}</h5>
-									<div class="card-text">{{ production.description }}</div>
+									<div class="card-text">{{ production.description|nl2br }}</div>
 								</div>
 							</div>
 						</div>

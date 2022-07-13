@@ -23,7 +23,7 @@
 							<img src="{{ asset('uploads/images/team/' ~ team_member.picture) }}" class="card-img-top" alt="{{ team_member.name }}">
 							<div class="card-body px-0">
 								<h2 class=" px-2 py-2 card-title shadow border border-primary bg-dark text-light fs-3 w-fit mx-auto">{{team_member.name}}</h2>
-								<p class="card-text px-2 mx-4 py-3">{{ team_member.description}}</p>
+								<p class="card-text px-2 mx-4 py-3">{{ team_member.description|nl2br }}</p>
 							</div>
 							<span class="text-end role px-2 py-2 fs-5 m-3 text-primary">{{team_member.position}}</span>
 						</div>
