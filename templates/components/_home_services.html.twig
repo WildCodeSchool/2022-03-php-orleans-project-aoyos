@@ -18,7 +18,7 @@
 								</div>
 								<p class="card-text py-3">{{ article.description | u.truncate(100, '...', false) | raw}}.</p>
 								<div class="text-end">
-									<a href="{{ path('app_article') }}/#{{article.title}}" class="text-decoration-none fst-italic py-3">En savoir plus</a>
+									<a href="{{ path('app_article', {'_fragment': article.title|url_encode }) }}" class="text-decoration-none fst-italic py-3">En savoir plus</a>
 								</div>
 							</div>
 						</div>

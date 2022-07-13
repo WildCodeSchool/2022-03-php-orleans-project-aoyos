@@ -3,7 +3,7 @@
 		<div class="row justify-content-start justify-content-lg-center flex-nowrap overflow-scroll">
 			{% if partners is not empty %}
 				{% for partner in partners %}
-					<img src="{{ asset('uploads/images/partner/' ~ partner.logo) }}" class="col-lg-2 partner-image mt-3"/>
+					<img src="{{ asset('uploads/images/partner/' ~ partner.logo) }}" class="col-lg-2 partner-image mt-3" alt="partenaire"/>
 				{% endfor %}
 			{% else %}
 				<h2 class="h3 text-center">Partenaires à venir !</h2>
