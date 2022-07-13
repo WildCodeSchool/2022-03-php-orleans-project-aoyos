@@ -22,12 +22,11 @@ class TeamMemberType extends AbstractType
                 'label' => 'Poste occupé'
             ])
             ->add('description', TextareaType::class, [
-                'label' => 'Description',
+                'label' => 'Description (optionnel)',
                 'required' => false
             ])
             ->add('imageFile', VichImageType::class, [
                 'label' => 'Image',
-                'required' => false
             ])
         ;
     }

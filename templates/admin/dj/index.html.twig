@@ -22,19 +22,16 @@
 			<thead>
 				<tr>
 					<th></th>
-					<th>Prénom</th>
 					<th>Nom</th>
 					<th>Matériel</th>
 					<th>Réservations prises</th>
 					<th></th>
 					<th></th>
-
 				</tr>
 			</thead>
 			<tbody>
 				{% for artist in artists %}
 					<tr>
-
 						<td class="align-middle">
 							{% set unavailabilityTest = false %}
 							{% for unavailability in artist.unavailabilities %}
@@ -46,9 +43,7 @@
 								<span class="badge bg-danger">Indisponible</span>
 							{% endif %}
 						</td>
-
-						<td class="align-middle">{{ artist.firstName }}</td>
-						<td class="align-middle">{{ artist.lastName }}</td>
+						<td class="align-middle">{{ artist.fullname }}</td>
 						<td class="align-middle">{{ artist.equipment }}</td>
 						<td class="align-middle">{{ artist.reservations|length }}</td>
 						<td class="align-start text-end">

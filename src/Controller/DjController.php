@@ -8,6 +8,7 @@ use App\Form\ArtistProfileType;
 use App\Form\ArtistRegistrationType;
 use App\Form\ArtistType;
 use App\Repository\ArtistRepository;
+use App\Repository\MusicalStyleRepository;
 use App\Repository\UserRepository;
 use App\Service\Locator;
 use Doctrine\Persistence\ManagerRegistry;
@@ -38,6 +39,7 @@ class DjController extends AbstractController
         UserRepository $userRepository,
         HasherUserPasswordHasherInterface $passwordHasher,
         Locator $locator,
+        MusicalStyleRepository $musicalStyleRepo
     ): Response {
         $session = $stack->getSession();
         $artist = $session->get('artist') ?? new Artist();
@@ -64,6 +66,11 @@ class DjController extends AbstractController
             } elseif ($session->get('step') === 2) {
                 $session->set('step', 3);
             } elseif ($session->get('step') === 3) {
+                foreach ($artist->getMusicalStyles() as $musicalStyle) {
+                    $artist->removeMusicalStyle($musicalStyle);
+                    $existingMusicalStyle = $musicalStyleRepo->find($musicalStyle->getId());
+                    $artist->addMusicalStyle($existingMusicalStyle);
+                }
                 $session->remove('step');
                 $session->remove('artist');
                 $hashedPassword = $passwordHasher->hashPassword(
@@ -73,6 +80,7 @@ class DjController extends AbstractController
                 $user->setPassword($hashedPassword);
                 $userRepository->add($user, true);
                 $artist->setUser($user);
+                $artist->setEmail($user->getEmail());
                 $artistRepository->add($artist, true);
                 $this->addFlash('success', 'Votre demande a bien été transmise.');
 
