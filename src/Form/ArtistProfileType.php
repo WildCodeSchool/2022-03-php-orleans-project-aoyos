@@ -34,10 +34,6 @@ class ArtistProfileType extends AbstractType
                 'multiple' => false,
                 'expanded' => true,
             ])
-            ->add('message', TextType::class, [
-                'label' => 'Message',
-                'attr' => ['placeholder' => 'Informations supplémentaires'],
-                ])
             ->add('musicalStyles', EntityType::class, [
                 'class' => MusicalStyle::class,
                 'label' => 'Genre musical',
@@ -53,16 +49,21 @@ class ArtistProfileType extends AbstractType
                         ->orderBy('m.name', 'ASC');
                 },
                 ])
+            ->add('message', TextType::class, [
+                'label' => 'Message (optionnel)',
+                'attr' => ['placeholder' => 'Informations supplémentaires'],
+                'required' => false,
+                ])
             ->add('instagram', UrlType::class, [
-                'label' => 'Lien Instagram',
+                'label' => 'Lien Instagram (optionnel)',
                 'required' => false
             ])
             ->add('soundCloud', UrlType::class, [
-                'label' => 'Lien SoundCloud',
+                'label' => 'Lien SoundCloud (optionnel)',
                 'required' => false
             ])
             ->add('facebook', UrlType::class, [
-                'label' => 'Lien Facebook',
+                'label' => 'Lien Facebook (optionnel)',
                 'required' => false
             ])
         ;
