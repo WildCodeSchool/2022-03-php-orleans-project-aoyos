@@ -1,5 +1,17 @@
-<a class="anchor" id="productions"></a>
-<section class="production mt-5 py-5">
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ parent()}}
+	- Réalisations
+{% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	{{ encore_entry_link_tags('home') }}
+{% endblock %}
+
+{% block body %}
+<section class="production my-3">
 	<div class="container-fluid d-flex flex-column align-items-center position-relative">
 		<h1 class="py-4 mt-0 mb-4 position-relative" data-aos="fade-up">
 			<img src="{{ asset('build/images/title_underline_blue.png') }}" class="title-underline" alt="">Nos réalisations</h1>
@@ -16,9 +28,9 @@
 							</div>
 						</div>
 					{% endfor %}
-					<a href="{{ path('production_index') }}" class="btn btn-outline-primary text-dark col-md-2 mb-5">Voir plus</a>
 				{% else %}
 					<h2 class="h3 text-center">Aucune réalisation</h2>
 				{% endif %}
 		</div>
 </div></section>
+{% endblock %}
