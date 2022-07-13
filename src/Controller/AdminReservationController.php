@@ -64,6 +64,9 @@ class AdminReservationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $search = $form->getData()['search'];
+            if ($search === null) {
+                return $this->redirectToRoute('admin_reservation_taken', [], Response::HTTP_SEE_OTHER);
+            }
             $reservations = $reservationRepo->findTakenWithSearch($search);
         } else {
             $reservations = $reservationRepo->findTaken();
