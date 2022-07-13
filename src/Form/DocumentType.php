@@ -16,18 +16,18 @@ class DocumentType extends AbstractType
         $builder
             ->add('identityCardFile', VichFileType::class, [
                 'label' => 'Carte d\'identité',
-                'download_uri' => false,
                 'required' => false,
+                'download_label' => 'Voir le document'
             ])
             ->add('identityPhotoFile', VichFileType::class, [
                 'label' => 'Photo d\'identité',
-                'download_uri' => false,
                 'required' => false,
+                'download_label' => 'Voir le document'
             ])
             ->add('kbisFile', VichFileType::class, [
                 'label' => 'KBIS',
                 'required' => false,
-                'download_uri' => false,
+                'download_label' => 'Voir le document'
             ])
             ->add('siretNumber', TextType::class, [
                 'label' => 'SIRET',
