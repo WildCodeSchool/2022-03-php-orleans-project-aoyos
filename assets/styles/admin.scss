@@ -74,6 +74,14 @@ $adminCardsHeight: 25rem;
     height: 100vh;
 }
 
+.artist-name-link {
+    color: darken($color: $secondary, $amount: 50%);
+    &:hover {
+        color: $dark;
+    }
+}
+
+
 .admin-events > div:first-child {
     background: linear-gradient(98deg, $secondary 0%, $secondary 85%, rgba(255,255,255,1) 86%, rgba(255,255,255,1) 100%);
 }
