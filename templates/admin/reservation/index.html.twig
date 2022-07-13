@@ -54,10 +54,10 @@
         <tbody>
         {% for reservation in reservations %}
             <tr>
-                <td>{{ reservation.eventType }}</td>
-                <td>{{ reservation.company }}</td>
-                <td>{{ reservation.dateStart ? reservation.dateStart|date('d-m-Y H:i') : '' }}</td>
-                <td>{{ reservation.dateEnd ? reservation.dateEnd|date('d-m-Y H:i') : '' }}</td>
+                <td class="align-middle">{{ reservation.eventType }}</td>
+                <td class="align-middle">{{ reservation.company }}</td>
+                <td class="align-middle">{{ reservation.dateStart ? reservation.dateStart|date('d-m-Y H:i') : '' }}</td>
+                <td class="align-middle">{{ reservation.dateEnd ? reservation.dateEnd|date('d-m-Y H:i') : '' }}</td>
                 <td class="align-middle">{{ reservation.price ? reservation.price ~ '€' : 'Non précisé' }}</td>
                 {% if app.request.attributes.get('_route') == 'admin_reservation_taken' %}
                 <td class="align-middle">{{ reservation.artist.artistName }}</td>
