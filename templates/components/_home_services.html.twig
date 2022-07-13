@@ -5,24 +5,26 @@
 			<img src="{{ asset('build/images/title_underline_orange.png') }}" class="title-underline" alt="">Nos services</h1>
 
 		<div class="row g-0 gap-5 justify-content-center">
-		{% if articles is not empty %}
-			{% for article in articles %}
-				<div class="card shadow border border-primary col-lg-5 col-md-12 d-flex align-items-center flex-column flex-md-row" data-aos="fade-up">
-					<div class="col-lg-6 col-md-4 img-services-card">
-						<img src="{{ asset('uploads/images/article/' ~ article.image) }}" class="img-services-card h-100" alt="service DJ">
-					</div>
-					<div class="col-lg-6 col-md-8 h-100 d-flex flex-column justify-content-around">
-						<div class="card-body">
-							<div class="h-25">
-								<h5 class="card-title text-center text-light bg-dark border border-light p-3">{{ article.title }}</h5>
-							</div>
-							<p class="card-text pt-5 h-50">{{ article.description | u.truncate(150, '...', false) | raw}}.</p>
+			{% if articles is not empty %}
+				{% for article in articles %}
+					<div class="card shadow border border-primary col-lg-5 col-md-12 d-flex align-items-center flex-column flex-md-row" data-aos="fade-up">
+						<div class="col-lg-6">
+							<img src="{{ asset('uploads/images/article/' ~ article.image) }}" class="img-services-card" alt="service DJ">
 						</div>
-						<a href="{{ path('app_article') }}/#{{article.title}}" class="text-decoration-none fst-italic px-3 pb-3 justify-self-end">En savoir plus</a>
+						<div class="col-lg-6 d-flex flex-column justify-content-between">
+							<div class="card-body">
+								<div class="h-25 mb-3">
+									<h5 class="card-title text-center text-light bg-dark border border-light p-3">{{ article.title }}</h5>
+								</div>
+								<p class="card-text py-3">{{ article.description | u.truncate(100, '...', false) | raw}}.</p>
+								<div class="text-end">
+									<a href="{{ path('app_article') }}/#{{article.title}}" class="text-decoration-none fst-italic py-3">En savoir plus</a>
+								</div>
+							</div>
+						</div>
 					</div>
-				</div>
-			{% endfor %}
-			<a href="{{ path('app_article') }}" class="btn btn-outline-primary text-dark col-md-2 mb-5">Voir plus</a>
+				{% endfor %}
+				<a href="{{ path('app_article') }}" class="btn btn-outline-primary text-dark col-md-2 mb-5">Voir plus</a>
 			{% else %}
 			<h2 class="h4 mb-5 text-center">Aucun service</h2>
 			{% endif %}
