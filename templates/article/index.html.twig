@@ -12,18 +12,18 @@
 
 {% block body %}
 	<main class="services-list">
-		<div class="header d-flex justify-content-center align-items-center pt-5 mb-5">
+		<div class="header d-flex justify-content-center align-items-center pt-5">
 			<h1 class="py-4 mt-0 mb-4 position-relative"><img src="{{ asset('build/images/title_underline_blue.png') }}" class="title-underline" alt="">Nos services</h1>
 		</div>
 		<div class="container mt-5 d-flex flex-column gap-3">
 		{% if articles is not empty %}
 			{% for article in articles %}
-				<div class="card bg-light col-lg-9 my-5">
+				<div class="card bg-light col-lg-9 my-md-5 my-3">
 					<a class="anchor" id="{{article.title}}"></a>
 					<div class="row g-0">
 						{% if loop.index is even %}
 							<div class="col-md-5 order-first order-md-0">
-								<img src="{{ asset('uploads/images/article/' ~ article.image) }}" class="img-services-card w-100 rounded-start" alt="{{ article.title }}">
+								<img src="{{ asset('uploads/images/article/' ~ article.image) }}" class="img-services-card w-100 d-none d-md-block rounded-start" alt="{{ article.title }}">
 							</div>
 						{% endif %}
 						<div class="col-md-7 px-4 order-last order-md-0">
@@ -38,7 +38,7 @@
 						</div>
 						{% if loop.index is odd %}
 							<div class="col-md-5">
-								<img src="{{ asset('uploads/images/article/' ~ article.image) }}" class="img-services-card w-100 rounded-end" alt="{{ article.title }}">
+								<img src="{{ asset('uploads/images/article/' ~ article.image) }}" class="img-services-card w-100 d-none d-md-block rounded-end" alt="{{ article.title }}">
 							</div>
 						{% endif %}
 					</div>
