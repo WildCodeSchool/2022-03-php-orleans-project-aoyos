@@ -28,6 +28,11 @@ class ReservationType extends AbstractType
         }
 
         $builder
+            ->add('status', ChoiceType::class, [
+                'choices' => $this->reservationStatus,
+                'multiple' => false,
+                'expanded' => true,
+            ])
             ->add('lastname', TextType::class, [
                 'label' => 'Nom'
             ])
@@ -71,7 +76,7 @@ class ReservationType extends AbstractType
                 'multiple' => true,
                 'expanded' => true,
                 'by_reference' => false,
-                ])
+            ])
             ->add('commentAdmin', TextareaType::class, [
                 'label' => 'Commentaire admin (visible côté DJ)',
                 'required' => false
@@ -79,11 +84,7 @@ class ReservationType extends AbstractType
             ->add('price', MoneyType::class, [
                 'label' => 'Tarif',
                 'required' => false
-            ])
-            ->add('status', ChoiceType::class, [
-                'choices' => $this->reservationStatus
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
