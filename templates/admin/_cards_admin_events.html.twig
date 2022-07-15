@@ -15,14 +15,14 @@
 			</div>
 			<div class="d-flex flex-column justify-content-between col-lg-6">
 				<div class="my-3 flex-grow-1 justify-content-around flex-column d-flex px-2">
-					<p class="d-none d-lg-block card-text m-0">
+					<p class="d-none d-lg-block card-text m-0 my-2">
 						<i class="bi bi-geo-alt-fill me-1"></i>
 						{{ reservation.address|u.truncate(50, '...', false) }}</p>
 					<p class="card-text m-0 my-2">
 						<i class="bi bi-telephone-fill me-1"></i>
 						{{ reservation.phone }}
 					</p>
-					<p class="d-none d-lg-block card-text">
+					<p class="d-none d-lg-block card-text my-2">
 						<i class="bi bi-currency-exchange me-1"></i>
 						{{ reservation.formula}}
 					</p>
