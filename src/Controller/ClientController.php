@@ -63,7 +63,7 @@ class ClientController extends AbstractController
                 $reservationRepo->add($reservation, true);
                 $this->sendReservationMail($reservation, $mailer);
 
-                return $this->redirectToRoute('client_index', [], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
             }
             return $this->redirectToRoute('client_index', [], Response::HTTP_SEE_OTHER);
         }
