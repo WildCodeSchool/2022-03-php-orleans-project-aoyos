@@ -2,6 +2,7 @@
 $teamCardSize: 500px;
 $teamImgSize: 250px;
 $teamTitleOffset: -30px;
+$djCardSize: 275px;
 
 .team .card {
     height: $teamCardSize;
@@ -42,4 +43,20 @@ $teamTitleOffset: -30px;
 
 .role {
     font-weight: 600;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.musical-style-tag {
+    outline: solid 1px $primary;
+    width: fit-content;
+}
+
+.artists .card-body {
+    min-height: $djCardSize;
+}
+
+.disabled-icon {
+    opacity: 25%;
 }
