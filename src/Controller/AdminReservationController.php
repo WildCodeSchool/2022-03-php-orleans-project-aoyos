@@ -86,6 +86,7 @@ class AdminReservationController extends AbstractController
         $reservation = new Reservation();
         $form = $this->createForm(ReservationType::class, $reservation);
         $form->remove('status');
+        $form->remove('commentClient');
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
