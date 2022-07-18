@@ -85,9 +85,11 @@ class AdminReservationController extends AbstractController
     {
         $reservation = new Reservation();
         $form = $this->createForm(ReservationType::class, $reservation);
+        $form->remove('status');
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $reservation->setStatus(ReservationStatus::Validated->name);
             $reservationRepo->add($reservation, true);
 
             return $this->redirectToRoute('admin_reservation_index', [], Response::HTTP_SEE_OTHER);

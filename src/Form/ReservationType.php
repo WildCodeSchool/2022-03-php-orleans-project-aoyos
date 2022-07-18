@@ -29,6 +29,7 @@ class ReservationType extends AbstractType
 
         $builder
             ->add('status', ChoiceType::class, [
+                'label' => 'Statut',
                 'choices' => $this->reservationStatus,
                 'multiple' => false,
                 'expanded' => true,
