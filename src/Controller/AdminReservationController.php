@@ -80,7 +80,7 @@ class AdminReservationController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
+    #[Route('/ajouter', name: 'new', methods: ['GET', 'POST'])]
     public function new(Request $request, ReservationRepository $reservationRepo): Response
     {
         $reservation = new Reservation();
