@@ -80,14 +80,17 @@ class AdminReservationController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
+    #[Route('/ajouter', name: 'new', methods: ['GET', 'POST'])]
     public function new(Request $request, ReservationRepository $reservationRepo): Response
     {
         $reservation = new Reservation();
         $form = $this->createForm(ReservationType::class, $reservation);
+        $form->remove('status');
+        $form->remove('commentClient');
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $reservation->setStatus(ReservationStatus::Validated->name);
             $reservationRepo->add($reservation, true);
 
             return $this->redirectToRoute('admin_reservation_index', [], Response::HTTP_SEE_OTHER);

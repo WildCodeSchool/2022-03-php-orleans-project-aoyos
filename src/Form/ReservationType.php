@@ -20,6 +20,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ReservationType extends AbstractType
 {
     private array $reservationStatus;
+    public const FORMULAS = [
+        'Solo' => 'Solo',
+        'Standard' => 'Standard',
+        'Sur mesure' => 'Sur mesure'
+    ];
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -29,6 +34,7 @@ class ReservationType extends AbstractType
 
         $builder
             ->add('status', ChoiceType::class, [
+                'label' => 'Statut',
                 'choices' => $this->reservationStatus,
                 'multiple' => false,
                 'expanded' => true,
@@ -46,8 +52,9 @@ class ReservationType extends AbstractType
             ->add('phone', TextType::class, [
                 'label' => 'Téléphone'
             ])
-            ->add('formula', TextType::class, [
-                'label' => 'Formule'
+            ->add('formula', ChoiceType::class, [
+                'label' => 'Formule',
+                'choices'  => self::FORMULAS,
             ])
             ->add('eventType', TextType::class, [
                 'label' => 'Type d\'évènement'
@@ -67,7 +74,8 @@ class ReservationType extends AbstractType
                 'label' => 'Participants'
             ])
             ->add('commentClient', TextareaType::class, [
-                'label' => 'Commentaire client (non visible côté DJ)'
+                'label' => 'Commentaire client (non visible côté DJ)',
+                'required' => false,
             ])
             ->add('musicalStyles', EntityType::class, [
                 'class' => MusicalStyle::class,
