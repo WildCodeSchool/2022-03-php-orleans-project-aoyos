@@ -9,22 +9,22 @@
 		<div class="d-flex justify-content-center me-4 mt-2">
 			<ul class="navbar-nav">
 				<li class="nav-item me-lg-3">
-					<a class="nav-link text-dark hover-underline-animation" href="/#presentation">Qui sommes nous?</a>
+					<a class="nav-link text-dark hover-underline-animation pb-0" href="{{ path('app_home', {'_fragment': 'presentation'}) }}">Qui sommes nous?</a>
 				</li>
 				<li class="nav-item me-lg-3">
-					<a class="nav-link text-dark hover-underline-animation" href="/equipe">Notre équipe</a>
+					<a class="nav-link text-dark hover-underline-animation pb-0" href="{{ path('app_team') }}">Notre équipe</a>
 				</li>
 				<li class="nav-item me-lg-3">
-					<a class="nav-link text-dark hover-underline-animation" href="{{ path('app_article') }}">Nos services</a>
+					<a class="nav-link text-dark hover-underline-animation pb-0" href="{{ path('app_article') }}">Nos services</a>
 				</li>
 				<li class="nav-item me-lg-2">
-					<a class="nav-link text-dark hover-underline-animation" href="/#productions">Nos réalisations</a>
+					<a class="nav-link text-dark hover-underline-animation pb-0" href="{{ path('production_index') }}">Nos réalisations</a>
 				</li>
-				<li class="nav-item me-lg-2">
-					<a class="btn btn-nav btn-client w-100" href="/client">Réserver un DJ</a>
+				<li class="nav-item me-lg-2 mt-2 mt-lg-0">
+					<a class="btn btn-nav btn-client w-100 pb-0" href="{{ path('client_index') }}">Réserver un DJ</a>
 				</li>
 				<li class="nav-item mt-2 mt-lg-0">
-					<a class="btn btn-nav btn-dj w-100" href="/dj">DJ</a>
+					<a class="btn btn-nav btn-dj w-100 pb-0" href="{{ path('app_dj') }}">DJ</a>
 				</li>
 			</ul>
 		</div>
