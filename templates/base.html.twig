@@ -18,7 +18,7 @@
 			{{ encore_entry_script_tags('app') }}
 		{% endblock %}
 	</head>
-	<body>
+	<body {% if route_name == 'client_index' %}{{ stimulus_controller('symfony/ux-swup/swup') }}{% endif %}>
 		{% block navbar %}
 			{% include 'components/_navbar.html.twig' %}
 		{% endblock %}
