@@ -134,10 +134,10 @@ class ReservationRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('r')
             ->innerjoin('r.musicalStyles', 'm')
             ->select('r')
-            ->andWhere('r.status = :Validated')
+            ->andWhere('r.status = :validated')
             ->andWhere('m.name = :musicalStyle')
             ->setParameter('musicalStyle', $musicalStyleName)
-            ->setParameter('Validated', 'Validated')
+            ->setParameter('validated', 'Validated')
             ->getQuery()
             ->getResult();
     }
