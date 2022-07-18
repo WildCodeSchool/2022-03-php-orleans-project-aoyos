@@ -2,7 +2,7 @@
 	<div class="card-dj shadow border border-dark rounded-3 w-100">
 		<div class="d-lg-flex h-100 rounded-3 {% if reservation.artist is defined and reservation.artist == app.user.artist %} dj-my-events {% elseif reservation.artist is not null and reservation.artist != app.user.artist %} dj-other-events {% else %} dj-new-events {% endif %}">
 			<div class="d-flex flex-column justify-content-around align-items-start px-5 rounded-3 col-lg-6">
-				<h1 class="h4 text-light">{{ reservation.company }}</h1>
+				<h1 class="h4 mb-0 mb-lg-4 text-light">{{ reservation.company }}</h1>
 				<div class="d-none d-lg-flex flex-column resa-header">
 					<p class="card-text text-light d-flex fs-5 mb-2">
 					<i class="bi bi-calendar me-2"></i>
