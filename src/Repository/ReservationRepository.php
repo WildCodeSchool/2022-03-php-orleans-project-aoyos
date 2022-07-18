@@ -82,6 +82,16 @@ class ReservationRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+    public function findFreeEvent(): ?array
+    {
+        return $this->createQueryBuilder('r')
+            ->join('r.artist', 'ra')
+            ->Where('ra is null')
+            ->orderBy('r.id', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
     public function findTakenWithSearch(?string $search): array
     {
         return $this->createQueryBuilder('r')
@@ -124,10 +134,10 @@ class ReservationRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('r')
             ->innerjoin('r.musicalStyles', 'm')
             ->select('r')
-            ->andWhere('r.status = :Waiting')
+            ->andWhere('r.status = :Validated')
             ->andWhere('m.name = :musicalStyle')
             ->setParameter('musicalStyle', $musicalStyleName)
-            ->setParameter('Waiting', 'Waiting')
+            ->setParameter('Validated', 'Validated')
             ->getQuery()
             ->getResult();
     }

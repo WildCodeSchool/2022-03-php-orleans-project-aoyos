@@ -27,16 +27,13 @@
 				) }}
 			</div>
 			{{ form_end(form) }}
-
-		{% if reservations is not empty %}
+			{% if reservations is not empty %}
 			{% for reservation in reservations %}
-				{% if reservation.artist is null %}
 					{% include 'dj_dashboard/_cards_dj.html.twig' %}
-				{% endif %}
 			{% endfor %}
-		{% else %}
-			<h2 class="h4 text-center">Aucun évènement</h2>
-		{% endif %}
+			{% else %}
+			<h2 class="h4 text-center">Aucune offre trouvée</h2>
+			{% endif %}
 		</div>
 	</main>
 {% endblock %}
