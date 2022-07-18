@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Config\ReservationStatus;
 use App\Entity\Artist;
 use App\Entity\Reservation;
 use Doctrine\Persistence\ManagerRegistry;
@@ -85,8 +86,10 @@ class ReservationRepository extends ServiceEntityRepository
     public function findFreeEvent(): ?array
     {
         return $this->createQueryBuilder('r')
-            ->join('r.artist', 'ra')
-            ->Where('ra is null')
+            // ->join('r.artist', 'ra')
+            ->Where('r.artist is NULL')
+            ->andWhere('r.status = :validated')
+            ->setParameter('validated', ReservationStatus::Validated->name)
             ->orderBy('r.id', 'DESC')
             ->getQuery()
             ->getResult();
@@ -137,7 +140,7 @@ class ReservationRepository extends ServiceEntityRepository
             ->andWhere('r.status = :validated')
             ->andWhere('m.name = :musicalStyle')
             ->setParameter('musicalStyle', $musicalStyleName)
-            ->setParameter('validated', 'Validated')
+            ->setParameter('validated', ReservationStatus::Validated->name)
             ->getQuery()
             ->getResult();
     }
