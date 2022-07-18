@@ -89,6 +89,11 @@ $adminCardsHeight: 25rem;
     background: linear-gradient(98deg, $primary 0%, $primary 85%, rgba(255,255,255,1) 86%, rgba(255,255,255,1) 100%);
 }
 
+.dj-details-cards {
+    background-color: rgba($color: $light, $alpha: 0.8);
+    border: 1px solid $primary;
+}
+
 @media screen and (max-width: 992px) {
     .admin-events > div:first-child {
         height: 4rem;
