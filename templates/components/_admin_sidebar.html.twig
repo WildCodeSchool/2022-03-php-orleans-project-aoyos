@@ -5,6 +5,7 @@
 	],
 	'reservation': [
 		'admin_reservation_index',
+		'admin_reservation_new',
 		'admin_reservation_taken',
 		'admin_reservation_billed'
 	],
@@ -62,6 +63,7 @@
 			<div id="flush-collapseTwo" class="accordion-collapse collapse {% if route_name in route_admin.reservation %}show{% endif %}" aria-labelledby="flush-headingTwo">
 				<div class="accordion-body pb-0">
 					<ul>
+						<li><a class="text-decoration-none" href="{{ path('admin_reservation_new') }}">Ajouter</a></li>
 						<li><a class="text-decoration-none" href="{{ path('admin_reservation_index') }}">Non prises</a></li>
 						<li><a class="text-decoration-none" href="{{ path('admin_reservation_taken') }}">Prises par un DJ</a></li>
 						<li><a class="text-decoration-none" href="{{ path('admin_reservation_billed') }}">Facturées</a></li>
