@@ -121,14 +121,14 @@ class DjDashboardController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if (!$form->getData()['musicalStyle']) {
-                $reservations = $reservationRepo->findBy(['status' => 'Validated'], ['dateStart' => 'ASC']);
-            } else {
+            if ($form->getData()['musicalStyle']) {
                 $musicalStyleName = $form->getData()['musicalStyle']->getName();
                 $reservations = $reservationRepo->findByMusicalStyle($musicalStyleName);
+            } else {
+                return $this->redirectToRoute('dashboard_dj_reservations', []);
             }
         } else {
-            $reservations = $reservationRepo->findBy(['status' => 'Validated'], ['dateStart' => 'ASC']);
+            $reservations = $reservationRepo->findFreeEvent();
         }
 
         /** @var User */
