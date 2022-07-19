@@ -33,7 +33,14 @@
         </div>
     {% endif %}
     {{ form_end(form) }}
-    
+    {% if route_name == 'admin_reservation_index' %}
+        <div class="w-100 d-flex justify-content-end">
+                <a class="btn btn-outline-dark px-3 me-2" href="{{ path('admin_reservation_new') }}">
+                    <i class="bi bi-plus-square"></i>
+                    Ajouter
+                </a>
+        </div>
+    {% endif %}
     <table class="table table-hover">
         <thead>
             <tr>
@@ -54,10 +61,10 @@
         <tbody>
         {% for reservation in reservations %}
             <tr>
-                <td>{{ reservation.eventType }}</td>
-                <td>{{ reservation.company }}</td>
-                <td>{{ reservation.dateStart ? reservation.dateStart|date('d-m-Y H:i') : '' }}</td>
-                <td>{{ reservation.dateEnd ? reservation.dateEnd|date('d-m-Y H:i') : '' }}</td>
+                <td class="align-middle">{{ reservation.eventType }}</td>
+                <td class="align-middle">{{ reservation.company }}</td>
+                <td class="align-middle">{{ reservation.dateStart ? reservation.dateStart|date('d-m-Y H:i') : '' }}</td>
+                <td class="align-middle">{{ reservation.dateEnd ? reservation.dateEnd|date('d-m-Y H:i') : '' }}</td>
                 <td class="align-middle">{{ reservation.price ? reservation.price ~ '€' : 'Non précisé' }}</td>
                 {% if app.request.attributes.get('_route') == 'admin_reservation_taken' %}
                 <td class="align-middle">{{ reservation.artist.artistName }}</td>

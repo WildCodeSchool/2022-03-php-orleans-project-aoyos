@@ -102,6 +102,7 @@ class Reservation implements Localizable
         propertyPath: 'dateEnd',
         groups: ['eventInfos']
     )]
+    #[Assert\LessThan(propertyPath: 'dateEnd')]
     private DateTimeInterface $dateStart;
 
     #[ORM\Column(type: 'datetime')]
@@ -110,6 +111,7 @@ class Reservation implements Localizable
         propertyPath: 'dateStart',
         groups: ['eventInfos']
     )]
+    #[Assert\GreaterThan(propertyPath: 'dateStart')]
     private DateTimeInterface $dateEnd;
 
     #[ORM\Column(type: 'integer')]
@@ -157,7 +159,7 @@ class Reservation implements Localizable
     #[Vich\UploadableField(mapping: 'bills', fileNameProperty: 'bill')]
     #[Assert\File(
         maxSize: '2M',
-        mimeTypes: ['image/jpeg', 'image/png', 'image/webp', 'application/pdf', 'application/x-pdf' ]
+        mimeTypes: ['image/jpeg', 'image/png', 'image/webp', 'application/pdf', 'application/x-pdf']
     )]
     private ?File $billFile = null;
 

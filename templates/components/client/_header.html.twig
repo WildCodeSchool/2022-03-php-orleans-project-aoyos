@@ -7,8 +7,8 @@
 			</h2>
 		</div>
 		<div class="d-flex gap-5 mt-5 pt-5">
-			<a href="{{ path('client_reservation') }}" class="btn btn-secondary fs-3 text-light px-4">Réserver</a>
-			<a href="{{ path('client_reservation', {'_fragment': 'sale'}) }}" class="btn btn-outline-secondary fs-3 text-light px-4">Formules</a>
+			<a href="{{ path('client_index', {'_fragment': 'reservation'}) }}" class="btn btn-secondary fs-3 text-light px-4" data-no-swup>Réserver</a>
+			<a href="{{ path('client_index', {'_fragment': 'sale'}) }}" class="btn btn-outline-secondary fs-3 text-light px-4" data-no-swup>Formules</a>
 		</div>
 	</div>
 </section>

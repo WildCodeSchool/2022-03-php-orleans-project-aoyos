@@ -7,6 +7,7 @@
 
 {% block content %}
 	<main class="container">
+	<div class="dj-details-cards px-5 shadow mt-5">
 		<a href="{{ path('admin_dj_list') }}" class="btn btn-outline-dark px-3 mt-3">
 			<i class="bi bi-arrow-left-square"></i>
 			Retour
@@ -15,8 +16,8 @@
 			<h1 class="my-5 text-center">
 				{{ artist.artistName }}
 			</h1>
-			<div class="d-flex w-100 p-0">
-				<div class="d-flex flex-column shadow p-4 w-50 me-5">
+			<div class="d-flex flex-column flex-md-row align-items-center w-10 p-0">
+				<div class="d-flex flex-column dj-details-cards p-4 w-100 me-md-5 mb-3">
 					<h2 class="text-muted fs-2">Coordonnées</h2>
 					<p class="fs-6 text-muted m-0">Prénom :
 						<span class="fs-5 text-dark">
@@ -39,7 +40,7 @@
 							{{ artist.address }}</span>
 					</p>
 				</div>
-				<div class="d-flex flex-column shadow p-4 w-50">
+				<div class="d-flex flex-column dj-details-cards p-4 w-100">
 					<h2 class="text-muted fs-2">Profil d'artiste</h2>
 					<p class="fs-6 text-muted m-0">Nom d'artiste :
 						<span class="fs-5 text-dark">
@@ -62,20 +63,23 @@
 					</p>
 				</div>
 			</div>
-			<div class="d-flex flex-column shadow p-4 w-100 my-4 mx-auto">
+			<div class="d-flex flex-column dj-details-cards p-4 w-100 my-4 mx-auto">
 				<h2 class="text-muted text-center fs-2">Documents</h2>
 				{% if artist.documents is not null %}
-					<p class="fs-6 text-muted my-3">SIRET :
+					<p class="fs-6 text-muted text-center my-3">SIRET :
 						<span class="fs-5 text-dark">
 							{{ artist.documents.siretNumber }}</span>
 					</p>
-					<div class="d-flex justify-content-around w-100">
-						<img class="col-3" src="{{ asset('uploads/images/dj/' ~ artist.documents.identityCard) }}" alt="Carte d'identité">
-						<img class="col-3" src="{{ asset('uploads/images/dj/' ~ artist.documents.identityPhoto) }}" alt="Photo d'identité">
-						<img class="col-3" src="{{ asset('uploads/images/dj/' ~ artist.documents.kbis) }}" alt="KBIS">
+					<div class="d-flex justify-content-center w-100">
+						<a class="btn btn-outline-dark mx-3" href="{{ asset('uploads/images/dj/' ~ artist.documents.identityCard) }}" target="_blank" rel="noopener noreferrer">Carte d'identité</a>
+						<a class="btn btn-outline-dark mx-3" href="{{ asset('uploads/images/dj/' ~ artist.documents.identityPhoto) }}" target="_blank" rel="noopener noreferrer">Photo d'identité</a>
+						<a class="btn btn-outline-dark mx-3" href="{{ asset('uploads/images/dj/' ~ artist.documents.kbis) }}" target="_blank" rel="noopener noreferrer">Kbis</a>
 					</div>
+					{% else %}
+					<p class="text-center my-3">Aucun document fourni.</p>
 				{% endif %}
 			</div>
 		</div>
+	</div>
 	</main>
 {% endblock %}

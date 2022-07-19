@@ -42,7 +42,7 @@ body {
     line-height: $lineHeight;
 }
 
-.nav-link {
+.nav-link, .btn-nav {
     font-family: $titleFont;
     font-weight: 200;
     font-size: clamp(1rem, 1.5vw, 1.25rem);
@@ -50,12 +50,6 @@ body {
 
 .nav-item {
      list-style: none;
-}
-
-.btn-nav {
-    font-family: $titleFont;
-    font-weight: 200;
-    font-size: clamp(1rem, 1.5vw, 1.25rem);
 }
 
 .btn-client {

@@ -23,9 +23,9 @@
 							<img src="{{ asset('uploads/images/team/' ~ team_member.picture) }}" class="card-img-top" alt="{{ team_member.name }}">
 							<div class="card-body px-0">
 								<h2 class=" px-2 py-2 card-title shadow border border-primary bg-dark text-light fs-3 w-fit mx-auto">{{team_member.name}}</h2>
-								<p class="card-text px-2 mx-4 py-3">{{ team_member.description}}</p>
+								<p class="card-text px-2 mx-4 py-3">{{ team_member.description|nl2br }}</p>
 							</div>
-							<span class="text-end px-2 py-2 fs-5">{{team_member.position}}</span>
+							<span class="text-end role px-2 py-2 fs-5 m-3 text-primary">{{team_member.position}}</span>
 						</div>
 					</div>
 				{% endfor %}
@@ -39,39 +39,49 @@
 			<div class="container mb-5">
 			<h1 class="text-center py-4 mb-4 position-relative">
 			<img src="{{ asset('build/images/title_underline_purple.png') }}" class="title-underline w-25 pe-5" alt="">Nos artistes</h1>
-			<div class="row justify-content-center">
+			<div class="row justify-content-center h-100">
 			{% if artists is not empty %}
 				{% for artist in artists %}
 					<div class="col-lg-4 col-md-5 py-2">
 						<div class="card shadow border border-primary">
 							<img src="{{ asset('build/images/bg_client.webp') }}" class="card-img-top" alt="{{ artist.artist.fullname }}">
 							<div class="card-body px-0 pb-0 mb-0">
-								<h2 class=" px-2 py-2 card-title shadow border border-primary bg-dark text-light fs-3 w-fit mx-auto">{{ artist.artist.fullname }}</h2>
-								<div class="d-flex flex-column mt-4">
-									<ul class="list-group">
+								<h2 class="px-2 py-2 card-title shadow border border-primary bg-dark text-light fs-3 w-fit mx-auto">{{ artist.artist.fullname }}</h2>
+								<div class="row d-flex mt-4 mx-2 justify-content-center ">
 										{% for musicalStyle in artist.artist.musicalStyles %}
-											<li class="list-group-item text-center">{{ musicalStyle.name }}</li>
+											<p class="musical-style-tag col-3 mx-1 p-2 text-center">{{ musicalStyle.name }}</li>
 										{% endfor %}
-									</ul>
 								</div>
-								<div class="d-flex justify-content-around mt-3">
+								<div class="d-flex justify-content-around mt-3 mb-5">
 									{% if artist.artist.facebook %}
 										<a href="{{ artist.artist.facebook }}" target="_blank" class="card-text">
 											<i class="bi bi-facebook fs-1"></i>
 										</a>
+									{% else %}
+										<p class="disabled-icon">
+											<i class="bi bi-facebook fs-1"></i>
+										</p>
 									{% endif %}
 									{% if artist.artist.instagram %}
 										<a href="{{ artist.artist.instagram }}" target="_blank" class="card-text">
 											<i class="bi bi-instagram fs-1"></i>
 										</a>
+									{% else %}
+										<p class="disabled-icon">
+											<i class="bi bi-instagram fs-1"></i>
+										</p>
 									{% endif %}
 									{% if artist.artist.soundCloud %}
 										<a href="{{ artist.artist.soundCloud }}" target="_blank" class="card-text">
 											<i class="bi bi-cloud fs-1"></i>
 										</a>
+									{% else %}
+										<p class="disabled-icon">
+											<i class="bi bi-cloud fs-1"></i>
+										</p>
 									{% endif %}
-								</div>
-								<p class="text-end p-2 pb-0 mb-0 fs-5">DJ</p>
+								</div>	
+								<p class="text-end role px-2 py-2 fs-5 m-3 text-primary">DJ</p>
 							</div>
 						</div>
 					</div>

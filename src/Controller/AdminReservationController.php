@@ -44,7 +44,7 @@ class AdminReservationController extends AbstractController
             }
             $reservations = $reservationRepo->findLikeEventType($search, $status);
         } else {
-            $reservations = $reservationRepo->findBy(['artist' => null], ['dateStart' => 'desc', 'status' => 'asc']);
+            $reservations = $reservationRepo->findBy(['artist' => null], ['id' => 'desc', 'status' => 'asc']);
         }
 
         return $this->renderForm('admin/reservation/index.html.twig', [
@@ -64,6 +64,9 @@ class AdminReservationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $search = $form->getData()['search'];
+            if ($search === null) {
+                return $this->redirectToRoute('admin_reservation_taken', [], Response::HTTP_SEE_OTHER);
+            }
             $reservations = $reservationRepo->findTakenWithSearch($search);
         } else {
             $reservations = $reservationRepo->findTaken();
@@ -77,14 +80,17 @@ class AdminReservationController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
+    #[Route('/ajouter', name: 'new', methods: ['GET', 'POST'])]
     public function new(Request $request, ReservationRepository $reservationRepo): Response
     {
         $reservation = new Reservation();
         $form = $this->createForm(ReservationType::class, $reservation);
+        $form->remove('status');
+        $form->remove('commentClient');
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $reservation->setStatus(ReservationStatus::Validated->name);
             $reservationRepo->add($reservation, true);
 
             return $this->redirectToRoute('admin_reservation_index', [], Response::HTTP_SEE_OTHER);
