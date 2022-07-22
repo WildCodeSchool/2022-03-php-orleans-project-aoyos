@@ -130,3 +130,12 @@ a.anchor {
     top: -$navHeight;
     visibility: hidden;
 }
+
+.overflow-scroll-x {
+    overflow-x: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+.overflow-scroll-x::-webkit-scrollbar { /* Chrome */
+    display: none;
+}
