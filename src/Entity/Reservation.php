@@ -32,90 +32,92 @@ class Reservation implements Localizable
     private int $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\NotBlank(groups: ['clientInfos'])]
+    #[Assert\NotBlank(groups: ['clientInfos', 'Default'])]
     #[Assert\Length(
         max: 255,
-        groups: ['clientInfos']
+        groups: ['clientInfos', 'Default']
     )]
     private string $lastname;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\NotBlank(groups: ['clientInfos'])]
+    #[Assert\NotBlank(groups: ['clientInfos', 'Default'])]
     #[Assert\Length(
         max: 255,
-        groups: ['clientInfos']
+        groups: ['clientInfos', 'Default']
     )]
     private string $firstname;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\NotBlank(groups: ['clientInfos'])]
+    #[Assert\NotBlank(groups: ['clientInfos', 'Default'])]
     #[Assert\Length(
         max: 255,
-        groups: ['clientInfos']
+        groups: ['clientInfos', 'Default']
     )]
     private string $company;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\NotBlank(groups: ['clientInfos'])]
+    #[Assert\NotBlank(groups: ['clientInfos', 'Default'])]
     #[Assert\Length(
         max: 255,
-        groups: ['clientInfos']
+        groups: ['clientInfos', 'Default']
     )]
-    #[Assert\Email(groups: ['clientInfos'])]
+    #[Assert\Email(groups: ['clientInfos', 'Default'])]
     private string $email;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\NotBlank(groups: ['clientInfos'])]
+    #[Assert\NotBlank(groups: ['clientInfos', 'Default'])]
     #[Assert\Length(
         max: 255,
-        groups: ['clientInfos']
+        groups: ['clientInfos', 'Default']
     )]
     private string $phone;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\NotBlank(groups: ['eventInfos'])]
+    #[Assert\NotBlank(groups: ['eventInfos', 'Default'])]
     #[Assert\Length(
         max: 255,
-        groups: ['eventInfos']
+        groups: ['eventInfos', 'Default']
     )]
     private string $formula;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\NotBlank(groups: ['eventInfos'])]
+    #[Assert\NotBlank(groups: ['eventInfos', 'Default'])]
     #[Assert\Length(
         max: 255,
-        groups: ['eventInfos']
+        groups: ['eventInfos', 'Default']
     )]
     private string $eventType;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\NotBlank(groups: ['eventInfos'])]
+    #[Assert\NotBlank(groups: ['eventInfos', 'Default'])]
     #[Assert\Length(
         max: 255,
-        groups: ['eventInfos']
+        groups: ['eventInfos', 'Default']
     )]
     private string $address;
 
     #[ORM\Column(type: 'datetime')]
-    #[Assert\NotBlank(groups: ['eventInfos'])]
+    #[Assert\NotBlank(groups: ['eventInfos', 'Default'])]
+    #[Assert\GreaterThan(
+        'today',
+        groups:['eventInfos', 'Default']
+    )]
     #[Assert\LessThan(
         propertyPath: 'dateEnd',
-        groups: ['eventInfos']
+        groups: ['eventInfos', 'Default']
     )]
-    #[Assert\LessThan(propertyPath: 'dateEnd')]
     private DateTimeInterface $dateStart;
 
     #[ORM\Column(type: 'datetime')]
-    #[Assert\NotBlank(groups: ['eventInfos'])]
+    #[Assert\NotBlank(groups: ['eventInfos', 'Default'])]
     #[Assert\GreaterThan(
         propertyPath: 'dateStart',
-        groups: ['eventInfos']
+        groups: ['eventInfos', 'Default']
     )]
-    #[Assert\GreaterThan(propertyPath: 'dateStart')]
     private DateTimeInterface $dateEnd;
 
     #[ORM\Column(type: 'integer')]
-    #[Assert\NotBlank(groups: ['eventInfos'])]
+    #[Assert\NotBlank(groups: ['eventInfos', 'Default'])]
     #[Assert\Range(
         min: self::MIN_ATTENDEES,
         max: self::MAX_INT_NUMBER,
@@ -143,10 +145,10 @@ class Reservation implements Localizable
     private ?string $commentAdmin;
 
     #[ORM\Column(type: 'float', nullable: true)]
-    private float $longitude;
+    private ?float $longitude = null;
 
     #[ORM\Column(type: 'float', nullable: true)]
-    private float $latitude;
+    private ?float $latitude = null;
 
     private float $distance = 0;
 
