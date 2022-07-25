@@ -1,0 +1,12 @@
+{% extends "layout_email.html.twig" %}
+
+{% block title %}
+	{{ parent() }}
+	- Profil validé
+{% endblock %}
+{% block body %}
+	<h1 class="fs-4">Bonjour {{ artist.fullname }}</h1>
+	<h2 class="fs-5 my-3">Votre profil est complet et validé.</h2>
+	<p>Vous pouvez désormais accéder à votre espace privé et aux offres de prestation.</p>
+	<p class="mt-3">Bonne journée et à bientôt</p>
+{% endblock %}
