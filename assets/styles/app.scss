@@ -118,8 +118,27 @@ body {
     transform-origin: bottom left;
     transition: transform 0.35s ease-out;
   }
+
+  .hover-underline-animation-light {
+    display: inline-block;
+    position: relative;
+    color: $light;
+}
+
+.hover-underline-animation-light:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: $light;
+    transform-origin: bottom left;
+    transition: transform 0.35s ease-out;
+  }
   
-  .hover-underline-animation:hover:after {
+  .hover-underline-animation:hover:after, .hover-underline-animation-light:hover:after{
     transform: scaleX(1);
     transform-origin: bottom left;
   }
@@ -138,4 +157,8 @@ a.anchor {
 }
 .overflow-scroll-x::-webkit-scrollbar { /* Chrome */
     display: none;
+}
+
+.no-list-style {
+    list-style: none;
 }
