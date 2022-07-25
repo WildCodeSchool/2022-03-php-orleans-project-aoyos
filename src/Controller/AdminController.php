@@ -84,7 +84,7 @@ class AdminController extends AbstractController
                     ->from($this->getParameter('mailer_from'))
                     ->to($artist->getEmail())
                     ->subject('Votre profil est validé')
-                    ->html($this->renderView('client/notification_email_reservation.html.twig', [
+                    ->html($this->renderView('admin/dj/dj_validated_email.html.twig', [
                         'artist' => $artist
                     ]));
 
@@ -97,7 +97,6 @@ class AdminController extends AbstractController
     }
 
     #[Route('/dj/{id}/desactiver', name: 'dj_deactivate', methods: ['POST'])]
-
     public function deactivateDj(
         Request $request,
         Artist $artist,
