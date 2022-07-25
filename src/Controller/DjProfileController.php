@@ -2,19 +2,21 @@
 
 namespace App\Controller;
 
+use Exception;
 use App\Entity\Document;
-use App\Form\ArtistProfileType;
 use App\Form\ArtistType;
+use App\Service\Locator;
 use App\Form\DocumentType;
+use App\Form\ArtistProfileType;
+use Symfony\Component\Mime\Email;
 use App\Repository\ArtistRepository;
 use App\Repository\DocumentRepository;
-use App\Service\Locator;
-use Exception;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpClient\Exception\TransportException;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/espace-dj', name: 'dashboard_dj_')]
 class DjProfileController extends AbstractController
@@ -53,6 +55,7 @@ class DjProfileController extends AbstractController
     public function documents(
         Request $request,
         DocumentRepository $documentRepository,
+        MailerInterface $mailer
     ): Response {
         /** @phpstan-ignore-next-line */
         $artist = $this->getUser()->getArtist();
@@ -64,6 +67,16 @@ class DjProfileController extends AbstractController
         if (($form->isSubmitted() && $form->isValid())) {
             $document->setArtist($artist);
             $documentRepository->add($document, true);
+
+            $email = (new Email())
+                    ->from($artist->getEmail())
+                    ->to($this->getParameter('mailer_from'))
+                    ->subject('Nouveau profil Dj a validé')
+                    ->html($this->renderView('dj/admin_completed_profile_email.html.twig', [
+                        'artist' => $artist
+                    ]));
+
+                $mailer->send($email);
 
             $this->addFlash('success', 'Votre profil a bien été modifié.');
 

@@ -17,60 +17,63 @@
 			</button>
 			{{ form_end(form) }}
 		</div>
-
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th></th>
-					<th>Nom d'artiste</th>
-					<th>Nom</th>
-					<th>Matériel</th>
-					<th>Réservations prises</th>
-					<th></th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for artist in artists %}
+		<div class="table-responsive">
+			<table class="table table-hover">
+				<thead>
 					<tr>
-						<td class="align-middle">
-							{% set unavailabilityTest = false %}
-							{% for unavailability in artist.unavailabilities %}
-								{% if (date(unavailability.dateEnd|date("d-m-Y")) > ("now"|date('d-m-Y'))) and (date(unavailability.dateStart|date('d-m-Y')) <= date("now"|date('d-m-Y'))) and (date(unavailability.dateEnd|date('d-m-Y')) >= date("now"|date('d-m-Y'))) %}
-									{% set unavailabilityTest = true %}
+						<th></th>
+						<th>Nom d'artiste</th>
+						<th>Nom</th>
+						<th>Matériel</th>
+						<th>Réservations prises</th>
+						<th></th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for artist in artists %}
+						<tr>
+							<td class="align-middle">
+								{% set unavailabilityTest = false %}
+								{% for unavailability in artist.unavailabilities %}
+									{% if (date(unavailability.dateEnd|date("d-m-Y")) > ("now"|date('d-m-Y'))) and (date(unavailability.dateStart|date('d-m-Y')) <= date("now"|date('d-m-Y'))) and (date(unavailability.dateEnd|date('d-m-Y')) >= date("now"|date('d-m-Y'))) %}
+										{% set unavailabilityTest = true %}
+									{% endif %}
+								{% endfor %}
+								{% if unavailabilityTest %}
+									<span class="badge bg-danger">Indisponible</span>
 								{% endif %}
-							{% endfor %}
-							{% if unavailabilityTest %}
-								<span class="badge bg-danger">Indisponible</span>
+							</td>
+							<td class="align-middle">
+								<a class="text-decoration-none artist-name-link" href="{{ path('admin_dj_show', {'id': artist.id}) }}" target="_blank">{{ artist.artistName }}</a>
+							</td>
+							<td class="align-middle">{{ artist.fullname }}</td>
+							<td class="align-middle">{{ artist.equipment }}</td>
+							<td class="align-middle">{{ artist.reservations|length }}</td>
+							<td class="align-middle text-end">
+								<a class="btn btn-outline-dark btn-sm text-nowrap px-3 my-2" href="{{ path('admin_dj_show', {'id': artist.id}) }}">
+									<i class="bi bi-card-list pe-1"></i>
+									Détails</a>
+							</td>
+							{% if artist.user.roles == ['ROLE_USER'] %}
+								<td class="align-middle text-end">
+									{{ include('admin/dj/_dj_validate_form.html.twig') }}
+								</td>
+							{% else %}
+								<td class="align-middle text-end">
+									{{ include('admin/dj/_dj_deactivate_form.html.twig') }}
+								</td>
 							{% endif %}
-						</td>
-						<td class="align-middle"><a class="text-decoration-none artist-name-link" href="{{ path('admin_dj_show', {'id': artist.id}) }}" target="_blank">{{ artist.artistName }}</a></td>
-						<td class="align-middle">{{ artist.fullname }}</td>
-						<td class="align-middle">{{ artist.equipment }}</td>
-						<td class="align-middle">{{ artist.reservations|length }}</td>
-						<td class="align-start text-end">
-							<a class="btn btn-outline-dark btn-sm text-nowrap px-3 my-2" href="{{ path('admin_dj_show', {'id': artist.id}) }}">
-								<i class="bi bi-card-list pe-1"></i>
-								Détails</a>
-						</td>
-						{% if artist.user.roles == ['ROLE_USER'] %}
-							<td class="align-middle text-end">
-								{{ include('admin/dj/_dj_validate_form.html.twig') }}
-							</td>
-						{% else %}
-							<td class="align-middle text-end">
-								{{ include('admin/dj/_dj_deactivate_form.html.twig') }}
-							</td>
-						{% endif %}
 
-					</tr>
+						</tr>
 
-				{% else %}
-					<tr>
-						<td colspan="7">Aucun DJ trouvé</td>
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
+					{% else %}
+						<tr>
+							<td colspan="7">Aucun DJ trouvé</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
 	</main>
 {% endblock %}
