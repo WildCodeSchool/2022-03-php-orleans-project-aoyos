@@ -52,7 +52,7 @@ class ReservationRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('r')
             ->andWhere('r.artist is NOT NULL')
-            ->orderBy('r.dateStart', 'DESC')
+            ->orderBy('r.id', 'DESC')
             ->getQuery()
             ->getResult();
     }
