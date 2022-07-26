@@ -2,18 +2,20 @@
 
 namespace App\Controller;
 
-use App\Config\ReservationStatus;
+use Exception;
+use App\Service\Locator;
 use App\Entity\Reservation;
 use App\Form\ReservationType;
+use App\Config\ReservationStatus;
+use Symfony\Component\Mime\Email;
 use App\Form\SearchAdminReservationType;
 use App\Repository\ReservationRepository;
-use App\Service\Locator;
-use Exception;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpClient\Exception\TransportException;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpClient\Exception\TransportException;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/admin/reservation', name: 'admin_reservation_')]
 class AdminReservationController extends AbstractController
@@ -107,7 +109,8 @@ class AdminReservationController extends AbstractController
         Request $request,
         Reservation $reservation,
         ReservationRepository $reservationRepo,
-        Locator $locator
+        Locator $locator,
+        MailerInterface $mailer
     ): Response {
         $form = $this->createForm(ReservationType::class, $reservation);
         $form->handleRequest($request);
@@ -122,6 +125,18 @@ class AdminReservationController extends AbstractController
                 $this->addFlash('warning', $e->getMessage());
             }
             $reservationRepo->add($reservation, true);
+
+            if ($reservation->getArtist()) {
+                $email = (new Email())
+                    ->from($this->getParameter('mailer_from'))
+                    ->to($reservation->getArtist()->getEmail())
+                    ->subject('Un évènement a été modifié')
+                    ->html($this->renderView('admin/reservation/dj_event_modified_email.html.twig', [
+                        'reservation' => $reservation
+                    ]));
+
+                $mailer->send($email);
+            }
 
             return $this->redirectToRoute('admin_reservation_index', [], Response::HTTP_SEE_OTHER);
         }
