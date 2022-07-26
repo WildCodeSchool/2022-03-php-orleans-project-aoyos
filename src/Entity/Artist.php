@@ -61,7 +61,7 @@ class Artist implements Localizable
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     #[Assert\Length(max: 255, groups: ['djProfile'])]
-    private string $message;
+    private ?string $message = null;
 
     #[ORM\ManyToMany(targetEntity: MusicalStyle::class, inversedBy: 'artists', cascade: ['persist'])]
     #[Assert\Count(

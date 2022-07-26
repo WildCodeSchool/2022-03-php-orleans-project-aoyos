@@ -16,6 +16,10 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
  * @method Reservation[]    findAll()
  * @method Reservation[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
+/**
+ *
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
+ */
 class ReservationRepository extends ServiceEntityRepository
 {
     public const PAST_EVENTS = 'passes';
@@ -48,7 +52,32 @@ class ReservationRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('r')
             ->andWhere('r.artist is NOT NULL')
-            ->orderBy('r.dateStart', 'DESC')
+            ->orderBy('r.id', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findByNotTakenByDate(): array
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.artist is NULL')
+            ->andWhere('r.status = :validated')
+            ->andWhere('r.dateEnd ' . '>' . ' current_date()')
+            ->setParameter('validated', ReservationStatus::Validated->name)
+            ->orderBy('r.id', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findByNotTakenByDateByMaxElements(int $maxElements): array
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.artist is NULL')
+            ->andWhere('r.status = :validated')
+            ->andWhere('r.dateEnd ' . '>' . ' current_date()')
+            ->setParameter('validated', ReservationStatus::Validated->name)
+            ->orderBy('r.id', 'DESC')
+            ->setMaxResults($maxElements)
             ->getQuery()
             ->getResult();
     }
@@ -66,6 +95,18 @@ class ReservationRepository extends ServiceEntityRepository
             ->setParameter('artist', $artist)
             ->andWhere('r.dateEnd ' . $condition . ' current_date()')
             ->orderBy('r.dateEnd', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findByArtistByDateByMaxElements(Artist $artist, int $maxElements): array
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.artist = :artist')
+            ->setParameter('artist', $artist)
+            ->andWhere('r.dateEnd ' . '>' . ' current_date()')
+            ->orderBy('r.dateEnd', 'DESC')
+            ->setMaxResults($maxElements)
             ->getQuery()
             ->getResult();
     }

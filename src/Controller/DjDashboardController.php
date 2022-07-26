@@ -36,14 +36,11 @@ class DjDashboardController extends AbstractController
     ): Response {
         /** @var User */
         $user = $this->getUser();
-        $reservations = $reservationRepo->findBy(
-            ['artist' => $user->getArtist()],
-            ['id' => 'desc'],
+        $reservations = $reservationRepo->findByArtistByDateByMaxElements(
+            $user->getArtist(),
             self::MAX_ELEMENTS
         );
-        $newReservations = $reservationRepo->findBy(
-            ['status' => 'Validated', 'artist' => null],
-            ['id' => 'desc'],
+        $newReservations = $reservationRepo->findByNotTakenByDateByMaxElements(
             self::MAX_ELEMENTS
         );
 
@@ -128,7 +125,7 @@ class DjDashboardController extends AbstractController
                 return $this->redirectToRoute('dashboard_dj_reservations', []);
             }
         } else {
-            $reservations = $reservationRepo->findFreeEvent();
+            $reservations = $reservationRepo->findByNotTakenByDate();
         }
 
         /** @var User */

@@ -18,6 +18,7 @@
 					<th>Société</th>
 					<th>Début</th>
 					<th>Fin</th>
+					<th>DJ</th>
 					<th>Facture</th>
 				</tr>
 			</thead>
@@ -29,6 +30,7 @@
 							<td class="align-middle">{{ reservation.company }}</td>
 							<td class="align-middle">{{ reservation.dateStart ? reservation.dateStart|date('d-m-Y H:i') : '' }}</td>
 							<td class="align-middle">{{ reservation.dateEnd ? reservation.dateEnd|date('d-m-Y H:i') : '' }}</td>
+							<td class="align-middle">{{ reservation.artist.artistName }}</td>
 							<td class="align-middle">
 								<a class="btn btn-outline-dark" href="{{ asset('uploads/images/bill/'~ reservation.bill)}}" target="_blank" ><i class="bi bi-eye me-2"></i>Voir</a>
 							</td>

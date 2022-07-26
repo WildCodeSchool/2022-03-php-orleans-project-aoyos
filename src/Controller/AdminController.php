@@ -4,13 +4,15 @@ namespace App\Controller;
 
 use App\Entity\Artist;
 use App\Form\AdminArtistType;
+use Symfony\Component\Mime\Email;
 use App\Repository\ArtistRepository;
 use App\Repository\ReservationRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/admin', name: 'admin_')]
 class AdminController extends AbstractController
@@ -66,6 +68,7 @@ class AdminController extends AbstractController
         Request $request,
         Artist $artist,
         ManagerRegistry $doctrine,
+        MailerInterface $mailer
     ): Response {
         $entityManager = $doctrine->getManager();
 
@@ -76,6 +79,16 @@ class AdminController extends AbstractController
                 $entityManager->flush();
 
                 $this->addFlash('success', 'Vous avez accepté un nouveau DJ avec succès.');
+
+                $email = (new Email())
+                    ->from($this->getParameter('mailer_from'))
+                    ->to($artist->getEmail())
+                    ->subject('Votre profil est validé')
+                    ->html($this->renderView('admin/dj/dj_validated_email.html.twig', [
+                        'artist' => $artist
+                    ]));
+
+                $mailer->send($email);
             } else {
                 $this->addFlash('danger', 'Ce DJ existe déjà.');
             }
@@ -84,7 +97,6 @@ class AdminController extends AbstractController
     }
 
     #[Route('/dj/{id}/desactiver', name: 'dj_deactivate', methods: ['POST'])]
-
     public function deactivateDj(
         Request $request,
         Artist $artist,
