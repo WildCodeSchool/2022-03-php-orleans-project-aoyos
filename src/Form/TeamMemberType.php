@@ -27,6 +27,7 @@ class TeamMemberType extends AbstractType
             ])
             ->add('imageFile', VichImageType::class, [
                 'label' => 'Image',
+                'required' => false
             ])
         ;
     }
