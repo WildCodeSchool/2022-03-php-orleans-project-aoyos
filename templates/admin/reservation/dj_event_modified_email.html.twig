@@ -1,0 +1,13 @@
+{% extends "layout_email.html.twig" %}
+
+{% block title %}
+	{{ parent() }}
+	- Evènement modifié
+{% endblock %}
+{% block body %}
+	<h1 class="fs-4">Bonjour {{ reservation.artist.fullname }}</h1>
+	<h2 class="fs-5 my-3">Un de vos évènements a été modifié.</h2>
+	<h3>La modification concerne {{ reservation.company }} du {{ reservation.dateStart|date('d-m-Y') }} au {{ reservation.dateEnd|date('d-m-Y') }}</h3>
+	<p>Pour plus de détails, rendez-vous sur votre espace personnel.</p>
+	<p class="mt-3">Bonne journée et à bientôt</p>
+{% endblock %}
