@@ -105,7 +105,7 @@ class ReservationRepository extends ServiceEntityRepository
             ->andWhere('r.artist = :artist')
             ->setParameter('artist', $artist)
             ->andWhere('r.dateEnd ' . '>' . ' current_date()')
-            ->orderBy('r.dateEnd', 'DESC')
+            ->orderBy('r.dateEnd', 'ASC')
             ->setMaxResults($maxElements)
             ->getQuery()
             ->getResult();

@@ -13,13 +13,13 @@
 {% block body %}
 	<section class="production my-3">
 		<div class="container-fluid d-flex flex-column align-items-center position-relative">
-			<h1 class="py-4 mt-0 mb-4 position-relative" data-aos="fade-up">
+			<h1 class="py-4 mt-0 mb-4 position-relative">
 				<img src="{{ asset('build/images/title_underline_blue.png') }}" class="title-underline" alt="">Nos réalisations</h1>
-			<div class="row justify-content-center mx-5 mx-lg-0">
+			<div class="row justify-content-center mx-0 mx-lg-5">
 				{% if productions is not empty %}
 					{% for production in productions %}
 						<div class="col-lg-3 px-0 m-4">
-							<div class="card shadow border border-secondary" data-aos="fade-in">
+							<div class="card shadow border border-secondary" data-aos="fade-up">
 								<img src="{{ asset('uploads/images/production/' ~ production.imageProduction) }}" class="card-img-top border-bottom border-dark" alt="{{ production.title }}">
 								<div class="card-body d-flex flex-column justify-content-around pb-3">
 									<h5 class="card-title w-fit mx-auto text-center text-light bg-dark border border-light p-3">{{ production.title | u.truncate(20, '...', false)}}</h5>

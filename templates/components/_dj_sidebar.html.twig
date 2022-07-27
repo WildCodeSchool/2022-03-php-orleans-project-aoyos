@@ -7,11 +7,11 @@
 } %}
 <nav class="offcanvas offcanvas-start sideBar d-flex flex-column justify-content-start align-items-start justify-self-start" tabindex="-1" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling">
 	<div class="w-100 d-flex mt-3 flex-column">
-		<a class="dj-nav-link pt-4 pb-3 my-2 text-decoration-none fs-6" href="{{ path('dashboard_dj_index') }}">
+		<a class="dj-nav-link pt-4 mb-3 my-2 text-decoration-none fs-6 hover-underline-animation-light" href="{{ path('dashboard_dj_index') }}">
 			<i class="bi bi-house me-1"></i>
 			Dashboard
 		</a>
-		<a class="dj-nav-link pb-2 mt-2 text-decoration-none fs-6" href="{{ path('dashboard_dj_reservations') }}">
+		<a class="dj-nav-link mb-2 mt-2 text-decoration-none fs-6 hover-underline-animation-light" href="{{ path('dashboard_dj_reservations') }}">
 			<i class="bi bi-broadcast me-1"></i>
 			Offres
 		</a>
@@ -26,14 +26,14 @@
 				<div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo">
 					<div class="accordion-body">
 						<ul>
-							<li class="mb-2 no-list-style"><a class="text-decoration-none hover-underline-animation-light" href="{{ path('dashboard_dj_my_events', {'filter': 'passes'}) }}">Passés</a></li>
 							<li class="no-list-style"><a class="text-decoration-none hover-underline-animation-light" href="{{ path('dashboard_dj_my_events', {'filter': 'a-venir'}) }}">À venir</a></li>
+							<li class="mb-2 no-list-style"><a class="text-decoration-none hover-underline-animation-light" href="{{ path('dashboard_dj_my_events', {'filter': 'passes'}) }}">Passés</a></li>
 						</ul>
 					</div>
 				</div>
 			</div>
 		</div>
-		<a class="dj-nav-link pb-2 mt-2 text-decoration-none fs-6" href="{{ path('dashboard_dj_unavailability') }}">
+		<a class="dj-nav-link mb-2 mt-2 text-decoration-none fs-6 hover-underline-animation-light" href="{{ path('dashboard_dj_unavailability') }}">
 			<i class="bi bi-calendar-x me-1"></i>
 			Indisponibilités
 		</a>

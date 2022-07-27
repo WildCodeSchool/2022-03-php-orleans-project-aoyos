@@ -117,9 +117,9 @@ body {
     background-color: $dark;
     transform-origin: bottom left;
     transition: transform 0.35s ease-out;
-  }
+}
 
-  .hover-underline-animation-light {
+.hover-underline-animation-light {
     display: inline-block;
     position: relative;
     color: $light;
@@ -136,12 +136,12 @@ body {
     background-color: $light;
     transform-origin: bottom left;
     transition: transform 0.35s ease-out;
-  }
+}
   
-  .hover-underline-animation:hover:after, .hover-underline-animation-light:hover:after{
+.hover-underline-animation:hover:after, .hover-underline-animation-light:hover:after{
     transform: scaleX(1);
     transform-origin: bottom left;
-  }
+}
 
 a.anchor {
     display: block;
