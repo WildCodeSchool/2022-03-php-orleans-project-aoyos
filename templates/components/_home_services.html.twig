@@ -3,7 +3,6 @@
 	<div class="container d-flex flex-column align-items-center">
 		<h1 class="py-4 mt-0 mb-4 position-relative">
 			<img src="{{ asset('build/images/title_underline_orange.png') }}" class="title-underline" alt="">Nos services</h1>
-
 		<div class="row g-0 gap-5 justify-content-center">
 			{% if articles is not empty %}
 				{% for article in articles %}
@@ -24,7 +23,9 @@
 						</div>
 					</div>
 				{% endfor %}
-				<a href="{{ path('app_article') }}" class="btn btn-outline-primary text-dark col-md-2 mb-5">Voir plus</a>
+				<div class="w-100 d-flex justify-content-center">
+				<a href="{{ path('app_article') }}" class="w-25 btn btn-outline-primary text-dark col-md-2 mb-5">Voir plus</a>
+				</div>
 			{% else %}
 			<h2 class="h4 mb-5 text-center">Aucun service</h2>
 			{% endif %}
