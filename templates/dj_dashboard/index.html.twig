@@ -23,34 +23,34 @@
 				</div>
 			{% else %}
 				<section class="reservations-dj">
-					<h1 class="mt-5 mb-2 ms-lg-3">
+					<h1 class="mt-5 mb-2">
+						Nouveaux évènements
+					</h1>
+					<div class="row">
+						{% for reservation in newReservations %}
+							{% include 'dj_dashboard/_cards_dj.html.twig' %}
+							<div class="d-flex justify-content-center">
+								<a class="btn w-25 btn-outline-dark" href="{{ path('dashboard_dj_reservations') }}">Voir plus</a>
+							</div>
+						{% else %}
+							<p class="ms-lg-4">Aucun nouvel évènement trouvé.</p>
+						{% endfor %}
+					</div>
+					<h1 class="mt-3 mb-2">
 						Mes évènements
 					</h1>
-				<div class="row">
-					{% for reservation in reservations %}
-						{% include 'dj_dashboard/_cards_dj.html.twig' %}
-					{% else %}
-						<p class="m-4">Vous n'avez pas encore d'évènement.</p>
-					{% endfor %}
-				</div>
-				<div class="d-flex justify-content-center">
-					<a class="btn w-25 btn-outline-dark" href="{{ path('dashboard_dj_my_events', {'filter': 'a-venir'}) }}">Voir plus</a>
-				</div>
-				<h1 class="mt-3 mb-2 ms-lg-3">
-					Nouveaux évènements
-				</h1>
-				<div class="row">
-					{% for reservation in newReservations %}
-						{% include 'dj_dashboard/_cards_dj.html.twig' %}
-				<div class="d-flex justify-content-center">
-					<a class="btn w-25 btn-outline-dark" href="{{ path('dashboard_dj_reservations') }}">Voir plus</a>
-				</div>
-					{% else %}
-						<p class="ms-lg-4">Aucun nouvel évènement trouvé.</p>
-					{% endfor %}
-				</div>
-
-			{% endif %}
-		</div>
-	</main>
-{% endblock %}
+					<div class="row">
+						{% for reservation in reservations %}
+							{% include 'dj_dashboard/_cards_dj.html.twig' %}
+						{% else %}
+							<p class="m-4">Vous n'avez pas encore d'évènement.</p>
+						{% endfor %}
+					</div>
+					<div class="d-flex justify-content-center">
+						<a class="btn w-25 btn-outline-dark" href="{{ path('dashboard_dj_my_events', {'filter': 'a-venir'}) }}">Voir plus</a>
+					</div>
+				{% endif %}
+				</section>
+			</div>
+		</main>
+	{% endblock %}
