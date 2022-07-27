@@ -42,13 +42,14 @@
 				<div class="row">
 					{% for reservation in newReservations %}
 						{% include 'dj_dashboard/_cards_dj.html.twig' %}
+				<div class="d-flex justify-content-center">
+					<a class="btn w-25 btn-outline-dark" href="{{ path('dashboard_dj_reservations') }}">Voir plus</a>
+				</div>
 					{% else %}
 						<p class="ms-lg-4">Aucun nouvel évènement trouvé.</p>
 					{% endfor %}
 				</div>
-				<div class="d-flex justify-content-center">
-					<a class="btn w-25 btn-outline-dark" href="{{ path('dashboard_dj_reservations') }}">Voir plus</a>
-				</div>
+
 			{% endif %}
 		</div>
 	</main>
