@@ -12,18 +12,26 @@
 				Nouvelles réservations
 			</h1>
 			<div class="row me-2 ms-2 mb-1 d-flex flex-row">
-				{% for reservation in reservations %}
-					{% include "admin/_cards_admin_events.html.twig" %}
-				{% endfor %}
+				{% if reservations is not empty %}
+					{% for reservation in reservations %}
+						{% include "admin/_cards_admin_events.html.twig" %}
+					{% endfor %}
+				{% else %}
+					<h2 class="h4 mt-3 text-center">Pas de nouvelles réservations</h2>
+				{% endif %}
 			</div>
 		</section>
 		<section class="djs">
 			<h1 class="mb-2 ms-3 mt-5">
 				Nouveaux Djs</h1>
 			<div class="row me-2 ms-2 mb-5 d-flex flex-row">
+			{% if artists is not empty %}
 				{% for artist in artists %}
 					{% include "admin/_cards_admin_djs.html.twig" %}
 				{% endfor %}
+			{% else %}
+					<h2 class="h4 mt-3 text-center">Pas de nouveaux DJs</h2>
+				{% endif %}
 			</div>
 		</section>
 	</div>
