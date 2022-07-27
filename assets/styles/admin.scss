@@ -12,7 +12,7 @@ $adminCardsHeight: 25rem;
     background-color: $adminColor;
 }
 
-.sideBar a {
+.accordion-item a {
     font-family: $textFont;
     color: $light;  
 }
@@ -92,6 +92,18 @@ $adminCardsHeight: 25rem;
 .dj-details-cards {
     background-color: rgba($color: $light, $alpha: 0.8);
     border: 1px solid $primary;
+}
+
+.admin-nav-link {
+    width: fit-content;
+    font-family: $titleFont;
+    color: $light;
+    margin-left: 1.25rem;
+    text-decoration: none;
+}
+
+.admin-nav-link:hover {
+    color: $light;
 }
 
 @media screen and (max-width: 992px) {
